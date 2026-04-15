@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About · Sayali Mandhalkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sw:       280px;
+      --bg:       #111111;
+      --bg2:      #0e0e0e;
+      --bg3:      #1a1a1a;
+      --sidebar:  #000000;
+      --border:   rgba(255,255,255,0.07);
+      --gold:     #c9a96e;
+      --gold-dim: rgba(201,169,110,0.1);
+      --gold-lt:  #dfc08a;
+      --text:     #e8e4dc;
+      --muted:    rgba(232,228,220,0.72);
+      --faint:    rgba(232,228,220,0.55);
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Global image & video quality ── */
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center top;
+      filter: none !important;
+      -webkit-filter: none !important;
+      
+      
+      border-radius: 12px;
+    }
+    video, iframe {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: none !important;
+      border-radius: 12px;
+    }
+
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ════════ SIDEBAR ════════ */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px; border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover {
+      background: rgba(201,169,110,0.05);
+    }
+    .sb-profile:hover .sb-avatar {
+      border-color: rgba(201,169,110,0.65);
+    }
+    .sb-profile:hover .sb-name {
+      color: var(--gold-lt);
+    }
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.25s ease;
+    }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); display: block; line-height: 1.3; }
+    .sb-role { font-size: 0.74rem; color: var(--muted); margin-top: 1px; display: block; }
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.55;
+      padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px;
+      background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold);
+      border-radius: 0 2px 2px 0; transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+    }
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; color: var(--muted); margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════ MAIN ════════ */
+    .main { margin-left: var(--sw); width: calc(100% - var(--sw)); min-height: 100vh; }
+
+    /* ════════ SECTION BASE ════════ */
+    .page-section { padding: 96px 100px; border-top: 1px solid var(--border); }
+    .page-section.alt { background: var(--bg2); }
+    .page-section.dark { background: var(--bg3); }
+
+    .sec-label {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+    }
+    .sec-label .eyebrow-line { width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+    /* ════════ HERO ════════ */
+    .about-hero {
+      min-height: 72vh;
+      padding: 100px 100px 80px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 40%, rgba(201,169,110,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 40% at 5% 80%, rgba(201,169,110,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Large watermark */
+    .about-hero-wm {
+      font-family: var(--serif);
+      font-size: clamp(140px, 20vw, 280px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.04);
+      position: absolute; right: -10px; bottom: -40px;
+      line-height: 1; letter-spacing: -0.04em;
+      pointer-events: none; user-select: none;
+    }
+    .about-hero-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: start;
+      width: 100%;
+    }
+    .about-hero-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards;
+    }
+    .about-hero-eyebrow .eline { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .about-hero-name {
+      font-family: var(--serif);
+      font-size: clamp(24px, 2.6vw, 38px);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+      color: var(--text); margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+    .about-hero-name em { font-style: italic; color: var(--gold); }
+    .about-hero-tagline { display: none; }
+    /* I am a(n) list */
+    .about-iam-label {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 300; font-style: italic;
+      color: var(--gold); margin-bottom: 18px;
+      opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards;
+    }
+    .about-iam-list {
+      list-style: none; display: flex; flex-direction: column; gap: 13px;
+      opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards;
+      margin-bottom: 36px;
+    }
+    .about-iam-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.94rem; color: var(--muted); line-height: 1.65;
+    }
+    .about-iam-list li::before {
+      content: '✦';
+      font-size: 0.38rem; color: var(--gold); opacity: 0.85;
+      position: absolute; left: 0; top: 6px;
+    }
+    .about-iam-list li strong { color: var(--text); font-weight: 500; }
+    .about-hero-right {
+      opacity: 0; animation: fadeUp 0.7s 0.45s ease forwards;
+      position: relative; align-self: center;
+    }
+    /* Photo treatment */
+    .about-hero-photo-wrap {
+      position: relative;
+      width: 86%; margin-left: auto;
+      opacity: 0;
+      animation: photoFadeUp 0.8s 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes photoFadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* Offset gold ghost frame behind photo */
+    .about-hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: 12px; left: 12px; right: -12px; bottom: -12px;
+      border: 1px solid rgba(201,169,110,0.28);
+      z-index: 0; pointer-events: none;
+    }
+    /* Bottom vignette */
+    .about-hero-photo-wrap::after {
+      content: '';
+      position: absolute; left: 0; right: 0; bottom: 0; height: 38%;
+      background: linear-gradient(to top, rgba(17,17,17,0.75), transparent);
+      z-index: 2; pointer-events: none;
+    }
+    .about-hero-photo {
+      position: relative; z-index: 1;
+      width: 100%; height: 420px;
+      object-fit: cover; object-position: center 14%;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .about-hero-photo-wrap:hover .about-hero-photo {
+      transform: scale(1.03);
+    }
+    .about-hero-ctas { display: none; }
+    .photo-rule-top, .photo-rule-bottom, .photo-label-row { display: none; }
+    .about-hero-ctas {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px;
+      background: var(--gold); color: #0a0a09;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--gold); transition: background 0.25s;
+    }
+    .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px;
+      background: transparent; color: var(--muted);
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--border); transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-ghost:hover { border-color: rgba(201,169,110,0.5); color: var(--gold); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════ CREDENTIALS STRIP ════════ */
+    .creds-strip {
+      padding: 48px 100px;
+      background: #000;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+    }
+    .cred-item {
+      padding: 28px 32px;
+      border-right: 1px solid var(--border);
+      opacity: 0; animation: fadeUp 0.6s ease forwards;
+    }
+    .cred-item:last-child { border-right: none; }
+    .cred-item:nth-child(1) { animation-delay: 0.1s; }
+    .cred-item:nth-child(2) { animation-delay: 0.2s; }
+    .cred-item:nth-child(3) { animation-delay: 0.3s; }
+    .cred-item:nth-child(4) { animation-delay: 0.4s; }
+    .cred-icon {
+      color: var(--gold); margin-bottom: 12px; opacity: 0.8;
+    }
+    .cred-title {
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+      color: var(--text); margin-bottom: 5px; letter-spacing: 0.02em;
+    }
+    .cred-sub {
+      font-size: 0.73rem; color: var(--faint); line-height: 1.5;
+    }
+
+    /* ════════ THE STORY ════════ */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .story-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 300; line-height: 1.12; color: var(--text);
+      margin-bottom: 36px;
+    }
+    .story-heading em { font-style: italic; color: var(--gold); }
+    .story-body p {
+      font-size: 1rem; line-height: 1.9; color: var(--muted); margin-bottom: 20px;
+    }
+    .story-body p strong { color: var(--text); font-weight: 500; }
+    .story-body p:last-child { margin-bottom: 0; }
+
+    /* Timeline on the right */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0;
+      position: relative;
+      padding-bottom: 32px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    /* Vertical line */
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 30px; top: 22px;
+      width: 1px; bottom: 0;
+      background: var(--border);
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      background: var(--bg);
+      margin-top: 6px; margin-left: 25px;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .tl-dot.filled { background: var(--gold); }
+    .tl-content { padding-left: 8px; }
+    .tl-year {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 5px;
+    }
+    .tl-title {
+      font-family: var(--sans); font-size: 0.9rem; font-weight: 500;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .tl-desc {
+      font-size: 0.8rem; color: var(--faint); line-height: 1.6;
+    }
+
+    /* ════════ SKILLS ════════ */
+    .skills-outer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+    .skill-card {
+      background: #161616;
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 14px;
+      padding: 22px 24px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skill-card:hover {
+      border-color: rgba(201,168,76,0.48);
+      box-shadow: 0 4px 32px rgba(201,169,110,0.06);
+    }
+    .skill-group-title {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(201,169,110,0.15);
+    }
+    .skill-list { display: flex; flex-direction: column; gap: 8px; }
+    .skill-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.84rem; color: var(--muted); line-height: 1.4;
+    }
+    .skill-item::before {
+      content: '';
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--gold); opacity: 0.55; flex-shrink: 0;
+    }
+
+    /* ════════ COFFEE ON PAPER ════════ */
+    .coffee-section {
+      padding: 96px 100px;
+      background: #000;
+      border-top: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .coffee-section::before {
+      content: '☕';
+      position: absolute; right: 80px; top: 60px;
+      font-size: 120px; opacity: 0.04;
+      pointer-events: none; user-select: none;
+    }
+    .coffee-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .coffee-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 300; line-height: 1.12; color: var(--text);
+      margin-bottom: 20px;
+    }
+    .coffee-heading em { font-style: italic; color: var(--gold); }
+    .coffee-quote {
+      font-family: var(--serif);
+      font-size: 1.15rem; font-weight: 300; font-style: italic;
+      color: var(--muted); line-height: 1.75;
+      margin-bottom: 24px;
+      padding-left: 20px;
+      border-left: 2px solid rgba(201,169,110,0.4);
+    }
+    .coffee-body {
+      font-size: 0.97rem; color: var(--muted); line-height: 1.85;
+    }
+    /* Coffee art placeholder grid */
+    .coffee-art-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .coffee-art-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      padding: 20px;
+      transition: border-color 0.28s, background 0.28s;
+    }
+    .coffee-art-item:hover {
+    }
+    .coffee-art-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      filter: brightness(0.88) contrast(1.05) saturate(0.85);
+      transition: transform 0.6s ease;
+    }
+    .coffee-art-item:hover img { transform: scale(1.05); }
+    .coffee-art-item:first-child { grid-column: span 2; aspect-ratio: 2/1; }
+
+    /* ════════ SKETCHES ════════ */
+    .sketches-section {
+      padding: 96px 100px;
+      background: #0a0a0a;
+      border-top: 1px solid var(--border);
+    }
+    .sketches-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .sketches-heading {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 300; line-height: 1.1;
+      color: var(--text);
+    }
+    .sketches-heading em { font-style: italic; color: var(--gold); }
+    .sketches-sub {
+      font-family: var(--sans); font-size: 0.85rem;
+      color: var(--faint); max-width: 280px; text-align: right;
+      line-height: 1.7;
+    }
+    .sketches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .sketch-item {
+      overflow: hidden; position: relative;
+      aspect-ratio: 3/4;
+    }
+    .sketch-item.wide { grid-column: span 2; aspect-ratio: 2/1.2; }
+    .sketch-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+      filter: brightness(0.92) contrast(1.08);
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .sketch-item:hover img { transform: scale(1.04); }
+
+    /* ════════ GALLERY SECTIONS ════════ */
+    .gallery-section {
+      padding: 80px 100px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .gallery-section + .gallery-section {
+      padding-top: 80px;
+    }
+    .gallery-label {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .gallery-label .eyebrow-line { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .gallery-heading {
+      font-family: var(--serif);
+      font-size: clamp(24px, 2.6vw, 38px);
+      font-weight: 300; line-height: 1.1;
+      color: var(--text); margin-bottom: 0;
+    }
+    .gallery-heading em { font-style: italic; color: var(--gold); }
+    .gallery-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, rgba(201,169,110,0.45), rgba(201,169,110,0.08) 60%, transparent);
+      margin: 24px 0 28px;
+    }
+    /* Horizontal scroll strip */
+    .gallery-strip {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 4px;
+      cursor: grab;
+    }
+    .gallery-strip::-webkit-scrollbar { display: none; }
+    .gallery-strip:active { cursor: grabbing; }
+    .gallery-item {
+      flex: 0 0 auto;
+      width: 240px;
+      height: 320px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      transition: border-color 0.3s ease;
+      background: transparent;
+    }
+    .gallery-item:hover { border-color: rgba(201,169,110,0.55); }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center top;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.03); }
+
+    /* ════════ PERSONAL ════════ */
+    .personal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .personal-card {
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.28s, transform 0.28s;
+    }
+    .personal-card:hover {
+      border-color: rgba(201,169,110,0.3);
+      transform: translateY(-3px);
+    }
+    .personal-icon {
+      font-size: 1.5rem; margin-bottom: 14px; display: block;
+      opacity: 0.7;
+    }
+    .personal-title {
+      font-size: 0.82rem; font-weight: 600; color: var(--text);
+      margin-bottom: 6px; letter-spacing: 0.02em;
+    }
+    .personal-desc {
+      font-size: 0.78rem; color: var(--faint); line-height: 1.6;
+    }
+
+    /* ════════ CTA FOOTER BAR ════════ */
+    .about-cta-bar {
+      padding: 64px 100px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 40px;
+    }
+    .cta-bar-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.8vw, 36px);
+      font-weight: 300; color: var(--text); line-height: 1.2;
+    }
+    .cta-bar-left h2 em { font-style: italic; color: var(--gold); }
+    .cta-bar-left p {
+      font-size: 0.9rem; color: var(--faint); margin-top: 8px;
+    }
+    .cta-bar-right { display: flex; gap: 12px; flex-shrink: 0; }
+
+    /* ════════ REVEAL ════════ */
+    .reveal { opacity: 0; transition: opacity 0.75s ease; }
+    .reveal.visible { opacity: 1; }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+
+    /* ════════ FOOTER / CONTACT ════════ */
+    .contact-section {
+      background: #000000;
+      padding: 72px 100px 0;
+      border-top: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: 'SM';
+      font-family: var(--serif);
+      font-size: clamp(180px, 24vw, 320px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.07);
+      position: absolute; left: 40px; bottom: 40px;
+      line-height: 1; letter-spacing: -0.04em;
+      pointer-events: none; user-select: none;
+    }
+    .contact-section .sec-label { margin-bottom: 20px; }
+    .footer-body {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .footer-left { max-width: 520px; }
+    .contact-sub {
+      font-size: 0.9rem; line-height: 1.95; color: var(--muted);
+      margin-top: 0; margin-bottom: 0;
+      font-style: normal; font-family: var(--sans);
+    }
+    .contact-sub span { display: block; }
+    .contact-btns {
+      display: flex; flex-direction: column;
+      gap: 10px; align-items: stretch;
+    }
+    .cta-btn {
+      width: 200px; height: 52px;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      font-family: var(--sans); font-size: 0.71rem; font-weight: 500;
+      letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted);
+      transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s;
+    }
+    .cta-btn svg { flex-shrink: 0; }
+    .cta-btn:hover { border-color: rgba(201,169,110,0.45); color: var(--gold-lt); transform: translateX(-3px); }
+    .cta-btn.primary { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 600; }
+    .cta-btn.primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); color: #000; transform: translateX(-3px); }
+    .footer-bar {
+      margin-top: 60px; padding: 24px 0 28px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .footer-copy { font-size: 0.72rem; color: rgba(232,228,220,0.45); }
+    .footer-back {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; transition: opacity 0.2s;
+    }
+    .footer-back:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ════════ SIDEBAR ════════ -->
+<aside class="sidebar" aria-label="Site navigation">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer</span>
+    </div>
+  </a>
+
+  <nav class="sb-nav" aria-label="Primary">
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Projects</span>
+      <a href="jpmc.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        </span>
+        <span class="sb-label">JP Morgan Chase</span>
+        <span class="sb-icon-right" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="11" height="11" x="3" y="11" rx="2"/><path d="M11 11V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/></svg>
+        </span>
+      </a>
+      <a href="index.html#purwaters" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </span>
+      </a>
+      <a href="index.html#mentormap" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </span>
+      </a>
+      <a href="philly-truce.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Designing AI Experiences</span>
+      <a href="tenetic.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="11" height="11" x="3" y="11" rx="2"/><path d="M11 11V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+    <a href="/playground" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      </span>
+      <span class="sb-label">Playground</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </span>
+    </a>
+
+    <div class="sb-divider"></div>
+    <a href="certifications.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </span>
+    </a>
+
+    <div class="sb-divider"></div>
+    <a href="about.html" class="sb-row active">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </span>
+    </a>
+  </nav>
+
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- ════════ MAIN ════════ -->
+<main class="main">
+
+  <!-- ── HERO ── -->
+  <section class="about-hero">
+    <div class="about-hero-wm" aria-hidden="true">SIA</div>
+    <div class="about-hero-inner">
+      <div>
+        <p class="about-hero-eyebrow"><span class="eline"></span>About Me</p>
+        <h1 class="about-hero-name">Hello, I'm Sayali.<br>You can call me <em>Sia.</em></h1>
+        <p class="about-iam-label">I am a(n):</p>
+        <ul class="about-iam-list">
+          <li>Graduate <strong>Summa Cum Laude</strong> in UX &amp; Interaction Design (Master's degree)</li>
+          <li><strong>Certified AI Product Designer</strong> · Interaction Design Foundation</li>
+          <li>Founder of <strong>Anavrin Designs</strong>, delivering 0-1 UX design solutions for small businesses</li>
+          <li>Lead of a <strong>20-member cross-functional Product team</strong></li>
+          <li>Contributor to projects for <strong>Fortune 500 clients</strong></li>
+          <li>Practitioner experienced with <strong>AI tools and automation workflows</strong> (n8n, Figma Make)</li>
+        </ul>
+      </div>
+      <div class="about-hero-right">
+        <div class="about-hero-photo-wrap">
+          <div class="photo-rule-top"></div>
+          <img src="About me photo.jpg" alt="Sayali Mandhalkar speaking at Thomas Jefferson University" class="about-hero-photo" />
+          <div class="photo-rule-bottom"></div>
+          <div class="photo-label-row">
+            <span class="photo-label-num">01</span>
+            <span class="photo-label-text">Thomas Jefferson University</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS & TOOLS ── -->
+  <section class="page-section dark">
+    <p class="sec-label reveal"><span class="eyebrow-line"></span>Skills &amp; Tools</p>
+    <h2 class="story-heading reveal" style="margin-bottom:48px;">What I bring<br>to the <em>table.</em></h2>
+    <div class="skills-outer">
+      <div class="skill-card reveal">
+        <p class="skill-group-title">Design Practice</p>
+        <ul class="skill-list">
+          <li class="skill-item">User Research &amp; Usability Testing</li>
+          <li class="skill-item">Interaction Design</li>
+          <li class="skill-item">Visual &amp; UI Design</li>
+          <li class="skill-item">Design Systems</li>
+          <li class="skill-item">Prototyping &amp; Wireframing</li>
+          <li class="skill-item">Information Architecture</li>
+          <li class="skill-item">Cognitive Psychology for UX</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal d1">
+        <p class="skill-group-title">AI &amp; Emerging Tech</p>
+        <ul class="skill-list">
+          <li class="skill-item">Designing AI-Powered Products</li>
+          <li class="skill-item">Figma Make (AI workflows)</li>
+          <li class="skill-item">n8n Automation</li>
+          <li class="skill-item">Prompt Engineering for Design</li>
+          <li class="skill-item">AI Experience Strategy</li>
+          <li class="skill-item">Human-AI Interaction</li>
+          <li class="skill-item">Claude / ChatGPT for UX Research</li>
+          <li class="skill-item">Midjourney / AI Image Generation</li>
+          <li class="skill-item">Cursor (AI-powered development)</li>
+          <li class="skill-item">AI Prototyping &amp; Rapid Ideation</li>
+          <li class="skill-item">Voice &amp; Conversational UI Design</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal d2">
+        <p class="skill-group-title">Tools</p>
+        <ul class="skill-list">
+          <li class="skill-item">Figma</li>
+          <li class="skill-item">FigJam</li>
+          <li class="skill-item">Maze / UserTesting</li>
+          <li class="skill-item">Miro</li>
+          <li class="skill-item">Notion</li>
+          <li class="skill-item">Jira &amp; Confluence</li>
+          <li class="skill-item">Framer</li>
+          <li class="skill-item">Cursor</li>
+          <li class="skill-item">Claude / ChatGPT</li>
+          <li class="skill-item">Midjourney</li>
+          <li class="skill-item">Loom</li>
+          <li class="skill-item">Zeplin</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALLERY: SKETCHES ── -->
+  <section class="gallery-section reveal">
+    <p class="gallery-label"><span class="eyebrow-line"></span>On Paper</p>
+    <h2 class="gallery-heading">Drawn with Patience and <em>Attention to Detail</em></h2>
+    <div class="gallery-divider"></div>
+    <div class="gallery-strip">
+      <div class="gallery-item"><img src="sketches/image 32@2x.png" alt="Pencil sketch" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image 34@2x.png" alt="Sketch study" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image 36@2x.png" alt="Pencil sketch" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image 37@2x.png" alt="Pencil sketch" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image 38@2x.png" alt="Sketch detail" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image 39@2x.png" alt="Sketch study" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- ── GALLERY: DIGITAL EXPLORATIONS ── -->
+  <section class="gallery-section reveal">
+    <p class="gallery-label"><span class="eyebrow-line"></span>Digital Work</p>
+    <h2 class="gallery-heading"><em>Digital</em> Explorations</h2>
+    <div class="gallery-divider"></div>
+    <div class="gallery-strip">
+      <div class="gallery-item"><img src="digital exploration/image 40@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital exploration/image 41@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital exploration/image 43@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital exploration/image 44@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital exploration/image 45@2x.png" alt="Digital exploration" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- ── PERSONAL ── -->
+  <section class="page-section">
+    <p class="sec-label reveal"><span class="eyebrow-line"></span>Beyond the Screen</p>
+    <h2 class="story-heading reveal" style="margin-bottom:40px;">The person behind<br>the <em>work.</em></h2>
+    <div class="personal-grid">
+      <div class="personal-card reveal">
+        <span class="personal-icon">✈️</span>
+        <p class="personal-title">Avid Traveller</p>
+        <p class="personal-desc">Exploring new cultures and places fuels my design thinking more than any workshop.</p>
+      </div>
+      <div class="personal-card reveal d1">
+        <span class="personal-icon">🍳</span>
+        <p class="personal-title">Home Cook</p>
+        <p class="personal-desc">Cooking is my form of relaxation; the creative process maps perfectly to design.</p>
+      </div>
+      <div class="personal-card reveal d2">
+        <span class="personal-icon">🏋️</span>
+        <p class="personal-title">Gym Enthusiast</p>
+        <p class="personal-desc">Staying active keeps me sharp. You'll often find me at the gym before a big project.</p>
+      </div>
+      <div class="personal-card reveal d3">
+        <span class="personal-icon">🌅</span>
+        <p class="personal-title">Sunset Chaser</p>
+        <p class="personal-desc">I believe in pausing to appreciate beauty; it's where the best ideas come from.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER / CONTACT ── -->
+  <section class="contact-section">
+    <div class="footer-body">
+      <div class="footer-left">
+        <p class="sec-label reveal"><span class="eyebrow-line"></span>Get In Touch</p>
+        <h2 class="sec-title reveal" style="margin-bottom: 28px;">
+          Let's create something<br><em>remarkable</em> together.
+        </h2>
+        <p class="contact-sub reveal">
+          <span>Available for full-time roles in the USA &amp; design conversations.</span>
+          <span>To enquire about my work, shoot me an email.</span>
+        </p>
+      </div>
+      <div class="contact-btns reveal">
+        <a href="mailto:sayali.ux@gmail.com" class="cta-btn primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Send an Email
+        </a>
+        <a href="https://www.linkedin.com/in/sayali-mandhalkar-0a449616a/" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://medium.com/@sayalim" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          Medium
+        </a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
+      <a href="index.html" class="footer-back">← Back to Home</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Drag-to-scroll on gallery strips
+  document.querySelectorAll('.gallery-strip').forEach(strip => {
+    let isDown = false, startX, scrollLeft;
+    strip.addEventListener('mousedown', e => {
+      isDown = true; startX = e.pageX - strip.offsetLeft; scrollLeft = strip.scrollLeft;
+    });
+    strip.addEventListener('mouseleave', () => isDown = false);
+    strip.addEventListener('mouseup', () => isDown = false);
+    strip.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX);
+    });
+  });
+
+  // Reveal on scroll
+  const revealIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+</script>
+</body>
+</html>

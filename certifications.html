@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certifications · Sayali Mandhalkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sw:      280px;
+      --bg:      #111111;
+      --bg2:     #0e0e0e;
+      --bg3:     #1a1a1a;
+      --sidebar: #000000;
+      --border:  rgba(255,255,255,0.07);
+      --gold:    #c9a96e;
+      --gold-lt: #dfc08a;
+      --gold-dim:rgba(201,169,110,0.1);
+      --text:    #e8e4dc;
+      --muted:   rgba(232,228,220,0.72);
+      --faint:   rgba(232,228,220,0.55);
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Global image & video quality ── */
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center top;
+      filter: none !important;
+      -webkit-filter: none !important;
+      
+      
+      border-radius: 12px;
+    }
+    video, iframe {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: none !important;
+      border-radius: 12px;
+    }
+
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sw);
+      height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      z-index: 200;
+      overflow-y: auto;
+      scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-profile {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease;
+      cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.25s ease;
+    }
+    .sb-avatar-initials {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .sb-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      display: block;
+      line-height: 1.3;
+    }
+    .sb-role {
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-top: 1px;
+      display: block;
+    }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+
+    .sb-section { padding: 18px 0 6px; }
+
+    .sb-section-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--faint);
+      padding: 0 22px 8px;
+      display: block;
+    }
+
+    .sb-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      text-decoration: none;
+    }
+    .sb-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 2px; height: 0;
+      background: var(--gold);
+      border-radius: 0 2px 2px 0;
+      transition: height 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .sb-row:hover::before,
+    .sb-row.active::before { height: 56%; }
+
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active { background: rgba(201,169,110,0.06); }
+
+    .sb-icon-left {
+      color: var(--faint);
+      flex-shrink: 0;
+      transition: color 0.18s;
+    }
+    .sb-row:hover .sb-icon-left,
+    .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1;
+      font-size: 0.84rem;
+      font-weight: 400;
+      color: var(--muted);
+      transition: color 0.18s;
+    }
+    .sb-row:hover .sb-label,
+    .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      color: rgba(232,228,220,0.25);
+      flex-shrink: 0;
+      transition: color 0.18s, transform 0.18s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px,-2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 6px 18px;
+    }
+
+    .sb-footer {
+      padding: 16px 18px 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sb-avail {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .avail-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+      animation: dotBlink 2s ease-in-out infinite;
+    }
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    .sb-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sb-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      color: var(--faint);
+      padding: 3px 0;
+      transition: color 0.2s;
+    }
+    .sb-link:hover { color: var(--gold); }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* ════════════════════════════════
+       PAGE HERO
+    ════════════════════════════════ */
+    .page-hero {
+      padding: 80px 100px 60px;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 60% at 90% 40%, rgba(201,169,110,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 40% at 5% 90%, rgba(201,169,110,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-wm {
+      font-family: var(--serif);
+      font-size: clamp(140px, 22vw, 300px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.04);
+      position: absolute;
+      right: -20px;
+      bottom: -50px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-inner { position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .eyebrow-line {
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+      background: linear-gradient(
+        105deg,
+        var(--gold) 0%,
+        var(--gold) 38%,
+        #f5e6c0 48%,
+        #fffdf7 52%,
+        var(--gold) 58%,
+        var(--gold) 100%
+      );
+      background-size: 300% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 3.6s ease-in-out infinite;
+    }
+    @keyframes shimmerText {
+      0%   { background-position: 200% 0; }
+      50%  { background-position: -50% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 16px;
+    }
+
+    .hero-ai-note {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--gold);
+      max-width: 620px;
+    }
+
+    /* ════════════════════════════════
+       CERTIFICATES SECTION
+    ════════════════════════════════ */
+    .certs-section {
+      padding: 0 100px 100px;
+    }
+
+    /* Category group */
+    .cert-category {
+      margin-bottom: 56px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(201,169,110,0.18);
+    }
+    .category-name {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .category-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--gold);
+      padding: 2px 10px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Cards stack */
+    .cards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Certificate card */
+    .cert-card {
+      background: #161616;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 28px;
+      align-items: start;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .cert-card:hover {
+      border-color: rgba(201,169,110,0.45);
+      box-shadow: 0 4px 32px rgba(201,169,110,0.06);
+    }
+
+    /* Image area */
+    .cert-img-wrap {
+      width: 160px;
+      background: #0e0e0e;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cert-img-wrap img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    /* Card content */
+    .cert-content {
+      display: flex;
+      flex-direction: column;
+      min-height: 126px;
+    }
+
+    .cert-issuer-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 0;
+    }
+    /* Hide issuer institution label — keep badge only */
+    .cert-issuer { display: none; }
+
+    .cert-badge {
+      display: inline-block;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 20px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      padding: 2px 9px;
+    }
+
+    .cert-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+    /* No badge — title sits at top with no extra margin */
+    .cert-issuer-row:not(:has(.cert-badge)) + .cert-title { margin-top: 0; }
+
+    .cert-desc {
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .cert-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .cert-skill {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 3px 11px;
+      font-size: 0.69rem;
+      color: var(--faint);
+    }
+
+    .cert-link {
+      display: inline-block;
+      margin-top: auto;
+      padding-top: 16px;
+      align-self: flex-start;
+      border: 1px solid rgba(201,169,110,0.4);
+      color: var(--gold);
+      padding: 8px 18px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+      margin-top: 16px;
+    }
+    .cert-link:hover {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+    }
+
+    /* ════════════════════════════════
+       CONTACT / FOOTER
+    ════════════════════════════════ */
+    .contact-section {
+      background: #000000;
+      padding: 72px 100px 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-section::before {
+      content: 'SM';
+      font-family: var(--serif);
+      font-size: clamp(180px, 24vw, 320px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.07);
+      position: absolute;
+      left: 40px;
+      bottom: 40px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .footer-body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-left { max-width: 520px; }
+
+    .sec-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .sec-label .eyebrow-line { width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+    .sec-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.8vw, 50px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .sec-title em { font-style: italic; color: var(--gold); }
+
+    .contact-sub {
+      font-size: 0.9rem;
+      line-height: 1.95;
+      color: var(--muted);
+      font-style: normal;
+      font-family: var(--sans);
+    }
+    .contact-sub span { display: block; }
+
+    .contact-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .cta-btn {
+      width: 200px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      font-family: var(--sans);
+      font-size: 0.71rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s;
+    }
+    .cta-btn svg { flex-shrink: 0; }
+    .cta-btn:hover {
+      border-color: rgba(201,169,110,0.45);
+      color: var(--gold-lt);
+      transform: translateX(-3px);
+    }
+    .cta-btn.primary {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #000;
+      font-weight: 600;
+    }
+    .cta-btn.primary:hover {
+      background: var(--gold-lt);
+      border-color: var(--gold-lt);
+      color: #000;
+      transform: translateX(-3px);
+    }
+
+    .footer-bar {
+      margin-top: 60px;
+      padding: 24px 0 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(232,228,220,0.58);
+      letter-spacing: 0.04em;
+    }
+    .footer-back {
+      font-size: 0.72rem;
+      color: rgba(232,228,220,0.52);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-back:hover { color: var(--gold); }
+
+    /* ════════════════════════════════
+       REVEAL ANIMATION
+    ════════════════════════════════ */
+    .reveal { opacity: 0; transition: opacity 0.75s ease; }
+    .reveal.visible { opacity: 1; }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 900px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .page-hero,
+      .certs-section,
+      .contact-section { padding-left: 28px; padding-right: 28px; }
+      .cert-card { grid-template-columns: 1fr; }
+      .cert-img-wrap { width: 100%; height: auto; }
+      .footer-body { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bar { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     SIDEBAR
+════════════════════════════════ -->
+<aside class="sidebar">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar"><span class="sb-avatar-initials">SM</span></div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer</span>
+    </div>
+  </a>
+  <nav class="sb-nav">
+    <div class="sb-section">
+      <span class="sb-section-label">Projects</span>
+      <a href="jpmc.html" class="sb-row">
+        <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">JP Morgan Chase</span>
+        <span class="sb-icon-right"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+      <a href="index.html#purwaters" class="sb-row">
+        <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+      <a href="index.html#mentormap" class="sb-row">
+        <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+      <a href="philly-truce.html" class="sb-row">
+        <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+    </div>
+    <div class="sb-section">
+      <span class="sb-section-label">Designing AI Experiences</span>
+      <a href="tenetic.html" class="sb-row">
+        <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+    </div>
+    <div class="sb-divider"></div>
+    <a href="playground.html" class="sb-row">
+      <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span>
+      <span class="sb-label">Playground</span>
+      <span class="sb-icon-right arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+    <div class="sb-divider"></div>
+    <a href="certifications.html" class="sb-row active">
+      <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg></span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+    <div class="sb-divider"></div>
+    <a href="about.html" class="sb-row">
+      <span class="sb-icon-left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+  </nav>
+  <div class="sb-footer">
+    <div class="sb-avail"><span class="avail-dot"></span>Open to opportunities</div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- ════════════════════════════════
+     MAIN
+════════════════════════════════ -->
+<main class="main">
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="hero-wm">SM</div>
+    <div class="hero-inner">
+      <p class="eyebrow reveal">
+        <span class="eyebrow-line"></span>
+        Certifications
+      </p>
+      <h1 class="hero-title reveal d1">I am a Life-Long <em>Learner.</em></h1>
+      <p class="hero-desc reveal d2">I regularly invest in learning to refine my UX design skills, strengthen my research practice, and stay thoughtful about how I approach complex problems.</p>
+      <p class="hero-ai-note reveal d3">A certified AI Product Designer, with experience in human–AI interaction and AI-augmented design processes.</p>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section class="certs-section">
+
+    <!-- ── Category 1: AI & Emerging Design ── -->
+    <div class="cert-category reveal">
+      <div class="category-header">
+        <span class="category-name">AI &amp; Emerging Design</span>
+        <span class="category-count">3</span>
+      </div>
+      <div class="cards-stack">
+
+        <!-- Card 1: AI for Designers -->
+        <div class="cert-card reveal">
+          <div class="cert-img-wrap">
+            <img src="Certifications/AI for designers.jpeg" alt="AI for Designers certificate" loading="lazy" />
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer-row">
+              <span class="cert-issuer">Interaction Design Foundation</span>
+              <span class="cert-badge">TOP 10%</span>
+            </div>
+            <h2 class="cert-title">AI for Designers</h2>
+            <p class="cert-desc">Learned how to thoughtfully integrate AI into design workflows without over-automation or loss of intent. Focused on using AI where it adds clarity, speed, and insight, while recognizing where human judgment is essential.</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Human–AI Collaboration</span>
+              <span class="cert-skill">AI Workflow Design</span>
+              <span class="cert-skill">Ethical AI Use</span>
+              <span class="cert-skill">Prompt Engineering</span>
+              <span class="cert-skill">Design Decision Support</span>
+            </div>
+            <a href="https://www.interaction-design.org/members/sayali-mandhalkar/certificate/course/e08e100f-1fb9-4386-adfb-4bfc66ae1605?certificateType=course" target="_blank" rel="noopener" class="cert-link">View Certificate →</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Get Ahead in Product Design with AI -->
+        <div class="cert-card reveal">
+          <div class="cert-img-wrap">
+            <img src="Certifications/Get Ahead on product design with ai.jpeg" alt="Get Ahead in Product Design with AI certificate" loading="lazy" />
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer-row">
+              <span class="cert-issuer">Interaction Design Foundation</span>
+            </div>
+            <h2 class="cert-title">Get Ahead in Product Design with AI</h2>
+            <p class="cert-desc">Developed a practical understanding of how AI can augment the product design process, from research and ideation to wireframing, UI decisions, and evaluation.</p>
+            <div class="cert-skills">
+              <span class="cert-skill">AI-Augmented Design Workflows</span>
+              <span class="cert-skill">Prompting for Design Tasks</span>
+              <span class="cert-skill">AI-Assisted Wireframing</span>
+              <span class="cert-skill">Generative AI Literacy</span>
+              <span class="cert-skill">Critical Evaluation of AI</span>
+            </div>
+            <a href="https://www.interaction-design.org/members/sayali-mandhalkar/certificate/masterclass/mcc_9ac665f1a5ba46f6a61956d9d4ea1a29" target="_blank" rel="noopener" class="cert-link">View Certificate →</a>
+          </div>
+        </div>
+
+        <!-- Card 3: UX Design for Augmented Reality -->
+        <div class="cert-card reveal">
+          <div class="cert-img-wrap">
+            <img src="Certifications/UX for augmented reality.jpeg" alt="UX Design for Augmented Reality certificate" loading="lazy" />
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer-row">
+              <span class="cert-issuer">Interaction Design Foundation</span>
+              <span class="cert-badge">TOP 10%</span>
+            </div>
+            <h2 class="cert-title">UX Design for Augmented Reality</h2>
+            <p class="cert-desc">Explored how to design meaningful AR experiences by grounding interactions in real-world context, user behavior, and spatial constraints.</p>
+            <div class="cert-skills">
+              <span class="cert-skill">AR User Research</span>
+              <span class="cert-skill">Spatial UX Design</span>
+              <span class="cert-skill">AR Prototyping</span>
+              <span class="cert-skill">Usability Testing for AR</span>
+              <span class="cert-skill">Interaction Design for Augmented Spaces</span>
+            </div>
+            <a href="https://www.interaction-design.org/members/sayali-mandhalkar/certificate/course/936bc93e-ff0e-4a93-b98a-928954331ab2?certificateType=course" target="_blank" rel="noopener" class="cert-link">View Certificate →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Category 2: Product and Strategy ── -->
+    <div class="cert-category reveal">
+      <div class="category-header">
+        <span class="category-name">Product and Strategy</span>
+        <span class="category-count">2</span>
+      </div>
+      <div class="cards-stack">
+
+        <!-- Card 4: Get Your Product Used -->
+        <div class="cert-card reveal">
+          <div class="cert-img-wrap">
+            <img src="Certifications/Get you product used.jpeg" alt="Get Your Product Used certificate" loading="lazy" />
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer-row">
+              <span class="cert-issuer">Interaction Design Foundation</span>
+            </div>
+            <h2 class="cert-title">Get Your Product Used: Adoption and Appropriation</h2>
+            <p class="cert-desc">Explored how to design for long-term adoption by understanding how products are introduced, adopted, and appropriated in real user contexts.</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Product Adoption</span>
+              <span class="cert-skill">Diffusion of Innovation</span>
+              <span class="cert-skill">Value Network Design</span>
+              <span class="cert-skill">Design for Behavior Change</span>
+              <span class="cert-skill">Design for Continued Use</span>
+            </div>
+            <a href="https://www.interaction-design.org/members/sayali-mandhalkar/certificate/course/1ba03b30-db84-481c-8283-48c8a0046fec?certificateType=course" target="_blank" rel="noopener" class="cert-link">View Certificate →</a>
+          </div>
+        </div>
+
+        <!-- Card 5: How Designers can shape Product Decisions -->
+        <div class="cert-card reveal">
+          <div class="cert-img-wrap">
+            <img src="Certifications/Speak Strategy, Get InfluenceHow Designers.jpeg" alt="How Designers can shape Product Decisions certificate" loading="lazy" />
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer-row">
+              <span class="cert-issuer">Interaction Design Foundation</span>
+            </div>
+            <h2 class="cert-title">How Designers can shape Product Decisions</h2>
+            <p class="cert-desc">Strengthened my ability to communicate design decisions with clarity and strategic intent. Focused on framing UX insights in ways that influence stakeholders and drive product decisions.</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Design Communication</span>
+              <span class="cert-skill">Strategic Storytelling</span>
+              <span class="cert-skill">Stakeholder Alignment</span>
+              <span class="cert-skill">Influencing Product Decisions</span>
+              <span class="cert-skill">Framing UX Insights</span>
+            </div>
+            <a href="https://www.interaction-design.org/members/sayali-mandhalkar/certificate/masterclass/mcc_8c6cd94d344a44a2ad7c2aed9fd0cbab" target="_blank" rel="noopener" class="cert-link">View Certificate →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Category 3: Design Foundations ── -->
+    <div class="cert-category reveal">
+      <div class="category-header">
+        <span class="category-name">Design Foundations</span>
+        <span class="category-count">2</span>
+      </div>
+      <div class="cards-stack">
+
+        <!-- Card 6: Google UX Design Certificate -->
+        <div class="cert-card reveal">
+          <div class="cert-img-wrap">
+            <img src="Certifications/Google UX design certificate.png" alt="Google UX Design Certificate" loading="lazy" />
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer-row">
+              <span class="cert-issuer">Google</span>
+            </div>
+            <h2 class="cert-title">UX Design Certificate</h2>
+            <p class="cert-desc">Built a strong foundation in user-centered design by learning how to move from research insights to structured flows, wireframes, and usable interfaces.</p>
+            <div class="cert-skills">
+              <span class="cert-skill">User Research</span>
+              <span class="cert-skill">Personas &amp; Journey Mapping</span>
+              <span class="cert-skill">Information Architecture</span>
+              <span class="cert-skill">User Flows</span>
+              <span class="cert-skill">Wireframing</span>
+              <span class="cert-skill">Usability Testing</span>
+              <span class="cert-skill">Interaction Design</span>
+            </div>
+            <a href="https://www.credly.com/badges/00a7f3e6-f6a4-48d0-af52-d41c2a1102ba/linked_in_profile" target="_blank" rel="noopener" class="cert-link">View Certificate →</a>
+          </div>
+        </div>
+
+        <!-- Card 7: Innovation Through Design -->
+        <div class="cert-card reveal">
+          <div class="cert-img-wrap">
+            <img src="Certifications/Univrsity of sydeney.png" alt="Innovation Through Design certificate" loading="lazy" />
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer-row">
+              <span class="cert-issuer">The University of Sydney</span>
+            </div>
+            <h2 class="cert-title">Innovation Through Design: Think, Make, Break, Repeat</h2>
+            <p class="cert-desc">Practiced an iterative, experimentation-driven approach to design by rapidly moving between problem framing, prototyping, testing, and reflection.</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Design Thinking</span>
+              <span class="cert-skill">Rapid Prototyping</span>
+              <span class="cert-skill">Experimentation &amp; Iteration</span>
+              <span class="cert-skill">Creative Problem Solving</span>
+              <span class="cert-skill">Concept Testing</span>
+              <span class="cert-skill">Reflective Design Practice</span>
+            </div>
+            <a href="https://www.coursera.org/account/accomplishments/certificate/D98U3EPVLEE8" target="_blank" rel="noopener" class="cert-link">View Certificate →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       FOOTER / CONTACT
+  ════════════════════════════════ -->
+  <section class="contact-section">
+
+    <div class="footer-body">
+
+      <!-- LEFT: label + headline + subtext -->
+      <div class="footer-left">
+        <p class="sec-label reveal"><span class="eyebrow-line"></span>Get In Touch</p>
+        <h2 class="sec-title reveal" style="margin-bottom: 28px;">
+          Let's create something<br><em>remarkable</em> together.
+        </h2>
+        <p class="contact-sub reveal">
+          <span>Available for full-time roles in the USA &amp; design conversations.</span>
+          <span>To enquire about my projects, shoot me an email.</span>
+        </p>
+      </div>
+
+      <!-- RIGHT: stacked buttons -->
+      <div class="contact-btns reveal">
+
+        <a href="mailto:sayali.ux@gmail.com" class="cta-btn primary" aria-label="Send an email">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          Send an Email
+        </a>
+
+        <a href="https://www.linkedin.com/in/sayali-mandhalkar-0a449616a/" target="_blank" rel="noopener" class="cta-btn" aria-label="LinkedIn profile">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </a>
+
+        <a href="https://medium.com/@sayalim" target="_blank" rel="noopener" class="cta-btn" aria-label="Medium profile">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+          </svg>
+          Medium
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bar">
+      <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
+      <a href="index.html" class="footer-back">← Back to Home</a>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  const revealIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+</script>
+
+</body>
+</html>

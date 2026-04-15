@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presence · Sayali Mandhalkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sw:       280px;
+      --bg:       #111111;
+      --bg2:      #0e0e0e;
+      --bg3:      #1a1a1a;
+      --bg4:      #141414;
+      --sidebar:  #000000;
+      --border:   rgba(255,255,255,0.07);
+      --gold:     #c9a96e;
+      --gold-dim: rgba(201,169,110,0.1);
+      --gold-lt:  #dfc08a;
+      --text:     #e8e4dc;
+      --muted:    rgba(232,228,220,0.72);
+      --faint:    rgba(232,228,220,0.45);
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans); background: var(--bg); color: var(--text);
+      font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; display: flex;
+    }
+    a { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ═══ SIDEBAR ═══ */
+    .sidebar {
+      position: fixed; top: 0; left: 0; width: var(--sw); height: 100vh;
+      background: var(--sidebar); border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold); display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+    @keyframes sidebarIn { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px; padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border); transition: background 0.25s; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; overflow: hidden; transition: border-color 0.25s;
+    }
+    .sb-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .sb-avatar-initials { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--gold); letter-spacing: 0.02em; line-height: 1; }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before { content:''; width:14px; height:1px; background:var(--gold); opacity:0.5; flex-shrink:0; }
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+    .sb-row {
+      display: flex; align-items: center; gap: 0; padding: 0 14px; height: 44px; cursor: pointer;
+      position: relative; opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1) { animation-delay:.12s; } .sb-row:nth-child(2) { animation-delay:.17s; }
+    .sb-row:nth-child(3) { animation-delay:.22s; } .sb-row:nth-child(4) { animation-delay:.27s; }
+    .sb-row:nth-child(5) { animation-delay:.32s; } .sb-row:nth-child(6) { animation-delay:.37s; }
+    .sb-row:nth-child(7) { animation-delay:.42s; } .sb-row:nth-child(8) { animation-delay:.47s; }
+    .sb-row:nth-child(9) { animation-delay:.52s; }
+    @keyframes rowIn { from { opacity:0; transform:translateX(-10px); } to { opacity:1; transform:translateX(0); } }
+    .sb-row::before {
+      content:''; position:absolute; left:0; top:50%; transform:translateY(-50%);
+      width:2px; height:0; background:var(--gold); border-radius:0 2px 2px 0; transition:height 0.25s;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height:56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active { background: linear-gradient(90deg,rgba(201,169,110,0.14) 0%,rgba(201,169,110,0.04) 100%); box-shadow: inset 0 0 20px rgba(201,169,110,0.04); }
+    .sb-icon-left { width:30px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--muted); transition:color 0.2s; }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+    .sb-label { flex:1; font-size:0.84rem; font-weight:400; color:var(--muted); transition:color 0.2s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+    .sb-icon-right { width:24px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:rgba(232,228,220,0.22); transition:color 0.25s,transform 0.25s; }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px,-2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail { display:flex; align-items:center; gap:8px; font-size:0.72rem; color:var(--muted); margin-bottom:14px; padding:0 4px; }
+    .avail-dot { position:relative; width:7px; height:7px; border-radius:50%; background:#4ade80; flex-shrink:0; }
+    .avail-dot::before, .avail-dot::after { content:''; position:absolute; inset:0; border-radius:50%; background:#4ade80; animation:dotRipple 2.4s ease-out infinite; }
+    .avail-dot::after { animation-delay:1.2s; }
+    @keyframes dotRipple { 0% { transform:scale(1); opacity:0.7; } 100% { transform:scale(3.2); opacity:0; } }
+    .sb-links { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    .sb-link {
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      padding:8px 6px; border:1px solid var(--border); border-radius:5px;
+      font-size:0.69rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--muted); background:transparent; transition:border-color 0.22s,color 0.22s,background 0.22s;
+    }
+    .sb-link:hover { border-color:rgba(201,169,110,0.4); color:var(--gold-lt); background:var(--gold-dim); }
+    .sb-link.full { grid-column:span 2; }
+
+    /* ═══ MAIN ═══ */
+    .main { margin-left: var(--sw); width: calc(100% - var(--sw)); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ═══ REVEAL ═══ */
+    .reveal { opacity:0; transition:opacity 0.75s ease; }
+    .reveal.visible { opacity:1; }
+    .d1 { transition-delay:0.1s; } .d2 { transition-delay:0.2s; } .d3 { transition-delay:0.3s; } .d4 { transition-delay:0.4s; }
+
+    /* ═══ SHARED ═══ */
+    .sec-label {
+      font-size:0.62rem; font-weight:500; letter-spacing:0.28em; text-transform:uppercase;
+      color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:20px;
+    }
+    .sec-label-line { width:22px; height:1px; background:var(--gold); flex-shrink:0; }
+    .section { padding: 96px 100px; border-top: 1px solid var(--border); }
+    .section:first-of-type { border-top: none; }
+    .section-inner { max-width: 1100px; }
+    .sec-heading {
+      font-family: var(--serif); font-size: clamp(36px,4.5vw,58px); font-weight:300;
+      line-height:1.1; letter-spacing:-0.02em; color:var(--text); margin-bottom:28px;
+    }
+    .sec-heading em { font-style:italic; color:var(--gold); }
+    .body-text { font-size:0.97rem; line-height:1.95; color:var(--muted); max-width:760px; }
+    .body-text + .body-text { margin-top: 20px; }
+    .body-text p { margin-bottom: 20px; }
+    .body-text p:last-child { margin-bottom: 0; }
+
+    /* ═══ SECTION 1 — HERO ═══ */
+    .hero-section {
+      padding: 120px 100px 96px;
+      position: relative; overflow: hidden;
+      border-top: none;
+    }
+    .hero-section::before {
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(201,169,110,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 50% at 90% 20%, rgba(201,169,110,0.025) 0%, transparent 60%);
+      pointer-events:none;
+    }
+    .hero-pill {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:7px 18px;
+      border:1px solid rgba(201,169,110,0.35);
+      border-radius:100px;
+      font-size:0.6rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:48px;
+      background:rgba(201,169,110,0.06);
+    }
+    .hero-pill::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+    .hero-name {
+      font-family:var(--serif); font-size:clamp(72px,10vw,128px); font-weight:300;
+      line-height:0.95; letter-spacing:-0.03em; color:var(--text); margin-bottom:36px;
+    }
+    .hero-sub {
+      font-size:clamp(16px,1.6vw,20px); line-height:1.7; color:var(--muted);
+      max-width:560px; margin-bottom:64px; font-weight:300;
+    }
+    .hero-meta {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+      background:var(--border); border-radius:8px; overflow:hidden;
+      border:1px solid var(--border); max-width:620px;
+    }
+    .hero-meta-cell { padding:18px 22px; background:rgba(0,0,0,0.5); }
+    .hero-meta-label { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.75; margin-bottom:5px; display:block; }
+    .hero-meta-val { font-size:0.84rem; color:var(--text); font-weight:400; }
+    .hero-divider { width:100%; height:1px; background:linear-gradient(90deg, rgba(201,169,110,0.4), transparent); margin-top:56px; max-width:620px; }
+
+    /* ═══ PULL QUOTE ═══ */
+    .pull-quote {
+      margin: 56px 0;
+      padding: 32px 40px;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,169,110,0.03);
+      border-radius: 0 8px 8px 0;
+    }
+    .pull-quote-text {
+      font-family:var(--serif); font-size:clamp(20px,2.2vw,28px); font-weight:300;
+      font-style:italic; color:var(--gold-lt); line-height:1.5;
+    }
+
+    /* ═══ IMAGES ═══ */
+    .img-block { margin: 56px 0; }
+    .case-img {
+      display:block; width:100%; height:auto;
+      border-radius:12px; object-fit:contain;
+      filter:none; background:transparent;
+      image-rendering:auto;
+    }
+    .img-caption {
+      margin-top:14px; font-size:0.8rem; color:rgba(232,228,220,0.42);
+      font-style:italic; line-height:1.6;
+      border-left:2px solid rgba(201,169,110,0.2); padding-left:12px;
+    }
+
+    /* ═══ ARTIFACT: EMPATHY MAP ═══ */
+    .artifact-title { font-family:var(--serif); font-size:clamp(22px,2.2vw,28px); font-weight:300; color:var(--text); margin-bottom:6px; }
+    .artifact-sub { font-size:0.85rem; color:var(--muted); margin-bottom:32px; }
+    .artifact-caption { font-size:0.8rem; color:var(--faint); font-style:italic; margin-top:20px; padding-left:12px; border-left:2px solid rgba(201,169,110,0.2); }
+
+    .empathy-map {
+      display:grid; grid-template-columns:1fr 1fr; gap:2px;
+      background:rgba(201,169,110,0.08); border-radius:12px; overflow:hidden;
+      margin:0;
+    }
+    .em-quad {
+      background:var(--bg3); padding:32px 28px;
+      border-top:2px solid rgba(201,169,110,0.35);
+      transition:border-color 0.25s;
+    }
+    .em-quad:hover { border-color:var(--gold); }
+    .em-quad-label {
+      font-size:0.58rem; font-weight:600; letter-spacing:0.26em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:20px; display:flex; align-items:center; gap:8px;
+    }
+    .em-quad-label::before { content:''; width:16px; height:1px; background:var(--gold); flex-shrink:0; }
+    .em-quad ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .em-quad ul li {
+      font-size:0.87rem; line-height:1.65; color:var(--muted);
+      padding:8px 12px; border-radius:5px;
+      transition:background 0.2s, color 0.2s; cursor:default;
+      border-left:2px solid transparent; transition:all 0.2s;
+    }
+    .em-quad ul li::before { display:none; }
+    .em-quad ul li:hover { color:var(--gold-lt); background:rgba(201,169,110,0.06); border-left-color:var(--gold); }
+
+    /* ═══ ARTIFACT: COMPETITIVE LANDSCAPE ═══ */
+    .comp-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:0; }
+    .comp-card {
+      background:var(--bg3); border:1px solid var(--border);
+      border-radius:10px; padding:28px 24px; opacity:0.65;
+      transition:opacity 0.2s;
+    }
+    .comp-card:hover { opacity:0.8; }
+    .comp-card.preferred {
+      opacity:1; border-color:rgba(201,169,110,0.45);
+      background:linear-gradient(135deg,rgba(201,169,110,0.06) 0%, var(--bg3) 100%);
+      box-shadow:0 4px 32px rgba(201,169,110,0.08);
+    }
+    .comp-card-label {
+      font-size:0.6rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--border);
+      color:var(--muted);
+    }
+    .comp-card.preferred .comp-card-label { color:var(--gold); border-bottom-color:rgba(201,169,110,0.2); }
+    .comp-points { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .comp-points li {
+      font-size:0.83rem; line-height:1.6; color:var(--muted);
+      display:flex; align-items:flex-start; gap:10px;
+    }
+    .comp-icon { flex-shrink:0; margin-top:2px; font-style:normal; font-size:0.75rem; }
+    .comp-icon.x { color:rgba(220,80,80,0.7); }
+    .comp-icon.check { color:var(--gold); }
+
+    /* ═══ HARDWARE CALLOUT CARDS ═══ */
+    .hw-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:40px; }
+    .hw-card {
+      padding:24px 28px;
+      border-left:3px solid var(--gold);
+      background:rgba(201,169,110,0.03);
+      border-radius:0 8px 8px 0;
+      transition:background 0.25s;
+    }
+    .hw-card:hover { background:rgba(201,169,110,0.06); }
+    .hw-card h4 {
+      font-family:var(--serif); font-size:1.05rem; font-weight:400;
+      color:var(--text); margin-bottom:8px;
+    }
+    .hw-card p { font-size:0.84rem; line-height:1.75; color:var(--muted); }
+
+    /* ═══ ARTIFACT: TIMELINE ═══ */
+    .timeline { position:relative; padding-left:32px; margin-top:0; }
+    .timeline::before {
+      content:''; position:absolute; left:7px; top:8px; bottom:8px;
+      width:1px; background:linear-gradient(to bottom, var(--gold), rgba(201,169,110,0.1));
+    }
+    .timeline-event {
+      position:relative; margin-bottom:12px;
+    }
+    .timeline-event::before {
+      content:''; position:absolute; left:-29px; top:18px;
+      width:10px; height:10px; border-radius:50%;
+      background:var(--bg3); border:2px solid rgba(201,169,110,0.4);
+      transition:border-color 0.25s, background 0.25s;
+    }
+    .timeline-event.active::before,
+    .timeline-event:hover::before { background:var(--gold); border-color:var(--gold); }
+
+    .tl-header {
+      display:flex; align-items:center; gap:14px; cursor:pointer;
+      padding:14px 20px; background:var(--bg3); border:1px solid var(--border);
+      border-radius:8px; transition:border-color 0.25s, background 0.25s;
+      user-select:none;
+    }
+    .tl-header:hover { border-color:rgba(201,169,110,0.3); background:rgba(255,255,255,0.02); }
+    .timeline-event.active .tl-header { border-color:rgba(201,169,110,0.4); background:rgba(201,169,110,0.04); border-radius:8px 8px 0 0; border-bottom:none; }
+
+    .tl-time { font-size:0.7rem; font-weight:500; letter-spacing:0.1em; color:var(--gold); white-space:nowrap; flex-shrink:0; }
+    .tl-title { font-size:0.92rem; font-weight:400; color:var(--text); flex:1; }
+    .tl-tag {
+      font-size:0.55rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+      padding:3px 9px; border-radius:100px; flex-shrink:0;
+    }
+    .tl-tag.safety { background:rgba(201,169,110,0.15); color:var(--gold); }
+    .tl-tag.people { background:rgba(90,130,220,0.15); color:#8aaae8; }
+    .tl-tag.env { background:rgba(70,160,100,0.15); color:#6db888; }
+    .tl-tag.words { background:rgba(150,90,200,0.15); color:#c09de0; }
+    .tl-chevron { color:var(--faint); transition:transform 0.25s, color 0.25s; flex-shrink:0; }
+    .timeline-event.active .tl-chevron { transform:rotate(180deg); color:var(--gold); }
+
+    .tl-body {
+      max-height:0; overflow:hidden; transition:max-height 0.35s ease;
+    }
+    .timeline-event.active .tl-body { max-height:200px; }
+    .tl-body-inner {
+      padding:14px 20px 16px;
+      background:rgba(201,169,110,0.03); border:1px solid rgba(201,169,110,0.2);
+      border-top:none; border-radius:0 0 8px 8px;
+      font-size:0.86rem; line-height:1.75; color:var(--muted);
+    }
+
+    /* ═══ ROLE CARDS ═══ */
+    .role-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:48px; }
+    .role-card {
+      background:var(--bg3); border:1px solid rgba(201,169,110,0.2);
+      border-radius:10px; padding:28px 24px;
+      transition:border-color 0.25s, box-shadow 0.25s;
+    }
+    .role-card:hover { border-color:rgba(201,169,110,0.45); box-shadow:0 4px 24px rgba(201,169,110,0.07); }
+    .role-card-label { font-size:0.58rem; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .role-card h3 { font-family:var(--serif); font-size:1.4rem; font-weight:300; color:var(--text); margin-bottom:12px; }
+    .role-card p { font-size:0.84rem; line-height:1.75; color:var(--muted); }
+
+    /* ═══ VIDEO ═══ */
+    .video-wrap {
+      margin:0; border-radius:12px; overflow:hidden;
+      position:relative; padding-top:56.25%; /* 16:9 */
+      background:#000;
+    }
+    .video-wrap iframe {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      border:none;
+    }
+
+    /* ═══ ARTIFACT: PRIVACY TABLE ═══ */
+    .privacy-table-wrap { overflow-x:auto; margin-top:0; }
+    .privacy-table {
+      width:100%; border-collapse:collapse;
+      font-size:0.88rem;
+    }
+    .privacy-table thead th {
+      padding:14px 20px; text-align:left;
+      font-size:0.6rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      background:rgba(0,0,0,0.4); border-bottom:1px solid var(--border);
+      color:var(--muted);
+    }
+    .privacy-table thead th:last-child { color:var(--gold); background:rgba(201,169,110,0.06); }
+    .privacy-table thead th:first-child { color:var(--faint); }
+    .privacy-table tbody tr { border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s; }
+    .privacy-table tbody tr:hover { background:rgba(255,255,255,0.02); }
+    .privacy-table tbody td { padding:14px 20px; color:var(--muted); vertical-align:middle; }
+    .privacy-table tbody td:first-child { color:var(--text); font-weight:400; }
+    .privacy-table tbody td:last-child { background:rgba(201,169,110,0.04); }
+    .privacy-table .bad { color:rgba(210,80,80,0.75); display:flex; align-items:center; gap:6px; }
+    .privacy-table .bad::before { content:'✗'; font-size:0.85rem; }
+    .privacy-table .good { color:var(--gold-lt); display:flex; align-items:center; gap:6px; }
+    .privacy-table .good::before { content:'✓'; font-size:0.85rem; }
+
+    .privacy-pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+    .privacy-pill {
+      padding:9px 20px; border:1px solid rgba(201,169,110,0.35); border-radius:100px;
+      font-size:0.72rem; font-weight:500; letter-spacing:0.08em;
+      color:var(--gold); background:rgba(201,169,110,0.06);
+    }
+
+    /* ═══ NEXT STEP CARDS ═══ */
+    .next-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:40px; }
+    .next-card {
+      background:var(--bg3); border:1px solid rgba(201,169,110,0.18);
+      border-radius:10px; padding:32px 28px;
+      transition:border-color 0.25s, box-shadow 0.25s;
+    }
+    .next-card:hover { border-color:rgba(201,169,110,0.4); box-shadow:0 4px 28px rgba(201,169,110,0.08); }
+    .next-card-num { font-family:var(--serif); font-size:2rem; font-weight:300; color:rgba(201,169,110,0.2); line-height:1; margin-bottom:14px; }
+    .next-card h3 { font-family:var(--serif); font-size:1.1rem; font-weight:400; color:var(--text); margin-bottom:10px; }
+    .next-card p { font-size:0.84rem; line-height:1.75; color:var(--muted); }
+
+    /* ═══ CTA BACK ═══ */
+    .cta-back-section { padding:48px 100px; border-top:1px solid var(--border); }
+    .cta-back {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase;
+      color:rgba(232,228,220,0.4); transition:color 0.22s;
+    }
+    .cta-back:hover { color:var(--gold); }
+
+    /* ═══ FOOTER ═══ */
+    .contact-section {
+      background:#000; padding:72px 100px 0;
+      border-top:1px solid var(--border); position:relative; overflow:hidden;
+    }
+    .contact-section::before {
+      content:'SM'; font-family:var(--serif); font-size:clamp(180px,24vw,320px);
+      font-weight:300; color:rgba(201,169,110,0.07); position:absolute;
+      left:40px; bottom:40px; line-height:1; letter-spacing:-0.04em;
+      pointer-events:none; user-select:none;
+    }
+    .footer-body { display:grid; grid-template-columns:1fr auto; gap:80px; align-items:center; position:relative; z-index:1; }
+    .footer-left { max-width:520px; }
+    .footer-sec-label { font-size:0.7rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .eline { width:28px; height:1px; background:var(--gold); flex-shrink:0; }
+    .footer-title { font-family:var(--serif); font-size:clamp(32px,4vw,52px); font-weight:300; line-height:1.1; color:var(--text); letter-spacing:-0.01em; margin-bottom:20px; }
+    .footer-title em { font-style:italic; color:var(--gold); }
+    .contact-sub { font-size:0.9rem; line-height:1.95; color:var(--muted); }
+    .contact-sub span { display:block; }
+    .contact-btns { display:flex; flex-direction:column; gap:10px; }
+    .cta-btn {
+      width:200px; height:52px; display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      border:1px solid rgba(255,255,255,0.1); font-family:var(--sans); font-size:0.71rem; font-weight:500;
+      letter-spacing:0.13em; text-transform:uppercase; color:var(--muted);
+      transition:border-color 0.28s,color 0.28s,background 0.28s,transform 0.22s;
+    }
+    .cta-btn svg { flex-shrink:0; }
+    .cta-btn:hover { border-color:rgba(201,169,110,0.45); color:var(--gold-lt); transform:translateX(-3px); }
+    .cta-btn.primary { background:var(--gold); border-color:var(--gold); color:#000; font-weight:600; }
+    .cta-btn.primary:hover { background:var(--gold-lt); border-color:var(--gold-lt); color:#000; transform:translateX(-3px); }
+    .footer-bar { margin-top:60px; padding:24px 0 28px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
+    .footer-copy { font-size:0.72rem; color:rgba(232,228,220,0.45); }
+    .footer-back-link { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); opacity:0.7; transition:opacity 0.2s; }
+    .footer-back-link:hover { opacity:1; }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 960px) {
+      :root { --sw:0px; }
+      .sidebar { display:none; }
+      .main { margin-left:0; }
+      .hero-section, .section, .cta-back-section, .contact-section { padding-left:28px; padding-right:28px; }
+      .hero-meta { grid-template-columns:1fr; }
+      .empathy-map { grid-template-columns:1fr; }
+      .comp-grid { grid-template-columns:1fr; }
+      .hw-grid, .next-grid { grid-template-columns:1fr; }
+      .role-cards { grid-template-columns:1fr; }
+      .footer-body { grid-template-columns:1fr; gap:40px; }
+      .footer-bar { flex-direction:column; gap:10px; }
+      .privacy-table thead th, .privacy-table tbody td { padding:10px 12px; font-size:0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" aria-label="Site navigation">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true"><span class="sb-avatar-initials">SM</span></div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer</span>
+    </div>
+  </a>
+  <nav class="sb-nav" aria-label="Primary">
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Projects</span>
+      <a href="jpmc.html" class="sb-row" data-section="jpmorgan">
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">JP Morgan Chase</span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+      <a href="pur.html" class="sb-row" data-section="purwaters">
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+      <a href="mentormap.html" class="sb-row" data-section="mentormap">
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+      <a href="philly-truce.html" class="sb-row" data-section="phillytruce">
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+    </div>
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Designing AI Experiences</span>
+      <a href="tenetic.html" class="sb-row" data-section="tenetic">
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+    </div>
+    <div class="sb-divider"></div>
+    <a href="playground.html" class="sb-row active" data-section="playground">
+      <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span>
+      <span class="sb-label">Playground</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+    <div class="sb-divider"></div>
+    <a href="certifications.html" class="sb-row" data-section="certifications">
+      <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg></span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+    <div class="sb-divider"></div>
+    <a href="about.html" class="sb-row" data-section="about">
+      <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+  </nav>
+  <div class="sb-footer">
+    <div class="sb-avail"><span class="avail-dot"></span>Open to opportunities</div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main-content">
+
+  <!-- ═══════════════════════════════════
+       SECTION 1 — HERO
+  ═══════════════════════════════════ -->
+  <section class="hero-section">
+    <p class="hero-pill">Speculative Design · Accessibility · AI Wearable</p>
+    <h1 class="hero-name reveal">Presence.</h1>
+    <p class="hero-sub reveal d1">Smart glasses that help people with dementia live with more confidence, independence, and dignity.</p>
+    <div class="hero-meta reveal d2">
+      <div class="hero-meta-cell">
+        <span class="hero-meta-label">Type</span>
+        <span class="hero-meta-val">Personal / Speculative</span>
+      </div>
+      <div class="hero-meta-cell">
+        <span class="hero-meta-label">Platform</span>
+        <span class="hero-meta-val">Wearable + iOS</span>
+      </div>
+      <div class="hero-meta-cell">
+        <span class="hero-meta-label">Focus</span>
+        <span class="hero-meta-val">Dementia Care, AI, Privacy</span>
+      </div>
+    </div>
+    <div class="hero-divider reveal d3"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 2 — THE HUMAN TRUTH
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>Where It Starts</p>
+      <h2 class="sec-heading reveal d1">A disease that steals<br>the <em>familiar.</em></h2>
+
+      <div class="body-text reveal d2">
+        <p>There are 55 million people living with dementia worldwide. By 2050, that number will triple.</p>
+        <p>But the statistics miss the truth of what dementia actually feels like day to day. It is not just memory loss. It is standing in your own kitchen and not knowing if the stove is on. It is looking at your son's face and reaching desperately for his name. It is the slow erosion of the small certainties that make a person feel safe in their own life.</p>
+        <p>The people who live with dementia are not defined by their diagnosis. They are parents, grandparents, friends, storytellers, gardeners, cooks. They deserve technology that treats them that way.</p>
+      </div>
+
+      <div class="pull-quote reveal d3">
+        <p class="pull-quote-text">"The problem was never memory. The problem was the loss of confidence that follows."</p>
+      </div>
+
+      <!-- Empathy Map -->
+      <div class="reveal">
+        <p class="artifact-title">Understanding the person, not the patient</p>
+        <p class="artifact-sub">A day in the life of someone living with dementia</p>
+        <div class="empathy-map">
+          <div class="em-quad reveal">
+            <p class="em-quad-label">Thinks &amp; Wonders</p>
+            <ul>
+              <li>Did I take my medication this morning?</li>
+              <li>Is that person familiar to me?</li>
+              <li>Have I left something on in the kitchen?</li>
+              <li>I don't want to ask again. I already asked.</li>
+              <li>Am I safe right now?</li>
+            </ul>
+          </div>
+          <div class="em-quad reveal d1">
+            <p class="em-quad-label">Feels</p>
+            <ul>
+              <li>Anxious in unfamiliar situations</li>
+              <li>Embarrassed when forgetting faces</li>
+              <li>Frustrated by dependence on others</li>
+              <li>Isolated from social life</li>
+              <li>Relieved when family is nearby</li>
+            </ul>
+          </div>
+          <div class="em-quad reveal d2">
+            <p class="em-quad-label">Does</p>
+            <ul>
+              <li>Asks the same question multiple times</li>
+              <li>Avoids social situations to hide confusion</li>
+              <li>Relies heavily on caregivers for basics</li>
+              <li>Checks locks and appliances repeatedly</li>
+              <li>Withdraws from conversations</li>
+            </ul>
+          </div>
+          <div class="em-quad reveal d3">
+            <p class="em-quad-label">Says</p>
+            <ul>
+              <li>"I'm fine." (when they are not)</li>
+              <li>"I remember." (reaching for certainty)</li>
+              <li>"I don't need any help."</li>
+              <li>"I know who you are." (to cover doubt)</li>
+              <li>"I just forgot for a moment."</li>
+            </ul>
+          </div>
+        </div>
+        <p class="artifact-caption">Designed from empathy, not assumption.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 3 — THE OPPORTUNITY
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>The Opportunity</p>
+      <h2 class="sec-heading reveal d1">Technology that helps without<br><em>announcing itself.</em></h2>
+
+      <div class="body-text reveal d2">
+        <p>Most assistive technology for dementia falls into one of two traps. It is either so complex that the person who needs it cannot use it, or so clinical that wearing it broadcasts vulnerability to everyone in the room.</p>
+        <p>A GPS tracker worn around the neck. A panic button clipped to a shirt. These are not bad solutions. But they are solutions that constantly remind the person wearing them that something is wrong.</p>
+        <p>Presence was designed around a different belief: that the best assistive technology is the kind you forget you are wearing. That support should be quiet. Private. Dignified. And above all, invisible to everyone except the person who needs it.</p>
+      </div>
+
+      <!-- Competitive Landscape -->
+      <div class="reveal" style="margin-top:48px;">
+        <p class="artifact-title">Why existing solutions fall short</p>
+        <p class="artifact-sub" style="margin-bottom:24px;">A comparison of approaches to dementia support technology</p>
+        <div class="comp-grid">
+          <div class="comp-card reveal d1">
+            <p class="comp-card-label">Existing Apps</p>
+            <ul class="comp-points">
+              <li><span class="comp-icon x">✗</span>Require screen interaction</li>
+              <li><span class="comp-icon x">✗</span>Need caregiver management</li>
+              <li><span class="comp-icon x">✗</span>Phone must always be accessible</li>
+              <li><span class="comp-icon x">✗</span>Overwhelming for late-stage users</li>
+              <li><span class="comp-icon x">✗</span>No real-time environmental awareness</li>
+            </ul>
+          </div>
+          <div class="comp-card reveal d2">
+            <p class="comp-card-label">Medical Wearables</p>
+            <ul class="comp-points">
+              <li><span class="comp-icon x">✗</span>Visually stigmatizing</li>
+              <li><span class="comp-icon x">✗</span>Clinical aesthetic</li>
+              <li><span class="comp-icon x">✗</span>Limited to location tracking</li>
+              <li><span class="comp-icon x">✗</span>No social or contextual support</li>
+              <li><span class="comp-icon x">✗</span>Battery-intensive alert systems</li>
+            </ul>
+          </div>
+          <div class="comp-card preferred reveal d3">
+            <p class="comp-card-label">Presence</p>
+            <ul class="comp-points">
+              <li><span class="comp-icon check">✓</span>Worn like normal glasses</li>
+              <li><span class="comp-icon check">✓</span>On-device AI · fully private</li>
+              <li><span class="comp-icon check">✓</span>Face recognition in real time</li>
+              <li><span class="comp-icon check">✓</span>Environmental monitoring built in</li>
+              <li><span class="comp-icon check">✓</span>Gentle audio · invisible to others</li>
+              <li><span class="comp-icon check">✓</span>Designed for dignity, not dependency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 4 — THE PRODUCT
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>The Product</p>
+      <h2 class="sec-heading reveal d1">Presence.</h2>
+
+      <div class="body-text reveal d2">
+        <p>Presence is a pair of AI-powered smart glasses designed specifically for people living with early to mid-stage dementia. They look like ordinary glasses. They feel like ordinary glasses. But inside, they are quietly working: recognizing faces, monitoring the environment, and whispering gentle reminders only the wearer can hear.</p>
+        <p>No touchscreen. No app to open. No button to press. Presence works automatically, in the background, all day long.</p>
+      </div>
+
+      <div class="img-block reveal d3">
+        <img src="Presence/02-glasses-product.jpg   .jpg" alt="Presence smart glasses — product overview with component annotations" class="case-img" />
+        <p class="img-caption">Five components. One purpose: quiet, dignified support.</p>
+      </div>
+
+      <div class="hw-grid reveal">
+        <div class="hw-card">
+          <h4>Forward-Facing Camera</h4>
+          <p>Recognizes faces in real time using on-device AI. No image is ever stored or sent anywhere.</p>
+        </div>
+        <div class="hw-card">
+          <h4>On-Device AI Processor</h4>
+          <p>All processing happens locally on the glasses. No cloud connection required. No data leaves the device.</p>
+        </div>
+        <div class="hw-card">
+          <h4>Open-Ear Speaker</h4>
+          <p>Whispers privately to the wearer. A name. A reminder. A gentle alert. Inaudible to anyone nearby.</p>
+        </div>
+        <div class="hw-card">
+          <h4>Micro-Display Overlay</h4>
+          <p>Shows subtle visual cues in the lens, visible only to the wearer. Names, reminders, safety alerts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 5 — IN THE LENS
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>In the Lens</p>
+      <h2 class="sec-heading reveal d1">What the wearer sees.</h2>
+
+      <div class="body-text reveal d2">
+        <p>Two of the most common moments of confusion for someone with dementia: a familiar face they cannot name, and uncertainty about whether an appliance is safe. Presence handles both, quietly.</p>
+      </div>
+
+      <div class="img-block reveal d3">
+        <img src="Presence/04-hero-family.jpg.jpg" alt="Family member arriving at the door" class="case-img" />
+        <p class="img-caption">"David. Your Son." Whispered privately the moment he walks in. No one else hears it.</p>
+      </div>
+
+      <div class="img-block reveal">
+        <img src="Presence/2.png" alt="Glasses view showing street navigation — turn directions and distance to home" class="case-img" />
+        <p class="img-caption">"Turn left at the post box. Home is 200m ahead." Gentle navigation for familiar routes that feel suddenly unfamiliar.</p>
+      </div>
+
+      <div class="img-block reveal">
+        <img src="Presence/01-hero-stove..jpg" alt="Kitchen stove with Presence safety monitoring" class="case-img" />
+        <p class="img-caption">"Stove. Still on. You left the kitchen 10 minutes ago." A gentle reminder, not an alarm.</p>
+      </div>
+
+      <div class="img-block reveal">
+        <img src="Presence/3.png" alt="Glasses view showing medication detection — morning pills confirmed and afternoon reminder" class="case-img" />
+        <p class="img-caption">"Morning pills taken · 8:22am. Now it's time for your afternoon pill." Medication confirmed without asking, without a phone, without any effort.</p>
+      </div>
+
+      <!-- Day Timeline -->
+      <div class="reveal" style="margin-top:64px;">
+        <p class="artifact-title">A day in the life.</p>
+        <p class="artifact-sub">How Presence shows up: quietly, consistently, invisibly.</p>
+
+        <div class="timeline" id="dayTimeline">
+
+          <div class="timeline-event">
+            <div class="tl-header" onclick="toggleEvent(this)">
+              <span class="tl-time">08:00 am</span>
+              <span class="tl-title">Medication Confirmed</span>
+              <span class="tl-tag safety">Safety</span>
+              <svg class="tl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="tl-body"><div class="tl-body-inner">Glasses detected Eleanor took her morning medication on time. The day starts with certainty.</div></div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="tl-header" onclick="toggleEvent(this)">
+              <span class="tl-time">09:30 am</span>
+              <span class="tl-title">David Recognised</span>
+              <span class="tl-tag people">People</span>
+              <svg class="tl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="tl-body"><div class="tl-body-inner">David arrived at the front door. Glasses whispered "David. Your Son." Eleanor greeted him by name. He will never know she needed help.</div></div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="tl-header" onclick="toggleEvent(this)">
+              <span class="tl-time">11:00 am</span>
+              <span class="tl-title">Unfamiliar Face</span>
+              <span class="tl-tag safety">Safety</span>
+              <svg class="tl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="tl-body"><div class="tl-body-inner">An unfamiliar person rang the bell. Glasses whispered "Unknown person at the door." Eleanor waited for David to answer. Quietly safe, without panic.</div></div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="tl-header" onclick="toggleEvent(this)">
+              <span class="tl-time">12:30 pm</span>
+              <span class="tl-title">Stove Reminder</span>
+              <span class="tl-tag env">Environment</span>
+              <svg class="tl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="tl-body"><div class="tl-body-inner">Eleanor had been in the kitchen for 12 minutes. Glasses whispered "Stove. Still on." She turned it off. No alarm, no panic. Just a quiet prompt.</div></div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="tl-header" onclick="toggleEvent(this)">
+              <span class="tl-time">02:00 pm</span>
+              <span class="tl-title">Word Support</span>
+              <span class="tl-tag words">Words</span>
+              <svg class="tl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="tl-body"><div class="tl-body-inner">During a conversation, Eleanor paused mid-sentence, reaching for a word. Glasses whispered "Brighton," the town she was describing. The story continued.</div></div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="tl-header" onclick="toggleEvent(this)">
+              <span class="tl-time">04:30 pm</span>
+              <span class="tl-title">James at the Door</span>
+              <span class="tl-tag people">People</span>
+              <svg class="tl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="tl-body"><div class="tl-body-inner">James rang the bell. Glasses noted 58% confidence: "This might be James. Not certain." Eleanor checked through the window before answering. Caution over assumption.</div></div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="tl-header" onclick="toggleEvent(this)">
+              <span class="tl-time">06:00 pm</span>
+              <span class="tl-title">Evening Medication</span>
+              <span class="tl-tag safety">Safety</span>
+              <svg class="tl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="tl-body"><div class="tl-body-inner">Evening medication confirmed on time. Day summary: 2 people recognised, 1 stove reminder, 0 alerts. A full day, lived with confidence.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 6 — COMPANION APP
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>The Companion App</p>
+      <h2 class="sec-heading reveal d1">For the people<br>who <em>love them.</em></h2>
+
+      <div class="body-text reveal d2">
+        <p>Presence is not just a device. It is a system of care.</p>
+        <p>The companion iOS app gives family members and caregivers a private window into their loved one's day, without being intrusive, without creating surveillance, and without removing the independence that makes life feel worth living.</p>
+        <p>Three screens. Three roles. Each one designed for a different kind of caring.</p>
+      </div>
+
+      <div class="role-cards reveal d3">
+        <div class="role-card">
+          <p class="role-card-label">Screen 01</p>
+          <h3>Home</h3>
+          <p>Live status of the glasses. Battery, connection, current mode. Quick controls for volume and mute. A summary of what Presence did today.</p>
+        </div>
+        <div class="role-card">
+          <p class="role-card-label">Screen 02</p>
+          <h3>My People</h3>
+          <p>The faces your glasses know. Recognition confidence per person. Easy to add new faces and update photos as people change over time.</p>
+        </div>
+        <div class="role-card">
+          <p class="role-card-label">Screen 03</p>
+          <h3>My Day</h3>
+          <p>A private timeline of the full day. Every person seen. Every reminder given. Every medication confirmed. A quiet record of a life fully lived.</p>
+        </div>
+      </div>
+
+      <div class="img-block reveal">
+        <img src="Presence/1.png" alt="Onboarding screens — setting up people, daily routine, and glasses connection" class="case-img" />
+        <p class="img-caption">Onboarding designed for simplicity: set up your people, your routine, and your glasses in minutes.</p>
+      </div>
+
+      <div class="img-block reveal d1">
+        <img src="Presence/03-app-screens.jpg.jpg" alt="Presence companion app — three screens showing Home, My People, and My Day" class="case-img" />
+        <p class="img-caption">Designed for the wearer, not the caregiver. Control always stays with the person.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 7 — VIDEO
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>See It in Action</p>
+      <h2 class="sec-heading reveal d1">The concept,<br>brought to <em>life.</em></h2>
+
+      <div class="body-text reveal d2">
+        <p>A short film showing how Presence works in a real day, from morning medication to an evening conversation. Designed to show what quiet, dignified support actually feels like.</p>
+      </div>
+
+      <div class="img-block reveal d3">
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/pzp0eJDQb4c"
+            title="Presence · AI Dementia Wearable Concept Film"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 8 — PRIVACY
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>Design Principle</p>
+      <h2 class="sec-heading reveal d1">Private by design.<br><em>Not by policy.</em></h2>
+
+      <div class="body-text reveal d2">
+        <p>Every decision in Presence was made through the lens of privacy. Not as a legal requirement. Not as a feature to market. But as a fundamental act of respect for the person wearing it.</p>
+        <p>People living with dementia are among the most vulnerable to data exploitation. Their routines, their faces, their daily patterns: these are deeply personal. Presence was designed so that none of it ever leaves the device.</p>
+      </div>
+
+      <div class="privacy-pills reveal d3">
+        <span class="privacy-pill">On-device only</span>
+        <span class="privacy-pill">No cloud. No third parties.</span>
+        <span class="privacy-pill">You control your data. Always.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       SECTION 9 — REFLECTION
+  ═══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="sec-label reveal"><span class="sec-label-line"></span>Designer's Note</p>
+      <h2 class="sec-heading reveal d1">What building Presence<br>taught <em>me.</em></h2>
+
+      <div class="body-text reveal d2">
+        <p>I started this project thinking about technology. I ended it thinking about people.</p>
+        <p>Designing for dementia means designing for a person who is losing their grip on the familiar, and who deserves, more than most, to feel like the technology in their life is on their side.</p>
+        <p>Every interaction in Presence had to earn its place. If a feature created anxiety, it was cut. If a reminder felt like an alarm, it was redesigned until it felt like a whisper. If something required the user to remember how to use it, it was rebuilt until it required nothing at all.</p>
+        <p>The hardest design constraint was also the most clarifying one: the person wearing Presence should never feel like they are using assistive technology. They should just feel like themselves, moving through their day, a little more confident, a little more connected, a little more at ease.</p>
+      </div>
+
+      <div class="pull-quote reveal d3">
+        <p class="pull-quote-text">"The best design for someone who is losing their memory is design that requires none."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       CTA — BACK
+  ═══════════════════════════════════ -->
+  <div class="cta-back-section">
+    <a href="playground.html" class="cta-back">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Back to Playground
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════ -->
+  <section class="contact-section">
+    <div class="footer-body">
+      <div class="footer-left">
+        <p class="footer-sec-label"><span class="eline"></span>Get In Touch</p>
+        <h2 class="footer-title">Let's create something<br><em>remarkable</em> together.</h2>
+        <p class="contact-sub">
+          <span>Available for full-time roles in the USA &amp; design conversations.</span>
+          <span>To enquire about my projects, shoot me an email.</span>
+        </p>
+      </div>
+      <div class="contact-btns">
+        <a href="mailto:sayali.ux@gmail.com" class="cta-btn primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Send an Email
+        </a>
+        <a href="https://www.linkedin.com/in/sayali-mandhalkar-0a449616a/" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://medium.com/@sayalim" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          Medium
+        </a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
+      <a href="index.html" class="footer-back-link">← Back to Home</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Reveal on scroll
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.06 });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+
+  // Timeline toggle
+  function toggleEvent(header) {
+    var event = header.parentElement;
+    var isActive = event.classList.contains('active');
+    // Close all
+    document.querySelectorAll('.timeline-event.active').forEach(function(e) {
+      e.classList.remove('active');
+    });
+    // Open clicked if it wasn't already open
+    if (!isActive) { event.classList.add('active'); }
+  }
+</script>
+
+</body>
+</html>

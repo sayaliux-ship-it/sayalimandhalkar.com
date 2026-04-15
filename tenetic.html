@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tenetic · Sayali Mandhalkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sw:       280px;
+      --bg:       #111111;
+      --bg2:      #0e0e0e;
+      --bg3:      #1a1a1a;
+      --sidebar:  #000000;
+      --border:   rgba(255,255,255,0.07);
+      --gold:     #c9a96e;
+      --gold-dim: rgba(201,169,110,0.1);
+      --gold-lt:  #dfc08a;
+      --text:     #e8e4dc;
+      --muted:    rgba(232,228,220,0.72);
+      --faint:    rgba(232,228,220,0.55);
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Global image & video quality ── */
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center top;
+      filter: none !important;
+      -webkit-filter: none !important;
+      
+      
+      border-radius: 12px;
+    }
+    video, iframe {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: none !important;
+      border-radius: 12px;
+    }
+
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sw);
+      height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      z-index: 200;
+      overflow-y: auto;
+      scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s ease; position: relative;
+    }
+    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: none !important; }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0;
+      transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
+    }
+
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ════════════════════════════════
+       PASSWORD GATE
+    ════════════════════════════════ */
+    .gate {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: var(--bg2);
+      position: relative;
+      overflow: hidden;
+      padding: 60px 40px;
+    }
+
+    /* Ambient background glow */
+    .gate::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(201,169,110,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 30% at 20% 80%, rgba(201,169,110,0.02) 0%, transparent 60%),
+        radial-gradient(ellipse 25% 25% at 80% 20%, rgba(201,169,110,0.02) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Watermark */
+    .gate::after {
+      content: 'NDA';
+      font-family: var(--serif);
+      font-size: clamp(120px, 20vw, 260px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.03);
+      position: absolute;
+      right: -20px; bottom: -30px;
+      line-height: 1; letter-spacing: 0.1em;
+      pointer-events: none; user-select: none;
+    }
+
+    .gate-inner {
+      position: relative; z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 440px;
+      animation: gateIn 0.7s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    @keyframes gateIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* NDA label */
+    .gate-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .gate-eyebrow-line { width: 24px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+    /* Lock icon */
+    .gate-lock {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(201,169,110,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      background: rgba(201,169,110,0.05);
+      margin-bottom: 28px;
+      box-shadow: 0 0 0 8px rgba(201,169,110,0.04), 0 0 0 16px rgba(201,169,110,0.02);
+    }
+
+    /* Heading */
+    .gate-heading {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    /* Subtext */
+    .gate-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 360px;
+      margin-bottom: 40px;
+    }
+
+    /* Divider */
+    .gate-divider {
+      width: 40px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.4), transparent);
+      margin-bottom: 40px;
+    }
+
+    /* Input wrapper */
+    .gate-input-wrap {
+      position: relative;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .gate-input {
+      width: 100%;
+      height: 54px;
+      padding: 0 52px 0 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.15em;
+      outline: none;
+      transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
+      -webkit-appearance: none;
+    }
+    .gate-input::placeholder {
+      color: rgba(232,228,220,0.28);
+      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+    }
+    .gate-input:focus {
+      border-color: rgba(201,169,110,0.7);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.08);
+    }
+    .gate-input.error {
+      border-color: rgba(185, 74, 74, 0.8) !important;
+      box-shadow: 0 0 0 3px rgba(185,74,74,0.1) !important;
+      animation: shake 0.38s cubic-bezier(0.36,0.07,0.19,0.97) both;
+    }
+
+    @keyframes shake {
+      10%, 90%  { transform: translateX(-2px); }
+      20%, 80%  { transform: translateX(4px);  }
+      30%, 50%, 70% { transform: translateX(-5px); }
+      40%, 60%  { transform: translateX(5px);  }
+    }
+
+    /* Eye toggle */
+    .gate-eye {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: rgba(232,228,220,0.35); padding: 4px;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s;
+    }
+    .gate-eye:hover { color: var(--gold); }
+
+    /* Error message */
+    .gate-error {
+      font-size: 0.76rem;
+      color: rgba(220, 100, 100, 0.9);
+      letter-spacing: 0.03em;
+      line-height: 1.55;
+      text-align: center;
+      margin-bottom: 20px;
+      min-height: 18px;
+      max-width: 340px;
+      transition: opacity 0.25s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .gate-error.visible { opacity: 1; pointer-events: auto; }
+
+    /* Unlock button */
+    .gate-btn {
+      width: 100%;
+      height: 52px;
+      background: var(--gold);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0a0a09;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background 0.22s, transform 0.18s, box-shadow 0.22s;
+      margin-bottom: 32px;
+    }
+    .gate-btn:hover {
+      background: var(--gold-lt);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(201,169,110,0.25);
+    }
+    .gate-btn:active { transform: translateY(0); }
+
+    /* Email access line */
+    .gate-access {
+      font-size: 0.8rem;
+      color: rgba(232,228,220,0.4);
+      margin-bottom: 28px;
+    }
+    .gate-access a {
+      color: var(--gold);
+      transition: color 0.2s;
+      text-decoration: underline;
+      text-decoration-color: rgba(201,169,110,0.35);
+      text-underline-offset: 3px;
+    }
+    .gate-access a:hover { color: var(--gold-lt); text-decoration-color: var(--gold-lt); }
+
+    /* Return link */
+    .gate-return {
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,228,220,0.3);
+      transition: color 0.22s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .gate-return:hover { color: var(--muted); }
+
+    /* ════════════════════════════════
+       CASE STUDY CONTENT (hidden until unlocked)
+    ════════════════════════════════ */
+    .cs-content {
+      display: none;
+      flex: 1;
+    }
+
+    .cs-unlocked {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      background: var(--bg);
+      padding: 80px 100px;
+      text-align: center;
+    }
+
+    .cs-unlocked-icon {
+      width: 64px; height: 64px;
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      background: rgba(201,169,110,0.06);
+      margin-bottom: 8px;
+      animation: unlockPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes unlockPop {
+      from { transform: scale(0.6); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .cs-unlocked p.eyebrow-label {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cs-unlocked p.eyebrow-label::before,
+    .cs-unlocked p.eyebrow-label::after {
+      content: ''; width: 24px; height: 1px; background: var(--gold);
+    }
+
+    .cs-unlocked h2 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 300; line-height: 1.1;
+      color: var(--text);
+    }
+    .cs-unlocked h2 em { font-style: italic; color: var(--gold); }
+
+    .cs-unlocked .loading-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 460px;
+    }
+
+    /* ════════════════════════════════
+       CASE STUDY STYLES
+    ════════════════════════════════ */
+
+    /* ── Reveal on scroll ── */
+    .reveal { opacity: 0; transition: opacity 0.75s ease; }
+    .reveal.visible { opacity: 1; }
+    .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; } .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; } .d5 { transition-delay: 0.40s; }
+
+    /* ── Shared section util ── */
+    .sec-label {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .eline { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .sec-heading {
+      font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 300;
+      line-height: 1.1; letter-spacing: -0.01em; color: var(--text); margin-bottom: 24px;
+    }
+    .sec-heading em { font-style: italic; color: var(--gold); }
+    .body-text { font-size: 0.95rem; line-height: 1.9; color: var(--muted); max-width: 760px; }
+    .body-text + .body-text { margin-top: 18px; }
+
+    /* ── HERO ── */
+    .cs-hero {
+      position: relative; overflow: hidden;
+      min-height: 80vh;
+      display: flex; align-items: flex-end;
+      background: #0a0c14;
+    }
+    .cs-hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .cs-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25) 0%,
+        rgba(10,12,20,0.5) 40%,
+        rgba(10,12,20,0.92) 100%
+      );
+    }
+    .cs-hero-content {
+      position: relative; z-index: 2;
+      padding: 0 100px 72px;
+      width: 100%;
+    }
+    .cs-hero-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .cs-hero-eyebrow-line { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .cs-hero-title {
+      font-family: var(--serif); font-size: clamp(42px, 6vw, 80px);
+      font-weight: 300; line-height: 1.05; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .cs-hero-sub {
+      font-family: var(--serif); font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 300; font-style: italic; color: var(--gold);
+      margin-bottom: 48px; line-height: 1.4;
+    }
+    /* NDA badge */
+    .nda-badge {
+      position: absolute; top: 40px; right: 100px; z-index: 10;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 100px;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .nda-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+    /* Meta grid */
+    .cs-hero-meta {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.06);
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      max-width: 780px;
+    }
+    .cs-meta-cell {
+      padding: 20px 22px;
+      background: rgba(0,0,0,0.45);
+    }
+    .cs-meta-label {
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.75;
+      margin-bottom: 6px; display: block;
+    }
+    .cs-meta-val {
+      font-size: 0.82rem; font-weight: 400; color: var(--text); line-height: 1.4;
+    }
+
+    /* ── NDA DISCLAIMER ── */
+    .nda-disclaimer {
+      margin: 48px 100px;
+      padding: 24px 28px;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,169,110,0.04);
+      border-radius: 0 6px 6px 0;
+    }
+    .nda-disclaimer p {
+      font-size: 0.84rem; line-height: 1.75; color: rgba(232,228,220,0.55);
+      font-style: italic;
+    }
+
+    /* ── OVERVIEW SECTION ── */
+    .cs-section { padding: 72px 100px; border-top: 1px solid var(--border); }
+    .cs-section:first-of-type { border-top: none; }
+    .workflow-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .workflow-card {
+      background: var(--bg3); border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 8px; padding: 32px 28px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .workflow-card:hover { border-color: rgba(201,169,110,0.45); box-shadow: 0 4px 32px rgba(201,169,110,0.07); }
+    .workflow-card-label {
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+    }
+    .workflow-card h3 {
+      font-family: var(--serif); font-size: clamp(22px, 2.4vw, 30px);
+      font-weight: 300; color: var(--text); margin-bottom: 12px;
+    }
+    .workflow-card p { font-size: 0.87rem; line-height: 1.8; color: var(--muted); }
+
+    /* ── PART HEADER ── */
+    .part-header {
+      padding: 80px 100px 0;
+      position: relative;
+    }
+    .part-header::after {
+      content: attr(data-part);
+      font-family: var(--serif);
+      font-size: clamp(80px, 14vw, 180px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.04);
+      position: absolute; right: 80px; top: 40px;
+      line-height: 1; letter-spacing: 0.04em;
+      pointer-events: none; user-select: none;
+    }
+
+    /* ── TWO-COL TEXT LAYOUT ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; align-items: start; }
+    .insight-callout {
+      background: rgba(20,58,162,0.08);
+      border: 1px solid rgba(20,58,162,0.35);
+      border-radius: 8px;
+      padding: 28px 24px;
+    }
+    .insight-callout-label {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #5d83d4; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .insight-callout-label::before { content: '✦'; font-style: normal; font-size: 0.75rem; }
+    .insight-callout p { font-size: 0.87rem; line-height: 1.8; color: var(--muted); }
+    .insight-callout blockquote {
+      font-family: var(--serif); font-size: 1.1rem; font-style: italic;
+      color: #8aaae8; line-height: 1.6; border-left: 2px solid rgba(20,58,162,0.5);
+      padding-left: 16px; margin-top: 12px;
+    }
+
+    /* ── PERSONA CARD ── */
+    .persona-card {
+      margin-top: 40px;
+      background: var(--bg3);
+      border: 1px solid rgba(20,58,162,0.3);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .persona-header {
+      padding: 32px 36px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 24px;
+      background: rgba(20,58,162,0.06);
+    }
+    .persona-avatar {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(20,58,162,0.35), rgba(20,58,162,0.12));
+      border: 1px solid rgba(20,58,162,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 500;
+      color: #8aaae8; flex-shrink: 0;
+    }
+    .persona-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; color: var(--text); display: block; }
+    .persona-title { font-size: 0.76rem; color: var(--muted); margin-top: 2px; display: block; }
+    .persona-meta { font-size: 0.72rem; color: rgba(232,228,220,0.38); margin-top: 4px; display: block; letter-spacing: 0.02em; }
+    .persona-body { padding: 28px 36px; }
+    .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 28px; }
+    .persona-section h4 {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #8aaae8; margin-bottom: 12px;
+    }
+    .persona-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .persona-section ul li {
+      font-size: 0.84rem; line-height: 1.6; color: var(--muted);
+      padding-left: 14px; position: relative;
+    }
+    .persona-section ul li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 4px; height: 4px; border-radius: 50%; background: #5d83d4; opacity: 0.7;
+    }
+    .persona-quote {
+      padding: 20px 24px;
+      border-left: 2px solid rgba(20,58,162,0.6);
+      background: rgba(20,58,162,0.06);
+      border-radius: 0 6px 6px 0;
+    }
+    .persona-quote p {
+      font-family: var(--serif); font-size: 1.05rem; font-style: italic;
+      color: #8aaae8; line-height: 1.6;
+    }
+    .persona-quote cite {
+      display: block; font-family: var(--sans); font-size: 0.72rem; font-style: normal;
+      color: rgba(232,228,220,0.35); margin-top: 8px; letter-spacing: 0.06em;
+    }
+
+    /* ── JOURNEY FINDINGS ── */
+    .findings-list { margin-top: 28px; display: flex; flex-direction: column; gap: 0; }
+    .finding-item {
+      display: grid; grid-template-columns: 52px 1fr;
+      align-items: start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .finding-item:first-child { border-top: 1px solid var(--border); }
+    .finding-num {
+      font-family: var(--serif); font-size: clamp(28px, 3vw, 40px);
+      font-weight: 300; color: rgba(20,58,162,0.35);
+      line-height: 1; padding-top: 4px;
+    }
+    .finding-item p { font-size: 0.9rem; line-height: 1.75; color: var(--muted); padding-top: 4px; }
+    .finding-item strong { color: var(--text); font-weight: 500; }
+
+    /* ── HAPPY PATH FLOW ── */
+    .happy-path-block {
+      margin-top: 40px;
+      background: var(--bg3);
+      border: 1px solid rgba(201,169,110,0.18);
+      border-radius: 12px;
+      padding: 32px 36px;
+    }
+    .happy-path-label {
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .happy-path-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .flow-sequence {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    }
+    .flow-step {
+      padding: 10px 20px;
+      background: rgba(201,169,110,0.08);
+      border: 1px solid rgba(201,169,110,0.22);
+      border-radius: 100px;
+      font-size: 0.82rem; font-weight: 500; color: var(--text);
+      letter-spacing: 0.02em; white-space: nowrap;
+    }
+    .flow-step.start { background: rgba(20,58,162,0.15); border-color: rgba(20,58,162,0.45); color: #8aaae8; }
+    .flow-step.end { background: rgba(201,169,110,0.16); border-color: rgba(201,169,110,0.45); color: var(--gold-lt); }
+    .flow-arrow { color: var(--gold); font-size: 0.9rem; opacity: 0.55; }
+
+    /* ── KPI FEATURE CARDS ── */
+    .kpi-cards {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 40px; align-items: stretch;
+    }
+    .kpi-card {
+      background: var(--bg3); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px; padding: 24px 20px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      position: relative;
+    }
+    .kpi-card:hover { border-color: rgba(20,58,162,0.4); box-shadow: 0 4px 24px rgba(20,58,162,0.1); }
+    .kpi-card.oos { opacity: 0.5; }
+    .kpi-card.oos::after {
+      content: '*out of scope';
+      position: absolute; top: 10px; right: 10px;
+      font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(232,228,220,0.3); background: rgba(255,255,255,0.04);
+      padding: 2px 6px; border-radius: 3px;
+    }
+    .kpi-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(20,58,162,0.15);
+      border: 1px solid rgba(20,58,162,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: #7a9de0; margin-bottom: 14px;
+    }
+    .kpi-num {
+      font-family: var(--serif); font-size: 0.72rem; font-weight: 300;
+      color: rgba(20,58,162,0.5); margin-bottom: 6px;
+    }
+    .kpi-card h4 {
+      font-family: var(--serif); font-size: 1rem; font-weight: 400;
+      color: var(--text); margin-bottom: 8px; line-height: 1.25;
+    }
+    .kpi-card p { font-size: 0.76rem; line-height: 1.65; color: var(--muted); }
+
+    /* ── FULL-WIDTH IMAGE ── */
+    .cs-img {
+      display: block; width: 100%; height: auto;
+      border-radius: 12px; margin-top: 32px;
+      image-rendering: auto; filter: none; background: transparent;
+    }
+    .cs-img.tall {
+      max-height: 680px; object-fit: contain;
+      object-position: top center; background: rgba(255,255,255,0.02);
+    }
+    .cs-img.portrait {
+      width: auto; max-width: 100%; max-height: 520px;
+      margin-left: auto; margin-right: auto;
+    }
+    .cs-img-caption {
+      margin-top: 14px; font-size: 0.8rem; color: rgba(232,228,220,0.42);
+      font-style: italic; line-height: 1.6;
+      border-left: 2px solid rgba(201,169,110,0.2); padding-left: 12px;
+    }
+    .img-group { padding: 0 100px; margin-bottom: 56px; }
+
+    /* ── ANNOTATED MOCKUP BLOCK ── */
+    .annotated-block { padding: 0 100px; margin-bottom: 56px; }
+    .annotated-block .annotation-title {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .annotated-block .annotation-title::before { content: ''; width: 20px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0; }
+
+    /* ── SPRINT SUBSECTION ── */
+    .sprint-header {
+      display: flex; align-items: baseline; gap: 16px;
+      margin-bottom: 16px;
+    }
+    .sprint-num {
+      font-family: var(--serif); font-size: clamp(44px, 5vw, 60px);
+      font-weight: 300; color: rgba(20,58,162,0.2); line-height: 1; flex-shrink: 0;
+    }
+    .sprint-title-block {}
+    .sprint-eyebrow {
+      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: #7a9de0; margin-bottom: 4px;
+    }
+    .sprint-title-block h3 {
+      font-family: var(--serif); font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 300; color: var(--text); line-height: 1.2;
+    }
+    .sprint-features {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0;
+    }
+    .sprint-feature-tag {
+      padding: 5px 13px;
+      background: rgba(20,58,162,0.1);
+      border: 1px solid rgba(20,58,162,0.28);
+      border-radius: 100px;
+      font-size: 0.72rem; color: #8aaae8; letter-spacing: 0.03em;
+    }
+
+    /* ── OUTCOME CARDS (Conclusion) ── */
+    .outcome-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+    .outcome-card {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 24px 28px;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,169,110,0.04);
+      border-radius: 0 8px 8px 0;
+      transition: background 0.25s;
+    }
+    .outcome-card:hover { background: rgba(201,169,110,0.07); }
+    .outcome-num {
+      font-family: var(--serif); font-size: 2rem; font-weight: 300;
+      color: rgba(201,169,110,0.28); flex-shrink: 0; line-height: 1;
+    }
+    .outcome-card-body h4 {
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 400;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .outcome-card-body p { font-size: 0.83rem; line-height: 1.75; color: var(--muted); }
+
+    /* ── CONCLUSION ── */
+    .conclusion-section { padding: 80px 100px; border-top: 1px solid var(--border); }
+    .closing-quote {
+      margin-top: 56px; padding: 36px 40px;
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 12px;
+      background: rgba(201,169,110,0.03);
+      text-align: center;
+    }
+    .closing-quote blockquote {
+      font-family: var(--serif); font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 300; font-style: italic; color: var(--gold-lt); line-height: 1.55;
+      max-width: 680px; margin: 0 auto 16px;
+    }
+    .closing-quote cite {
+      font-family: var(--sans); font-size: 0.76rem; color: rgba(232,228,220,0.4);
+      letter-spacing: 0.1em; font-style: normal; text-transform: uppercase;
+    }
+
+    /* ── NEXT PROJECT ── */
+    .next-project-section { padding: 72px 100px; border-top: 1px solid var(--border); background: var(--bg2); }
+    .next-project-card {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 36px 40px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      background: var(--bg3);
+      transition: border-color 0.28s, background 0.28s, transform 0.22s;
+      text-decoration: none;
+    }
+    .next-project-card:hover {
+      border-color: rgba(201,169,110,0.35);
+      background: rgba(201,169,110,0.04);
+      transform: translateX(4px);
+    }
+    .next-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .next-title { font-family: var(--serif); font-size: clamp(22px, 2.5vw, 32px); font-weight: 300; color: var(--text); }
+    .next-arrow { color: var(--gold); font-size: 1.5rem; opacity: 0.7; transition: opacity 0.2s, transform 0.22s; }
+    .next-project-card:hover .next-arrow { opacity: 1; transform: translateX(6px); }
+
+    /* ── IMAGE PAIR ── */
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+    .img-pair-item {}
+    .img-pair-item .cs-img { margin-top: 0; }
+    .img-pair-caption { font-size: 0.75rem; color: rgba(232,228,220,0.38); margin-top: 8px; font-style: italic; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 960px) {
+      .cs-hero-content, .nda-disclaimer, .cs-section, .part-header, .img-group,
+      .annotated-block, .conclusion-section, .next-project-section { padding-left: 28px; padding-right: 28px; }
+      .nda-badge { right: 28px; top: 28px; }
+      .cs-hero-meta { grid-template-columns: repeat(2, 1fr); }
+      .workflow-cards, .two-col, .persona-grid, .outcome-cards { grid-template-columns: 1fr; }
+      .kpi-cards { grid-template-columns: repeat(2, 1fr); }
+      .next-project-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .img-pair { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Footer ─── */
+    .contact-section {
+      background: #000; padding: 72px 100px 0;
+      border-top: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: 'SM'; font-family: var(--serif); font-size: clamp(180px, 24vw, 320px);
+      font-weight: 300; color: rgba(201,169,110,0.07); position: absolute;
+      left: 40px; bottom: 40px; line-height: 1; letter-spacing: -0.04em;
+      pointer-events: none; user-select: none;
+    }
+    .footer-body {
+      display: grid; grid-template-columns: 1fr auto; gap: 80px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .footer-left { max-width: 520px; }
+    .sec-label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .eline { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .sec-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.1; color: var(--text); letter-spacing: -0.01em; }
+    .sec-title em { font-style: italic; color: var(--gold); }
+    .contact-sub { font-size: 0.9rem; line-height: 1.95; color: var(--muted); font-family: var(--sans); }
+    .contact-sub span { display: block; }
+    .contact-btns { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+    .cta-btn {
+      width: 200px; height: 52px; display: inline-flex; align-items: center;
+      justify-content: center; gap: 10px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1); font-family: var(--sans);
+      font-size: 0.71rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--muted); transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s;
+    }
+    .cta-btn svg { flex-shrink: 0; }
+    .cta-btn:hover { border-color: rgba(201,169,110,0.45); color: var(--gold-lt); transform: translateX(-3px); }
+    .cta-btn.primary { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 600; }
+    .cta-btn.primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); color: #000; transform: translateX(-3px); }
+    .footer-bar {
+      margin-top: 60px; padding: 24px 0 28px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;
+    }
+    .footer-copy { font-size: 0.72rem; color: rgba(232,228,220,0.45); }
+    .footer-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.7; transition: opacity 0.2s; }
+    .footer-back:hover { opacity: 1; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 960px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .gate { padding: 40px 24px; }
+      .contact-section { padding-left: 28px; padding-right: 28px; }
+      .footer-body { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bar { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     SIDEBAR
+════════════════════════════════ -->
+<aside class="sidebar" aria-label="Site navigation">
+
+  <!-- Profile -->
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer</span>
+    </div>
+  </a>
+
+  <!-- Nav -->
+  <nav class="sb-nav" aria-label="Primary">
+
+    <!-- PROJECTS -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Projects</span>
+
+      <a href="jpmc.html" class="sb-row" data-section="jpmorgan">
+        <span class="sb-icon-left" aria-hidden="true">
+          <!-- Lock icon — NDA active -->
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </span>
+        <span class="sb-label">JP Morgan Chase</span>
+        <span class="sb-icon-right" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </span>
+      </a>
+
+      <a href="pur.html" class="sb-row" data-section="purwaters">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </span>
+      </a>
+
+      <a href="mentormap.html" class="sb-row" data-section="mentormap">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </span>
+      </a>
+
+      <a href="philly-truce.html" class="sb-row" data-section="phillytruce">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- DESIGNING AI EXPERIENCES -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Designing AI Experiences</span>
+
+      <a href="tenetic.html" class="sb-row active" data-section="tenetic">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- PLAYGROUND -->
+    <a href="playground.html" class="sb-row" data-section="playground">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+          <path d="M20 3v4"/><path d="M22 5h-4"/>
+          <path d="M4 17v2"/><path d="M5 18H3"/>
+        </svg>
+      </span>
+      <span class="sb-label">Playground</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- CERTIFICATIONS -->
+    <a href="certifications.html" class="sb-row" data-section="certifications">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+          <circle cx="12" cy="8" r="6"/>
+        </svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- ABOUT ME -->
+    <a href="about.html" class="sb-row" data-section="about">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+  </nav>
+
+  <!-- Sidebar Footer -->
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+
+</aside>
+
+<!-- ════════════════════════════════
+     MAIN
+════════════════════════════════ -->
+<main class="main" id="main-content">
+
+  <!-- ═══ PASSWORD GATE ═══ -->
+  <section class="gate" id="gate" aria-label="Protected content">
+    <div class="gate-inner">
+
+      <!-- NDA label -->
+      <p class="gate-eyebrow" aria-label="NDA Project">
+        <span class="gate-eyebrow-line" aria-hidden="true"></span>
+        NDA Project
+        <span class="gate-eyebrow-line" aria-hidden="true"></span>
+      </p>
+
+      <!-- Lock icon -->
+      <div class="gate-lock" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="gate-heading">Private Content</h1>
+
+      <!-- Subtext -->
+      <p class="gate-sub">
+        This case study is protected under NDA.<br>
+        Enter passcode to continue.
+      </p>
+
+      <div class="gate-divider" aria-hidden="true"></div>
+
+      <!-- Input -->
+      <div class="gate-input-wrap">
+        <input
+          type="password"
+          id="gateInput"
+          class="gate-input"
+          placeholder="Enter passcode"
+          maxlength="20"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-label="Passcode"
+        />
+        <button class="gate-eye" id="eyeToggle" type="button" aria-label="Toggle visibility">
+          <!-- Eye open -->
+          <svg id="eyeOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <!-- Eye closed (hidden by default) -->
+          <svg id="eyeClosed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Error msg -->
+      <p class="gate-error" id="gateError" role="alert" aria-live="polite">
+        Incorrect password. Please try again or email <a href="mailto:sayali.ux@gmail.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">sayali.ux@gmail.com</a> for access.
+      </p>
+
+      <!-- Unlock button -->
+      <button class="gate-btn" id="gateBtn" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+        </svg>
+        Unlock Case Study
+      </button>
+
+      <!-- Email access -->
+      <p class="gate-access">
+        Need access? Email me at
+        <a href="mailto:sayali.ux@gmail.com">sayali.ux@gmail.com</a>
+      </p>
+
+      <!-- Return home -->
+      <a href="index.html" class="gate-return">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+        </svg>
+        Return to Home
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CASE STUDY CONTENT (shown after unlock) ═══ -->
+  <div class="cs-content" id="csContent">
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section class="cs-hero">
+      <img src="tenetic/Hero.png" alt="Tenetic platform hero" class="cs-hero-img" />
+      <div class="cs-hero-overlay"></div>
+      <span class="nda-badge">NDA Protected</span>
+      <div class="cs-hero-content">
+        <p class="cs-hero-eyebrow">
+          <span class="cs-hero-eyebrow-line"></span>
+          Designing AI Experiences
+          <span class="cs-hero-eyebrow-line"></span>
+        </p>
+        <h1 class="cs-hero-title">Tenetic</h1>
+        <p class="cs-hero-sub">AI-Powered Sales Presentation Platform</p>
+        <div class="cs-hero-meta">
+          <div class="cs-meta-cell">
+            <span class="cs-meta-label">My Role</span>
+            <span class="cs-meta-val">Lead Product Designer</span>
+          </div>
+          <div class="cs-meta-cell">
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-val">12 Weeks</span>
+          </div>
+          <div class="cs-meta-cell">
+            <span class="cs-meta-label">Team</span>
+            <span class="cs-meta-val">Solo Designer + 3 Engineers</span>
+          </div>
+          <div class="cs-meta-cell">
+            <span class="cs-meta-label">Platform</span>
+            <span class="cs-meta-val">Web Application</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NDA Disclaimer -->
+    <div class="nda-disclaimer reveal">
+      <p>Certain details have been omitted or abstracted in compliance with a non-disclosure agreement. All visuals are reproduced with permission from the client. The work shown reflects my individual contribution as the sole product designer on the engagement.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         OVERVIEW
+    ═══════════════════════════════════════ -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Project Overview</p>
+      <h2 class="sec-heading">An AI platform for enterprise<br>sales teams to build <em>data-ready</em> presentations</h2>
+      <p class="body-text">Tenetic is an AI data intelligence platform designed to help enterprise sales representatives transform raw data into compelling, client-ready presentations, in minutes rather than hours. I was brought on as the sole product designer to take the platform from concept to launch across two structured phases.</p>
+      <div class="workflow-cards reveal">
+        <div class="workflow-card">
+          <p class="workflow-card-label">Phase 01</p>
+          <h3>Creative Discovery</h3>
+          <p>Research, user analysis, and UX strategy to define what the product needed to become. Deliverables included personas, journey maps, happy path flows, information architecture, and feature prioritization.</p>
+        </div>
+        <div class="workflow-card">
+          <p class="workflow-card-label">Phase 02</p>
+          <h3>Implementation</h3>
+          <p>Sprint-by-sprint execution of the full Tenetic platform, from a design system and core navigation through the AI Story Builder engine, file management, and final presentation workflows.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PHASE 01 — DISCOVERY
+    ═══════════════════════════════════════ -->
+    <div class="part-header reveal" data-part="01">
+      <p class="sec-label"><span class="eline"></span>Phase 01</p>
+      <h2 class="sec-heading"><em>Creative Discovery</em></h2>
+      <p class="body-text">Before designing a single screen, I needed to understand who this product was truly for, what was breaking in their current workflow, and what the simplest path to value looked like. Phase 01 was entirely research and strategy.</p>
+    </div>
+
+    <!-- The Brief -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>The Challenge</p>
+      <h2 class="sec-heading">Designing a <em>0-to-1</em> AI product<br>under aggressive timelines</h2>
+      <div class="two-col">
+        <div>
+          <p class="body-text">Enterprise sales teams at Tenetic's target clients were spending enormous amounts of time manually pulling data, assembling slides, and reformatting decks for each client, a process rife with handoffs, rework, and inconsistency.</p>
+          <p class="body-text" style="margin-top:18px;">My mandate was to design the platform from scratch: no existing design system, no prior design files, unclear user needs, and a compressed sprint cadence. Every design decision had to be grounded in real user insight.</p>
+        </div>
+        <div class="insight-callout">
+          <p class="insight-callout-label">Key Insight</p>
+          <p>Initial assumptions pointed to data access as the primary friction. Research revealed something different entirely.</p>
+          <blockquote>"The pain point was not data access, but the effort required to structure a compelling story."</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Persona -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Primary Persona</p>
+      <h2 class="sec-heading">Meet <em>Ali Walton</em></h2>
+      <p class="body-text">Through stakeholder interviews and synthesized research, I defined the primary user: a senior sales representative navigating high-stakes client meetings with limited time and technical support.</p>
+
+      <div class="persona-card reveal">
+        <div class="persona-header">
+          <div class="persona-avatar">AW</div>
+          <div>
+            <span class="persona-name">Ali Walton</span>
+            <span class="persona-title">Senior Sales Representative</span>
+            <span class="persona-meta">Age 36 · B. Marketing · Married, 2 kids · Chicago, IL</span>
+          </div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-grid">
+            <div class="persona-section">
+              <h4>Goals</h4>
+              <ul>
+                <li>Quickly assemble impressive, tailored client presentations</li>
+                <li>Make data feel like a story, not a spreadsheet</li>
+                <li>Spend more time selling and less time formatting</li>
+                <li>Impress stakeholders with polished, on-brand output</li>
+              </ul>
+            </div>
+            <div class="persona-section">
+              <h4>Frustrations</h4>
+              <ul>
+                <li>Manual data pulls from multiple sources take hours</li>
+                <li>Decks feel generic and not tailored to specific clients</li>
+                <li>Rework cycles after every new data point or change</li>
+                <li>No single tool to handle data + story + design together</li>
+              </ul>
+            </div>
+          </div>
+          <div class="persona-quote">
+            <p>"If you can't explain it simply, you don't understand it well enough."</p>
+            <cite>Bill Gates (Ali's guiding principle)</cite>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey Map -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Current State Journey Map</p>
+      <h2 class="sec-heading">Mapping the <em>pain</em> in the current workflow</h2>
+      <p class="body-text">I mapped Ali's end-to-end experience preparing a client presentation today, from initial data request to final delivery. Three systemic failure modes emerged across the journey.</p>
+      <div class="findings-list reveal">
+        <div class="finding-item">
+          <span class="finding-num">01</span>
+          <p><strong>Manual handoffs between systems.</strong> Sales reps switch between 4–6 disparate tools to gather data, build context, and format output, creating constant context-switching and data integrity risk.</p>
+        </div>
+        <div class="finding-item">
+          <span class="finding-num">02</span>
+          <p><strong>Heavy rework cycles.</strong> Every client change, data update, or stakeholder revision requires starting over. There is no live feedback loop between the data source and the presentation output.</p>
+        </div>
+        <div class="finding-item">
+          <span class="finding-num">03</span>
+          <p><strong>Emotional friction at scale.</strong> The manual nature of the process creates anxiety, especially before high-stakes meetings. Reps lose confidence when they can't verify whether their data is current.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="img-group reveal">
+      <img src="tenetic/03-journey-map.png .png" alt="Current state journey map" class="cs-img" />
+      <p class="cs-img-caption">Current state journey map: annotating emotional highs and lows across the presentation preparation workflow.</p>
+    </div>
+
+    <!-- Happy Path -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Ideal Happy Path</p>
+      <h2 class="sec-heading">Designing the <em>frictionless</em> flow</h2>
+      <p class="body-text">Once I understood where the existing journey broke down, I mapped the ideal happy path: the simplest, most direct route from intent to a complete, client-ready presentation. Every sprint would be held accountable to this flow.</p>
+
+      <div class="happy-path-block reveal">
+        <p class="happy-path-label">Happy Path · Ideal User Journey</p>
+        <div class="flow-sequence">
+          <span class="flow-step start">Home</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">AI Prompt</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Review Details</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">View / Edit Outline</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Select Template</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step end">View / Edit Presentation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI Feature Cards -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Feature Prioritization</p>
+      <h2 class="sec-heading">Five KPI feature areas<br>to define the <em>product scope</em></h2>
+      <p class="body-text">Based on the happy path and research synthesis, I identified five key performance indicator feature areas. These became the organizing framework for all sprint planning and stakeholder alignment.</p>
+      <div class="kpi-cards reveal">
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <p class="kpi-num">01</p>
+          <h4>AI Prompt</h4>
+          <p>Natural language input that initiates the presentation generation workflow.</p>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m16.24 7.76-2.83 2.83"/><path d="M20 12h-4"/><path d="m16.24 16.24-2.83-2.83"/><path d="M12 18v4"/><path d="m7.76 16.24 2.83-2.83"/><path d="M4 12h4"/><path d="m7.76 7.76 2.83 2.83"/></svg>
+          </div>
+          <p class="kpi-num">02</p>
+          <h4>Generating &amp; Modifying Output</h4>
+          <p>Live feedback loops for refining AI-generated slide content and structure.</p>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <p class="kpi-num">03</p>
+          <h4>File Management</h4>
+          <p>Dashboard for organizing, locating, and downloading completed presentations.</p>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <p class="kpi-num">04</p>
+          <h4>Client Management</h4>
+          <p>Lightweight CRM layer for tracking client context and presentation history.</p>
+        </div>
+        <div class="kpi-card oos">
+          <div class="kpi-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="kpi-num">05</p>
+          <h4>Loyalty &amp; Gamification</h4>
+          <p>Engagement mechanics to drive retention and platform habit formation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Information Architecture -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Information Architecture</p>
+      <h2 class="sec-heading">Structuring the <em>product skeleton</em></h2>
+      <p class="body-text">With personas, journeys, and feature scope defined, I built the information architecture to establish the complete navigational and functional framework for the platform. This IA became the blueprint for every sprint that followed.</p>
+    </section>
+
+    <div class="img-group reveal">
+      <img src="tenetic/05-information-architecture.png .png" alt="Information architecture diagram" class="cs-img" />
+      <p class="cs-img-caption">Full information architecture: mapping the complete product hierarchy from navigation to feature-level flows.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         PHASE 02 — IMPLEMENTATION
+    ═══════════════════════════════════════ -->
+    <div class="part-header reveal" data-part="02">
+      <p class="sec-label"><span class="eline"></span>Phase 02</p>
+      <h2 class="sec-heading"><em>Implementation</em></h2>
+      <p class="body-text">With the strategic foundation set, Phase 02 was execution. Four sprints, each focused on a specific layer of the platform, from foundational navigation and file systems through the core AI Story Builder engine that defines Tenetic's value proposition.</p>
+    </div>
+
+    <!-- Sprint Timeline -->
+    <div class="img-group reveal">
+      <p class="sec-label" style="padding: 0 0 0 0;"><span class="eline"></span>Sprint Timeline</p>
+      <img src="tenetic/07-sprint-timeline.png .png" alt="Sprint timeline Gantt" class="cs-img" />
+      <p class="cs-img-caption">12-week sprint roadmap: four focused sprints from foundation to full AI engine delivery.</p>
+    </div>
+
+    <!-- Sprint 1 -->
+    <section class="cs-section reveal">
+      <div class="sprint-header">
+        <span class="sprint-num">01</span>
+        <div class="sprint-title-block">
+          <p class="sprint-eyebrow">Sprint One</p>
+          <h3>Foundation · Navigation &amp; File System</h3>
+        </div>
+      </div>
+      <p class="body-text">Sprint 1 established the structural backbone of the platform: the menu bar, brand system, files dashboard, and the first core user flows. With no existing design system, I built components from scratch, grounding every decision in the defined IA and user research.</p>
+      <div class="sprint-features">
+        <span class="sprint-feature-tag">Menu Bar</span>
+        <span class="sprint-feature-tag">Brand System</span>
+        <span class="sprint-feature-tag">Files Dashboard</span>
+        <span class="sprint-feature-tag">Download Presentation</span>
+        <span class="sprint-feature-tag">Unwanted Presentations Flow</span>
+      </div>
+    </section>
+
+    <div class="img-group reveal">
+      <div class="img-pair">
+        <div class="img-pair-item">
+          <img src="tenetic/brand colors.png" alt="Tenetic primary brand colors" class="cs-img" style="margin-top:0;" />
+          <p class="img-pair-caption">Primary brand color palette</p>
+        </div>
+        <div class="img-pair-item">
+          <img src="tenetic/secondary colors.png" alt="Tenetic secondary colors" class="cs-img" style="margin-top:0;" />
+          <p class="img-pair-caption">Secondary color system</p>
+        </div>
+      </div>
+      <p class="cs-img-caption" style="margin-top:20px;">Brand system established in Sprint 1: primary and secondary palettes informed all component and UI decisions across subsequent sprints.</p>
+    </div>
+
+    <div class="img-group reveal">
+      <img src="tenetic/08-sprint1-side-nav.png .png" alt="Sprint 1 side navigation spec" class="cs-img portrait" />
+      <p class="cs-img-caption">Side navigation and typography specifications: the component foundation for all subsequent screens.</p>
+    </div>
+
+    <div class="annotated-block reveal">
+      <p class="annotation-title">Sprint 1 · Annotated Mockup</p>
+      <img src="tenetic/sprint 1 annotation.png" alt="Sprint 1 annotated mockup" class="cs-img" />
+      <p class="cs-img-caption">Annotated wireframe from Sprint 1: core layout decisions documented for engineer handoff.</p>
+    </div>
+
+    <!-- Sprint 2 -->
+    <section class="cs-section reveal">
+      <div class="sprint-header">
+        <span class="sprint-num">02</span>
+        <div class="sprint-title-block">
+          <p class="sprint-eyebrow">Sprint Two</p>
+          <h3>Files &amp; Organization System</h3>
+        </div>
+      </div>
+      <p class="body-text">Sprint 2 built out the complete file management experience, the system users would rely on daily to find, organize, and manage their presentations. Two view paradigms (grid and list) and folder organization were designed with progressive disclosure in mind, so power users could navigate quickly while new users weren't overwhelmed.</p>
+      <div class="sprint-features">
+        <span class="sprint-feature-tag">Grid View</span>
+        <span class="sprint-feature-tag">List View</span>
+        <span class="sprint-feature-tag">Folder Organization</span>
+        <span class="sprint-feature-tag">Move to Folder</span>
+        <span class="sprint-feature-tag">File Actions</span>
+      </div>
+    </section>
+
+    <div class="annotated-block reveal">
+      <p class="annotation-title">Sprint 2 · Annotated Screen Flows</p>
+      <img src="tenetic/sprint 2.png" alt="Sprint 2 annotated screen flows" class="cs-img tall" />
+      <p class="cs-img-caption">Sprint 2 full annotation set: AI Chat interface and Storybuilder Inputs with 5 annotated interaction decisions. Grid and list view toggle, folder move flow, and contextual file actions are documented for handoff.</p>
+    </div>
+
+    <!-- Sprint 3 -->
+    <section class="cs-section reveal">
+      <div class="sprint-header">
+        <span class="sprint-num">03</span>
+        <div class="sprint-title-block">
+          <p class="sprint-eyebrow">Sprint Three</p>
+          <h3>The AI Story Builder Engine</h3>
+        </div>
+      </div>
+      <p class="body-text">Sprint 3 was the most complex and highest-impact sprint of the engagement, focused on the design of Tenetic's core differentiator: the AI Story Builder. Users move through a structured workflow that transforms an initial prompt into a fully generated, editable presentation. The design challenge was making this feel effortless without hiding the AI's reasoning.</p>
+      <div class="sprint-features">
+        <span class="sprint-feature-tag">AI Chat Interface</span>
+        <span class="sprint-feature-tag">Storybuilder Inputs</span>
+        <span class="sprint-feature-tag">Template Selection</span>
+        <span class="sprint-feature-tag">Generating State</span>
+        <span class="sprint-feature-tag">Slide States</span>
+        <span class="sprint-feature-tag">Outline View</span>
+      </div>
+      <p class="body-text" style="margin-top: 28px;">Two modes were designed for the input phase: an <strong style="color: var(--text); font-weight: 500;">AI Chat</strong> mode for users who prefer to describe their presentation in natural language, and a <strong style="color: var(--text); font-weight: 500;">Storybuilder Inputs</strong> mode for users who want structured control over sections, tone, and data sources. Both paths converge at the same outline review and template selection flow.</p>
+    </section>
+
+    <div class="annotated-block reveal">
+      <p class="annotation-title">Sprint 3 · Story Builder Flows</p>
+      <img src="tenetic/sprint 3.png" alt="Sprint 3 Story Builder flows" class="cs-img tall" />
+      <p class="cs-img-caption">Sprint 3 complete annotation set, covering the full AI Story Builder workflow: Storybuilder Inputs (5 annotated decisions), Template Selection, Generating state, and Slide States with real-time editing capability.</p>
+    </div>
+
+    <!-- Sprint 4 -->
+    <section class="cs-section reveal">
+      <div class="sprint-header">
+        <span class="sprint-num">04</span>
+        <div class="sprint-title-block">
+          <p class="sprint-eyebrow">Sprint Four</p>
+          <h3>Outline, Slide States &amp; Final Review</h3>
+        </div>
+      </div>
+      <p class="body-text">Sprint 4 completed the Story Builder loop: the Outline view and its two states (initial and edited), slide-level controls, and the final presentation review experience. The guiding principle for this sprint was human oversight: every AI-generated decision should be editable, auditable, and reversible without breaking the user's sense of flow.</p>
+      <div class="sprint-features">
+        <span class="sprint-feature-tag">Outline · Initial State</span>
+        <span class="sprint-feature-tag">Outline · Edited State</span>
+        <span class="sprint-feature-tag">Slide-Level Controls</span>
+        <span class="sprint-feature-tag">Final Presentation View</span>
+      </div>
+    </section>
+
+    <div class="annotated-block reveal">
+      <p class="annotation-title">Sprint 4 · Outline &amp; Slide States</p>
+      <img src="tenetic/sprint 4.png" alt="Sprint 4 Outline and Slide States" class="cs-img tall" />
+      <p class="cs-img-caption">Sprint 4 annotated screens: Outline view (both initial and edited states), slide state annotations, and the complete presentation review interface.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         CONCLUSION
+    ═══════════════════════════════════════ -->
+    <section class="conclusion-section reveal">
+      <p class="sec-label"><span class="eline"></span>Outcomes</p>
+      <h2 class="sec-heading">What we <em>shipped</em><br>and what it meant</h2>
+      <p class="body-text">Over 12 weeks, the engagement delivered a production-ready product design for Tenetic's full platform, from brand system to AI engine. Four outcomes defined the work.</p>
+      <div class="outcome-cards reveal">
+        <div class="outcome-card">
+          <span class="outcome-num">01</span>
+          <div class="outcome-card-body">
+            <h4>Complete Design System from Zero</h4>
+            <p>Built a full component library and brand system in Sprint 1 that scaled across all four sprints without rework, enabling rapid, consistent delivery under tight timelines.</p>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <span class="outcome-num">02</span>
+          <div class="outcome-card-body">
+            <h4>Frictionless AI Input Paradigm</h4>
+            <p>Designed two complementary AI input modes, conversational chat and structured Storybuilder Inputs, so users could choose the level of control that matched their workflow.</p>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <span class="outcome-num">03</span>
+          <div class="outcome-card-body">
+            <h4>End-to-End Story Builder Workflow</h4>
+            <p>Delivered the full generation loop: prompt → outline → template → presentation → export. Every step was annotated and handed off to engineering with full interaction documentation.</p>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <span class="outcome-num">04</span>
+          <div class="outcome-card-body">
+            <h4>Human Oversight at Every Step</h4>
+            <p>Every AI-generated decision, including section titles, data selections, and slide structure, was designed to be editable and reversible, ensuring users remained in control without breaking flow.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="closing-quote reveal">
+        <blockquote>"The Story Builder workflow reduced what used to take a full afternoon into a single, guided session, with the AI doing the heavy lifting while the sales rep stays in the driver's seat."</blockquote>
+        <cite>Design Rationale, Tenetic Sprint 3 Review</cite>
+      </div>
+
+      <p class="body-text" style="margin-top: 40px; max-width: 680px;">This engagement reinforced a core principle of designing for AI: the goal is not to replace human judgment, but to eliminate the mechanical labor that gets in its way. Tenetic gave sales teams back their time, and with it, the space to focus on the work that actually moves deals forward.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         NEXT PROJECT
+    ═══════════════════════════════════════ -->
+    <section class="next-project-section reveal">
+      <p class="sec-label"><span class="eline"></span>Next Project</p>
+      <a href="jpmc.html" class="next-project-card">
+        <div>
+          <p class="next-label">Up Next</p>
+          <p class="next-title">JP Morgan Chase</p>
+        </div>
+        <span class="next-arrow">→</span>
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <section class="contact-section">
+      <div class="footer-body">
+        <div class="footer-left">
+          <p class="sec-label"><span class="eline"></span>Get In Touch</p>
+          <h2 class="sec-title" style="margin-bottom: 28px;">Let's create something<br><em>remarkable</em> together.</h2>
+          <p class="contact-sub">
+            <span>Available for full-time roles in the USA &amp; design conversations.</span>
+            <span>To enquire about my projects, shoot me an email.</span>
+          </p>
+        </div>
+        <div class="contact-btns">
+          <a href="mailto:sayali.ux@gmail.com" class="cta-btn primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Send an Email
+          </a>
+          <a href="https://www.linkedin.com/in/sayali-mandhalkar-0a449616a/" target="_blank" rel="noopener" class="cta-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://medium.com/@sayalim" target="_blank" rel="noopener" class="cta-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            Medium
+          </a>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
+        <a href="index.html" class="footer-back">← Back to Home</a>
+      </div>
+    </section>
+
+  </div><!-- /cs-content -->
+
+</main>
+
+<script>
+  (function () {
+    // ── Password check (encoded) ──
+    // btoa('9137') === 'OTEzNw=='
+    function _ok(v) { try { return btoa(String(v)) === 'OTEzNw=='; } catch(e) { return false; } }
+
+    var input   = document.getElementById('gateInput');
+    var btn     = document.getElementById('gateBtn');
+    var errEl   = document.getElementById('gateError');
+    var gate    = document.getElementById('gate');
+    var content = document.getElementById('csContent');
+    var eyeBtn  = document.getElementById('eyeToggle');
+    var eyeOpen = document.getElementById('eyeOpen');
+    var eyeClosed = document.getElementById('eyeClosed');
+    var _t;
+
+    // Eye toggle
+    eyeBtn.addEventListener('click', function () {
+      var isPass = input.type === 'password';
+      input.type = isPass ? 'text' : 'password';
+      eyeOpen.style.display   = isPass ? 'none'  : '';
+      eyeClosed.style.display = isPass ? ''      : 'none';
+    });
+
+    // Enter key support
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); attempt(); }
+    });
+
+    // Clear error on type
+    input.addEventListener('input', function () {
+      if (errEl.classList.contains('visible')) {
+        errEl.classList.remove('visible');
+        input.classList.remove('error');
+      }
+    });
+
+    // Button click
+    btn.addEventListener('click', attempt);
+
+    function attempt() {
+      clearTimeout(_t);
+      var val = input.value.trim();
+      if (!val) return;
+
+      if (_ok(val)) {
+        // ── Success ──
+        gate.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+        gate.style.opacity    = '0';
+        gate.style.transform  = 'translateY(-12px)';
+        setTimeout(function () {
+          gate.style.display   = 'none';
+          content.style.display = 'flex';
+          content.style.flexDirection = 'column';
+          // Scroll to top
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          // Start reveal-on-scroll — double rAF ensures layout is calculated
+          // before IntersectionObserver fires (fixes opacity:0 after gate unlock)
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              var revEls = content.querySelectorAll('.reveal');
+              var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                  if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                });
+              }, { threshold: 0.05 });
+              revEls.forEach(function(el) { obs.observe(el); });
+            });
+          });
+        }, 460);
+      } else {
+        // ── Wrong ──
+        input.classList.remove('error');
+        void input.offsetWidth; // restart animation
+        input.classList.add('error');
+        errEl.classList.add('visible');
+        // Clear field
+        input.value = '';
+        input.focus();
+        // Auto-dismiss after 3s
+        _t = setTimeout(function () {
+          input.classList.remove('error');
+          errEl.classList.remove('visible');
+        }, 3000);
+      }
+    }
+
+    // Allow submit on Enter anywhere in the gate
+    document.getElementById('gate').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && document.activeElement !== btn) {
+        attempt();
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

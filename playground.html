@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playground · Sayali Mandhalkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sw:       280px;
+      --bg:       #111111;
+      --bg2:      #0e0e0e;
+      --bg3:      #1a1a1a;
+      --sidebar:  #000000;
+      --border:   rgba(255,255,255,0.07);
+      --gold:     #c9a96e;
+      --gold-dim: rgba(201,169,110,0.1);
+      --gold-lt:  #dfc08a;
+      --text:     #e8e4dc;
+      --muted:    rgba(232,228,220,0.72);
+      --faint:    rgba(232,228,220,0.55);
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s ease;
+    }
+    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0;
+      transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
+    }
+
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ════════════════════════════════
+       PAGE HEADER
+    ════════════════════════════════ */
+    .pg-header {
+      padding: 80px 100px 64px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .pg-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,169,110,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 40% at 10% 80%, rgba(201,169,110,0.02) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Large watermark */
+    .pg-header::after {
+      content: '✦';
+      font-family: var(--serif);
+      font-size: clamp(120px, 20vw, 280px);
+      color: rgba(201,169,110,0.035);
+      position: absolute;
+      right: 60px; bottom: -20px;
+      line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .pg-header-inner { position: relative; z-index: 1; }
+    .pg-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .pg-eyebrow-line { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .pg-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .pg-title em { font-style: italic; color: var(--gold); }
+    .pg-sub {
+      font-size: 1rem; line-height: 1.8; color: var(--muted);
+      max-width: 520px; font-weight: 300;
+    }
+
+    /* ════════════════════════════════
+       PROJECTS AREA
+    ════════════════════════════════ */
+    .projects-area {
+      flex: 1;
+      padding: 72px 100px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+
+    /* ════════════════════════════════
+       PROJECT CARD
+    ════════════════════════════════ */
+    .proj-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+    }
+    .proj-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+    }
+
+    /* Active card — gold border glow */
+    .proj-card.active {
+      border-color: rgba(201,169,110,0.35);
+      background: linear-gradient(135deg, #181510 0%, var(--bg3) 100%);
+    }
+    .proj-card.active:hover {
+      border-color: rgba(201,169,110,0.6);
+      box-shadow: 0 12px 56px rgba(201,169,110,0.12), 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    /* Coming soon card — more muted */
+    .proj-card.coming-soon {
+      border-color: rgba(255,255,255,0.05);
+      opacity: 0.75;
+    }
+    .proj-card.coming-soon:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+
+    /* ── Number column ── */
+    .proj-num-col {
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 40px 0 40px;
+      border-right: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+    }
+    .proj-card.active .proj-num-col {
+      background: rgba(201,169,110,0.04);
+      border-right-color: rgba(201,169,110,0.15);
+    }
+    .proj-number {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6vw, 80px);
+      font-weight: 300;
+      line-height: 1;
+      color: rgba(201,169,110,0.15);
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+    .proj-card.active .proj-number { color: rgba(201,169,110,0.25); }
+    .proj-card.coming-soon .proj-number { color: rgba(232,228,220,0.08); }
+
+    /* ── Content column ── */
+    .proj-content {
+      padding: 40px 48px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .proj-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .proj-category {
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.8;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .proj-category::before {
+      content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0;
+    }
+    .proj-card.coming-soon .proj-category { color: var(--muted); opacity: 0.5; }
+    .proj-card.coming-soon .proj-category::before { background: var(--muted); }
+
+    /* Status badge */
+    .proj-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 13px;
+      border-radius: 100px;
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; flex-shrink: 0;
+    }
+    .proj-badge.available {
+      background: var(--gold);
+      color: #0a0a09;
+    }
+    .proj-badge.available::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: #0a0a09; flex-shrink: 0;
+    }
+    .proj-badge.soon {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(232,228,220,0.45);
+    }
+
+    .proj-title-block { display: flex; flex-direction: column; gap: 6px; }
+    .proj-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .proj-card.coming-soon .proj-title { color: rgba(232,228,220,0.6); }
+    .proj-subtitle {
+      font-family: var(--serif);
+      font-size: clamp(14px, 1.4vw, 17px);
+      font-weight: 300; font-style: italic;
+      color: var(--muted); line-height: 1.4;
+    }
+
+    .proj-divider {
+      height: 1px;
+      background: var(--border);
+    }
+    .proj-card.active .proj-divider { background: rgba(201,169,110,0.12); }
+
+    .proj-desc {
+      font-size: 0.92rem; line-height: 1.85; color: var(--muted);
+      max-width: 600px;
+    }
+    .proj-card.coming-soon .proj-desc { color: rgba(232,228,220,0.4); }
+
+    /* CTA button */
+    .proj-cta {
+      margin-top: 8px;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 28px;
+      border: 1px solid rgba(201,169,110,0.5);
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold);
+      transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .proj-cta:hover {
+      border-color: var(--gold);
+      background: rgba(201,169,110,0.1);
+      color: var(--gold-lt);
+      transform: translateX(3px);
+    }
+    .proj-cta svg { transition: transform 0.2s; }
+    .proj-cta:hover svg { transform: translateX(3px); }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    .contact-section {
+      background: #000; padding: 72px 100px 0;
+      border-top: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: 'SM'; font-family: var(--serif); font-size: clamp(180px, 24vw, 320px);
+      font-weight: 300; color: rgba(201,169,110,0.07); position: absolute;
+      left: 40px; bottom: 40px; line-height: 1; letter-spacing: -0.04em;
+      pointer-events: none; user-select: none;
+    }
+    .footer-body {
+      display: grid; grid-template-columns: 1fr auto; gap: 80px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .footer-left { max-width: 520px; }
+    .sec-label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .eline { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .sec-title {
+      font-family: var(--serif); font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300; line-height: 1.1; color: var(--text); letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+    .sec-title em { font-style: italic; color: var(--gold); }
+    .contact-sub { font-size: 0.9rem; line-height: 1.95; color: var(--muted); }
+    .contact-sub span { display: block; }
+    .contact-btns { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+    .cta-btn {
+      width: 200px; height: 52px; display: inline-flex; align-items: center;
+      justify-content: center; gap: 10px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1); font-family: var(--sans);
+      font-size: 0.71rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--muted); transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s;
+    }
+    .cta-btn svg { flex-shrink: 0; }
+    .cta-btn:hover { border-color: rgba(201,169,110,0.45); color: var(--gold-lt); transform: translateX(-3px); }
+    .cta-btn.primary { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 600; }
+    .cta-btn.primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); color: #000; transform: translateX(-3px); }
+    .footer-bar {
+      margin-top: 60px; padding: 24px 0 28px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;
+    }
+    .footer-copy { font-size: 0.72rem; color: rgba(232,228,220,0.45); }
+    .footer-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.7; transition: opacity 0.2s; }
+    .footer-back:hover { opacity: 1; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 960px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .pg-header, .projects-area, .contact-section { padding-left: 28px; padding-right: 28px; }
+      .proj-card { grid-template-columns: 72px 1fr; }
+      .proj-content { padding: 28px 24px; }
+      .proj-number { font-size: 36px; }
+      .footer-body { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bar { flex-direction: column; gap: 10px; }
+      .pg-header { padding-top: 48px; padding-bottom: 40px; }
+      .projects-area { padding-top: 48px; padding-bottom: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     SIDEBAR
+════════════════════════════════ -->
+<aside class="sidebar" aria-label="Site navigation">
+
+  <!-- Profile -->
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer</span>
+    </div>
+  </a>
+
+  <!-- Nav -->
+  <nav class="sb-nav" aria-label="Primary">
+
+    <!-- PROJECTS -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Projects</span>
+
+      <a href="jpmc.html" class="sb-row" data-section="jpmorgan">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">JP Morgan Chase</span>
+        <span class="sb-icon-right" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </span>
+      </a>
+
+      <a href="pur.html" class="sb-row" data-section="purwaters">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </span>
+      </a>
+
+      <a href="mentormap.html" class="sb-row" data-section="mentormap">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </span>
+      </a>
+
+      <a href="philly-truce.html" class="sb-row" data-section="phillytruce">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- DESIGNING AI EXPERIENCES -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">Designing AI Experiences</span>
+
+      <a href="tenetic.html" class="sb-row" data-section="tenetic">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- PLAYGROUND — active -->
+    <a href="playground.html" class="sb-row active" data-section="playground">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+          <path d="M20 3v4"/><path d="M22 5h-4"/>
+          <path d="M4 17v2"/><path d="M5 18H3"/>
+        </svg>
+      </span>
+      <span class="sb-label">Playground</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- CERTIFICATIONS -->
+    <a href="certifications.html" class="sb-row" data-section="certifications">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+          <circle cx="12" cy="8" r="6"/>
+        </svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- ABOUT ME -->
+    <a href="about.html" class="sb-row" data-section="about">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+  </nav>
+
+  <!-- Sidebar Footer -->
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+
+</aside>
+
+<!-- ════════════════════════════════
+     MAIN
+════════════════════════════════ -->
+<main class="main" id="main-content">
+
+  <!-- ═══ PAGE HEADER ═══ -->
+  <header class="pg-header">
+    <div class="pg-header-inner">
+      <p class="pg-eyebrow">
+        <span class="pg-eyebrow-line"></span>
+        Playground
+        <span class="pg-eyebrow-line"></span>
+      </p>
+      <h1 class="pg-title">Personal Projects<br>&amp; <em>Explorations</em></h1>
+      <p class="pg-sub">Side projects, academic work, and experiments that live outside client work, where curiosity leads the design.</p>
+    </div>
+  </header>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <div class="projects-area">
+
+    <!-- ── PROJECT 01: PRESENCE ── -->
+    <a href="presence.html" class="proj-card active reveal" style="text-decoration:none;">
+      <div class="proj-num-col">
+        <span class="proj-number">01</span>
+      </div>
+      <div class="proj-content">
+        <div class="proj-top">
+          <p class="proj-category">Interaction Design</p>
+          <span class="proj-badge available">Available →</span>
+        </div>
+        <div class="proj-title-block">
+          <h2 class="proj-title">Presence</h2>
+        </div>
+        <div class="proj-divider"></div>
+        <p class="proj-desc">An exploration into designing meaningful digital presence: how people show up, connect, and communicate in digital spaces.</p>
+        <span class="proj-cta">
+          View Case Study
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- ── PROJECT 02: DUOLINGO VR & TV ── -->
+    <div class="proj-card coming-soon reveal d1">
+      <div class="proj-num-col">
+        <span class="proj-number">02</span>
+      </div>
+      <div class="proj-content">
+        <div class="proj-top">
+          <p class="proj-category">Mobile &amp; Emerging Tech</p>
+          <span class="proj-badge soon">Coming Soon</span>
+        </div>
+        <div class="proj-title-block">
+          <h2 class="proj-title">Duolingo VR &amp; TV</h2>
+          <p class="proj-subtitle">Expanding Language Learning Beyond the App</p>
+        </div>
+        <div class="proj-divider"></div>
+        <p class="proj-desc">A concept exploration designing Duolingo for VR and TV: immersive language learning through virtual reality and social group experiences. Part of Mobile Communication, IDD-637.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <section class="contact-section">
+    <div class="footer-body">
+      <div class="footer-left">
+        <p class="sec-label"><span class="eline"></span>Get In Touch</p>
+        <h2 class="sec-title">Let's create something<br><em>remarkable</em> together.</h2>
+        <p class="contact-sub">
+          <span>Available for full-time roles in the USA &amp; design conversations.</span>
+          <span>To enquire about my projects, shoot me an email.</span>
+        </p>
+      </div>
+      <div class="contact-btns">
+        <a href="mailto:sayali.ux@gmail.com" class="cta-btn primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Send an Email
+        </a>
+        <a href="https://www.linkedin.com/in/sayali-mandhalkar-0a449616a/" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://medium.com/@sayalim" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          Medium
+        </a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
+      <a href="index.html" class="footer-back">← Back to Home</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
