@@ -118,26 +118,165 @@
     .sec-label .eline { display: block; width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
 
     /* ════════ HERO ════════ */
-    .cs-hero { position: relative; width: 100%; min-height: 78vh; overflow: hidden; display: flex; align-items: flex-end; }
-    .cs-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; border-radius: 0; }
-    .cs-hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(17,17,17,0.1) 0%, rgba(17,17,17,0.35) 40%, rgba(17,17,17,0.9) 82%, #111 100%); }
-    .cs-hero-content { position: relative; z-index: 2; padding: 0 100px 72px; width: 100%; }
-    .cs-hero-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; opacity: 0.9; }
-    .cs-hero-eyebrow span { display: block; width: 32px; height: 1px; background: var(--gold); }
-    .cs-hero-title { font-family: var(--serif); font-size: clamp(52px, 7.5vw, 100px); font-weight: 300; line-height: 0.92; letter-spacing: -0.025em; color: var(--text); margin-bottom: 14px; }
-    .cs-hero-subtitle { font-family: var(--serif); font-size: clamp(16px, 1.8vw, 22px); font-weight: 300; font-style: italic; color: var(--gold-lt); opacity: 0.9; line-height: 1.4; margin-bottom: 40px; max-width: 540px; }
-    .cs-hero-meta { display: grid; grid-template-columns: repeat(4, auto); gap: 0; width: fit-content; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; background: rgba(0,0,0,0.5); }
-    .cs-meta-item { padding: 14px 24px; border-right: 1px solid rgba(255,255,255,0.08); }
-    .cs-meta-item:last-child { border-right: none; }
-    .cs-meta-key { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 4px; display: block; }
-    .cs-meta-val { font-size: 0.8rem; color: var(--text); line-height: 1.3; display: block; }
+    .cs-hero {
+      position: relative;
+      width: 100%;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: #0D0D0D;
+      border-bottom: 1px solid rgba(201,169,110,0.1);
+      overflow: hidden;
+    }
+
+    /* Left column — 44% */
+    .cs-hero-content {
+      flex: 0 0 44%;
+      position: relative;
+      z-index: 2;
+      padding: 80px 48px 80px 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Right column — 56% */
+    .cs-hero-img-col {
+      flex: 0 0 56%;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+      overflow: hidden;
+    }
+
+    .cs-hero-img {
+      width: 100%;
+      height: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 0;
+      display: block;
+      filter: none !important;
+    }
+
+    /* ── Layer 1: Label ── */
+    .cs-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+    .cs-hero-eyebrow span {
+      display: block;
+      width: 26px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.65;
+      flex-shrink: 0;
+    }
+
+    /* ── Layer 2: Title ── */
+    .cs-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(54px, 4.8vw, 72px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: #F5F0E8;
+      margin-bottom: 30px;
+    }
+
+    /* ── Layer 3: Bridge line ── */
+    .cs-hero-bridge {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: #C9A84C;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    /* ── Layer 4: Three interventions ── */
+    .cs-hero-interventions {
+      list-style: none;
+      margin: 0 0 44px 0;
+      padding: 0;
+    }
+    .cs-hero-intervention {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #F5F0E8;
+      line-height: 2.1;
+      letter-spacing: 0.01em;
+    }
+    .cs-hero-intervention::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.55;
+      flex-shrink: 0;
+    }
+
+    /* ── Layer 5: Meta grid ── */
+    .cs-hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid rgba(201,169,110,0.14);
+      border-radius: 3px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+    .cs-meta-item {
+      padding: 16px 24px;
+      border-right: 1px solid rgba(201,169,110,0.1);
+      border-bottom: 1px solid rgba(201,169,110,0.1);
+    }
+    .cs-meta-item:nth-child(2n) { border-right: none; }
+    .cs-meta-item:nth-last-child(-n+2) { border-bottom: none; }
+    .cs-meta-key {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.85;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .cs-meta-val {
+      font-size: 0.9rem;
+      color: rgba(245,240,232,0.9);
+      line-height: 1.4;
+      display: block;
+    }
 
     /* ════════ CONTENT BASE ════════ */
     .cs-section { padding: 80px 100px; border-top: 1px solid var(--border); }
     .cs-section.no-border { border-top: none; }
     .cs-section.tight { padding-top: 56px; padding-bottom: 56px; }
 
-    .body-text { max-width: 760px; font-size: 1rem; line-height: 1.85; color: var(--muted); }
+    .body-text { max-width: 900px; font-size: 1rem; line-height: 1.85; color: var(--muted); }
     .body-text + .body-text { margin-top: 20px; }
 
     .cs-h2 { font-family: var(--serif); font-size: clamp(28px, 3.2vw, 44px); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; color: var(--text); margin-bottom: 20px; }
@@ -146,7 +285,7 @@
     /* ─── Full-width image ─── */
     .cs-img-full { width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); }
     .cs-img-wrap { position: relative; }
-    .cs-img-caption { font-size: 0.78rem; color: var(--faint); margin-top: 12px; text-align: center; letter-spacing: 0.04em; }
+    .cs-img-caption { font-size: 0.78rem; color: var(--muted); margin-top: 12px; text-align: center; letter-spacing: 0.04em; }
     .img-gap { margin-top: 48px; }
     .img-gap-sm { margin-top: 28px; }
 
@@ -166,43 +305,76 @@
     .question-card { background: #161616; border: 1px solid rgba(201,169,110,0.18); border-radius: 16px; padding: 36px 32px; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
     .question-card::before { content: '"'; font-family: var(--serif); font-size: 120px; font-weight: 300; color: rgba(201,169,110,0.06); position: absolute; top: -16px; left: 20px; line-height: 1; pointer-events: none; }
     .question-card:hover { border-color: rgba(201,169,110,0.42); transform: translateY(-3px); }
-    .question-card-num { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 16px; display: block; }
-    .question-card-text { font-family: var(--serif); font-size: clamp(17px, 1.8vw, 22px); font-weight: 300; font-style: italic; color: var(--text); line-height: 1.45; position: relative; z-index: 1; }
+    .question-card-num { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.9; margin-bottom: 16px; display: block; }
+    .question-card-text { font-family: var(--sans); font-size: clamp(15px, 1.2vw, 17px); font-weight: 400; font-style: normal; color: var(--text); line-height: 1.6; position: relative; z-index: 1; }
 
     /* ════════ PROJECT GOAL — PILLS ════════ */
-    .goal-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-    .goal-pill { background: rgba(201,169,110,0.06); border: 1px solid rgba(201,169,110,0.22); border-radius: 100px; padding: 10px 22px; font-size: 0.82rem; color: var(--text); letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; }
-    .goal-pill::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.7; flex-shrink: 0; }
+    /* ── Goal cards ── */
+    .goal-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 40px; }
+    .goal-card { background: #161616; border: 1px solid rgba(201,169,110,0.12); border-left: 2px solid rgba(201,169,110,0.55); border-radius: 4px; padding: 28px 30px; transition: border-color 0.25s, border-left-color 0.25s; }
+    .goal-card:hover { border-color: rgba(201,169,110,0.3); border-left-color: var(--gold); }
+    .goal-card-num { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.24em; color: var(--gold); opacity: 0.9; display: block; margin-bottom: 12px; }
+    .goal-card-title { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 10px; line-height: 1.35; font-family: var(--sans); }
+    .goal-card-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.75; margin: 0; }
 
     /* ════════ PART CHAPTER ════════ */
-    .part-section { padding: 80px 100px 64px; background: var(--bg2); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
-    .part-section::after { content: attr(data-part); font-family: var(--serif); font-size: clamp(80px, 14vw, 180px); font-weight: 300; color: rgba(201,169,110,0.04); position: absolute; right: 80px; top: 50%; transform: translateY(-50%); line-height: 1; letter-spacing: -0.03em; pointer-events: none; user-select: none; }
-    .part-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-    .part-label::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold); opacity: 0.6; }
+    .part-section { padding: 80px 100px 64px 140px; background: var(--bg2); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+    .part-section::after { content: attr(data-part); font-family: var(--serif); font-size: clamp(100px, 16vw, 220px); font-weight: 300; position: absolute; right: 60px; top: 50%; transform: translateY(-50%); line-height: 1; letter-spacing: -0.03em; pointer-events: none; user-select: none; background: linear-gradient(105deg, rgba(201,169,110,0.22) 0%, rgba(201,169,110,0.22) 38%, rgba(245,230,192,0.55) 48%, rgba(255,253,247,0.65) 52%, rgba(201,169,110,0.22) 58%, rgba(201,169,110,0.22) 100%); background-size: 300% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmerText 3.6s ease-in-out infinite; }
+    @keyframes shimmerText {
+      0%   { background-position: 200% 0; }
+      50%  { background-position: -50% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .part-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); opacity: 1; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .part-label::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold); opacity: 0.8; }
     .part-title { font-family: var(--serif); font-size: clamp(36px, 4.5vw, 60px); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); position: relative; z-index: 1; }
     .part-title em { font-style: italic; color: var(--gold); }
     .part-desc { max-width: 660px; font-size: 0.94rem; line-height: 1.85; color: var(--muted); margin-top: 16px; position: relative; z-index: 1; }
 
+    /* ── About-the-client split ── */
+    .client-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; align-items: start; }
+    .client-img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); display: block; }
+    .client-text-col { display: flex; flex-direction: column; }
+    .client-text-col .body-text { max-width: none; }
+    .client-bullets { list-style: none; padding: 0; margin: 24px 0 0 0; display: flex; flex-direction: column; gap: 14px; }
+    .client-bullets li { font-size: 0.92rem; color: var(--muted); line-height: 1.75; padding-left: 20px; position: relative; }
+    .client-bullets li::before { content: ''; position: absolute; left: 0; top: 11px; width: 8px; height: 1px; background: var(--gold); opacity: 0.6; }
+
+    /* ── Part pull-quote ── */
+    .part-pull {
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.5vw, 21px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7;
+      border-left: 2px solid var(--gold);
+      padding-left: 24px;
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+
     /* ─── Journey flow ─── */
-    .journey-flows { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; max-width: 860px; }
-    .journey-flow { background: #161616; border-radius: 14px; padding: 28px 30px; border: 1px solid rgba(255,255,255,0.07); }
-    .journey-flow.old { opacity: 0.7; }
-    .journey-flow.new-flow { border-color: rgba(201,169,110,0.25); }
-    .journey-flow-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .journey-flow.old .journey-flow-label { color: var(--faint); }
+    .journey-flows { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; }
+    .journey-flow { border-radius: 14px; padding: 32px 34px; }
+    .journey-flow.old { background: #131313; border: 1px solid rgba(255,255,255,0.08); opacity: 1; }
+    .journey-flow.new-flow { background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.3); }
+    .journey-flow-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .journey-flow.old .journey-flow-label { color: rgba(232,228,220,0.35); }
     .journey-flow.new-flow .journey-flow-label { color: var(--gold); }
     .journey-flow-label-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    .journey-flow.old .journey-flow-label-dot { background: var(--faint); }
+    .journey-flow.old .journey-flow-label-dot { background: rgba(232,228,220,0.3); }
     .journey-flow.new-flow .journey-flow-label-dot { background: var(--gold); }
     .journey-steps { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .journey-step { font-size: 0.82rem; padding: 5px 12px; border-radius: 4px; white-space: nowrap; }
-    .journey-flow.old .journey-step { color: rgba(232,228,220,0.4); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); text-decoration-line: none; }
-    .journey-flow.new-flow .journey-step { color: var(--text); background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.2); }
+    .journey-step { font-size: 0.82rem; padding: 6px 14px; border-radius: 4px; white-space: nowrap; }
+    .journey-flow.old .journey-step { color: rgba(232,228,220,0.35); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+    .journey-flow.new-flow .journey-step { color: var(--text); background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.25); }
     .journey-arrow { font-size: 0.75rem; }
-    .journey-flow.old .journey-arrow { color: rgba(232,228,220,0.2); }
-    .journey-flow.new-flow .journey-arrow { color: var(--gold); }
-    .journey-flow.old .journey-note { font-size: 0.72rem; color: rgba(232,228,220,0.3); margin-top: 14px; font-style: italic; }
-    .journey-flow.new-flow .journey-note { font-size: 0.72rem; color: rgba(201,169,110,0.7); margin-top: 14px; font-style: italic; }
+    .journey-flow.old .journey-arrow { color: rgba(232,228,220,0.18); }
+    .journey-flow.new-flow .journey-arrow { color: var(--gold); opacity: 0.8; }
+    .journey-note { font-size: 0.73rem; margin-top: 20px; font-style: italic; line-height: 1.5; }
+    .journey-flow.old .journey-note { color: rgba(220,100,100,0.85); }
+    .journey-flow.new-flow .journey-note { color: rgba(201,169,110,0.92); }
 
     /* ─── Part 1 content section ─── */
     .part-content { padding: 60px 100px 80px; border-top: none; }
@@ -213,10 +385,11 @@
     .pull-quote-text em { color: var(--gold); }
 
     /* ─── XYZ statement callout ─── */
-    .xyz-callout { background: #161616; border: 1px solid rgba(201,169,110,0.22); border-radius: 16px; padding: 48px 52px; margin: 44px 0; text-align: center; max-width: 820px; position: relative; overflow: hidden; }
-    .xyz-callout::before { content: '✦'; font-size: 1.4rem; color: rgba(201,169,110,0.15); position: absolute; top: 28px; left: 50%; transform: translateX(-50%); }
-    .xyz-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); opacity: 0.75; margin-bottom: 20px; display: block; padding-top: 12px; }
-    .xyz-text { font-family: var(--serif); font-size: clamp(17px, 1.8vw, 22px); font-weight: 300; line-height: 1.6; color: var(--text); }
+    .xyz-callout { width: 100%; background: transparent; border-top: 1px solid rgba(201,169,110,0.2); border-bottom: 1px solid rgba(201,169,110,0.2); padding: 52px 0; margin: 48px 0; text-align: center; position: relative; }
+    .xyz-callout::before { display: none; }
+    .xyz-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); opacity: 0.92; margin-bottom: 28px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .xyz-label::before, .xyz-label::after { content: ''; display: inline-block; width: 40px; height: 1px; background: var(--gold); opacity: 0.45; flex-shrink: 0; }
+    .xyz-text { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 27px); font-weight: 300; line-height: 1.72; color: var(--text); max-width: 820px; margin: 0 auto; }
     .xyz-text em { font-style: italic; color: var(--gold-lt); }
 
     /* ─── User flow steps ─── */
@@ -237,7 +410,7 @@
 
     /* ─── SaaS callout ─── */
     .saas-callout { display: inline-flex; align-items: center; gap: 16px; margin-top: 36px; padding: 14px 24px; background: rgba(201,169,110,0.06); border: 1px solid rgba(201,169,110,0.2); border-radius: 8px; }
-    .saas-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.75; }
+    .saas-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.92; }
     .saas-name { font-size: 0.9rem; font-weight: 500; color: var(--text); }
     .saas-divider { width: 1px; height: 20px; background: rgba(201,169,110,0.25); }
 
@@ -253,7 +426,7 @@
     .closing-quote-text { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 30px); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text); }
 
     /* ─── What's next ─── */
-    .whats-next { max-width: 660px; margin-top: 36px; font-size: 0.9rem; line-height: 1.85; color: var(--faint); }
+    .whats-next { max-width: 660px; margin-top: 36px; font-size: 0.9rem; line-height: 1.85; color: var(--muted); }
 
     /* ════════ NEXT PROJECT ════════ */
     .next-project-section { padding: 0 100px 80px; }
@@ -286,17 +459,17 @@
     .footer-back:hover { opacity: 1; }
 
     /* ════════ TRUST BREAKDOWN MAP (artifact) ════════ */
-    .trust-map { background: #161616; border: 1px solid rgba(201,169,110,0.22); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 0.9fr 1.1fr 1.4fr 1.3fr 0.85fr; }
+    .trust-map { background: #161616; border: 1px solid rgba(201,169,110,0.22); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr 1.5fr 1.3fr 0.85fr; }
     .trust-map-header, .trust-map-row { display: contents; }
-    .tm-col, .tm-cell { padding: 22px 22px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.04); }
-    .tm-col { padding: 16px 22px; background: rgba(201,169,110,0.05); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.85; border-bottom: 1px solid rgba(201,169,110,0.22); }
+    .tm-col, .tm-cell { padding: 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+    .tm-col { padding: 14px 20px; background: rgba(201,169,110,0.05); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.85; border-bottom: 1px solid rgba(201,169,110,0.22); }
     .trust-map-header .tm-col:last-child, .trust-map-row .tm-cell:last-child { border-right: none; }
     .trust-map-row:last-of-type .tm-cell { border-bottom: none; }
-    .tm-step { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; justify-content: center; }
-    .tm-step-num { font-family: var(--serif); font-size: 0.82rem; font-style: italic; color: var(--gold); letter-spacing: 0.08em; }
-    .tm-step-name { font-size: 0.92rem; font-weight: 500; color: var(--text); line-height: 1.35; }
-    .tm-goal { font-size: 0.88rem; color: var(--text); line-height: 1.55; }
-    .tm-thought { font-family: var(--serif); font-style: italic; color: var(--gold-lt); font-size: 0.98rem; line-height: 1.5; }
+    .tm-step { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; justify-content: center; }
+    .tm-step-num { font-family: var(--sans); font-size: 0.62rem; font-weight: 600; font-style: normal; color: var(--gold); letter-spacing: 0.14em; opacity: 0.9; text-transform: uppercase; }
+    .tm-step-name { font-size: 0.9rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .tm-goal { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
+    .tm-thought { font-family: var(--sans); font-style: normal; color: rgba(232,228,220,0.75); font-size: 0.88rem; line-height: 1.6; }
     .tm-pains { display: flex; flex-direction: column; gap: 8px; }
     .tm-pain { position: relative; padding-left: 14px; font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
     .tm-pain::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: rgba(201,169,110,0.6); }
@@ -309,7 +482,7 @@
       :root { --sw: 0px; }
       .sidebar { display: none; }
       .main { margin-left: 0; }
-      .cs-hero-content, .cs-section, .part-section, .part-content, .next-project-section, .contact-section { padding-left: 28px; padding-right: 28px; }
+      .cs-hero-content, .cs-section, .part-section, .part-content, .next-project-section, .contact-section { padding-left: 28px !important; padding-right: 28px !important; }
       .cs-hero-meta { grid-template-columns: repeat(2, auto); }
       .question-cards, .journey-flows, .conclusion-cards { grid-template-columns: 1fr; }
       .footer-body { grid-template-columns: 1fr; gap: 40px; }
@@ -414,11 +587,27 @@
 
   <!-- ═══ HERO ═══ -->
   <section class="cs-hero">
-    <img src="PUR Waters/HERO.png" alt="PUR Waters — Trust-Driven E-Commerce platform" class="cs-hero-img" loading="eager" />
+
+    <!-- Left: text content -->
     <div class="cs-hero-content">
+
+      <!-- Layer 1: Label -->
       <p class="cs-hero-eyebrow"><span></span>Case Study</p>
+
+      <!-- Layer 2: Title -->
       <h1 class="cs-hero-title">PUR Waters</h1>
-      <p class="cs-hero-subtitle">Extending the Digital Experience with Trust-Driven E-Commerce</p>
+
+      <!-- Layer 3: Bridge -->
+      <p class="cs-hero-bridge">Extending the digital experience by</p>
+
+      <!-- Layer 4: Interventions -->
+      <ul class="cs-hero-interventions">
+        <li class="cs-hero-intervention">E-Commerce Integration</li>
+        <li class="cs-hero-intervention">Water Quality Map Innovation</li>
+        <li class="cs-hero-intervention">SaaS &amp; Live Chat Integration</li>
+      </ul>
+
+      <!-- Layer 5: Meta -->
       <div class="cs-hero-meta">
         <div class="cs-meta-item">
           <span class="cs-meta-key">Client</span>
@@ -437,7 +626,14 @@
           <span class="cs-meta-val">E-Commerce · Trust Design · SaaS</span>
         </div>
       </div>
+
     </div>
+
+    <!-- Right: device mockup -->
+    <div class="cs-hero-img-col">
+      <img src="PUR Waters/HERO.png" alt="PUR Waters: Water Quality Map on tablet and mobile" class="cs-hero-img" loading="eager" />
+    </div>
+
   </section>
 
   <!-- ═══ OVERVIEW ═══ -->
@@ -445,7 +641,7 @@
     <p class="sec-label reveal"><span class="eline"></span>Overview</p>
     <h2 class="cs-h2 reveal d1">From <em>informational</em> to indispensable.</h2>
     <p class="body-text reveal d2">
-      PUR came to us with a problem they couldn't ignore. Their site did the hard part well: it taught people about contaminants, explained filter types, and built real brand trust. Then it stopped. There was no way to buy. Motivated users at peak purchase intent would hit a dead end, open Amazon, and either grab a competitor or close the tab. PUR was teaching its customers to buy from someone else.
+      PUR came to us with a problem they couldn't ignore. Their site did the hard part well. It built real brand trust and guided people through their product range. Then it stopped. There was no way to buy. Motivated users at peak purchase intent would hit a dead end, open Amazon, and either grab a competitor or close the tab. PUR was teaching its customers to buy from someone else.
     </p>
     <p class="body-text reveal d3">
       On a team of three UX designers, I led the brand research and competitive benchmarking that grounded our direction, drove the idea and design of the Water Quality Map feature, and owned the annotated UI documentation across the project. The e-commerce flow and live chat integration ran in parallel as shared workstreams.
@@ -471,24 +667,72 @@
   </section>
 
   <!-- ═══ PROJECT GOAL ═══ -->
-  <section class="cs-section tight" style="border-top: none; padding-top: 0;">
+  <section class="cs-section" style="border-top: 1px solid var(--border); background: var(--bg2);">
     <p class="sec-label reveal"><span class="eline"></span>Project Goal</p>
-    <div class="goal-pills reveal d1">
-      <span class="goal-pill">Seamless browse → decide → buy</span>
-      <span class="goal-pill">Reduce filter selection confusion</span>
-      <span class="goal-pill">Build trust through transparency</span>
-      <span class="goal-pill">Increase engagement &amp; conversion</span>
+    <h2 class="cs-h2 reveal d1">Design a complete <em>trust-to-purchase</em> journey.</h2>
+    <div class="goal-cards">
+      <div class="goal-card reveal d1">
+        <span class="goal-card-num">01</span>
+        <p class="goal-card-title">Seamless Browse → Decide → Buy</p>
+        <p class="goal-card-desc">Build a complete e-commerce flow inside PUR. No more dead ends, no redirecting to Amazon.</p>
+      </div>
+      <div class="goal-card reveal d2">
+        <span class="goal-card-num">02</span>
+        <p class="goal-card-title">Reduce Filter Selection Confusion</p>
+        <p class="goal-card-desc">Help users identify the right product for their home without needing to research elsewhere.</p>
+      </div>
+      <div class="goal-card reveal d3">
+        <span class="goal-card-num">03</span>
+        <p class="goal-card-title">Build Trust Through Transparency</p>
+        <p class="goal-card-desc">Surface local, relevant data that turns abstract concern into a confident, informed decision.</p>
+      </div>
+      <div class="goal-card reveal d4">
+        <span class="goal-card-num">04</span>
+        <p class="goal-card-title">Increase Engagement &amp; Conversion</p>
+        <p class="goal-card-desc">Reduce drop-off at every friction point: product pages, checkout, and last-minute hesitation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHO IS PUR ═══ -->
+  <section class="cs-section">
+    <p class="sec-label reveal"><span class="eline"></span>About the Client</p>
+    <h2 class="cs-h2 reveal d1">Who is <em>PUR?</em></h2>
+    <div class="client-split reveal d2">
+
+      <!-- Left: brand research image -->
+      <div class="client-img-col">
+        <img src="PUR Waters/WHAT IS PUR.png" alt="PUR brand overview, product range and market positioning" class="client-img" loading="lazy" />
+      </div>
+
+      <!-- Right: description, bullets, link -->
+      <div class="client-text-col">
+        <p class="body-text">PUR is one of North America's leading water filtration brands. Pitchers, faucet filters, and replacement cartridges trusted in millions of homes. At the time of this project, no direct path to purchase on their own site.</p>
+        <ul class="client-bullets">
+          <li>Sold through major retail partners including Target and Walmart</li>
+          <li>BPA-free, sustainability-focused, long-lasting filter cartridges</li>
+          <li>Competing directly with Brita on filtration technology</li>
+        </ul>
+        <a href="https://drive.google.com/file/d/10SD-YEOhAVN-asFLpEWLC4lC_dLQUnhM/view?usp=sharing" target="_blank" rel="noopener" class="gold-link" style="margin-top: 32px; align-self: flex-start;">
+          See Full Brand Research
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+
     </div>
   </section>
 
   <!-- ═══ PART 1 CHAPTER ═══ -->
   <div class="part-section reveal" data-part="01">
-    <p class="part-label">Part 01</p>
+    <p class="part-label">Part 01 of 03 · E-Commerce Integration</p>
     <h2 class="part-title">From Browsing <em>to Buying.</em></h2>
-    <p class="part-desc">The site was a teaching tool pretending to be a store. Users could learn about contaminants, compare filter types, build confidence in the brand, and then hit a wall. The "buy" action wasn't there. So we rebuilt the full path: browse, evaluate, decide, checkout, all inside PUR.</p>
+    <p class="part-pull">PUR's site was a teaching tool pretending to be a store. Users could explore products, build confidence in the brand, and then hit a wall.</p>
+    <p class="part-desc">The buy action simply wasn't there. They'd leave, open Amazon, lose all the context they'd just built, and either buy something else or nothing at all. We rebuilt the full path: browse, evaluate, decide, checkout, all inside PUR.</p>
   </div>
 
   <section class="cs-section" style="background: var(--bg2);">
+
+    <!-- Journey redesign -->
     <p class="sec-label reveal"><span class="eline"></span>The Journey Redesign</p>
     <div class="journey-flows">
       <div class="journey-flow old reveal">
@@ -502,7 +746,7 @@
           <span class="journey-arrow">→</span>
           <span class="journey-step">Drop-off</span>
         </div>
-        <p class="journey-flow.old journey-note" style="font-size:0.72rem;color:rgba(232,228,220,0.3);margin-top:14px;font-style:italic;">Broken loop: user exits the ecosystem before converting.</p>
+        <p class="journey-note">Broken loop: user exits the ecosystem before converting.</p>
       </div>
       <div class="journey-flow new-flow reveal d1">
         <p class="journey-flow-label"><span class="journey-flow-label-dot"></span>New Journey</p>
@@ -515,47 +759,45 @@
           <span class="journey-arrow">→</span>
           <span class="journey-step">Buy</span>
         </div>
-        <p class="journey-note" style="font-size:0.72rem;color:rgba(201,169,110,0.7);margin-top:14px;font-style:italic;">Complete loop: confidence built, purchase completed, trust earned.</p>
+        <p class="journey-note">Complete loop: confidence built, purchase completed, trust earned.</p>
       </div>
     </div>
 
+    <!-- User Journey Map -->
     <div class="cs-img-wrap img-gap reveal">
-      <img src="PUR Waters/WHAT IS PUR.png" alt="Brand research — competitor analysis and positioning" class="cs-img-full" loading="lazy" />
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:12px;">
-        <p class="cs-img-caption" style="margin-top:0;">Brand research: competitive landscape, positioning gaps, and purchase flow benchmarks.</p>
-        <a href="https://drive.google.com/file/d/10SD-YEOhAVN-asFLpEWLC4lC_dLQUnhM/view?usp=sharing" target="_blank" rel="noopener" class="gold-link" style="margin-top:0;flex-shrink:0;">
-          See Full Brand Research
+      <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>User Journey Map</p>
+      <p style="margin-bottom: 24px; font-size: 0.92rem; color: var(--muted); line-height: 1.7; text-align: center; width: 100%;">Jordan, a health-conscious mother of two, navigating the full purchase journey from awareness to post-purchase.</p>
+      <div style="display:flex;justify-content:center;">
+        <img src="PUR Waters/user journey map.png" alt="User Journey Map: Jordan navigating from awareness to post-purchase" style="width:80%;height:auto;border-radius:12px;border:1px solid var(--border);display:block;image-rendering:auto;" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- E-Commerce Integration -->
+    <div class="img-gap reveal">
+      <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>E-Commerce Integration</p>
+      <p class="body-text" style="margin-bottom: 20px; max-width: 680px;">The redesigned product catalogue with integrated cart. Users can browse, filter, and purchase without leaving the PUR ecosystem.</p>
+      <div style="width:70%;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--border);">
+        <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+          <source src="PUR Waters/ecommerce-prototype.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;margin-top:28px;gap:10px;">
+        <p style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,169,110,0.85);font-weight:500;">Try it yourself</p>
+        <a href="https://www.figma.com/proto/8PWMoM3NYUqe21e0kIquYu/PUR-Innovation?node-id=126-1730&p=f&viewport=1481%2C892%2C0.07&t=bCEJeuE5BSJyvZ1y-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=450%3A1843&show-proto-sidebar=1" target="_blank" rel="noopener" class="gold-link" style="margin-top:0;">
+          View E-Commerce Prototype
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         </a>
       </div>
     </div>
 
-    <div class="cs-img-wrap img-gap reveal">
-      <img src="PUR Waters/user journey map.png" alt="New purchase flow — User Journey Map" class="cs-img-full" loading="lazy" />
-      <p class="cs-img-caption">New Purchase Flow · User Journey Map. Explore → Understand → Get Recommendation → Buy.</p>
-    </div>
-
-    <div class="img-gap reveal">
-      <video
-        class="video-wrap"
-        autoplay muted loop playsinline
-        style="width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--border);"
-      >
-        <source src="PUR Waters/ecommerce-prototype.mp4" type="video/mp4" />
-      </video>
-      <p class="cs-img-caption" style="margin-top:12px;">E-Commerce prototype: browse to buy flow in action.</p>
-      <a href="https://www.figma.com/proto/8PWMoM3NYUqe21e0kIquYu/PUR-Innovation?node-id=126-1730&p=f&viewport=1481%2C892%2C0.07&t=bCEJeuE5BSJyvZ1y-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=450%3A1843&show-proto-sidebar=1" target="_blank" rel="noopener" class="gold-link">
-        View E-Commerce Prototype
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
-    </div>
   </section>
 
   <!-- ═══ PART 2 CHAPTER ═══ -->
   <div class="part-section reveal" data-part="02">
-    <p class="part-label">Part 02</p>
+    <p class="part-label">Part 02 of 03 · Water Quality Map</p>
     <h2 class="part-title">Making Water Quality <em>Visible.</em></h2>
-    <p class="part-desc">We started this project assuming users were confused about which filter to buy. Research said otherwise. Users understood the products fine. What they couldn't answer was whether their specific water, in their specific home, actually needed filtering. The gap wasn't product literacy. It was local relevance. If we'd skipped this step, we'd have built a better comparison page and missed the real blocker.</p>
+    <p class="part-pull">We started this project assuming users were confused about which filter to buy. Research said otherwise.</p>
+    <p class="part-desc">Users understood the products fine. What they couldn't answer was whether their specific water, in their specific home, actually needed filtering. The gap wasn't product literacy. It was local relevance. If we'd skipped this step, we'd have built a better comparison page and missed the real blocker entirely.</p>
   </div>
 
   <section class="cs-section" style="background: var(--bg2);">
@@ -564,6 +806,8 @@
     </div>
 
     <div class="cs-img-wrap img-gap reveal d1">
+      <p class="sec-label" style="margin-bottom:14px;"><span class="eline"></span>Where Trust Broke Down</p>
+      <p class="body-text" style="margin-bottom:24px;max-width:680px;">Three moments in the Evaluate stage where users hit uncertainty, stalled, and eventually left to research elsewhere.</p>
       <div class="trust-map" role="table" aria-label="Trust breakdown during the Evaluate stage">
         <div class="trust-map-header" role="row">
           <div class="tm-col" role="columnheader">Step</div>
@@ -633,71 +877,77 @@
       </p>
     </div>
 
-    <div class="reveal d3" style="margin-top: 44px; max-width: 820px; padding: 32px 36px; background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.14); border-radius: 2px; border-left: 3px solid var(--gold);">
+    <div class="reveal d3" style="margin-top: 44px; padding: 32px 36px; background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.14); border-radius: 2px; border-left: 3px solid var(--gold);">
       <p class="sec-label" style="margin-bottom: 14px;"><span class="eline"></span>The Hardest Call</p>
       <p class="body-text" style="color: var(--text); margin: 0; max-width: none;">
         The map depended on reviews from real people in real neighborhoods, and we had to trust they'd show up. Community features die when they launch empty. Our bet: seed the map with public utility data so it never felt dead, add a modest review incentive, and lean on market research that said people do share local knowledge when the payoff is obvious. If we'd waited for certainty, the feature would never have shipped.
       </p>
     </div>
 
-    <div class="reveal d3" style="margin-top: 16px;">
+    <div class="reveal d3" style="margin-top: 44px;">
       <p class="sec-label" style="margin-bottom: 16px;"><span class="eline"></span>User Flow</p>
+      <p class="body-text" style="margin-bottom: 20px; max-width: 680px;">How a user moves from not knowing anything to buying the right filter in four steps.</p>
       <div class="user-flow-steps">
         <span class="flow-step">Enter ZIP</span>
         <span class="flow-arrow">→</span>
         <span class="flow-step">View Local Water Summary</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-step">Explore Contaminants</span>
+        <span class="flow-step">Explore Local Data</span>
         <span class="flow-arrow">→</span>
         <span class="flow-step">Get Recommendations</span>
       </div>
     </div>
 
+
+    <!-- Annotated UI -->
     <div class="cs-img-wrap img-gap reveal">
-      <img src="PUR Waters/Tradeoffs.png" alt="Solution screens — water quality map and filter recommendations" class="cs-img-full" loading="lazy" />
+      <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>Annotated UI Screens</p>
+      <p class="body-text" style="margin-bottom: 20px; max-width: 680px;">Design rationale, interaction states, and edge case documentation for the Water Quality Map feature.</p>
+      <img src="PUR Waters/ANNOTATIONS.png" alt="Annotated UI screens: Water Quality Map design rationale" class="cs-img-full" style="border-radius:12px;" loading="lazy" />
     </div>
 
-    <div class="cs-img-wrap img-gap reveal">
-      <img src="PUR Waters/ANNOTATIONS.png" alt="Annotated UI screens with design rationale" class="cs-img-full" loading="lazy" />
-      <p class="cs-img-caption">Annotated UI Screens: design rationale, interaction states, and edge case documentation.</p>
+    <!-- Prototype CTAs -->
+    <div class="reveal" style="margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <p style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,169,110,0.85);font-weight:500;">Try it yourself</p>
+      <div class="proto-btns">
+        <a href="https://www.figma.com/proto/8PWMoM3NYUqe21e0kIquYu/PUR-Innovation?node-id=126-1730&p=f&viewport=1481%2C892%2C0.07&t=bCEJeuE5BSJyvZ1y-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=450%3A1843&show-proto-sidebar=1" target="_blank" rel="noopener" class="proto-btn">
+          View Desktop Prototype
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+        <a href="https://www.figma.com/proto/8PWMoM3NYUqe21e0kIquYu/PUR-Innovation?node-id=126-1730&p=f&viewport=1462%2C1012%2C0.07&t=bCEJeuE5BSJyvZ1y-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=229%3A805&show-proto-sidebar=1" target="_blank" rel="noopener" class="proto-btn">
+          View Mobile Prototype
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
     </div>
 
-    <div class="proto-btns reveal" style="margin-top: 28px;">
-      <a href="https://www.figma.com/proto/8PWMoM3NYUqe21e0kIquYu/PUR-Innovation?node-id=126-1730&p=f&viewport=1481%2C892%2C0.07&t=bCEJeuE5BSJyvZ1y-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=450%3A1843&show-proto-sidebar=1" target="_blank" rel="noopener" class="proto-btn">
-        View Desktop Prototype
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
-      <a href="https://www.figma.com/proto/8PWMoM3NYUqe21e0kIquYu/PUR-Innovation?node-id=126-1730&p=f&viewport=1462%2C1012%2C0.07&t=bCEJeuE5BSJyvZ1y-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=229%3A805&show-proto-sidebar=1" target="_blank" rel="noopener" class="proto-btn">
-        View Mobile Prototype
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
-    </div>
   </section>
 
   <!-- ═══ PART 3 CHAPTER ═══ -->
   <div class="part-section reveal" data-part="03">
-    <p class="part-label">Part 03</p>
+    <p class="part-label">Part 03 of 03 · Live Chat Support</p>
     <h2 class="part-title">Reducing Last Minute <em>Hesitation.</em></h2>
+    <p class="part-pull">"How do you answer 'I'm not sure' <em>without sounding like a sales pitch?</em>"</p>
     <p class="part-desc">Some users did everything right. They understood the product, saw their local data, picked the right filter. And still paused at checkout. That pause wasn't an information gap. It was an anxiety spike at the exact moment someone hands over a credit card. An FAQ wouldn't fix it. A human voice might.</p>
   </div>
 
   <section class="cs-section" style="background: var(--bg2);">
-    <div class="pull-quote reveal">
-      <p class="pull-quote-text">"How do you answer 'I'm not sure' <em>without sounding like a sales pitch?</em>"</p>
+
+    <p class="sec-label reveal"><span class="eline"></span>The Intervention</p>
+    <p class="body-text reveal d1" style="margin-bottom: 32px;">We placed a contextual live chat trigger at the checkout hesitation point. Not a generic support widget, but a moment-aware prompt that appeared only when the user had been idle for more than 8 seconds on the payment screen.</p>
+
+    <div class="img-gap reveal d2">
+      <div style="width:70%;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--border);">
+        <video autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+          <source src="PUR Waters/live-chat-demo.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <p class="cs-img-caption" style="margin-top:12px;">Live chat integration: real-time support surfaced at the exact hesitation moment.</p>
     </div>
 
-    <div class="img-gap reveal d1">
-      <video
-        autoplay muted loop playsinline
-        style="width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#0a0a0a;display:block;"
-      >
-        <source src="PUR Waters/live-chat-demo.mp4" type="video/mp4" />
-      </video>
-      <p class="cs-img-caption" style="margin-top:12px;">Live Chat integration: real-time support at the hesitation moment.</p>
-    </div>
-
-    <p class="body-text reveal" style="margin-top: 44px;">The live chat system was designed to match the brand's tone, helpful, not pushy. Key capabilities engineered into the flow:</p>
-    <div class="feature-pills reveal d1">
+    <p class="sec-label reveal" style="margin-top: 48px;"><span class="eline"></span>Conversation Design · Key Capabilities</p>
+    <p class="body-text reveal d1" style="margin-bottom: 20px;">The chat system was designed to match PUR's brand tone: helpful, not pushy. Each conversation state was scripted and mapped:</p>
+    <div class="feature-pills reveal d2">
       <span class="feature-pill">Greetings</span>
       <span class="feature-pill">Use of Prompts</span>
       <span class="feature-pill">Transfer to Human Agent</span>
@@ -705,7 +955,7 @@
       <span class="feature-pill">Reviews</span>
     </div>
 
-    <div class="saas-callout reveal d2">
+    <div class="saas-callout reveal d3">
       <span class="saas-label">Platform</span>
       <div class="saas-divider"></div>
       <span class="saas-name">Livechat</span>
@@ -733,18 +983,14 @@
       </div>
     </div>
 
-    <div class="reveal" style="margin-top: 48px; max-width: 820px; padding: 32px 36px; background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.14); border-radius: 2px; border-left: 3px solid var(--gold);">
+    <div class="reveal" style="margin-top: 48px; padding: 32px 36px; background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.14); border-radius: 2px; border-left: 3px solid var(--gold);">
       <p class="sec-label" style="margin-bottom: 14px;"><span class="eline"></span>What I'd Do Differently</p>
       <p class="body-text" style="color: var(--text); margin: 0; max-width: none;">
         Ship the Water Quality Map with real EPA data from day one rather than a prototype flow. The concept only earns full trust if the data is real. A map that shows you your neighborhood's actual water report is genuinely useful. A map that simulates it is just a feature demo. The gap between those two things is the difference between a product people tell their neighbors about and one they forget the next day.
       </p>
     </div>
 
-    <div class="closing-quote reveal">
-      <p class="closing-quote-text">"Trust isn't built by giving people more information. It's built by giving them <em>the right answer at the exact moment they need it.</em>"</p>
-    </div>
-
-    <p class="whats-next reveal">
+    <p class="body-text reveal" style="margin-top: 36px; color: var(--muted);">
       <strong style="color: var(--text); font-weight: 500;">What's next:</strong> Validate data source partnerships for the Water Quality Map, measure conversion behavior post-launch, and explore scaling the live chat support layer with AI-assisted triage to handle volume without sacrificing the human touch.
     </p>
   </section>
