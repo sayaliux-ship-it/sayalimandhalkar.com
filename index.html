@@ -242,15 +242,11 @@
       border-radius: 0 2px 2px 0;
       transition: height 0.25s ease;
     }
-    .sb-row:hover::before,
-    .sb-row.active::before { height: 56%; }
+    /* Homepage sidebar — hover only, never active */
+    .sb-row:hover::before { height: 56%; }
 
     .sb-row:hover {
       background: rgba(255,255,255,0.03);
-    }
-    .sb-row.active {
-      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
-      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
     }
 
     /* Icon left */
@@ -263,8 +259,7 @@
       color: var(--muted);
       transition: color 0.2s;
     }
-    .sb-row:hover .sb-icon-left,
-    .sb-row.active .sb-icon-left { color: var(--gold); }
+    .sb-row:hover .sb-icon-left { color: var(--gold); }
 
     /* Label */
     .sb-label {
@@ -277,9 +272,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .sb-row:hover .sb-label,
-    .sb-row.active .sb-label { color: var(--text); }
-    .sb-row.active .sb-label { color: var(--gold-lt); }
+    .sb-row:hover .sb-label { color: var(--text); }
 
     /* Icon right */
     .sb-icon-right {
@@ -288,12 +281,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(232,228,220,0.22);   /* very quiet by default */
+      color: rgba(232,228,220,0.22);
       transition: color 0.25s, transform 0.25s;
     }
     .sb-row:hover .sb-icon-right { color: var(--faint); }
     .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
-    .sb-row.active .sb-icon-right { color: var(--gold); }
 
     /* ── Sidebar footer ── */
     .sb-footer {
@@ -961,7 +953,7 @@
     <div class="sb-section">
       <span class="sb-section-label" aria-hidden="true">Projects</span>
 
-      <a href="jpmc.html" class="sb-row" data-section="jpmorgan">
+      <a href="jpmc.html" class="sb-row">
         <span class="sb-icon-left" aria-hidden="true">
           <!-- Lucide: FileText -->
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -980,7 +972,7 @@
         </span>
       </a>
 
-      <a href="pur.html" class="sb-row" data-section="purwaters">
+      <a href="pur.html" class="sb-row">
         <span class="sb-icon-left" aria-hidden="true">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
@@ -997,7 +989,7 @@
         </span>
       </a>
 
-      <a href="mentormap.html" class="sb-row" data-section="mentormap">
+      <a href="mentormap.html" class="sb-row">
         <span class="sb-icon-left" aria-hidden="true">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
@@ -1013,7 +1005,7 @@
         </span>
       </a>
 
-      <a href="philly-truce.html" class="sb-row" data-section="phillytruce">
+      <a href="philly-truce.html" class="sb-row">
         <span class="sb-icon-left" aria-hidden="true">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
@@ -1034,7 +1026,7 @@
     <div class="sb-section">
       <span class="sb-section-label" aria-hidden="true">Designing AI Experiences</span>
 
-      <a href="tenetic.html" class="sb-row" data-section="tenetic">
+      <a href="tenetic.html" class="sb-row">
         <span class="sb-icon-left" aria-hidden="true">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
@@ -1056,7 +1048,7 @@
     <div class="sb-divider"></div>
 
     <!-- PLAYGROUND -->
-    <a href="playground.html" class="sb-row" data-section="playground">
+    <a href="playground.html" class="sb-row">
       <span class="sb-icon-left" aria-hidden="true">
         <!-- Lucide: Sparkles -->
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -1076,7 +1068,7 @@
     <div class="sb-divider"></div>
 
     <!-- CERTIFICATIONS -->
-    <a href="certifications.html" class="sb-row" data-section="certifications">
+    <a href="certifications.html" class="sb-row">
       <span class="sb-icon-left" aria-hidden="true">
         <!-- Lucide: Award -->
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -1095,7 +1087,7 @@
     <div class="sb-divider"></div>
 
     <!-- ABOUT ME -->
-    <a href="about.html" class="sb-row" data-section="about">
+    <a href="about.html" class="sb-row">
       <span class="sb-icon-left" aria-hidden="true">
         <!-- Lucide: User -->
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -1150,7 +1142,7 @@
           Currently at <a href="https://www.fiserv.com/en.html" target="_blank" rel="noopener">Fiserv</a>. Open to full-time opportunities.
         </p>
         <div class="hero-btns">
-          <a href="#" class="btn-gold">Download Resume</a>
+          <a href="https://drive.google.com/file/d/1R_0ZQhlpQfF-H3JLxSF-dUtkTmXlz8Xh/view?usp=sharing" target="_blank" rel="noopener" class="btn-gold">Download Resume</a>
           <a href="#work" class="btn-ghost">View My Work</a>
         </div>
       </div>
@@ -1255,7 +1247,7 @@
         <div class="proj-info">
           <p class="proj-tag">EdTech · Social Impact</p>
           <h3 class="proj-name">MentorMap</h3>
-          <p class="proj-desc">Designing an accessible platform connecting mentors and mentees across disciplines with meaningful outcomes.</p>
+          <p class="proj-desc">Designing a peer mentorship platform for architecture students at Thomas Jefferson University, my Master's thesis project.</p>
         </div>
         <span class="proj-arrow-wrap" aria-hidden="true">View Case Study →</span>
       </a>
@@ -1275,7 +1267,7 @@
         <div class="proj-info">
           <p class="proj-tag">Healthcare · AI · B2B SaaS</p>
           <h3 class="proj-name">Tenetic</h3>
-          <p class="proj-desc">Improving care pathways through clean, efficient AI-assisted clinical interfaces that reduce friction for healthcare providers.</p>
+          <p class="proj-desc">Designing an AI-assisted storytelling workflow for enterprise sales teams, helping them build data-ready presentations faster.</p>
         </div>
         <span class="proj-arrow-wrap" aria-hidden="true">View Case Study →</span>
       </a>
@@ -1321,18 +1313,18 @@
     <p class="sec-label reveal"><span class="eyebrow-line"></span>Featured Writing</p>
     <h2 class="sec-title reveal">Thoughts on design,<br>business &amp; <em>craft.</em></h2>
     <div class="articles">
-      <a href="#" class="article reveal">
+      <a href="https://medium.com/design-bootcamp/how-disneys-ux-design-inspires-magic-in-every-interaction-131ebcd8ac07" target="_blank" rel="noopener" class="article reveal">
         <span class="art-num">01</span>
         <span class="art-title">How Disney's UX Design Inspires Magic in Every Interaction</span>
         <span class="art-badge">Medium</span>
       </a>
-      <a href="#" class="article reveal d1">
+      <a href="https://medium.com/design-bootcamp/killed-by-google-what-290-dead-products-teach-us-about-ux-and-business-f77fb7b51b22" target="_blank" rel="noopener" class="article reveal d1">
         <span class="art-num">02</span>
         <span class="art-title">Killed by Google: What 290+ Dead Products Teach Us About UX and Business</span>
         <span class="art-badge">Medium</span>
       </a>
     </div>
-    <a href="#" class="more-link reveal">View all articles on Medium →</a>
+    <a href="https://medium.com/@sayalim" target="_blank" rel="noopener" class="more-link reveal">View all articles on Medium →</a>
   </section>
 
   <!-- Footer / Contact -->
@@ -1409,30 +1401,7 @@
     document.title = 'Playground · Sayali Mandhalkar';
   }
 
-  // ── Scroll-spy — homepage sections only, no project items ──
-  const navItems = document.querySelectorAll('.sb-row[data-section]');
-  const sectionIds = ['hero','about','writing','certifications'];
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navItems.forEach(n => {
-          // hero section → clear all active states
-          if (e.target.id === 'hero') {
-            n.classList.remove('active');
-            n.removeAttribute('aria-current');
-          } else {
-            const active = n.dataset.section === e.target.id;
-            n.classList.toggle('active', active);
-            if (active) n.setAttribute('aria-current','page');
-            else n.removeAttribute('aria-current');
-          }
-        });
-      }
-    });
-  }, { threshold: 0.4 });
-
-  sectionIds.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+  // Sidebar is static on homepage — no scroll-spy
 
   // ── Reveal ──
   const revealIO = new IntersectionObserver(entries => {

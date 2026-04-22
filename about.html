@@ -260,26 +260,24 @@
     }
     .about-hero-name em { font-style: italic; color: var(--gold); }
     .about-hero-tagline { display: none; }
-    /* I am a(n) list */
-    .about-iam-label {
-      font-family: var(--serif); font-size: 1.15rem; font-weight: 300; font-style: italic;
-      color: var(--gold); margin-bottom: 18px;
+    /* Credentials editorial list */
+    .about-iam-label { display: none; }
+    .about-iam-list {
+      list-style: none; display: flex; flex-direction: column;
+      gap: 0; margin-bottom: 36px;
       opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards;
     }
-    .about-iam-list {
-      list-style: none; display: flex; flex-direction: column; gap: 13px;
-      opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards;
-      margin-bottom: 36px;
-    }
     .about-iam-list li {
-      position: relative;
-      padding-left: 18px;
-      font-size: 0.94rem; color: var(--muted); line-height: 1.65;
+      display: flex; align-items: baseline; gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.94rem; color: var(--muted); line-height: 1.6;
     }
+    .about-iam-list li:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
     .about-iam-list li::before {
-      content: '✦';
-      font-size: 0.38rem; color: var(--gold); opacity: 0.85;
-      position: absolute; left: 0; top: 6px;
+      content: '—';
+      color: var(--gold); opacity: 0.7; font-size: 0.8rem;
+      flex-shrink: 0; margin-top: 1px;
     }
     .about-iam-list li strong { color: var(--text); font-weight: 500; }
     .about-hero-right {
@@ -324,6 +322,10 @@
     }
     .about-hero-ctas { display: none; }
     .photo-rule-top, .photo-rule-bottom, .photo-label-row { display: none; }
+    .about-photo-caption {
+      margin-top: 14px; font-size: 0.78rem; color: rgba(232,228,220,0.42);
+      font-style: italic; line-height: 1.5; text-align: center;
+    }
     .about-hero-ctas {
       display: flex; gap: 12px; flex-wrap: wrap;
     }
@@ -460,11 +462,16 @@
       margin-bottom: 14px; padding-bottom: 10px;
       border-bottom: 1px solid rgba(201,169,110,0.15);
     }
-    .skill-list { display: flex; flex-direction: column; gap: 8px; }
+    .skill-list { display: flex; flex-direction: column; gap: 0; }
     .skill-item {
       display: flex; align-items: center; gap: 10px;
       font-size: 0.84rem; color: var(--muted); line-height: 1.4;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s;
     }
+    .skill-item:last-child { border-bottom: none; }
+    .skill-item:hover { color: var(--gold-lt); }
     .skill-item::before {
       content: '';
       width: 3px; height: 3px; border-radius: 50%;
@@ -527,8 +534,9 @@
     }
     .coffee-art-item img {
       width: 100%; height: 100%;
-      object-fit: cover; display: block;
-      filter: brightness(0.88) contrast(1.05) saturate(0.85);
+      object-fit: contain; display: block;
+      background: transparent;
+      filter: none !important;
       transition: transform 0.6s ease;
     }
     .coffee-art-item:hover img { transform: scale(1.05); }
@@ -568,9 +576,10 @@
     .sketch-item.wide { grid-column: span 2; aspect-ratio: 2/1.2; }
     .sketch-item img {
       width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
+      object-fit: contain; object-position: center top;
       display: block;
-      filter: brightness(0.92) contrast(1.08);
+      background: transparent;
+      filter: none !important;
       transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .sketch-item:hover img { transform: scale(1.04); }
@@ -619,21 +628,27 @@
     .gallery-strip:active { cursor: grabbing; }
     .gallery-item {
       flex: 0 0 auto;
-      width: 240px;
-      height: 320px;
-      position: relative;
-      overflow: hidden;
-      border-radius: 2px;
+      width: auto;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
       border: 1px solid transparent;
       transition: border-color 0.3s ease;
       background: transparent;
+      overflow: hidden;
     }
     .gallery-item:hover { border-color: rgba(201,169,110,0.55); }
     .gallery-item img {
-      width: 100%; height: 100%;
+      width: auto;
+      height: 100%;
+      max-width: none;
       object-fit: contain;
-      object-position: center top;
+      object-position: center;
       display: block;
+      background: transparent;
+      filter: none !important;
       transition: transform 0.3s ease;
     }
     .gallery-item:hover img { transform: scale(1.03); }
@@ -641,30 +656,29 @@
     /* ════════ PERSONAL ════════ */
     .personal-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
     .personal-card {
-      padding: 28px 24px;
+      padding: 32px 28px;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.02);
-      transition: border-color 0.28s, transform 0.28s;
+      border-radius: 12px;
+      background: #161616;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .personal-card:hover {
-      border-color: rgba(201,169,110,0.3);
-      transform: translateY(-3px);
+      border-color: rgba(201,169,110,0.45);
+      box-shadow: 0 4px 32px rgba(201,169,110,0.07);
     }
     .personal-icon {
-      font-size: 1.5rem; margin-bottom: 14px; display: block;
-      opacity: 0.7;
+      font-size: 2.25rem; margin-bottom: 16px; display: block;
     }
     .personal-title {
-      font-size: 0.82rem; font-weight: 600; color: var(--text);
-      margin-bottom: 6px; letter-spacing: 0.02em;
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 300;
+      color: var(--text); margin-bottom: 8px;
     }
     .personal-desc {
-      font-size: 0.78rem; color: var(--faint); line-height: 1.6;
+      font-size: 0.84rem; color: var(--faint); line-height: 1.7;
     }
 
     /* ════════ CTA FOOTER BAR ════════ */
@@ -780,7 +794,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="11" height="11" x="3" y="11" rx="2"/><path d="M11 11V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/></svg>
         </span>
       </a>
-      <a href="index.html#purwaters" class="sb-row">
+      <a href="pur.html" class="sb-row">
         <span class="sb-icon-left" aria-hidden="true">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
         </span>
@@ -789,7 +803,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         </span>
       </a>
-      <a href="index.html#mentormap" class="sb-row">
+      <a href="mentormap.html" class="sb-row">
         <span class="sb-icon-left" aria-hidden="true">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
         </span>
@@ -880,7 +894,7 @@
       <div>
         <p class="about-hero-eyebrow"><span class="eline"></span>About Me</p>
         <h1 class="about-hero-name">Hello, I'm Sayali.<br>You can call me <em>Sia.</em></h1>
-        <p class="about-iam-label">I am a(n):</p>
+        <p class="about-iam-label" aria-hidden="true"></p>
         <ul class="about-iam-list">
           <li>Graduate <strong>Summa Cum Laude</strong> in UX &amp; Interaction Design (Master's degree)</li>
           <li><strong>Certified AI Product Designer</strong> · Interaction Design Foundation</li>
@@ -892,14 +906,9 @@
       </div>
       <div class="about-hero-right">
         <div class="about-hero-photo-wrap">
-          <div class="photo-rule-top"></div>
-          <img src="About me photo.jpg" alt="Sayali Mandhalkar speaking at Thomas Jefferson University" class="about-hero-photo" />
-          <div class="photo-rule-bottom"></div>
-          <div class="photo-label-row">
-            <span class="photo-label-num">01</span>
-            <span class="photo-label-text">Thomas Jefferson University</span>
-          </div>
+          <img src="about-me-photo.jpg" alt="Sayali Mandhalkar speaking at Thomas Jefferson University" class="about-hero-photo" />
         </div>
+        <p class="about-photo-caption">Speaking at Thomas Jefferson University, Philadelphia</p>
       </div>
     </div>
   </section>
@@ -963,12 +972,12 @@
     <h2 class="gallery-heading">Drawn with Patience and <em>Attention to Detail</em></h2>
     <div class="gallery-divider"></div>
     <div class="gallery-strip">
-      <div class="gallery-item"><img src="sketches/image 32@2x.png" alt="Pencil sketch" loading="lazy" /></div>
-      <div class="gallery-item"><img src="sketches/image 34@2x.png" alt="Sketch study" loading="lazy" /></div>
-      <div class="gallery-item"><img src="sketches/image 36@2x.png" alt="Pencil sketch" loading="lazy" /></div>
-      <div class="gallery-item"><img src="sketches/image 37@2x.png" alt="Pencil sketch" loading="lazy" /></div>
-      <div class="gallery-item"><img src="sketches/image 38@2x.png" alt="Sketch detail" loading="lazy" /></div>
-      <div class="gallery-item"><img src="sketches/image 39@2x.png" alt="Sketch study" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image-32@2x.png" alt="Pencil sketch" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image-34@2x.png" alt="Sketch study" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image-36@2x.png" alt="Pencil sketch" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image-37@2x.png" alt="Pencil sketch" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image-38@2x.png" alt="Sketch detail" loading="lazy" /></div>
+      <div class="gallery-item"><img src="sketches/image-39@2x.png" alt="Sketch study" loading="lazy" /></div>
     </div>
   </section>
 
@@ -978,11 +987,11 @@
     <h2 class="gallery-heading"><em>Digital</em> Explorations</h2>
     <div class="gallery-divider"></div>
     <div class="gallery-strip">
-      <div class="gallery-item"><img src="digital exploration/image 40@2x.png" alt="Digital exploration" loading="lazy" /></div>
-      <div class="gallery-item"><img src="digital exploration/image 41@2x.png" alt="Digital exploration" loading="lazy" /></div>
-      <div class="gallery-item"><img src="digital exploration/image 43@2x.png" alt="Digital exploration" loading="lazy" /></div>
-      <div class="gallery-item"><img src="digital exploration/image 44@2x.png" alt="Digital exploration" loading="lazy" /></div>
-      <div class="gallery-item"><img src="digital exploration/image 45@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital-exploration/image-40@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital-exploration/image-41@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital-exploration/image-43@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital-exploration/image-44@2x.png" alt="Digital exploration" loading="lazy" /></div>
+      <div class="gallery-item"><img src="digital-exploration/image-45@2x.png" alt="Digital exploration" loading="lazy" /></div>
     </div>
   </section>
 
