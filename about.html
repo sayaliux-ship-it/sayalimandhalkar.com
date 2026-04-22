@@ -260,24 +260,26 @@
     }
     .about-hero-name em { font-style: italic; color: var(--gold); }
     .about-hero-tagline { display: none; }
-    /* Credentials editorial list */
-    .about-iam-label { display: none; }
-    .about-iam-list {
-      list-style: none; display: flex; flex-direction: column;
-      gap: 0; margin-bottom: 36px;
+    /* I am a(n) list */
+    .about-iam-label {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 300; font-style: italic;
+      color: var(--gold); margin-bottom: 18px;
       opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards;
     }
-    .about-iam-list li {
-      display: flex; align-items: baseline; gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.94rem; color: var(--muted); line-height: 1.6;
+    .about-iam-list {
+      list-style: none; display: flex; flex-direction: column; gap: 13px;
+      opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards;
+      margin-bottom: 36px;
     }
-    .about-iam-list li:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+    .about-iam-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.94rem; color: var(--muted); line-height: 1.65;
+    }
     .about-iam-list li::before {
-      content: '—';
-      color: var(--gold); opacity: 0.7; font-size: 0.8rem;
-      flex-shrink: 0; margin-top: 1px;
+      content: '✦';
+      font-size: 0.38rem; color: var(--gold); opacity: 0.85;
+      position: absolute; left: 0; top: 6px;
     }
     .about-iam-list li strong { color: var(--text); font-weight: 500; }
     .about-hero-right {
@@ -894,7 +896,7 @@
       <div>
         <p class="about-hero-eyebrow"><span class="eline"></span>About Me</p>
         <h1 class="about-hero-name">Hello, I'm Sayali.<br>You can call me <em>Sia.</em></h1>
-        <p class="about-iam-label" aria-hidden="true"></p>
+        <p class="about-iam-label">I am a(n):</p>
         <ul class="about-iam-list">
           <li>Graduate <strong>Summa Cum Laude</strong> in UX &amp; Interaction Design (Master's degree)</li>
           <li><strong>Certified AI Product Designer</strong> · Interaction Design Foundation</li>
