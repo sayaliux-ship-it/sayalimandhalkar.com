@@ -285,6 +285,25 @@
     .footer-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.7; transition: opacity 0.2s; }
     .footer-back:hover { opacity: 1; }
 
+    /* ════════ TRUST BREAKDOWN MAP (artifact) ════════ */
+    .trust-map { background: #161616; border: 1px solid rgba(201,169,110,0.22); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 0.9fr 1.1fr 1.4fr 1.3fr 0.85fr; }
+    .trust-map-header, .trust-map-row { display: contents; }
+    .tm-col, .tm-cell { padding: 22px 22px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.04); }
+    .tm-col { padding: 16px 22px; background: rgba(201,169,110,0.05); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.85; border-bottom: 1px solid rgba(201,169,110,0.22); }
+    .trust-map-header .tm-col:last-child, .trust-map-row .tm-cell:last-child { border-right: none; }
+    .trust-map-row:last-of-type .tm-cell { border-bottom: none; }
+    .tm-step { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; justify-content: center; }
+    .tm-step-num { font-family: var(--serif); font-size: 0.82rem; font-style: italic; color: var(--gold); letter-spacing: 0.08em; }
+    .tm-step-name { font-size: 0.92rem; font-weight: 500; color: var(--text); line-height: 1.35; }
+    .tm-goal { font-size: 0.88rem; color: var(--text); line-height: 1.55; }
+    .tm-thought { font-family: var(--serif); font-style: italic; color: var(--gold-lt); font-size: 0.98rem; line-height: 1.5; }
+    .tm-pains { display: flex; flex-direction: column; gap: 8px; }
+    .tm-pain { position: relative; padding-left: 14px; font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+    .tm-pain::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: rgba(201,169,110,0.6); }
+    .tm-emotion { display: flex; align-items: flex-start; }
+    .tm-emotion-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.28); border-radius: 100px; font-size: 0.78rem; color: var(--gold-lt); letter-spacing: 0.02em; }
+    .tm-emotion-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
     /* ─── Responsive ─── */
     @media (max-width: 960px) {
       :root { --sw: 0px; }
@@ -296,6 +315,11 @@
       .footer-body { grid-template-columns: 1fr; gap: 40px; }
       .footer-bar { flex-direction: column; gap: 10px; }
       .next-project-card { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .trust-map { grid-template-columns: 1fr; }
+      .trust-map-header { display: none; }
+      .trust-map-row .tm-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .trust-map-row:not(:last-of-type) .tm-cell:last-child { border-bottom: 2px solid rgba(201,169,110,0.22); }
+      .tm-cell:not(.tm-step)::before { content: attr(data-label); display: block; font-size: 0.56rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.65; margin-bottom: 10px; }
     }
   </style>
 </head>
@@ -421,24 +445,27 @@
     <p class="sec-label reveal"><span class="eline"></span>Overview</p>
     <h2 class="cs-h2 reveal d1">From <em>informational</em> to indispensable.</h2>
     <p class="body-text reveal d2">
-      PUR's website maintained strong brand consistency and solid information architecture, but lacked the ability to close the loop on purchase. Users would learn about products, then leave to compare and buy elsewhere. The initiative transformed PUR's digital presence from a passive information resource into an active decision-support and commerce platform.
+      PUR came to us with a problem they couldn't ignore. Their site did the hard part well: it taught people about contaminants, explained filter types, and built real brand trust. Then it stopped. There was no way to buy. Motivated users at peak purchase intent would hit a dead end, open Amazon, and either grab a competitor or close the tab. PUR was teaching its customers to buy from someone else.
     </p>
     <p class="body-text reveal d3">
-      The goal: guide users from uncertainty toward confident purchasing within a single, trusted ecosystem, without sacrificing the brand clarity PUR had already built.
+      On a team of three UX designers, I led the brand research and competitive benchmarking that grounded our direction, drove the idea and design of the Water Quality Map feature, and owned the annotated UI documentation across the project. The e-commerce flow and live chat integration ran in parallel as shared workstreams.
+    </p>
+    <p class="body-text reveal d3">
+      The goal wasn't "more information." It was closing the loop between "I trust this brand" and "I just bought something."
     </p>
 
     <div class="question-cards">
       <div class="question-card reveal d1">
         <span class="question-card-num">User Concern 01</span>
-        <p class="question-card-text">"Is my water actually safe?"</p>
+        <p class="question-card-text">"Can I actually buy this here, or do I have to go somewhere else?"</p>
       </div>
       <div class="question-card reveal d2">
         <span class="question-card-num">User Concern 02</span>
-        <p class="question-card-text">"Which filter is right for my home?"</p>
+        <p class="question-card-text">"Is my ZIP code's water even a problem worth solving?"</p>
       </div>
       <div class="question-card reveal d3">
         <span class="question-card-num">User Concern 03</span>
-        <p class="question-card-text">"Can I confidently buy this here without second-guessing my decision later?"</p>
+        <p class="question-card-text">"If I get stuck, can someone help me right now?"</p>
       </div>
     </div>
   </section>
@@ -458,7 +485,7 @@
   <div class="part-section reveal" data-part="01">
     <p class="part-label">Part 01</p>
     <h2 class="part-title">From Browsing <em>to Buying.</em></h2>
-    <p class="part-desc">Users explored products but completing a purchase required leaving the PUR site entirely, disrupting momentum at the most critical decision moment. We redesigned the end-to-end flow to keep users in one ecosystem, from discovery to checkout.</p>
+    <p class="part-desc">The site was a teaching tool pretending to be a store. Users could learn about contaminants, compare filter types, build confidence in the brand, and then hit a wall. The "buy" action wasn't there. So we rebuilt the full path: browse, evaluate, decide, checkout, all inside PUR.</p>
   </div>
 
   <section class="cs-section" style="background: var(--bg2);">
@@ -514,8 +541,7 @@
         autoplay muted loop playsinline
         style="width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--border);"
       >
-        <source src="PUR Waters/video ecom.mov" type="video/mp4" />
-        <source src="PUR Waters/video ecom.mov" type="video/quicktime" />
+        <source src="PUR Waters/ecommerce-prototype.mp4" type="video/mp4" />
       </video>
       <p class="cs-img-caption" style="margin-top:12px;">E-Commerce prototype: browse to buy flow in action.</p>
       <a href="https://www.figma.com/proto/8PWMoM3NYUqe21e0kIquYu/PUR-Innovation?node-id=126-1730&p=f&viewport=1481%2C892%2C0.07&t=bCEJeuE5BSJyvZ1y-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=450%3A1843&show-proto-sidebar=1" target="_blank" rel="noopener" class="gold-link">
@@ -529,16 +555,74 @@
   <div class="part-section reveal" data-part="02">
     <p class="part-label">Part 02</p>
     <h2 class="part-title">Making Water Quality <em>Visible.</em></h2>
-    <p class="part-desc">Users lacked the confidence to justify their purchase decision. Without local, relevant context for what "water quality" actually meant for their home, the selection process felt abstract and overwhelming.</p>
+    <p class="part-desc">We started this project assuming users were confused about which filter to buy. Research said otherwise. Users understood the products fine. What they couldn't answer was whether their specific water, in their specific home, actually needed filtering. The gap wasn't product literacy. It was local relevance. If we'd skipped this step, we'd have built a better comparison page and missed the real blocker.</p>
   </div>
 
   <section class="cs-section" style="background: var(--bg2);">
     <div class="pull-quote reveal">
-      <p class="pull-quote-text">"How might we make water quality feel <em>personal, understandable, and trustworthy?</em>"</p>
+      <p class="pull-quote-text">"How do you turn 'water quality' from an abstract worry into a <em>local, personal fact?</em>"</p>
     </div>
 
     <div class="cs-img-wrap img-gap reveal d1">
-      <img src="PUR Waters/04-trust-breakdown-map.png .png" alt="Trust breakdown map — where users lost confidence" class="cs-img-full" loading="lazy" />
+      <div class="trust-map" role="table" aria-label="Trust breakdown during the Evaluate stage">
+        <div class="trust-map-header" role="row">
+          <div class="tm-col" role="columnheader">Step</div>
+          <div class="tm-col" role="columnheader">User Goal</div>
+          <div class="tm-col" role="columnheader">User Thought</div>
+          <div class="tm-col" role="columnheader">Pain Points</div>
+          <div class="tm-col" role="columnheader">Emotion</div>
+        </div>
+
+        <div class="trust-map-row" role="row">
+          <div class="tm-cell tm-step" role="cell">
+            <span class="tm-step-num">01</span>
+            <span class="tm-step-name">Compare Options</span>
+          </div>
+          <div class="tm-cell tm-goal" role="cell" data-label="User Goal">Understand which filter fits my needs</div>
+          <div class="tm-cell tm-thought" role="cell" data-label="User Thought">"These products look similar. What's the real difference?"</div>
+          <div class="tm-cell tm-pains" role="cell" data-label="Pain Points">
+            <span class="tm-pain">Overlapping features</span>
+            <span class="tm-pain">Technical terminology</span>
+            <span class="tm-pain">No clear recommendation</span>
+          </div>
+          <div class="tm-cell tm-emotion" role="cell" data-label="Emotion">
+            <span class="tm-emotion-pill">Uncertain</span>
+          </div>
+        </div>
+
+        <div class="trust-map-row" role="row">
+          <div class="tm-cell tm-step" role="cell">
+            <span class="tm-step-num">02</span>
+            <span class="tm-step-name">Question Credibility</span>
+          </div>
+          <div class="tm-cell tm-goal" role="cell" data-label="User Goal">Validate that this is the right choice</div>
+          <div class="tm-cell tm-thought" role="cell" data-label="User Thought">"Do I even need this level of filtration?"</div>
+          <div class="tm-cell tm-pains" role="cell" data-label="Pain Points">
+            <span class="tm-pain">No personal water context</span>
+            <span class="tm-pain">Generic product claims</span>
+            <span class="tm-pain">Hard to assess necessity</span>
+          </div>
+          <div class="tm-cell tm-emotion" role="cell" data-label="Emotion">
+            <span class="tm-emotion-pill">Doubt</span>
+          </div>
+        </div>
+
+        <div class="trust-map-row" role="row">
+          <div class="tm-cell tm-step" role="cell">
+            <span class="tm-step-num">03</span>
+            <span class="tm-step-name">Leave to Research</span>
+          </div>
+          <div class="tm-cell tm-goal" role="cell" data-label="User Goal">Reduce risk before buying</div>
+          <div class="tm-cell tm-thought" role="cell" data-label="User Thought">"Let me Google this to be sure."</div>
+          <div class="tm-cell tm-pains" role="cell" data-label="Pain Points">
+            <span class="tm-pain">Context switch breaks momentum</span>
+            <span class="tm-pain">Conflicting external info</span>
+          </div>
+          <div class="tm-cell tm-emotion" role="cell" data-label="Emotion">
+            <span class="tm-emotion-pill">Hesitant</span>
+          </div>
+        </div>
+      </div>
       <p class="cs-img-caption">Zooming into the Evaluate stage, where trust broke down and users abandoned the decision process.</p>
     </div>
 
@@ -546,6 +630,13 @@
       <span class="xyz-label">XYZ Statement · Design Intent</span>
       <p class="xyz-text">
         "We help <em>health-conscious individuals</em> make informed decisions about their water filtration needs by offering an <em>interactive community Water Quality Map</em> that provides real-time data and personalized recommendations based on location."
+      </p>
+    </div>
+
+    <div class="reveal d3" style="margin-top: 44px; max-width: 820px; padding: 32px 36px; background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.14); border-radius: 2px; border-left: 3px solid var(--gold);">
+      <p class="sec-label" style="margin-bottom: 14px;"><span class="eline"></span>The Hardest Call</p>
+      <p class="body-text" style="color: var(--text); margin: 0; max-width: none;">
+        The map depended on reviews from real people in real neighborhoods, and we had to trust they'd show up. Community features die when they launch empty. Our bet: seed the map with public utility data so it never felt dead, add a modest review incentive, and lean on market research that said people do share local knowledge when the payoff is obvious. If we'd waited for certainty, the feature would never have shipped.
       </p>
     </div>
 
@@ -587,12 +678,12 @@
   <div class="part-section reveal" data-part="03">
     <p class="part-label">Part 03</p>
     <h2 class="part-title">Reducing Last Minute <em>Hesitation.</em></h2>
-    <p class="part-desc">Even with a clearer purchase path and localized water quality data, some users still hesitated at the final moment. We integrated a conversational SaaS solution to support users precisely when doubt emerged, without adding friction or pressure.</p>
+    <p class="part-desc">Some users did everything right. They understood the product, saw their local data, picked the right filter. And still paused at checkout. That pause wasn't an information gap. It was an anxiety spike at the exact moment someone hands over a credit card. An FAQ wouldn't fix it. A human voice might.</p>
   </div>
 
   <section class="cs-section" style="background: var(--bg2);">
     <div class="pull-quote reveal">
-      <p class="pull-quote-text">"How might we support users at the exact moment of hesitation, without adding <em>friction, complexity, or pressure?</em>"</p>
+      <p class="pull-quote-text">"How do you answer 'I'm not sure' <em>without sounding like a sales pitch?</em>"</p>
     </div>
 
     <div class="img-gap reveal d1">
@@ -600,7 +691,7 @@
         autoplay muted loop playsinline
         style="width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#0a0a0a;display:block;"
       >
-        <source src="PUR Waters/Livechat.mp4" type="video/mp4" />
+        <source src="PUR Waters/live-chat-demo.mp4" type="video/mp4" />
       </video>
       <p class="cs-img-caption" style="margin-top:12px;">Live Chat integration: real-time support at the hesitation moment.</p>
     </div>
@@ -625,7 +716,7 @@
   <section class="cs-section">
     <p class="sec-label reveal"><span class="eline"></span>Conclusion</p>
     <h2 class="cs-h2 reveal d1">Three parts. <em>One complete journey.</em></h2>
-    <p class="body-text reveal d2">The initiative progressed through three integrated phases, each addressing a distinct layer of the trust and conversion problem. Together, they close the loop between brand awareness and committed purchase.</p>
+    <p class="body-text reveal d2">PUR's gap wasn't one big problem. It was three smaller ones stacked on top of each other: no way to buy, no reason to trust the decision, no support when doubt crept in. Each part of this project solved one layer. The combined effect was the thing PUR came to us wanting in the first place: customers who never had to leave.</p>
 
     <div class="conclusion-cards">
       <div class="conclusion-card reveal">
@@ -642,8 +733,15 @@
       </div>
     </div>
 
+    <div class="reveal" style="margin-top: 48px; max-width: 820px; padding: 32px 36px; background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.14); border-radius: 2px; border-left: 3px solid var(--gold);">
+      <p class="sec-label" style="margin-bottom: 14px;"><span class="eline"></span>What I'd Do Differently</p>
+      <p class="body-text" style="color: var(--text); margin: 0; max-width: none;">
+        Ship the Water Quality Map with real EPA data from day one rather than a prototype flow. The concept only earns full trust if the data is real. A map that shows you your neighborhood's actual water report is genuinely useful. A map that simulates it is just a feature demo. The gap between those two things is the difference between a product people tell their neighbors about and one they forget the next day.
+      </p>
+    </div>
+
     <div class="closing-quote reveal">
-      <p class="closing-quote-text">"Trust isn't built by adding more information; it's built by helping users feel <em>confident at the right moment.</em>"</p>
+      <p class="closing-quote-text">"Trust isn't built by giving people more information. It's built by giving them <em>the right answer at the exact moment they need it.</em>"</p>
     </div>
 
     <p class="whats-next reveal">
