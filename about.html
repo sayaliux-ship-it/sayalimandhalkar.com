@@ -77,6 +77,8 @@
       animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
     }
     html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
     .sidebar::-webkit-scrollbar { display: none; }
     @keyframes sidebarIn {
       from { opacity: 0; transform: translateX(-20px); }
