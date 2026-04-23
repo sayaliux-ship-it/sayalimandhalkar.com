@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Playground · Sayali Mandhalkar</title>
@@ -63,6 +64,7 @@
       from { opacity: 0; transform: translateX(-20px); }
       to   { opacity: 1; transform: translateX(0); }
     }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
 
     .sb-profile {
       display: flex; align-items: center; gap: 13px;
@@ -780,6 +782,6 @@
     els.forEach(function (el) { obs.observe(el); });
   })();
 </script>
-
+<script>sessionStorage.setItem('sb_v','1');</script>
 </body>
 </html>

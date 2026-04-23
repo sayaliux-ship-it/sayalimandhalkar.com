@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Philly Truce · Sayali Mandhalkar</title>
@@ -93,6 +94,7 @@
       from { opacity: 0; transform: translateX(-20px); }
       to   { opacity: 1; transform: translateX(0); }
     }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
 
     .sb-profile {
       display: flex; align-items: center; gap: 13px;
@@ -250,7 +252,7 @@
     .chapter-marker .eline-long { display: block; width: 40px; height: 1px; background: var(--gold); flex-shrink: 0; opacity: 0.6; }
     .chapter-label {
       font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.85;
+      text-transform: uppercase; color: var(--gold); opacity: 1;
     }
 
     /* ════════════════════════════════
@@ -275,7 +277,7 @@
       border-radius: 0;
     }
 
-    /* Gradient overlay — bottom to fade into content */
+    /* Gradient overlay: bottom to fade into content */
     .cs-hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -347,8 +349,7 @@
     .cs-section.tighter { padding-top: 56px; padding-bottom: 56px; }
 
     .body-text {
-      max-width: 760px;
-      font-size: 1rem;
+      font-size: 0.96rem;
       line-height: 1.85;
       color: var(--muted);
     }
@@ -394,7 +395,7 @@
 
     .role-item-label {
       font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.75;
+      text-transform: uppercase; color: var(--gold); opacity: 0.92;
       margin-bottom: 8px; display: block;
     }
     .role-item-val {
@@ -417,7 +418,7 @@
     .pull-quote-text em { color: var(--gold); }
     .pull-quote-source {
       font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--faint); margin-top: 14px; display: block;
+      color: var(--muted); margin-top: 14px; display: block;
     }
 
     /* ─── Full-width image ─── */
@@ -431,7 +432,7 @@
       position: relative;
     }
     .cs-img-caption {
-      font-size: 0.78rem; color: var(--faint);
+      font-size: 0.78rem; color: var(--muted);
       margin-top: 12px; text-align: center;
       letter-spacing: 0.04em;
     }
@@ -497,7 +498,7 @@
        CHAPTER DIVIDER (Mobile / Desktop)
     ════════════════════════════════ */
     .chapter-section {
-      padding: 72px 100px 56px;
+      padding: 80px 100px 64px 140px;
       background: var(--bg2);
       border-top: 1px solid var(--border);
       position: relative; overflow: hidden;
@@ -505,10 +506,22 @@
     .chapter-section::before {
       content: attr(data-chapter);
       font-family: var(--serif);
-      font-size: clamp(80px, 12vw, 160px);
-      font-weight: 300; color: rgba(201,169,110,0.05);
-      position: absolute; right: 80px; top: 50%; transform: translateY(-50%);
+      font-size: clamp(80px, 13vw, 180px);
+      font-weight: 300;
+      position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
       line-height: 1; letter-spacing: -0.03em; pointer-events: none; user-select: none;
+      background: linear-gradient(105deg, rgba(201,169,110,0.22) 0%, rgba(201,169,110,0.22) 38%, rgba(245,230,192,0.55) 48%, rgba(255,253,247,0.65) 52%, rgba(201,169,110,0.22) 58%, rgba(201,169,110,0.22) 100%);
+      background-size: 300% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 3.6s ease-in-out infinite;
+    }
+    @keyframes shimmerText {
+      0%   { background-position: 200% 0; }
+      50%  { background-position: -50% 0; }
+      100% { background-position: 200% 0; }
     }
     .chapter-section-title {
       font-family: var(--serif);
@@ -518,8 +531,13 @@
     }
     .chapter-section-title em { font-style: italic; color: var(--gold); }
     .chapter-section-desc {
-      max-width: 640px; font-size: 0.94rem; line-height: 1.85;
-      color: var(--muted); margin-top: 16px; position: relative; z-index: 1;
+      font-family: var(--serif);
+      font-size: clamp(16px, 1.5vw, 20px);
+      font-weight: 300; font-style: italic;
+      color: var(--text); border-left: 2px solid var(--gold);
+      padding-left: 24px; margin-top: 20px;
+      max-width: 680px; line-height: 1.7;
+      position: relative; z-index: 1;
     }
 
     /* ════════════════════════════════
@@ -586,7 +604,7 @@
     }
     .next-label {
       font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 8px;
+      text-transform: uppercase; color: var(--gold); opacity: 0.92; margin-bottom: 8px;
     }
     .next-title {
       font-family: var(--serif);
@@ -664,10 +682,10 @@
       display: flex; justify-content: space-between; align-items: center;
       position: relative; z-index: 1;
     }
-    .footer-copy { font-size: 0.72rem; color: rgba(232,228,220,0.45); }
+    .footer-copy { font-size: 0.72rem; color: rgba(232,228,220,0.6); }
     .footer-back {
       font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.7; transition: opacity 0.2s;
+      color: var(--gold); opacity: 0.9; transition: opacity 0.2s;
     }
     .footer-back:hover { opacity: 1; }
 
@@ -829,7 +847,7 @@
   <section class="cs-hero">
     <img
       src="Philly truce/hero-banner.png"
-      alt="Philly Truce — Peace Patrol digital platform"
+      alt="Philly Truce: Peace Patrol digital platform"
       class="cs-hero-img"
       loading="eager"
     />
@@ -951,7 +969,7 @@
 
   <!-- ════════ CHAPTER: MOBILE ════════ -->
   <div class="chapter-section reveal" data-chapter="Mobile">
-    <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>The Experience</p>
+    <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>Chapter 01 of 02 · Mobile Experience</p>
     <h2 class="chapter-section-title">The Mobile <em>Experience.</em></h2>
     <p class="chapter-section-desc">
       Phase 4 mobile work focused on enabling PPOs to participate in dispatcher-led planning, not just react to it. The goal: help PPOs clearly understand route assignments, availability, and completion flows without increasing cognitive load during active patrols.
@@ -985,12 +1003,12 @@
     <div class="cs-img-2col img-spacer reveal d3">
       <img
         src="Philly truce/06-wireframe-exploration-1.png .png"
-        alt="Wireframe exploration — route experience, option A"
+        alt="Wireframe exploration: route experience, option A"
         loading="lazy"
       />
       <img
         src="Philly truce/06-wireframe-exploration-2.png .png"
-        alt="Wireframe exploration — route experience, option B"
+        alt="Wireframe exploration: route experience, option B"
         loading="lazy"
       />
     </div>
@@ -1007,28 +1025,28 @@
       <div class="reveal">
         <img
           src="Philly truce/08-mobile-component-1.png .png"
-          alt="Mobile component — route card"
+          alt="Mobile component: route card"
           loading="lazy"
         />
       </div>
       <div class="reveal d1">
         <img
           src="Philly truce/08-mobile-component-2.png .png"
-          alt="Mobile component — availability state"
+          alt="Mobile component: availability state"
           loading="lazy"
         />
       </div>
       <div class="reveal d2">
         <img
           src="Philly truce/08-mobile-component-3.png .png"
-          alt="Mobile component — alert pattern"
+          alt="Mobile component: alert pattern"
           loading="lazy"
         />
       </div>
       <div class="reveal d3">
         <img
           src="Philly truce/08-mobile-component-4.png .png"
-          alt="Mobile component — feedback flow"
+          alt="Mobile component: feedback flow"
           loading="lazy"
         />
       </div>
@@ -1045,12 +1063,12 @@
     <div class="cs-img-2col img-spacer reveal d3">
       <img
         src="Philly truce/12-report-status-unclaimed.png .png"
-        alt="Report status — Unclaimed"
+        alt="Report status: Unclaimed"
         loading="lazy"
       />
       <img
         src="Philly truce/13-report-status-inprogress.png .png"
-        alt="Report status — In Progress"
+        alt="Report status: In Progress"
         loading="lazy"
       />
     </div>
@@ -1076,7 +1094,7 @@
 
   <!-- ════════ CHAPTER: DESKTOP ════════ -->
   <div class="chapter-section reveal" data-chapter="Desktop">
-    <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>The Experience</p>
+    <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>Chapter 02 of 02 · Desktop Experience</p>
     <h2 class="chapter-section-title">The Desktop <em>Experience.</em></h2>
     <p class="chapter-section-desc">
       Designed for dispatchers and administrators responsible for planning routes, assigning PPOs, and managing daily patrol operations. Unlike the mobile app which supports execution in the field, the desktop product supports decision-making, coordination, and oversight.
@@ -1113,7 +1131,7 @@
     <div class="cs-img-wrap img-spacer reveal d3">
       <img
         src="Philly truce/15-desktop-styleguide.png .png"
-        alt="Desktop style guide — buttons, navigation, layout system"
+        alt="Desktop style guide: buttons, navigation, layout system"
         class="cs-img-full"
         loading="lazy"
       />
@@ -1131,7 +1149,7 @@
     <div class="cs-img-wrap img-spacer reveal d3">
       <img
         src="Philly truce/scheduling user flow.png"
-        alt="Scheduling iteration — flow evolution across design rounds"
+        alt="Scheduling iteration: flow evolution across design rounds"
         class="cs-img-full"
         loading="lazy"
       />
@@ -1151,7 +1169,7 @@
     <div class="cs-img-wrap reveal d3">
       <img
         src="Philly truce/19-final-desktop-ui.png"
-        alt="Final desktop UI — dispatcher scheduling dashboard"
+        alt="Final desktop UI: dispatcher scheduling dashboard"
         class="cs-img-full"
         loading="lazy"
       />
@@ -1231,6 +1249,6 @@
 
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
-
+<script>sessionStorage.setItem('sb_v','1');</script>
 </body>
 </html>

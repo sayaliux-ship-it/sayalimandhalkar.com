@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sayali Mandhalkar · Product Designer</title>
@@ -102,6 +103,7 @@
       from { opacity: 0; transform: translateX(-20px); }
       to   { opacity: 1; transform: translateX(0); }
     }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
 
     /* ── Profile ── */
     .sb-profile {
@@ -1417,6 +1419,6 @@
     });
   });
 </script>
-
+<script>sessionStorage.setItem('sb_v','1');</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PUR Waters · Sayali Mandhalkar</title>
@@ -60,6 +61,7 @@
     .sidebar { position: fixed; top: 0; left: 0; width: var(--sw); height: 100vh; background: var(--sidebar); border-right: 1px solid var(--border); border-top: 2px solid var(--gold); display: flex; flex-direction: column; z-index: 200; overflow-y: auto; scrollbar-width: none; animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both; }
     .sidebar::-webkit-scrollbar { display: none; }
     @keyframes sidebarIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
 
     .sb-profile { display: flex; align-items: center; gap: 13px; padding: 28px 22px 24px; border-bottom: 1px solid var(--border); transition: background 0.25s ease; cursor: pointer; }
     .sb-profile:hover { background: rgba(201,169,110,0.05); }
@@ -1050,5 +1052,6 @@
   }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+<script>sessionStorage.setItem('sb_v','1');</script>
 </body>
 </html>
