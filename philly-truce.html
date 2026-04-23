@@ -29,666 +29,234 @@
     }
 
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      display: flex;
-    }
-
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; display: flex; }
     a { color: inherit; text-decoration: none; }
 
-    /* ── Global image & video quality ── */
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-      object-fit: contain;
-      object-position: center top;
-      filter: none !important;
-      -webkit-filter: none !important;
-      
-      
-      border-radius: 12px;
-    }
-    video, iframe {
-      display: block;
-      width: 100%;
-      height: auto;
-      filter: none !important;
-      border-radius: 12px;
-    }
-
-    .skip-link {
-      position: absolute; top: -100px; left: 16px; z-index: 9999;
-      padding: 10px 20px; background: var(--gold); color: #0a0a09;
-      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; border-radius: 3px; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 16px; }
+    img { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; object-position: center top; filter: none !important; -webkit-filter: none !important; border-radius: 12px; }
+    video, iframe { display: block; width: 100%; height: auto; filter: none !important; border-radius: 12px; }
 
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
     :focus:not(:focus-visible) { outline: none; }
 
-    /* ════════════════════════════════
-       SIDEBAR
-    ════════════════════════════════ */
-    .sidebar {
-      position: fixed; top: 0; left: 0;
-      width: var(--sw); height: 100vh;
-      background: var(--sidebar);
-      border-right: 1px solid var(--border);
-      border-top: 2px solid var(--gold);
-      display: flex; flex-direction: column;
-      z-index: 200; overflow-y: auto; scrollbar-width: none;
-      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
-    }
+    /* ════════ SIDEBAR ════════ */
+    .sidebar { position: fixed; top: 0; left: 0; width: var(--sw); height: 100vh; background: var(--sidebar); border-right: 1px solid var(--border); border-top: 2px solid var(--gold); display: flex; flex-direction: column; z-index: 200; overflow-y: auto; scrollbar-width: none; animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both; }
     .sidebar::-webkit-scrollbar { display: none; }
-
-    @keyframes sidebarIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
+    @keyframes sidebarIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
     html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
     html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
     html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
 
-    .sb-profile {
-      display: flex; align-items: center; gap: 13px;
-      padding: 28px 22px 24px; border-bottom: 1px solid var(--border);
-      transition: background 0.25s ease; cursor: pointer;
-    }
+    .sb-profile { display: flex; align-items: center; gap: 13px; padding: 28px 22px 24px; border-bottom: 1px solid var(--border); transition: background 0.25s ease; cursor: pointer; }
     .sb-profile:hover { background: rgba(201,169,110,0.05); }
     .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
     .sb-profile:hover .sb-name { color: var(--gold-lt); }
-
-    .sb-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, #2a2218, #4a3828);
-      border: 1.5px solid rgba(201,169,110,0.3); flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; transition: border-color 0.25s ease; position: relative;
-    }
-    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: none !important; }
-    .sb-avatar-initials {
-      font-family: var(--serif); font-size: 1rem; font-weight: 500;
-      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
-    }
-
+    .sb-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #2a2218, #4a3828); border: 1.5px solid rgba(201,169,110,0.3); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: border-color 0.25s ease; }
+    .sb-avatar-initials { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--gold); letter-spacing: 0.02em; line-height: 1; }
     .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
-    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+    .sb-role { font-size: 0.74rem; color: var(--muted); margin-top: 1px; display: block; }
 
     .sb-nav { flex: 1; padding: 8px 0; }
-
     .sb-section { padding: 18px 0 6px; }
-    .sb-section-label {
-      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.55;
-      padding: 0 22px 0 20px; margin-bottom: 4px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .sb-section-label::before {
-      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
-    }
-
+    .sb-section-label { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .sb-section-label::before { content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0; }
     .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
 
-    .sb-row {
-      display: flex; align-items: center; gap: 0;
-      padding: 0 14px; height: 44px; cursor: pointer;
-      position: relative; opacity: 0;
-      animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
-    }
-    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
-    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
-    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
-    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
-    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
-    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
-    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
-    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
-    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
-
-    @keyframes rowIn {
-      from { opacity: 0; transform: translateX(-10px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    .sb-row::before {
-      content: ''; position: absolute; left: 0; top: 50%;
-      transform: translateY(-50%); width: 2px; height: 0;
-      background: var(--gold); border-radius: 0 2px 2px 0; transition: height 0.25s ease;
-    }
+    .sb-row { display: flex; align-items: center; gap: 0; padding: 0 14px; height: 44px; cursor: pointer; position: relative; opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+    .sb-row:nth-child(1) { animation-delay: 0.12s; } .sb-row:nth-child(2) { animation-delay: 0.17s; } .sb-row:nth-child(3) { animation-delay: 0.22s; } .sb-row:nth-child(4) { animation-delay: 0.27s; } .sb-row:nth-child(5) { animation-delay: 0.32s; } .sb-row:nth-child(6) { animation-delay: 0.37s; } .sb-row:nth-child(7) { animation-delay: 0.42s; } .sb-row:nth-child(8) { animation-delay: 0.47s; } .sb-row:nth-child(9) { animation-delay: 0.52s; }
+    @keyframes rowIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+    .sb-row::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0; transition: height 0.25s ease; }
     .sb-row:hover::before, .sb-row.active::before { height: 56%; }
     .sb-row:hover { background: rgba(255,255,255,0.03); }
-    .sb-row.active {
-      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
-      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
-    }
-
-    .sb-icon-left {
-      width: 30px; flex-shrink: 0; display: flex; align-items: center;
-      justify-content: center; color: var(--muted); transition: color 0.2s;
-    }
+    .sb-row.active { background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%); box-shadow: inset 0 0 20px rgba(201,169,110,0.04); }
+    .sb-icon-left { width: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); transition: color 0.2s; }
     .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
-
-    .sb-label {
-      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
-      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    .sb-label { flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted); transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
     .sb-row.active .sb-label { color: var(--gold-lt); }
-
-    .sb-icon-right {
-      width: 24px; flex-shrink: 0; display: flex; align-items: center;
-      justify-content: center; color: rgba(232,228,220,0.22);
-      transition: color 0.25s, transform 0.25s;
-    }
+    .sb-icon-right { width: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s; }
     .sb-row:hover .sb-icon-right { color: var(--faint); }
     .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
     .sb-row.active .sb-icon-right { color: var(--gold); }
 
     .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
-    .sb-avail {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.72rem; color: var(--muted); margin-bottom: 14px; padding: 0 4px;
-    }
+    .sb-avail { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: var(--muted); margin-bottom: 14px; padding: 0 4px; }
     .avail-dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
-    .avail-dot::before, .avail-dot::after {
-      content: ''; position: absolute; inset: 0; border-radius: 50%;
-      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
-    }
+    .avail-dot::before, .avail-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #4ade80; animation: dotRipple 2.4s ease-out infinite; }
     .avail-dot::after { animation-delay: 1.2s; }
-    @keyframes dotRipple {
-      0%   { transform: scale(1);   opacity: 0.7; }
-      100% { transform: scale(3.2); opacity: 0; }
-    }
-
+    @keyframes dotRipple { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(3.2); opacity: 0; } }
     .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .sb-link {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
-      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted); background: transparent;
-      transition: border-color 0.22s, color 0.22s, background 0.22s;
-    }
+    .sb-link { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px; font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: transparent; transition: border-color 0.22s, color 0.22s, background 0.22s; }
     .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
     .sb-link.full { grid-column: span 2; }
 
-    /* ════════════════════════════════
-       MAIN
-    ════════════════════════════════ */
-    .main {
-      margin-left: var(--sw);
-      width: calc(100% - var(--sw));
-      min-height: 100vh;
-      background: var(--bg);
-    }
+    /* ════════ MAIN ════════ */
+    .main { margin-left: var(--sw); width: calc(100% - var(--sw)); min-height: 100vh; background: var(--bg); }
 
-    /* ─── Reveal animation ─── */
+    /* ─── Reveal (opacity only) ─── */
     .reveal { opacity: 0; transition: opacity 0.75s ease; }
     .reveal.visible { opacity: 1; }
-    .reveal.d1 { transition-delay: 0.1s; }
-    .reveal.d2 { transition-delay: 0.2s; }
-    .reveal.d3 { transition-delay: 0.3s; }
-    .reveal.d4 { transition-delay: 0.4s; }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
 
-    /* ─── Section label (eyebrow) ─── */
-    .sec-label {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
-    }
+    /* ─── Section label ─── */
+    .sec-label { display: flex; align-items: center; gap: 12px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
     .sec-label .eline { display: block; width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
 
-    /* ─── Chapter marker (large section divider) ─── */
-    .chapter-marker {
-      display: flex; align-items: center; gap: 18px;
-      margin-bottom: 48px;
-    }
-    .chapter-marker .eline-long { display: block; width: 40px; height: 1px; background: var(--gold); flex-shrink: 0; opacity: 0.6; }
-    .chapter-label {
-      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--gold); opacity: 1;
-    }
-
-    /* ════════════════════════════════
-       HERO
-    ════════════════════════════════ */
-    .cs-hero {
-      position: relative;
-      width: 100%;
-      min-height: 76vh;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      padding: 0;
-    }
-
-    .cs-hero-img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      border-radius: 0;
-    }
-
-    /* Gradient overlay: bottom to fade into content */
-    .cs-hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(17,17,17,0.15) 0%,
-        rgba(17,17,17,0.35) 40%,
-        rgba(17,17,17,0.85) 80%,
-        rgba(17,17,17,1) 100%
-      );
-      z-index: 1;
-    }
-
-    .cs-hero-content {
-      position: relative; z-index: 2;
-      padding: 0 100px 72px;
-      width: 100%;
-    }
-
-    .cs-hero-eyebrow {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px; opacity: 0.9;
-    }
+    /* ════════ HERO ════════ */
+    .cs-hero { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .cs-hero-inner { display: grid; grid-template-columns: 5fr 7fr; align-items: center; min-height: 540px; }
+    .cs-hero-content { padding: 80px 40px 80px 100px; }
+    .cs-hero-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0.9; }
     .cs-hero-eyebrow span { display: block; width: 32px; height: 1px; background: var(--gold); }
-
-    .cs-hero-title {
-      font-family: var(--serif);
-      font-size: clamp(48px, 6.5vw, 88px);
-      font-weight: 300; line-height: 1.0; letter-spacing: -0.02em;
-      color: var(--text); margin-bottom: 36px;
-    }
+    .cs-hero-title { font-family: var(--serif); font-size: clamp(40px, 5.5vw, 76px); font-weight: 300; line-height: 1.0; letter-spacing: -0.02em; color: var(--text); margin-bottom: 36px; }
     .cs-hero-title em { font-style: italic; color: var(--gold-lt); }
+    .cs-hero-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; max-width: 400px; }
+    .cs-meta-item { padding: 14px 22px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cs-meta-item:nth-child(even) { border-right: none; }
+    .cs-meta-item:nth-child(3), .cs-meta-item:nth-child(4) { border-bottom: none; }
+    .cs-meta-key { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 5px; display: block; }
+    .cs-meta-val { font-size: 0.84rem; color: var(--text); font-weight: 400; line-height: 1.3; display: block; }
+    .cs-hero-img-wrap { display: flex; align-items: center; justify-content: center; padding: 32px 40px 32px 8px; }
+    .cs-hero-img { display: block; width: 100%; max-width: 1040px; height: auto; border-radius: 12px; }
 
-    .cs-hero-meta {
-      display: grid;
-      grid-template-columns: repeat(4, auto);
-      gap: 0;
-      width: fit-content;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 4px;
-      overflow: hidden;
-      background: rgba(0,0,0,0.45);
-    }
-
-    .cs-meta-item {
-      padding: 16px 28px;
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
-    .cs-meta-item:last-child { border-right: none; }
-    .cs-meta-key {
-      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.8;
-      margin-bottom: 5px; display: block;
-    }
-    .cs-meta-val {
-      font-size: 0.84rem; color: var(--text); font-weight: 400; line-height: 1.3;
-      display: block;
-    }
-
-    /* ════════════════════════════════
-       CONTENT SECTIONS
-    ════════════════════════════════ */
-    .cs-section {
-      padding: 80px 100px;
-      border-top: 1px solid var(--border);
-    }
+    /* ════════ CONTENT BASE ════════ */
+    .cs-section { padding: 80px 100px; border-top: 1px solid var(--border); }
+    .cs-section.alt { background: var(--bg2); }
     .cs-section.no-top-border { border-top: none; }
-    .cs-section.tighter { padding-top: 56px; padding-bottom: 56px; }
+    .cs-section.tight { padding-top: 56px; padding-bottom: 56px; }
 
-    .body-text {
-      font-size: 0.96rem;
-      line-height: 1.85;
-      color: var(--muted);
-    }
+    .body-text { font-size: 0.96rem; line-height: 1.85; color: var(--muted); }
     .body-text + .body-text { margin-top: 20px; }
 
-    .cs-section-title {
-      font-family: var(--serif);
-      font-size: clamp(28px, 3.2vw, 44px);
-      font-weight: 300; line-height: 1.15; letter-spacing: -0.01em;
-      color: var(--text); margin-bottom: 20px;
-    }
-    .cs-section-title em { font-style: italic; color: var(--gold); }
+    .cs-h2 { font-family: var(--serif); font-size: clamp(28px, 3.2vw, 44px); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; color: var(--text); margin-bottom: 20px; }
+    .cs-h2 em { font-style: italic; color: var(--gold); }
 
-    .cs-sub-title {
-      font-family: var(--serif);
-      font-size: clamp(22px, 2.4vw, 34px);
-      font-weight: 300; line-height: 1.2; letter-spacing: -0.01em;
-      color: var(--text); margin-bottom: 16px;
-    }
+    .cs-sub-title { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 30px); font-weight: 300; line-height: 1.2; letter-spacing: -0.01em; color: var(--text); margin-bottom: 14px; }
+    .cs-sub-title em { font-style: italic; color: var(--gold); }
 
-    /* ─── My Role Card ─── */
-    .role-card {
-      background: #161616;
-      border: 1px solid rgba(201,169,110,0.22);
-      border-radius: 16px;
-      padding: 40px 44px;
-      margin-top: 40px;
-      max-width: 900px;
-    }
+    /* ─── Images ─── */
+    .cs-img-full { width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); }
+    .cs-img-wrap { position: relative; }
+    .cs-img-caption { font-size: 0.78rem; color: var(--muted); margin-top: 12px; text-align: center; letter-spacing: 0.04em; }
+    .img-gap { margin-top: 48px; }
+    .img-gap-sm { margin-top: 28px; }
+    .img-gap-lg { margin-top: 72px; }
 
-    .role-card-title {
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 28px; padding-bottom: 16px;
-      border-bottom: 1px solid rgba(201,169,110,0.15);
-    }
+    /* ─── Galleries ─── */
+    .cs-gallery-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+    .cs-gallery-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 36px; }
+    .gallery-item img { border-radius: 10px; border: 1px solid var(--border); width: 100%; display: block; object-fit: contain; }
 
-    .role-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 32px;
-    }
+    /* ─── Sub-section label ─── */
+    .subsec-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.85; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .subsec-label::before { content: ''; display: block; width: 18px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .subsec-gap { margin-top: 64px; }
 
-    .role-item-label {
-      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.92;
-      margin-bottom: 8px; display: block;
-    }
-    .role-item-val {
-      font-size: 0.9rem; color: var(--text); line-height: 1.6;
-    }
+    /* ─── Key decision badge ─── */
+    .key-decision-badge { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 7px 18px; background: rgba(201,169,110,0.07); border: 1px solid rgba(201,169,110,0.28); border-radius: 100px; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
 
     /* ─── Pull quote ─── */
-    .pull-quote {
-      max-width: 760px;
-      border-left: 3px solid var(--gold);
-      padding: 8px 0 8px 36px;
-      margin: 40px 0;
-    }
-    .pull-quote-text {
-      font-family: var(--serif);
-      font-size: clamp(22px, 2.8vw, 34px);
-      font-weight: 300; font-style: italic;
-      line-height: 1.45; color: var(--text); letter-spacing: 0.01em;
-    }
+    .pull-quote { max-width: 760px; border-left: 3px solid var(--gold); padding: 8px 0 8px 36px; margin: 40px 0 20px; }
+    .pull-quote-text { font-family: var(--serif); font-size: clamp(22px, 2.8vw, 34px); font-weight: 300; font-style: italic; line-height: 1.45; color: var(--text); letter-spacing: 0.01em; }
     .pull-quote-text em { color: var(--gold); }
-    .pull-quote-source {
-      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); margin-top: 14px; display: block;
-    }
+    .pull-quote-source { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 14px; display: block; }
 
-    /* ─── Full-width image ─── */
-    .cs-img-full {
-      width: 100%;
-      display: block;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-    .cs-img-wrap {
-      position: relative;
-    }
-    .cs-img-caption {
-      font-size: 0.78rem; color: var(--muted);
-      margin-top: 12px; text-align: center;
-      letter-spacing: 0.04em;
-    }
+    /* ─── Role card ─── */
+    .role-card { background: #161616; border: 1px solid rgba(201,169,110,0.22); border-radius: 16px; padding: 40px 44px; margin: 40px auto 0; max-width: 960px; }
+    .role-card-title { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid rgba(201,169,110,0.15); }
+    .role-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+    .role-item-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.92; margin-bottom: 8px; display: block; }
+    .role-item-val { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
 
-    /* ─── Image note (above image) ─── */
-    .img-note {
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--gold); letter-spacing: 0.14em;
-      text-transform: uppercase; margin-bottom: 14px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .img-note::before {
-      content: ''; display: block; width: 18px; height: 1px; background: var(--gold); opacity: 0.6;
-    }
+    /* ─── Insight items ─── */
+    .insight-items { margin-top: 40px; display: flex; flex-direction: column; gap: 32px; }
+    .insight-item { padding-left: 24px; border-left: 2px solid rgba(201,169,110,0.3); }
+    .insight-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; }
+    .insight-text { font-size: 0.96rem; line-height: 1.85; color: var(--muted); margin: 0; }
 
-    /* ─── Two-column images ─── */
-    .cs-img-2col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .cs-img-2col img {
-      width: 100%; display: block;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      object-fit: contain;
-    }
-
-    /* ─── 2x2 grid (mobile components) ─── */
-    .cs-img-grid-2x2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .cs-img-grid-2x2 img {
-      width: 100%; display: block;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      object-fit: contain;
-    }
-
-    /* ─── Three-column images ─── */
-    .cs-img-3col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .cs-img-3col img {
-      width: 100%; display: block;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      object-fit: contain;
-    }
-
-    /* ─── Image spacing within section ─── */
-    .img-spacer { margin-top: 40px; }
-    .img-spacer-lg { margin-top: 64px; }
-
-    /* ════════════════════════════════
-       CHAPTER DIVIDER (Mobile / Desktop)
-    ════════════════════════════════ */
-    .chapter-section {
-      padding: 80px 100px 64px 140px;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      position: relative; overflow: hidden;
-    }
-    .chapter-section::before {
-      content: attr(data-chapter);
-      font-family: var(--serif);
-      font-size: clamp(80px, 13vw, 180px);
-      font-weight: 300;
-      position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
-      line-height: 1; letter-spacing: -0.03em; pointer-events: none; user-select: none;
-      background: linear-gradient(105deg, rgba(201,169,110,0.22) 0%, rgba(201,169,110,0.22) 38%, rgba(245,230,192,0.55) 48%, rgba(255,253,247,0.65) 52%, rgba(201,169,110,0.22) 58%, rgba(201,169,110,0.22) 100%);
-      background-size: 300% 100%;
-      background-position: 100% 0;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmerText 3.6s ease-in-out infinite;
-    }
-    @keyframes shimmerText {
-      0%   { background-position: 200% 0; }
-      50%  { background-position: -50% 0; }
-      100% { background-position: 200% 0; }
-    }
-    .chapter-section-title {
-      font-family: var(--serif);
-      font-size: clamp(36px, 4.5vw, 60px);
-      font-weight: 300; line-height: 1.1; letter-spacing: -0.02em;
-      color: var(--text); position: relative; z-index: 1;
-    }
+    /* ════════ CHAPTER DIVIDER ════════ */
+    .chapter-section { padding: 80px 100px 64px 140px; background: var(--bg2); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+    .chapter-section::before { content: attr(data-chapter); font-family: var(--serif); font-size: clamp(52px, 7vw, 100px); font-weight: 300; position: absolute; right: 40px; bottom: -8px; top: auto; transform: none; line-height: 1; letter-spacing: -0.03em; pointer-events: none; user-select: none; background: linear-gradient(105deg, rgba(201,169,110,0.22) 0%, rgba(201,169,110,0.22) 38%, rgba(245,230,192,0.55) 48%, rgba(255,253,247,0.65) 52%, rgba(201,169,110,0.22) 58%, rgba(201,169,110,0.22) 100%); background-size: 300% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmerText 3.6s ease-in-out infinite; }
+    @keyframes shimmerText { 0% { background-position: 200% 0; } 50% { background-position: -50% 0; } 100% { background-position: 200% 0; } }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
+    .chapter-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); opacity: 1; margin-bottom: 14px; display: flex; align-items: center; gap: 14px; }
+    .chapter-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); opacity: 0.6; }
+    .chapter-section-title { font-family: var(--serif); font-size: clamp(36px, 4.5vw, 60px); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); position: relative; z-index: 1; }
     .chapter-section-title em { font-style: italic; color: var(--gold); }
-    .chapter-section-desc {
-      font-family: var(--serif);
-      font-size: clamp(16px, 1.5vw, 20px);
-      font-weight: 300; font-style: italic;
-      color: var(--text); border-left: 2px solid var(--gold);
-      padding-left: 24px; margin-top: 20px;
-      max-width: 680px; line-height: 1.7;
-      position: relative; z-index: 1;
-    }
+    .chapter-section-desc { font-family: var(--serif); font-size: clamp(16px, 1.5vw, 20px); font-weight: 300; font-style: italic; color: var(--text); border-left: 2px solid var(--gold); padding-left: 24px; margin-top: 20px; max-width: 680px; line-height: 1.7; position: relative; z-index: 1; }
 
-    /* ════════════════════════════════
-       DESKTOP WORKFLOW CALLOUT
-    ════════════════════════════════ */
-    .workflow-callout {
-      padding: 64px 100px;
-      background: linear-gradient(135deg, rgba(201,169,110,0.05) 0%, rgba(201,169,110,0.02) 100%);
-      border-top: 1px solid rgba(201,169,110,0.12);
-      border-bottom: 1px solid rgba(201,169,110,0.12);
-    }
-    .workflow-callout .sec-label { opacity: 0.9; }
+    /* ════════ MOSCOW MATRIX ════════ */
+    .moscow-wrap { margin-top: 40px; }
+    .moscow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(201,169,110,0.12); border: 1px solid rgba(201,169,110,0.15); border-radius: 14px; overflow: hidden; }
+    .moscow-col { background: #161616; padding: 28px 24px; }
+    .moscow-col-header { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid rgba(201,169,110,0.15); }
+    .moscow-must .moscow-col-header { color: var(--gold); }
+    .moscow-should .moscow-col-header { color: rgba(232,228,220,0.75); }
+    .moscow-could .moscow-col-header { color: rgba(232,228,220,0.45); }
+    .moscow-wont .moscow-col-header { color: rgba(232,228,220,0.52); }
+    .moscow-list { list-style: none; display: flex; flex-direction: column; gap: 13px; padding: 0; margin: 0; }
+    .moscow-item { font-size: 0.82rem; line-height: 1.55; position: relative; padding-left: 14px; }
+    .moscow-item::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; }
+    .moscow-must .moscow-item { color: var(--text); }
+    .moscow-must .moscow-item::before { background: var(--gold); }
+    .moscow-should .moscow-item { color: var(--muted); }
+    .moscow-should .moscow-item::before { background: rgba(232,228,220,0.4); }
+    .moscow-could .moscow-item { color: var(--faint); }
+    .moscow-could .moscow-item::before { background: rgba(232,228,220,0.25); }
+    .moscow-wont .moscow-item { color: rgba(232,228,220,0.48); }
+    .moscow-wont .moscow-item::before { background: rgba(232,228,220,0.32); }
 
-    /* ════════════════════════════════
-       FINAL DESKTOP UI (hero moment)
-    ════════════════════════════════ */
-    .final-ui-section {
-      padding: 100px 100px 100px;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-    }
+    /* ════════ WHAT DIDN'T SHIP ════════ */
+    .didnt-ship-list { margin-top: 36px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .didnt-ship-row { display: grid; grid-template-columns: 28px 1fr 2fr; gap: 24px; align-items: baseline; padding: 22px 28px; border-bottom: 1px solid var(--border); transition: background 0.2s; }
+    .didnt-ship-row:last-child { border-bottom: none; }
+    .didnt-ship-row:hover { background: rgba(255,255,255,0.015); }
+    .didnt-ship-num { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; color: var(--gold); opacity: 0.65; }
+    .didnt-ship-name { font-size: 0.88rem; font-weight: 500; color: var(--text); line-height: 1.4; }
+    .didnt-ship-why { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+    .didnt-ship-note { margin-top: 20px; font-size: 0.82rem; color: var(--faint); font-style: italic; }
 
-    /* ════════════════════════════════
-       CONCLUSION
-    ════════════════════════════════ */
-    .conclusion-section {
-      padding: 96px 100px 80px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-    .conclusion-text {
-      max-width: 700px;
-      margin: 0 auto;
-      font-family: var(--serif);
-      font-size: clamp(20px, 2.2vw, 28px);
-      font-weight: 300; font-style: italic;
-      line-height: 1.6; color: var(--muted);
-      letter-spacing: 0.01em;
-    }
-    .conclusion-text em { color: var(--gold); font-style: italic; }
-    .conclusion-text strong { font-weight: 400; color: var(--text); font-style: normal; }
+    /* ════════ REFLECTIONS ════════ */
+    .reflection-items { margin-top: 36px; display: flex; flex-direction: column; gap: 36px; }
+    .reflection-item { padding-left: 28px; border-left: 2px solid rgba(201,169,110,0.25); }
+    .reflection-text { font-size: 0.96rem; line-height: 1.85; color: var(--muted); }
+    .reflection-text strong { color: var(--text); font-weight: 500; }
 
-    /* ════════════════════════════════
-       NEXT PROJECT CTA
-    ════════════════════════════════ */
-    .next-project-section {
-      padding: 0 100px 80px;
-      border-top: none;
-    }
-    .next-project-card {
-      background: #141414;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 48px 56px;
-      display: flex; align-items: center; justify-content: space-between;
-      transition: border-color 0.35s, background 0.35s, transform 0.35s;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .next-project-card:hover {
-      border-color: rgba(201,169,110,0.45);
-      background: #181818;
-      transform: translateY(-3px);
-    }
-    .next-label {
-      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.92; margin-bottom: 8px;
-    }
-    .next-title {
-      font-family: var(--serif);
-      font-size: clamp(28px, 3vw, 42px);
-      font-weight: 300; color: var(--text); letter-spacing: -0.01em;
-    }
+    /* ════════ CREDITS ════════ */
+    .credits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 56px; margin-top: 36px; max-width: 800px; }
+    .credit-item { display: flex; flex-direction: column; gap: 5px; }
+    .credit-org { font-size: 0.82rem; font-weight: 500; color: var(--text); }
+    .credit-role { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    /* ════════ NEXT PROJECT ════════ */
+    .next-project-section { padding: 0 100px 80px; }
+    .next-project-card { background: #141414; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.35s, background 0.35s, transform 0.35s; cursor: pointer; text-decoration: none; }
+    .next-project-card:hover { border-color: rgba(201,169,110,0.45); background: #181818; transform: translateY(-3px); }
+    .next-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.92; margin-bottom: 8px; }
+    .next-title { font-family: var(--serif); font-size: clamp(28px, 3vw, 42px); font-weight: 300; color: var(--text); letter-spacing: -0.01em; }
     .next-title em { font-style: italic; color: var(--gold-lt); }
-    .next-arrow {
-      width: 56px; height: 56px; border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.3);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold); flex-shrink: 0;
-      transition: background 0.25s, border-color 0.25s, transform 0.25s;
-    }
-    .next-project-card:hover .next-arrow {
-      background: rgba(201,169,110,0.12);
-      border-color: rgba(201,169,110,0.55);
-      transform: translate(3px, -3px);
-    }
+    .next-arrow { width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(201,169,110,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; transition: background 0.25s, border-color 0.25s, transform 0.25s; }
+    .next-project-card:hover .next-arrow { background: rgba(201,169,110,0.12); border-color: rgba(201,169,110,0.55); transform: translate(3px, -3px); }
 
-    /* ════════════════════════════════
-       CONTACT / FOOTER
-    ════════════════════════════════ */
-    .contact-section {
-      background: #000000;
-      padding: 72px 100px 0;
-      border-top: 1px solid var(--border);
-      position: relative; overflow: hidden;
-    }
-    .contact-section::before {
-      content: 'SM';
-      font-family: var(--serif);
-      font-size: clamp(180px, 24vw, 320px);
-      font-weight: 300; color: rgba(201,169,110,0.07);
-      position: absolute; left: 40px; bottom: 40px;
-      line-height: 1; letter-spacing: -0.04em;
-      pointer-events: none; user-select: none;
-    }
-    .contact-section .sec-label { margin-bottom: 20px; }
-    .footer-body {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 80px; align-items: center;
-      position: relative; z-index: 1;
-    }
+    /* ════════ FOOTER ════════ */
+    .contact-section { background: #000; padding: 72px 100px 0; border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+    .contact-section::before { content: 'SM'; font-family: var(--serif); font-size: clamp(180px, 24vw, 320px); font-weight: 300; color: rgba(201,169,110,0.07); position: absolute; left: 40px; bottom: 40px; line-height: 1; letter-spacing: -0.04em; pointer-events: none; user-select: none; }
+    .footer-body { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; position: relative; z-index: 1; }
     .footer-left { max-width: 520px; }
-    .sec-title {
-      font-family: var(--serif);
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 300; line-height: 1.1;
-      color: var(--text); letter-spacing: -0.01em;
-    }
+    .sec-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.1; color: var(--text); letter-spacing: -0.01em; }
     .sec-title em { font-style: italic; color: var(--gold); }
-    .contact-sub {
-      font-size: 0.9rem; line-height: 1.95; color: var(--muted);
-      margin-top: 0; margin-bottom: 0; font-style: normal; font-family: var(--sans);
-    }
+    .contact-sub { font-size: 0.9rem; line-height: 1.95; color: var(--muted); font-family: var(--sans); }
     .contact-sub span { display: block; }
     .contact-btns { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
-    .cta-btn {
-      width: 200px; height: 52px;
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 10px; flex-shrink: 0;
-      border: 1px solid rgba(255,255,255,0.1);
-      font-family: var(--sans); font-size: 0.71rem; font-weight: 500;
-      letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted);
-      transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s;
-    }
+    .cta-btn { width: 200px; height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1); font-family: var(--sans); font-size: 0.71rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s; }
     .cta-btn svg { flex-shrink: 0; }
     .cta-btn:hover { border-color: rgba(201,169,110,0.45); color: var(--gold-lt); transform: translateX(-3px); }
     .cta-btn.primary { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 600; }
     .cta-btn.primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); color: #000; transform: translateX(-3px); }
-    .footer-bar {
-      margin-top: 60px; padding: 24px 0 28px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      position: relative; z-index: 1;
-    }
+    .footer-bar { margin-top: 60px; padding: 24px 0 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
     .footer-copy { font-size: 0.72rem; color: rgba(232,228,220,0.6); }
-    .footer-back {
-      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.9; transition: opacity 0.2s;
-    }
+    .footer-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.9; transition: opacity 0.2s; }
     .footer-back:hover { opacity: 1; }
 
     /* ─── Responsive ─── */
@@ -696,12 +264,14 @@
       :root { --sw: 0px; }
       .sidebar { display: none; }
       .main { margin-left: 0; }
-      .cs-hero-content, .cs-section, .chapter-section, .workflow-callout,
-      .final-ui-section, .conclusion-section, .next-project-section,
-      .contact-section { padding-left: 28px; padding-right: 28px; }
-      .cs-hero-meta { grid-template-columns: repeat(2, auto); }
-      .role-grid { grid-template-columns: 1fr; gap: 20px; }
-      .cs-img-2col, .cs-img-grid-2x2, .cs-img-3col { grid-template-columns: 1fr; }
+      .cs-hero-inner { grid-template-columns: 1fr; }
+      .cs-hero-img-wrap { padding: 0 28px 40px; }
+      .cs-hero-content, .cs-section, .chapter-section, .next-project-section, .contact-section { padding-left: 28px !important; padding-right: 28px !important; }
+      .cs-hero-meta { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+      .role-grid { grid-template-columns: 1fr; }
+      .moscow-grid { grid-template-columns: 1fr 1fr; }
+      .cs-gallery-2col, .cs-gallery-3col { grid-template-columns: 1fr; }
+      .credits-grid { grid-template-columns: 1fr; }
       .footer-body { grid-template-columns: 1fr; gap: 40px; }
       .footer-bar { flex-direction: column; gap: 10px; }
       .next-project-card { flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -710,17 +280,12 @@
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" style="position:absolute;top:-100px;left:16px;z-index:9999;padding:10px 20px;background:var(--gold);color:#0a0a09;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border-radius:3px;transition:top 0.2s;">Skip to main content</a>
 
-<!-- ════════════════════════════════
-     SIDEBAR
-════════════════════════════════ -->
+<!-- ════════ SIDEBAR ════════ -->
 <aside class="sidebar" aria-label="Site navigation">
-
   <a href="index.html" class="sb-profile" style="text-decoration:none;">
-    <div class="sb-avatar" aria-hidden="true">
-      <span class="sb-avatar-initials">SM</span>
-    </div>
+    <div class="sb-avatar"><span class="sb-avatar-initials">SM</span></div>
     <div class="sb-profile-text">
       <span class="sb-name">Sayali Mandhalkar</span>
       <span class="sb-role">Product Designer</span>
@@ -728,108 +293,63 @@
   </a>
 
   <nav class="sb-nav" aria-label="Primary">
-
     <div class="sb-section">
       <span class="sb-section-label" aria-hidden="true">Projects</span>
-
       <a href="jpmc.html" class="sb-row">
-        <span class="sb-icon-left" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-        </span>
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
         <span class="sb-label">JP Morgan Chase</span>
-        <span class="sb-icon-right" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
       </a>
-
-      <a href="index.html#purwaters" class="sb-row">
-        <span class="sb-icon-left" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-        </span>
+      <a href="pur.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
         <span class="sb-label">PUR Waters</span>
-        <span class="sb-icon-right arrow" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-        </span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
       </a>
-
       <a href="mentormap.html" class="sb-row">
-        <span class="sb-icon-left" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-        </span>
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
         <span class="sb-label">MentorMap</span>
-        <span class="sb-icon-right arrow" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-        </span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
       </a>
-
       <a href="philly-truce.html" class="sb-row active">
-        <span class="sb-icon-left" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-        </span>
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
         <span class="sb-label">Philly Truce</span>
-        <span class="sb-icon-right arrow" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-        </span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
       </a>
     </div>
 
     <div class="sb-section">
       <span class="sb-section-label" aria-hidden="true">Designing AI Experiences</span>
-
       <a href="tenetic.html" class="sb-row">
-        <span class="sb-icon-left" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-        </span>
+        <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
         <span class="sb-label">Tenetic</span>
-        <span class="sb-icon-right" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
       </a>
     </div>
 
     <div class="sb-divider"></div>
-
     <a href="playground.html" class="sb-row">
-      <span class="sb-icon-left" aria-hidden="true">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-      </span>
+      <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span>
       <span class="sb-label">Playground</span>
-      <span class="sb-icon-right arrow" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
     </a>
 
     <div class="sb-divider"></div>
-
     <a href="certifications.html" class="sb-row">
-      <span class="sb-icon-left" aria-hidden="true">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
-      </span>
+      <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg></span>
       <span class="sb-label">Certifications</span>
-      <span class="sb-icon-right arrow" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
     </a>
 
     <div class="sb-divider"></div>
-
     <a href="about.html" class="sb-row">
-      <span class="sb-icon-left" aria-hidden="true">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </span>
+      <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
       <span class="sb-label">About me</span>
-      <span class="sb-icon-right arrow" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
     </a>
-
   </nav>
 
   <div class="sb-footer">
-    <div class="sb-avail">
-      <span class="avail-dot"></span>
-      Open to opportunities
-    </div>
+    <div class="sb-avail"><span class="avail-dot"></span>Open to opportunities</div>
     <div class="sb-links">
       <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
         <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -837,357 +357,454 @@
       </a>
     </div>
   </div>
-
 </aside>
 
-<!-- ════════════════════════════════
-     MAIN
-════════════════════════════════ -->
+<!-- ════════ MAIN ════════ -->
 <main class="main" id="main-content">
 
-  <!-- ── HERO ── -->
-  <section class="cs-hero">
-    <img
-      src="Philly truce/hero-banner.png"
-      alt="Philly Truce: Peace Patrol digital platform"
-      class="cs-hero-img"
-      loading="eager"
-    />
-    <div class="cs-hero-content">
-      <p class="cs-hero-eyebrow">
-        <span></span>Case Study
-      </p>
-      <h1 class="cs-hero-title">
-        Philly Truce<br><em>Peace Patrol.</em>
-      </h1>
-      <div class="cs-hero-meta">
-        <div class="cs-meta-item">
-          <span class="cs-meta-key">Role</span>
-          <span class="cs-meta-val">Product Design Lead</span>
+  <!-- ═══ HERO ═══ -->
+  <section class="cs-hero" aria-label="Case study hero">
+    <div class="cs-hero-inner">
+      <div class="cs-hero-content">
+        <p class="cs-hero-eyebrow reveal"><span></span>Case Study</p>
+        <h1 class="cs-hero-title reveal d1">Philly Truce<br><em>Peace Patrol.</em></h1>
+        <div class="cs-hero-meta reveal d2">
+          <div class="cs-meta-item">
+            <span class="cs-meta-key">Role</span>
+            <span class="cs-meta-val">Product Design Lead</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-key">Team</span>
+            <span class="cs-meta-val">Mobile + Desktop Pods</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-key">Duration</span>
+            <span class="cs-meta-val">Phase 4 · 8 Weeks</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-key">Type</span>
+            <span class="cs-meta-val">Nonprofit / Civic Tech</span>
+          </div>
         </div>
-        <div class="cs-meta-item">
-          <span class="cs-meta-key">Team</span>
-          <span class="cs-meta-val">Mobile + Desktop Pods</span>
-        </div>
-        <div class="cs-meta-item">
-          <span class="cs-meta-key">Duration</span>
-          <span class="cs-meta-val">Phase 4 · 8 Weeks</span>
-        </div>
-        <div class="cs-meta-item">
-          <span class="cs-meta-key">Type</span>
-          <span class="cs-meta-val">Nonprofit / Civic Tech</span>
-        </div>
+      </div>
+      <div class="cs-hero-img-wrap">
+        <img src="Philly truce/hero.png" alt="Philly Truce Peace Patrol coordination platform" class="cs-hero-img" />
       </div>
     </div>
   </section>
 
-  <!-- ── OVERVIEW ── -->
-  <section class="cs-section no-top-border">
+  <!-- ═══ §1 OVERVIEW ═══ -->
+  <section class="cs-section">
     <p class="sec-label reveal"><span class="eline"></span>Overview</p>
-    <h2 class="cs-section-title reveal d1">
-      Designing for the work of <em>keeping peace.</em>
-    </h2>
-    <p class="body-text reveal d2">
-      Philly Truce is a Philadelphia-based nonprofit founded to reduce gun violence through community-led intervention. Its core initiative, Peace Patrol, empowers trained Peace Patrol Officers to conduct daily neighborhood patrols, de-escalate conflict, and report incidents in collaboration with local stakeholders.
-    </p>
-    <p class="body-text reveal d3">
-      As the program scaled, the team faced increasing operational complexity, managing patrol routes, officer availability, scheduling, and incident tracking across multiple neighborhoods without a dedicated system.
-    </p>
+    <p class="body-text reveal d1">Philly Truce is a Philadelphia nonprofit that runs Peace Patrol - a program of trained Peace Patrol Officers (PPOs) who patrol neighborhoods to de-escalate conflict and respond to incidents before they escalate. As the program scaled, the team was coordinating routes, shift schedules, PPO availability, and incident reports through group texts, paper sign-ins, and the memory of a few key people.</p>
+    <p class="body-text reveal d2">I led UX for Phase 4 of a multi-phase volunteer engagement through Tech Fleet. The goal: design a dispatcher-facing desktop platform and evolve the mobile experience so PPOs could view routes, claim reports, submit updates, and close out incidents - all in one system.</p>
   </section>
 
-  <!-- ── MY ROLE ── -->
-  <section class="cs-section tighter" style="border-top: none; padding-top: 0;">
+  <!-- ═══ §2 PROBLEM STATEMENT ═══ -->
+  <section class="cs-section alt">
+    <p class="sec-label reveal"><span class="eline"></span>Problem Statement</p>
+    <div class="pull-quote reveal d1">
+      <p class="pull-quote-text">Dispatchers were coordinating routes, schedules, and PPO availability through <em>fragmented, manual workflows.</em></p>
+      <span class="pull-quote-source">Phase 4 Design Brief · Philly Truce</span>
+    </div>
+    <p class="body-text reveal d2">Routes were shared via group chat. Schedule changes happened reactively. Report intake and assignment lived across texts and sticky notes. When an incident came in, there was no single source of truth for who was on duty, who was closest, or what had been assigned to whom. The Phase 4 brief: design a desktop dashboard for dispatchers while evolving the mobile experience so PPOs could see their schedule, claim reports, and reflect real-time operational changes - without adding cognitive load during active patrols.</p>
+  </section>
+
+  <!-- ═══ §3 MY ROLE ═══ -->
+  <section class="cs-section">
     <p class="sec-label reveal"><span class="eline"></span>My Role</p>
-    <div class="role-card reveal d1">
-      <p class="role-card-title">Phase 4 · Product Design Lead</p>
+    <p class="body-text reveal d1">I was Product Design Lead across mobile and desktop for Phase 4.</p>
+    <div class="role-card reveal d2">
+      <p class="role-card-title">Phase 4 Responsibilities</p>
       <div class="role-grid">
         <div>
           <span class="role-item-label">Responsibilities</span>
-          <p class="role-item-val">Led design direction across mobile and desktop, aligned research insights with delivery constraints, facilitated stakeholder decision-making, and ensured end-to-end system cohesion.</p>
+          <p class="role-item-val">Research synthesis from prior phases, scope negotiation with stakeholders, design direction across both platforms, design-decision calls under pressure, engineering handoffs.</p>
         </div>
         <div>
           <span class="role-item-label">Team Structure</span>
-          <p class="role-item-val">2 cross-functional design pods (Mobile and Desktop) working alongside research partners, engineers, and nonprofit stakeholders.</p>
+          <p class="role-item-val">Two cross-functional design pods (Mobile and Desktop) alongside researchers, content designers, volunteer engineers, and nonprofit stakeholders.</p>
         </div>
         <div>
           <span class="role-item-label">Delivery Window</span>
-          <p class="role-item-val">8 weeks, Phase 4. Scoped for feasibility, prioritizing features with the highest operational impact under tight constraints.</p>
+          <p class="role-item-val">Phase 4 · 8 weeks · Tech Fleet (pro-bono) in partnership with Philly Truce and Penn Injury Science Center DATA Lab.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── PROBLEM STATEMENT ── -->
-  <section class="cs-section tighter">
-    <p class="sec-label reveal"><span class="eline"></span>Problem Statement</p>
-    <div class="pull-quote reveal d1">
-      <p class="pull-quote-text">
-        "Dispatchers were coordinating routes, schedules, and PPO availability through <em>fragmented, manual workflows.</em>"
-      </p>
-      <span class="pull-quote-source">Phase 4 Design Brief · Philly Truce</span>
+  <!-- ═══ §4 RESEARCH FOUNDATION ═══ -->
+  <section class="cs-section alt">
+    <p class="sec-label reveal"><span class="eline"></span>Research Foundation</p>
+    <h2 class="cs-h2 reveal d1">Building on what came before.</h2>
+    <p class="body-text reveal d2">I didn't start with a blank page. Phases 1-3 had already produced substantial research, and my first move was to read all of it before committing to a direction. What I inherited: a field study that shadowed actual patrols, a round of usability testing with Philly Truce operational leads, stakeholder interviews with the Executive Director, and a DATA Lab session at Penn that reframed patrol routing as a spatial-coverage problem.</p>
+    <p class="body-text reveal d2">Three insights carried through and shaped Phase 4:</p>
+
+    <div class="insight-items">
+      <div class="insight-item reveal">
+        <span class="insight-label">PPOs trust people, not software.</span>
+        <p class="insight-text">Field study notes documented PPOs adjusting routes mid-shift based on local knowledge - a friend's text, a rumor about a block. Any system that overrode that instinct would be ignored. The tool had to surface information, not dispatch against it.</p>
+      </div>
+      <div class="insight-item reveal">
+        <span class="insight-label">The operational unit is the Report.</span>
+        <p class="insight-text">Every conversation circled back to incident reports - how they got created, who got assigned, how they got closed out. Reports, not shifts, were the thing the product had to get right.</p>
+      </div>
+      <div class="insight-item reveal">
+        <span class="insight-label">Dispatchers and PPOs have overlapping but distinct mental models.</span>
+        <p class="insight-text">Dispatchers think in schedules and coverage. PPOs think in routes and reports. The system had to respect both - which meant the mobile and desktop apps shared data but not interaction patterns.</p>
+      </div>
     </div>
-    <p class="body-text reveal d2">
-      Routes were shared via group chats. Last-minute changes were handled reactively. Visibility into coverage gaps was limited. The goal for Phase 4 was clear: design a dispatcher-facing desktop dashboard while evolving the mobile experience so PPOs could view schedules, claim routes, and reflect real-time operational changes.
-    </p>
+
+    <div class="img-gap reveal">
+      <div class="cs-img-wrap">
+        <img src="Philly truce/system-thinking.png" alt="Mobile to desktop relationship mapping: shared primitives and platform-specific interactions diagram" class="cs-img-full" />
+        <p class="cs-img-caption">Mobile to Desktop relationship mapping: shared primitives, platform-specific interactions.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- ── SYSTEM THINKING ── -->
+  <!-- ═══ §5 DEFINE & SCOPE ═══ -->
   <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>System Thinking</p>
-    <h2 class="cs-section-title reveal d1">
-      Mobile <em>meets</em> Desktop.
-    </h2>
-    <p class="body-text reveal d2">
-      Early in Phase 4, we facilitated alignment sessions to map how mobile and desktop responsibilities intersected. While the users differed (PPOs on mobile and dispatchers on desktop), their actions were deeply interconnected. This artifact helped us identify shared features (routes, schedules, availability), avoid duplicating logic across platforms, and define clear ownership between experiences.
-    </p>
-    <div class="cs-img-wrap img-spacer reveal d3">
-      <img
-        src="Philly truce/03-system-thinking-diagram.png"
-        alt="System thinking diagram showing mobile and desktop relationship"
-        class="cs-img-full"
-        loading="lazy"
-      />
-      <p class="cs-img-caption">Mobile ↔ Desktop relationship mapping: shared features, platform ownership, and dependency flows.</p>
+    <p class="sec-label reveal"><span class="eline"></span>Define &amp; Scope</p>
+
+    <!-- Sprint Timeline -->
+    <div class="subsec-label reveal">Sprint Timeline</div>
+    <h2 class="cs-h2 reveal d1">Eight weeks. Two pods.</h2>
+    <p class="body-text reveal d2">I made the scope call in week two alongside the Tech Fleet leads and Philly Truce stakeholders.</p>
+    <div class="img-gap-sm reveal">
+      <div class="cs-img-wrap">
+        <img src="Philly truce/sprint-timeline.png" alt="8-week sprint timeline showing phased delivery across mobile and desktop workstreams" class="cs-img-full" />
+        <p class="cs-img-caption">8-week delivery window.</p>
+      </div>
     </div>
+
+    <!-- 5.2 MoSCoW Prioritization -->
+    <div class="subsec-gap"></div>
+    <div class="subsec-label reveal">Prioritization</div>
+    <h2 class="cs-h2 reveal d1">What we committed to - and what we didn't.</h2>
+    <div class="moscow-wrap">
+      <div class="moscow-grid reveal">
+        <div class="moscow-col moscow-must">
+          <div class="moscow-col-header">Must</div>
+          <ul class="moscow-list">
+            <li class="moscow-item">Desktop scheduling dashboard (publish/unpublish)</li>
+            <li class="moscow-item">Report lifecycle on mobile: Unclaimed to In Progress to Resolved</li>
+            <li class="moscow-item">Admin-side report assignment</li>
+            <li class="moscow-item">PPO-side report claim and update</li>
+            <li class="moscow-item">Route management foundation</li>
+            <li class="moscow-item">Design system for both platforms</li>
+          </ul>
+        </div>
+        <div class="moscow-col moscow-should">
+          <div class="moscow-col-header">Should</div>
+          <ul class="moscow-list">
+            <li class="moscow-item">Calendar and list views on desktop scheduling</li>
+            <li class="moscow-item">Report edit flow</li>
+            <li class="moscow-item">Chatbot-generated vs manually-created report paths</li>
+            <li class="moscow-item">PPO-side create-new-report flow</li>
+          </ul>
+        </div>
+        <div class="moscow-col moscow-could">
+          <div class="moscow-col-header">Could</div>
+          <ul class="moscow-list">
+            <li class="moscow-item">Real-time coverage map</li>
+            <li class="moscow-item">Cross-platform messaging</li>
+            <li class="moscow-item">Live location tracking</li>
+            <li class="moscow-item">Predictive routing from the DATA Lab framework</li>
+          </ul>
+        </div>
+        <div class="moscow-col moscow-wont">
+          <div class="moscow-col-header">Won't (this phase)</div>
+          <ul class="moscow-list">
+            <li class="moscow-item">Full spatial-coverage map</li>
+            <li class="moscow-item">Automated payroll</li>
+            <li class="moscow-item">In-app comms beyond report notifications</li>
+            <li class="moscow-item">Live GPS tracking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.3 The hardest cut -->
+    <div class="subsec-gap"></div>
+    <div class="subsec-label reveal">The Hardest Cut</div>
+    <h2 class="cs-h2 reveal d1">Live patrol tracking was cut on day one of scoping.</h2>
+    <p class="body-text reveal d2">Live patrol tracking was the single most requested feature internally and the one I cut fastest. A live-location tool for people doing safety work in their own neighborhoods - disproportionately people with records - becomes a surveillance tool if the permissions model is wrong. We did not have eight weeks to design a permissions model I'd stake the safety of real PPOs on. I wrote up the concern in the handoff doc for the next phase.</p>
   </section>
 
-  <!-- ── SPRINT TIMELINE ── -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Sprint Timeline</p>
-    <h2 class="cs-section-title reveal d1">Planning Under <em>Constraints.</em></h2>
-    <p class="body-text reveal d2">
-      With an 8-week delivery window, we worked across design, research, and engineering to scope what was feasible. Not every requested feature could be delivered, so we prioritized based on operational impact. This timeline became a shared source of truth across teams, clarifying dependencies, setting expectations, and protecting design quality under tight deadlines.
-    </p>
-    <div class="cs-img-wrap img-spacer reveal d3">
-      <p class="img-note">8-week delivery window</p>
-      <img
-        src="Philly truce/04-sprint-timeline.png .png"
-        alt="Sprint timeline showing 8-week delivery plan"
-        class="cs-img-full"
-        loading="lazy"
-      />
-    </div>
-  </section>
-
-  <!-- ════════ CHAPTER: MOBILE ════════ -->
-  <div class="chapter-section reveal" data-chapter="Mobile">
-    <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>Chapter 01 of 02 · Mobile Experience</p>
-    <h2 class="chapter-section-title">The Mobile <em>Experience.</em></h2>
-    <p class="chapter-section-desc">
-      Phase 4 mobile work focused on enabling PPOs to participate in dispatcher-led planning, not just react to it. The goal: help PPOs clearly understand route assignments, availability, and completion flows without increasing cognitive load during active patrols.
-    </p>
+  <!-- ═══ CHAPTER: DESIGN PROCESS ═══ -->
+  <div class="chapter-section" data-chapter="Design">
+    <p class="chapter-label reveal">Chapter 01 of 02 · Design Process</p>
+    <h2 class="chapter-section-title reveal d1">Design Process</h2>
+    <p class="chapter-section-desc reveal d2">Nine decisions across mobile and desktop - from information architecture to the consolidation that made the product usable.</p>
   </div>
 
-  <!-- ── USER FLOW ── -->
+  <!-- ═══ §6.1 - 6.3: Mobile foundations ═══ -->
   <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>User Flow</p>
-    <h2 class="cs-section-title reveal d1">Updated Information <em>Architecture.</em></h2>
-    <p class="body-text reveal d2">
-      Based on usability studies from the previous phase, we revised the mobile information architecture to reduce friction during critical moments: route completion and feedback. These changes directly informed which screens we redesigned and which interactions we simplified or deferred.
-    </p>
-    <div class="cs-img-wrap img-spacer reveal d3">
-      <img
-        src="Philly truce/05-user-flow.png .png"
-        alt="Updated mobile user flow and information architecture"
-        class="cs-img-full"
-        loading="lazy"
-      />
+    <p class="sec-label reveal"><span class="eline"></span>Design Process</p>
+
+    <!-- 6.1 Mobile IA -->
+    <div class="subsec-label reveal">Mobile Information Architecture</div>
+    <h2 class="cs-h2 reveal d1">Reports at the center.</h2>
+    <p class="body-text reveal d2">I revised the mobile IA based on usability findings from the prior phase to reduce friction during critical moments: report claim, update, and close-out. The architecture intentionally put Reports at the center - it's the PPO's primary workspace during an active shift.</p>
+    <div class="img-gap-sm reveal">
+      <img src="Philly truce/mobile-user-flow.png" alt="Updated mobile user flow across Home, Reports, Messages, and Routes tabs" class="cs-img-full" />
+    </div>
+
+    <!-- 6.2 Collaborative wireframing -->
+    <div class="subsec-gap"></div>
+    <div class="subsec-label reveal">Collaborative Wireframing</div>
+    <h2 class="cs-h2 reveal d1">Independent exploration, collective alignment.</h2>
+    <p class="body-text reveal d2">Each designer on the mobile pod explored the report experience independently. We reviewed patterns collectively through critique and dot-voting - surfacing edge cases early and aligning on the strongest ideas without top-down hierarchy.</p>
+    <div class="img-gap-sm reveal">
+      <img src="Philly truce/mobile-wireframes.png" alt="Mobile wireframe explorations from the design pod showing report flow variations" class="cs-img-full" />
+    </div>
+
+    <!-- 6.3 Mobile component system -->
+    <div class="subsec-gap"></div>
+    <div class="subsec-label reveal">Mobile Component System</div>
+    <h2 class="cs-h2 reveal d1">Built for field use, not a demo environment.</h2>
+    <p class="body-text reveal d2">We built the mobile components to handle real-world field use: report cards, status states, availability toggles, alert patterns, and feedback flows - each optimized for glanceable interaction during active patrols.</p>
+    <div class="img-gap-sm reveal">
+      <img src="Philly truce/mobile-components.png" alt="Mobile component library showing report cards, status states, availability toggles, and alert patterns" class="cs-img-full" />
     </div>
   </section>
 
-  <!-- ── WIREFRAMES ── -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Wireframing</p>
-    <h2 class="cs-section-title reveal d1">Collaborative <em>Exploration.</em></h2>
-    <p class="body-text reveal d2">
-      We encouraged each designer to explore the route experience independently, then reviewed patterns collectively. Critique sessions and dot-voting aligned the team on the strongest ideas, surfacing edge cases early and ensuring decisions were made collaboratively, not by hierarchy.
-    </p>
-    <div class="cs-img-2col img-spacer reveal d3">
-      <img
-        src="Philly truce/06-wireframe-exploration-1.png .png"
-        alt="Wireframe exploration: route experience, option A"
-        loading="lazy"
-      />
-      <img
-        src="Philly truce/06-wireframe-exploration-2.png .png"
-        alt="Wireframe exploration: route experience, option B"
-        loading="lazy"
-      />
-    </div>
-  </section>
+  <!-- ═══ §6.4: Key decision - Report resolution ═══ -->
+  <section class="cs-section alt">
+    <span class="key-decision-badge reveal">Key Design Decision</span>
+    <div class="subsec-label reveal">Report Resolution</div>
+    <h2 class="cs-h2 reveal d1">Multiple legitimate paths - all of them designed.</h2>
+    <p class="body-text reveal d2">A single report can get into the system four ways: chatbot-generated from the Philly Truce public tip line, manually created by a PPO on the ground, manually created by an admin based on a phone call, or auto-created from a related incident.</p>
+    <p class="body-text reveal d2">Once in the system, it can get closed out three ways: resolved by the assigned PPO, resolved by an admin directly, or marked as chatbot-handled without PPO involvement.</p>
+    <p class="body-text reveal d2">I could have forced a single canonical flow. I didn't - because the real operation runs on all of them, and forcing uniformity would have pushed work back into group texts. Instead, we designed visual state that made the resolution path legible from the report card itself.</p>
 
-  <!-- ── MOBILE COMPONENTS ── -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Mobile Components</p>
-    <h2 class="cs-section-title reveal d1">Building the <em>Design System.</em></h2>
-    <p class="body-text reveal d2">
-      Key components were designed to handle the real-world complexity of field operations, including route states, availability toggles, alert patterns, and feedback flows, each optimized for glanceable use during active patrols.
-    </p>
-    <div class="cs-img-grid-2x2 img-spacer">
-      <div class="reveal">
-        <img
-          src="Philly truce/08-mobile-component-1.png .png"
-          alt="Mobile component: route card"
-          loading="lazy"
-        />
+    <div class="cs-gallery-2col">
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-report-tabs-annotated.png" alt="Unclaimed, In Progress, Resolved tab structure with engineering handoff annotations" />
+        <p class="cs-img-caption">Unclaimed / In Progress / Resolved tab structure with engineering handoff notes.</p>
       </div>
-      <div class="reveal d1">
-        <img
-          src="Philly truce/08-mobile-component-2.png .png"
-          alt="Mobile component: availability state"
-          loading="lazy"
-        />
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-view-report-unclaimed.png" alt="Individual report detail view showing the Select PPO assignment dropdown" />
+        <p class="cs-img-caption">Report detail with the Select PPO assignment dropdown.</p>
       </div>
-      <div class="reveal d2">
-        <img
-          src="Philly truce/08-mobile-component-3.png .png"
-          alt="Mobile component: alert pattern"
-          loading="lazy"
-        />
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-assign-report-flow.png" alt="Required-field disabled CTA pattern before a PPO is selected vs. the dropdown-open state" />
+        <p class="cs-img-caption">Disabled CTA before PPO is selected vs. dropdown-open state.</p>
       </div>
-      <div class="reveal d3">
-        <img
-          src="Philly truce/08-mobile-component-4.png .png"
-          alt="Mobile component: feedback flow"
-          loading="lazy"
-        />
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-assign-report-confirmed.png" alt="CTA enabled after assignment, showing Assign primary and Resolve secondary hierarchy" />
+        <p class="cs-img-caption">CTA enabled after assignment: Assign primary / Resolve secondary.</p>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-report-in-progress.png" alt="In-progress report state from both home-base PPO and assigned PPO perspectives" />
+        <p class="cs-img-caption">In-progress state: home-base PPO view vs. assigned PPO view.</p>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-resolved-states.png" alt="Four resolution variants: chatbot-generated vs manually-created, with description handling" />
+        <p class="cs-img-caption">Four resolution variants: chatbot-generated vs manually-created.</p>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-edit-report-flow.png" alt="Edit flow from the pencil icon into form fields with conditional CTAs" />
+        <p class="cs-img-caption">Edit flow: pencil icon to form fields with conditional CTAs.</p>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="Philly truce/mobile-create-report-flow.png" alt="Create-new-report flow from the Reports list with date/time prefill and snackbar confirmation" />
+        <p class="cs-img-caption">Create-new-report flow with date/time prefill and snackbar confirmation.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── REPORT STATUSES ── -->
+  <!-- ═══ §6.5: Key decision - Scheduling consolidation ═══ -->
   <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Report Statuses</p>
-    <h2 class="cs-section-title reveal d1">Unclaimed, In Progress, <em>Resolved.</em></h2>
-    <p class="body-text reveal d2">
-      The three main report statuses (Unclaimed, In Progress, and Resolved) required distinct visual treatments to communicate urgency and state at a glance. Each status carries different affordances for the PPO in the field.
-    </p>
-    <div class="cs-img-2col img-spacer reveal d3">
-      <img
-        src="Philly truce/12-report-status-unclaimed.png .png"
-        alt="Report status: Unclaimed"
-        loading="lazy"
-      />
-      <img
-        src="Philly truce/13-report-status-inprogress.png .png"
-        alt="Report status: In Progress"
-        loading="lazy"
-      />
+    <span class="key-decision-badge reveal">Key Design Decision</span>
+    <div class="subsec-label reveal">Route Assignment Consolidation</div>
+    <h2 class="cs-h2 reveal d1">Three edit pages collapsed into one interface.</h2>
+    <p class="body-text reveal d2">Early desktop iterations split route editing into three separate pages: Edit Route (the street path), Edit Parameters (shift metadata), and Edit Shift Time (start/end times). Dispatchers had to tab between three surfaces to make a single logical change - "move Janine's Wallace Ave patrol from 3 PM to 5 PM."</p>
+    <p class="body-text reveal d2">Testing surfaced the obvious problem: context-switching between three pages caused errors, especially for overlapping routes. In V2.3, I consolidated all three into a single Route Assignment interface with progressive disclosure - edit what you need, commit once.</p>
+    <p class="body-text reveal d2">This was the single highest-leverage desktop design call of the sprint.</p>
+    <div class="img-gap-lg reveal">
+      <div class="cs-img-wrap">
+        <img src="Philly truce/desktop-scheduling-iteration.png" alt="V1 desktop scheduling with three separate edit pages alongside V2.3 consolidated Route Assignment interface" class="cs-img-full" />
+        <p class="cs-img-caption">V1: three separate edit pages. V2.3: one consolidated Route Assignment interface.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ── FINAL MOBILE SCREENS ── -->
+  <!-- ═══ §6.6 + 6.7: Calendar/List views + Home Base/Perimeter ═══ -->
+  <section class="cs-section alt">
+    <span class="key-decision-badge reveal">Key Design Decision</span>
+    <div class="subsec-label reveal">Calendar and List Views</div>
+    <h2 class="cs-h2 reveal d1">Same data. Two representations. One toggle.</h2>
+    <p class="body-text reveal d2">Some dispatchers plan by time (calendar grid). Others audit by route (list rows). Rather than picking one, we shipped both with a toggle - the same scheduling data in two representations. Color-coding emerged as a later addition after testing: a monochrome schedule was hard to scan for overlap. Soft color blocks made conflict visible at a glance without requiring the dispatcher to read every cell.</p>
+
+    <div class="cs-gallery-3col">
+      <div class="gallery-item reveal">
+        <img src="Philly truce/desktop-calendar-default.png" alt="Monochrome desktop calendar scheduling view, first published version" />
+        <p class="cs-img-caption">V1 monochrome</p>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="Philly truce/desktop-calendar-colored.png" alt="Final calendar view with overlap-visible color blocks" />
+        <p class="cs-img-caption">V2 with overlap-visible color</p>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="Philly truce/desktop-list-view.png" alt="List view showing the same schedule as rows with a notes column" />
+        <p class="cs-img-caption">List representation of the same data</p>
+      </div>
+    </div>
+
+    <div class="subsec-gap"></div>
+    <span class="key-decision-badge reveal">Key Design Decision</span>
+    <div class="subsec-label reveal">Home Base / Perimeter</div>
+    <h2 class="cs-h2 reveal d1">Organized around how Philly Truce already thinks.</h2>
+    <p class="body-text reveal d2">Patrols aren't organized by individual PPO - they're organized by Home Base (the anchor location, usually a park or community hub) and Perimeter (the surrounding streets). A single Home Base can have multiple perimeters covered by multiple PPOs simultaneously.</p>
+    <p class="body-text reveal d2">The desktop scheduling grid uses Home Base | Perimeter as the left-column organizer because that's how Philly Truce's operational leads already thought about coverage. Organizing the UI around their mental model - not our abstraction of "shifts" - made the schedule legible to them on first view.</p>
+  </section>
+
+  <!-- ═══ §6.8 + 6.9: Workflow + Design system ═══ -->
   <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Final Mobile UI</p>
-    <h2 class="cs-section-title reveal d1">Clarity During <em>High-Attention Moments.</em></h2>
-    <p class="body-text reveal d2">
-      The final mobile designs focused on clarity at critical moments: route completion, feedback submission, and next-step navigation. Design annotations document rationale and edge cases considered during engineering handoff.
-    </p>
-    <div class="cs-img-wrap img-spacer reveal d3">
-      <img
-        src="Philly truce/14-final-mobile-screens.png .png"
-        alt="Final selected mobile UI screens with annotations"
-        class="cs-img-full"
-        loading="lazy"
-      />
-      <p class="cs-img-caption">Selected final screens, annotated for engineering handoff. Focus on route completion, feedback submission, and navigation clarity.</p>
+    <div class="subsec-label reveal">Desktop Workflow System</div>
+    <h2 class="cs-h2 reveal d1">The full loop: plan on desktop, act on mobile.</h2>
+    <p class="body-text reveal d2">The desktop-to-mobile handoff flow: dispatchers plan routes on desktop, considering hotspot areas and operational leads. PPOs receive assignments, meet supervisors, grab gear, head out. If they encounter anything on-route, they intervene and report via the mobile app - which closes the loop back to the desktop dashboard.</p>
+    <div class="img-gap-sm reveal">
+      <img src="Philly truce/desktop-workflow.png" alt="Full desktop to mobile workflow: dispatcher route planning through PPO field reporting back to dashboard" class="cs-img-full" style="border-radius: 16px;" />
     </div>
+
   </section>
 
-  <!-- ════════ CHAPTER: DESKTOP ════════ -->
-  <div class="chapter-section reveal" data-chapter="Desktop">
-    <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>Chapter 02 of 02 · Desktop Experience</p>
-    <h2 class="chapter-section-title">The Desktop <em>Experience.</em></h2>
-    <p class="chapter-section-desc">
-      Designed for dispatchers and administrators responsible for planning routes, assigning PPOs, and managing daily patrol operations. Unlike the mobile app which supports execution in the field, the desktop product supports decision-making, coordination, and oversight.
-    </p>
+  <!-- ═══ CHAPTER: FINAL SOLUTION ═══ -->
+  <div class="chapter-section" data-chapter="Final">
+    <p class="chapter-label reveal">Chapter 02 of 02 · Final Solution</p>
+    <h2 class="chapter-section-title reveal d1">Final Solution</h2>
+    <p class="chapter-section-desc reveal d2">A mobile experience built for PPOs in the field and a desktop dashboard built for dispatchers planning coverage - sharing the same data model, with platform-specific interaction patterns throughout.</p>
   </div>
 
-  <!-- ── DESKTOP WORKFLOW CALLOUT ── -->
-  <div class="workflow-callout">
-    <p class="sec-label reveal"><span class="eline"></span>System Workflow</p>
-    <h2 class="cs-section-title reveal d1" style="max-width: 680px;">
-      The steps between the <em>dashboard</em> and the app.
-    </h2>
-    <p class="body-text reveal d2" style="margin-bottom: 40px;">
-      Dispatchers intuitively plan routes on the desktop, considering hotspot areas and operational leads. PPOs receive assignments, meet supervisors, grab gear, and head out. If they encounter anything on their route, they intervene and report via the mobile app.
-    </p>
-    <div class="cs-img-wrap reveal d3">
-      <img
-        src="Philly truce/19-desktop-mobile-workflow.png .png"
-        alt="Desktop to mobile workflow diagram"
-        class="cs-img-full"
-        loading="lazy"
-      />
-      <p class="cs-img-caption">End-to-end workflow: dispatcher planning on desktop flows into PPO execution on mobile.</p>
-    </div>
-  </div>
-
-  <!-- ── STYLE GUIDE ── -->
+  <!-- ═══ §7 FINAL SOLUTION ═══ -->
   <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Design System</p>
-    <h2 class="cs-section-title reveal d1">The Style Guide for <em>Desktop.</em></h2>
-    <p class="body-text reveal d2">
-      We established a shared system for buttons, navigation, and layout to keep complex admin workflows consistent and scalable. A unified design language reduced friction and allowed the team to move faster across sprints without rethinking foundational patterns.
-    </p>
-    <div class="cs-img-wrap img-spacer reveal d3">
-      <img
-        src="Philly truce/15-desktop-styleguide.png .png"
-        alt="Desktop style guide: buttons, navigation, layout system"
-        class="cs-img-full"
-        loading="lazy"
-      />
-      <p class="cs-img-caption">Shared design system: components, states, and layout tokens established for the desktop dispatcher dashboard.</p>
+    <p class="sec-label reveal"><span class="eline"></span>Final Solution</p>
+
+    <!-- 7.1 Mobile -->
+    <div class="subsec-label reveal">Mobile · PPO-facing</div>
+    <h2 class="cs-h2 reveal d1">Login to close-out, without breaking focus.</h2>
+    <p class="body-text reveal d2">Login to Home dashboard with pinned announcements (heat advisories, closures, construction, local events), to Reports workspace (Unclaimed / In Progress / Resolved tabs), to individual report flows for claim, assign, edit, update, and close-out, to Routes tab for viewing assigned shifts, to Messages for admin-PPO communication.</p>
+    <div class="img-gap reveal">
+      <div class="cs-img-wrap">
+        <img src="Philly truce/mobile-home-login-annotated.png" alt="Login and home dashboard with engineering annotations covering forms, announcements, bottom navigation, and notification behavior" class="cs-img-full" />
+        <p class="cs-img-caption">Login and home dashboard with engineering annotations: email/password forms, announcements section, bottom navigation, and notification behavior.</p>
+      </div>
+    </div>
+
+    <!-- 7.2 Desktop -->
+    <div class="subsec-gap"></div>
+    <div class="subsec-label reveal">Desktop · Dispatcher / Admin-facing</div>
+    <h2 class="cs-h2 reveal d1">Scheduling as the primary surface.</h2>
+    <p class="body-text reveal d2">Sidebar: Home · Scheduling · Routes Management · Peace Patrollers Management. Scheduling is the primary surface for dispatchers. Published vs Unpublished tabs. Day / Week toggle. Calendar and List views. Add Schedule CTA top-right. Home Base | Perimeter organizes the left column. Each schedule cell shows route, time range, and assigned PPO avatars.</p>
+    <div class="img-gap reveal">
+      <div class="cs-img-wrap">
+        <img src="Philly truce/desktop-calendar-colored.png" alt="Final dispatcher scheduling dashboard with color-coded shifts organized by Home Base and Perimeter" class="cs-img-full" />
+        <p class="cs-img-caption">Final dispatcher scheduling dashboard: color-coded shifts, Home Base | Perimeter left-column hierarchy.</p>
+      </div>
+    </div>
+    <div class="img-gap reveal">
+      <div class="cs-img-wrap">
+        <img src="Philly truce/final-ui-composition.png" alt="Full system in context: desktop dispatcher dashboard alongside PPO mobile Routes view across multiple weekly states" class="cs-img-full" />
+        <p class="cs-img-caption">Full system in context: desktop dispatcher dashboard alongside PPO mobile Routes view.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ── SCHEDULING ITERATION ── -->
+  <!-- ═══ §8 OUTCOMES ═══ -->
+  <section class="cs-section alt">
+    <p class="sec-label reveal"><span class="eline"></span>Outcomes</p>
+    <h2 class="cs-h2 reveal d1">What Phase 4 shipped.</h2>
+    <p class="body-text reveal d2"><strong style="color:var(--text);font-weight:500;">Shipped in Phase 4:</strong> Mobile report lifecycle (Unclaimed to In Progress to Resolved) across four creation paths and three resolution paths · Desktop scheduling dashboard with Calendar and List views, Published/Unpublished states, and Home Base | Perimeter organization · Admin-assign and PPO-claim flows with shared data models · Route management foundation · Component libraries for both platforms · Engineering handoff annotations on every shipped screen.</p>
+    <p class="body-text reveal d2"><strong style="color:var(--text);font-weight:500;">Qualitative:</strong> Dispatchers validated the Home Base | Perimeter organization as matching their operational mental model. The V1 to V2.3 scheduling consolidation was cited as the change that made daily schedule editing reliable.</p>
+    <p class="body-text reveal d2">This was a pro-bono volunteer engagement. I don't have conversion-lift metrics or six-month retention data - that belongs to later phases. What Phase 4 delivered is a shipped mobile + desktop system, a documented design language, and a handoff package the next volunteer team can build on.</p>
+  </section>
+
+  <!-- ═══ §9 WHAT DIDN'T SHIP ═══ -->
   <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Iteration</p>
-    <h2 class="cs-section-title reveal d1">Iterating the <em>Scheduling Flow.</em></h2>
-    <p class="body-text reveal d2">
-      Early scheduling flows were too linear and error-prone. Through iteration, we separated route assignment, daily scheduling, and publishing to better match dispatcher workflows and reduce mistakes. Each round of testing surfaced new edge cases: late cancellations, overlapping routes, last-minute PPO unavailability.
-    </p>
-    <div class="cs-img-wrap img-spacer reveal d3">
-      <img
-        src="Philly truce/scheduling user flow.png"
-        alt="Scheduling iteration: flow evolution across design rounds"
-        class="cs-img-full"
-        loading="lazy"
-      />
-      <p class="cs-img-caption">Scheduling flow evolution: from linear and error-prone to separated, context-aware stages.</p>
+    <p class="sec-label reveal"><span class="eline"></span>What Didn't Ship</p>
+    <h2 class="cs-h2 reveal d1">Every cut has a written rationale.</h2>
+    <div class="didnt-ship-list reveal">
+      <div class="didnt-ship-row">
+        <span class="didnt-ship-num">01</span>
+        <span class="didnt-ship-name">Spatial coverage map with incident overlays</span>
+        <span class="didnt-ship-why">Cut in week 4: dev capacity and privacy review scope exceeded what Phase 4 could absorb.</span>
+      </div>
+      <div class="didnt-ship-row">
+        <span class="didnt-ship-num">02</span>
+        <span class="didnt-ship-name">Live GPS tracking for PPOs</span>
+        <span class="didnt-ship-why">Cut for safety reasons. A live-location tool for people doing safety work in their own neighborhoods requires a permissions model we didn't have eight weeks to design responsibly. See §5.3.</span>
+      </div>
+      <div class="didnt-ship-row">
+        <span class="didnt-ship-num">03</span>
+        <span class="didnt-ship-name">In-app PPO-to-PPO messaging</span>
+        <span class="didnt-ship-why">Beyond report notifications, in-app comms was out of scope for Phase 4. Report notifications covered the critical coordination loop.</span>
+      </div>
+      <div class="didnt-ship-row">
+        <span class="didnt-ship-num">04</span>
+        <span class="didnt-ship-name">Predictive routing from the DATA Lab framework</span>
+        <span class="didnt-ship-why">Deferred. The DATA Lab spatial-coverage framework is Phase 5 scope; Phase 4 delivered the route management foundation it needs to build on.</span>
+      </div>
+      <div class="didnt-ship-row">
+        <span class="didnt-ship-num">05</span>
+        <span class="didnt-ship-name">Automated payroll</span>
+        <span class="didnt-ship-why">Schedule data is exportable; the payroll integration itself was deferred to Phase 5 where engineering capacity can support it properly.</span>
+      </div>
+    </div>
+    <p class="didnt-ship-note reveal">Each has a written spec in the Phase 5 handoff package.</p>
+  </section>
+
+  <!-- ═══ §10 REFLECTIONS ═══ -->
+  <section class="cs-section alt">
+    <p class="sec-label reveal"><span class="eline"></span>Reflections</p>
+    <h2 class="cs-h2 reveal d1">Four things that shaped how I work now.</h2>
+    <div class="reflection-items">
+      <div class="reflection-item reveal">
+        <p class="reflection-text"><strong>Scope is a promise, not a document.</strong> Every feature I cut got a written rationale and a handoff spec for the next phase. That discipline is the difference between scope that scales an organization and scope that abandons it.</p>
+      </div>
+      <div class="reflection-item reveal">
+        <p class="reflection-text"><strong>Design around the real operational vocabulary.</strong> The Home Base | Perimeter structure works because it's how Philly Truce's leads already talk. Organizing the UI around user mental models - not our abstraction layer - was the single biggest accelerator to stakeholder sign-off.</p>
+      </div>
+      <div class="reflection-item reveal">
+        <p class="reflection-text"><strong>Safety-sensitive design means fewer features, not more.</strong> Live location tracking was the most requested feature and the most dangerous for the actual users. Cutting it was the highest-leverage design call of the project. A worse version shipped on time would have been ignored or, worse, used against the PPOs it was meant to serve.</p>
+      </div>
+      <div class="reflection-item reveal">
+        <p class="reflection-text"><strong>When a flow takes three screens, try one.</strong> The V1 to V2.3 scheduling consolidation wasn't innovation. It was the result of watching dispatchers flip between edit pages and accepting that three surfaces was a design failure, not a feature.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ── FINAL DESKTOP UI ── -->
-  <section class="final-ui-section">
-    <p class="sec-label reveal"><span class="eline"></span>Final Desktop UI</p>
-    <h2 class="cs-section-title reveal d1" style="max-width: 680px;">
-      A flexible system built for <em>real-world complexity.</em>
-    </h2>
-    <p class="body-text reveal d2" style="margin-bottom: 56px;">
-      We designed a flexible scheduling system that allows dispatchers to edit routes, parameters, and shift times without losing context. Breaking edits into focused actions reduced errors while keeping daily planning fast and predictable. The result: a dashboard dispatchers could trust under pressure.
-    </p>
-    <div class="cs-img-wrap reveal d3">
-      <img
-        src="Philly truce/19-final-desktop-ui.png"
-        alt="Final desktop UI: dispatcher scheduling dashboard"
-        class="cs-img-full"
-        loading="lazy"
-      />
-      <p class="cs-img-caption">Final dispatcher dashboard: flexible scheduling, route management, and real-time operational visibility.</p>
+  <!-- ═══ §11 CREDITS ═══ -->
+  <section class="cs-section">
+    <p class="sec-label reveal"><span class="eline"></span>Credits</p>
+    <h2 class="cs-h2 reveal d1">Built with a lot of people.</h2>
+    <div class="credits-grid">
+      <div class="credit-item reveal">
+        <span class="credit-org">Philly Truce</span>
+        <span class="credit-role">Executive Director and operational leads.</span>
+      </div>
+      <div class="credit-item reveal">
+        <span class="credit-org">Tech Fleet (my reports)</span>
+        <span class="credit-role">Research · Content · Mobile design · Desktop design pods.</span>
+      </div>
+      <div class="credit-item reveal">
+        <span class="credit-org">Engineering</span>
+        <span class="credit-role">Volunteer engineers on Next.js / TypeScript / Tailwind / Twilio / NextAuth / MongoDB.</span>
+      </div>
+      <div class="credit-item reveal">
+        <span class="credit-org">Penn Injury Science Center / DATA Lab</span>
+        <span class="credit-role">Phase 3 spatial-coverage research partners.</span>
+      </div>
+      <div class="credit-item reveal">
+        <span class="credit-org">Prior phases</span>
+        <span class="credit-role">Research teams whose field study, usability testing, and stakeholder interviews I built on top of.</span>
+      </div>
     </div>
   </section>
 
-  <!-- ── CONCLUSION ── -->
-  <section class="conclusion-section">
-    <p class="sec-label reveal" style="justify-content: center;"><span class="eline"></span>Reflection</p>
-    <p class="conclusion-text reveal d1">
-      The Philly Truce project taught me that designing for <em>operational systems</em> requires as much clarity about what you won't build as what you will. By aligning closely with research and iterating through multiple user flows, the final solution balances <strong>flexibility with structure</strong>, allowing teams to plan confidently while adapting to real-world change.
-    </p>
-  </section>
-
-  <!-- ── NEXT PROJECT CTA ── -->
+  <!-- ═══ NEXT PROJECT ═══ -->
   <section class="next-project-section">
     <a href="mentormap.html" class="next-project-card reveal">
       <div>
@@ -1195,21 +812,17 @@
         <h3 class="next-title">MentorMap <em>→</em></h3>
       </div>
       <div class="next-arrow" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
-        </svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
       </div>
     </a>
   </section>
 
-  <!-- ── CONTACT / FOOTER ── -->
+  <!-- ═══ FOOTER ═══ -->
   <section class="contact-section">
     <div class="footer-body">
       <div class="footer-left">
         <p class="sec-label reveal"><span class="eline"></span>Get In Touch</p>
-        <h2 class="sec-title reveal d1" style="margin-bottom: 28px;">
-          Let's create something<br><em>remarkable</em> together.
-        </h2>
+        <h2 class="sec-title reveal d1" style="margin-bottom: 28px;">Let's create something<br><em>remarkable</em> together.</h2>
         <p class="contact-sub reveal d2">
           <span>Available for full-time roles in the USA &amp; design conversations.</span>
           <span>To enquire about my projects, shoot me an email.</span>
@@ -1239,16 +852,11 @@
 </main>
 
 <script>
-  // ── Reveal on scroll ──
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.08 });
-
+  }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 <script>sessionStorage.setItem('sb_v','1');</script>
