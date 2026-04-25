@@ -1295,39 +1295,392 @@
   </section>
 
   <!-- ═══ CASE STUDY CONTENT (shown after unlock) ═══ -->
+  <!-- ═══ CASE STUDY CONTENT (shown after unlock) ═══ -->
   <div class="cs-content" id="csContent">
+
+  <style>
+    /* ── Pull-quote ── */
+    .pull-quote {
+      margin: 48px 0;
+      padding: 36px 44px;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,169,110,0.04);
+      border-radius: 0 10px 10px 0;
+    }
+    .pull-quote blockquote {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.4vw, 30px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      max-width: 840px;
+    }
+    .pull-quote blockquote em { color: var(--gold); }
+
+    /* ── Five Insights grid ── */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    .insight-cell {
+      background: var(--bg);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: background 0.25s;
+    }
+    .insight-cell:hover { background: rgba(201,169,110,0.04); }
+    .insight-cell-num {
+      font-family: var(--serif);
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.18);
+      line-height: 1;
+    }
+    .insight-cell h4 {
+      font-family: var(--serif);
+      font-size: clamp(15px, 1.4vw, 18px);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .insight-cell p {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .insight-cell.highlight { background: rgba(201,169,110,0.05); }
+    .insight-cell.highlight .insight-cell-num { color: rgba(201,169,110,0.35); }
+    .insight-cell.highlight h4 { color: var(--gold-lt); }
+    @media (max-width: 960px) {
+      .insights-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── Hero flow (numbered steps inline) ── */
+    .hero-flow-list {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .hero-flow-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      align-items: start;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-flow-item:first-child { border-top: 1px solid var(--border); }
+    .hero-flow-step-num {
+      font-family: var(--serif);
+      font-size: clamp(28px, 2.8vw, 40px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.22);
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .hero-flow-item-body {}
+    .hero-flow-item-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .hero-flow-item-desc {
+      font-size: 0.87rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── Discovery outcomes ── */
+    .discovery-outcomes {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .discovery-outcome-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .discovery-outcome-item:hover {
+      border-color: rgba(201,169,110,0.25);
+      background: rgba(201,169,110,0.03);
+    }
+    .discovery-outcome-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.5;
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+    .discovery-outcome-item p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .discovery-outcome-item strong { color: var(--text); font-weight: 500; }
+
+    /* ── Reflections (money section) ── */
+    .reflections-section { padding: 88px 100px; border-top: 1px solid var(--border); background: var(--bg2); }
+    .reflections-list {
+      margin-top: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .reflection-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 0 24px;
+      padding: 52px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.3s;
+    }
+    .reflection-item:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+    .reflection-num {
+      font-family: var(--serif);
+      font-size: clamp(64px, 7vw, 100px);
+      font-weight: 300;
+      color: rgba(201,169,110,0.1);
+      line-height: 1;
+      padding-top: 6px;
+      user-select: none;
+      transition: color 0.3s;
+    }
+    .reflection-item:hover .reflection-num { color: rgba(201,169,110,0.22); }
+    .reflection-body {}
+    .reflection-lead {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.4vw, 30px);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+    .reflection-body p {
+      font-size: 0.97rem;
+      line-height: 1.95;
+      color: var(--muted);
+      max-width: 740px;
+    }
+    @media (max-width: 960px) {
+      .reflections-section { padding: 60px 28px; }
+      .reflection-item { grid-template-columns: 1fr; gap: 16px; }
+      .reflection-num { font-size: 56px; }
+    }
+
+    /* ── What didn't ship ── */
+    .didnt-ship-list {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .didnt-ship-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0 48px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .didnt-ship-item:first-child { border-top: 1px solid var(--border); }
+    .didnt-ship-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text);
+      padding-top: 2px;
+    }
+    .didnt-ship-reason {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    @media (max-width: 960px) {
+      .didnt-ship-item { grid-template-columns: 1fr; gap: 6px; }
+    }
+
+    /* ── Credits section ── */
+    .credits-section {
+      padding: 80px 100px;
+      border-top: 1px solid var(--border);
+    }
+    .credits-body {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px 64px;
+    }
+    .credits-group-label {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.75;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .credits-group-label::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .credits-group p {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+    .credits-group strong { color: var(--text); font-weight: 500; }
+    .prototype-row {
+      margin-top: 40px;
+      padding: 24px 28px;
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 8px;
+      background: rgba(201,169,110,0.04);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .prototype-row-label {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      flex-shrink: 0;
+    }
+    .prototype-row a {
+      font-size: 0.9rem;
+      color: var(--gold);
+      text-decoration: underline;
+      text-decoration-color: rgba(201,169,110,0.3);
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .prototype-row a:hover { color: var(--gold-lt); }
+    .prototype-pw {
+      font-family: monospace;
+      font-size: 0.84rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    @media (max-width: 960px) {
+      .credits-section { padding: 60px 28px; }
+      .credits-body { grid-template-columns: 1fr; }
+    }
+
+    /* ── Sprint subsec header ── */
+    .subsec-header {
+      margin-bottom: 20px;
+    }
+    .subsec-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .subsec-eyebrow::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+    .subsec-header h3 {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.2vw, 28px);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    /* ── Problem callout row ── */
+    .problem-callout {
+      margin-top: 40px;
+      padding: 32px 36px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+    }
+    .problem-callout p {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .problem-callout strong { font-weight: 500; color: var(--gold-lt); font-style: normal; }
+  </style>
 
     <!-- ═══════════════════════════════════════
          HERO
     ═══════════════════════════════════════ -->
     <section class="cs-hero">
-      <img src="tenetic/Hero.png" alt="Tenetic platform hero" class="cs-hero-img" />
       <div class="cs-hero-overlay"></div>
       <span class="nda-badge">NDA Protected</span>
       <div class="cs-hero-content">
         <p class="cs-hero-eyebrow">
           <span class="cs-hero-eyebrow-line"></span>
-          Designing AI Experiences
+          Case Study &middot; NDA
           <span class="cs-hero-eyebrow-line"></span>
         </p>
-        <h1 class="cs-hero-title">Tenetic</h1>
-        <p class="cs-hero-sub">AI-Powered Sales Presentation Platform</p>
+        <h1 class="cs-hero-title">Tenetic Story Builder</h1>
+        <p class="cs-hero-sub">Designing an AI storytelling workflow for enterprise media sales when the client didn't know what they wanted</p>
         <div class="cs-hero-meta">
           <div class="cs-meta-cell">
             <span class="cs-meta-label">My Role</span>
-            <span class="cs-meta-val">Lead Product Designer</span>
-          </div>
-          <div class="cs-meta-cell">
-            <span class="cs-meta-label">Timeline</span>
-            <span class="cs-meta-val">12 Weeks</span>
+            <span class="cs-meta-val">UX Designer, AI interaction patterns &amp; hero flow</span>
           </div>
           <div class="cs-meta-cell">
             <span class="cs-meta-label">Team</span>
-            <span class="cs-meta-val">Solo Designer + 3 Engineers</span>
+            <span class="cs-meta-val">2 UX Designers, 1 Researcher, 1 Creative Director (Photon Interactive)</span>
+          </div>
+          <div class="cs-meta-cell">
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-val">12 weeks: 4 weeks Discovery, 8 weeks Implementation</span>
           </div>
           <div class="cs-meta-cell">
             <span class="cs-meta-label">Platform</span>
-            <span class="cs-meta-val">Web Application</span>
+            <span class="cs-meta-val">Web, desktop-first with tablet support</span>
           </div>
         </div>
       </div>
@@ -1335,391 +1688,531 @@
 
     <!-- NDA Disclaimer -->
     <div class="nda-disclaimer reveal">
-      <p>Certain details have been omitted or abstracted in compliance with a non-disclosure agreement. All visuals are reproduced with permission from the client. The work shown reflects my individual contribution as the sole product designer on the engagement.</p>
+      <p>Details have been omitted or abstracted in compliance with a non-disclosure agreement. All visuals are reproduced with permission. The work shown reflects my individual contributions as UX Designer, with ownership of AI interaction patterns and Sprints 2 and 4.</p>
     </div>
 
     <!-- ═══════════════════════════════════════
          OVERVIEW
     ═══════════════════════════════════════ -->
     <section class="cs-section reveal">
-      <p class="sec-label"><span class="eline"></span>Project Overview</p>
-      <h2 class="sec-heading">An AI platform for enterprise<br>sales teams to build <em>data-ready</em> presentations</h2>
-      <p class="body-text">Tenetic is an AI data intelligence platform designed to help enterprise sales representatives transform raw data into compelling, client-ready presentations, in minutes rather than hours. I was brought on as the sole product designer to take the platform from concept to launch across two structured phases.</p>
-      <div class="workflow-cards reveal">
-        <div class="workflow-card">
-          <p class="workflow-card-label">Phase 01</p>
-          <h3>Creative Discovery</h3>
-          <p>Research, user analysis, and UX strategy to define what the product needed to become. Deliverables included personas, journey maps, happy path flows, information architecture, and feature prioritization.</p>
-        </div>
-        <div class="workflow-card">
-          <p class="workflow-card-label">Phase 02</p>
-          <h3>Implementation</h3>
-          <p>Sprint-by-sprint execution of the full Tenetic platform, from a design system and core navigation through the AI Story Builder engine, file management, and final presentation workflows.</p>
-        </div>
+      <p class="sec-label"><span class="eline"></span>Overview</p>
+      <h2 class="sec-heading">When the brief is<br><em>ambiguity itself</em></h2>
+      <p class="body-text">Tenetic came to Photon Interactive with a problem and a hypothesis. The problem: their enterprise media sales customers were losing hours every week cobbling together pitch decks out of PowerPoint, Excel exports from Nielsen Scarborough, Comscore pulls, and whatever their last deck happened to look like. The hypothesis: AI could write those decks for them.</p>
+      <p class="body-text">That was the entire brief.</p>
+      <p class="body-text">No flows, no feature list, no clarity on what "AI could write those decks" actually meant in an interface. The client had a vision and a product team ready to build, and they needed a design partner who could turn that ambiguity into something shippable without spending six months in discovery.</p>
+      <p class="body-text">This is the part of AI-for-business work that doesn't get talked about. The client is not hiding the spec from you. They don't have one. You're being hired to help them figure out what the product is by designing it.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         THE PROBLEM
+    ═══════════════════════════════════════ -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>The Problem, Stated Plainly</p>
+      <h2 class="sec-heading">A morning that should<br>take <em>two minutes</em></h2>
+      <p class="body-text">Media sales reps sell air time. To sell air time, they build custom pitch decks showing advertisers why their TV network reaches the right audience. A typical deck has twenty to forty slides full of demographic data, ratings, dayparts, genre breakdowns, and competitive context. Every deck is different because every advertiser is different.</p>
+      <p class="body-text">Today a rep like Ali Walton, Senior Sales Rep at a CBS local station in Chicago, spends the entire morning pulling numbers out of Nielsen Scarborough, reshaping them in Excel, pasting them into PowerPoint, styling them on brand, and writing the narrative glue between the charts. She has a template. She starts from the last deck. She rebuilds half of it anyway because "no copy paste, a lot needs to be redone."</p>
+      <p class="body-text">Tenetic wanted to collapse that morning into a prompt.</p>
+
+      <div class="problem-callout reveal">
+        <p>The design question was not "can AI do this." It was: <strong>how much of the work do we automate, where do we hand control back to the user, and what does the interface look like when the user is co-authoring a deck with a model that sometimes gets the dayparts wrong?</strong></p>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════
-         PHASE 01 — DISCOVERY
+         PART 1: DISCOVERY
     ═══════════════════════════════════════ -->
     <div class="part-header reveal" data-part="01">
-      <p class="sec-label"><span class="eline"></span>Phase 01</p>
-      <h2 class="sec-heading"><em>Creative Discovery</em></h2>
-      <p class="body-text">Before designing a single screen, I needed to understand who this product was truly for, what was breaking in their current workflow, and what the simplest path to value looked like. Phase 01 was entirely research and strategy.</p>
+      <p class="sec-label"><span class="eline"></span>Part 1</p>
+      <h2 class="sec-heading"><em>Discovery</em></h2>
+      <p class="body-text">Four weeks. Two primary user interviews, secondary research on two more accounts, a competitive audit of every AI deck tool on the market, and a structured blueprint session with the Tenetic product team.</p>
     </div>
 
-    <!-- The Brief -->
+    <!-- Research Foundation -->
     <section class="cs-section reveal">
-      <p class="sec-label"><span class="eline"></span>The Challenge</p>
-      <h2 class="sec-heading">Designing a <em>0-to-1</em> AI product<br>under aggressive timelines</h2>
-      <div class="two-col">
-        <div>
-          <p class="body-text">Enterprise sales teams at Tenetic's target clients were spending enormous amounts of time manually pulling data, assembling slides, and reformatting decks for each client, a process rife with handoffs, rework, and inconsistency.</p>
-          <p class="body-text" style="margin-top:18px;">My mandate was to design the platform from scratch: no existing design system, no prior design files, unclear user needs, and a compressed sprint cadence. Every design decision had to be grounded in real user insight.</p>
+      <p class="sec-label"><span class="eline"></span>Research Foundation</p>
+      <h2 class="sec-heading">Reading the field<br>before touching <em>Figma</em></h2>
+      <p class="body-text">We ran a four-week Creative Discovery sprint. Two primary user interviews, secondary research on two more accounts (Disney and KTLA video sales teams), and a competitive audit of every AI deck tool currently on the market.</p>
+      <p class="body-text">Primary interviews: P1 was a Chief Platform Officer at a TV research firm managing a team of data analysts. P2 was a Strategy and Development SME on the agency side, builds client-facing proposals.</p>
+      <p class="body-text">We went in with open questions: what does your week actually look like, what's the worst part of deck prep, what would you never let AI touch, when do you trust the numbers and when do you double-check them.</p>
+    </section>
+
+    <div class="img-group reveal">
+      <img src="images/tenetic/research-synthesis.png" alt="Research synthesis: interview data to affinity mapping to insights to design considerations" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Research synthesis: interview data to affinity mapping to insights to design considerations</p>
+    </div>
+
+    <!-- Five Insights -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>The Decision Filter</p>
+      <h2 class="sec-heading">Five insights. <em>Every feature argument</em><br>ran through them.</h2>
+      <p class="body-text">Five insights came out of the affinity mapping. We locked these exact phrases early because they became the decision filter for every feature argument later.</p>
+      <div class="insights-grid reveal">
+        <div class="insight-cell">
+          <span class="insight-cell-num">1</span>
+          <h4>Ease of Use</h4>
+          <p>If it's harder than PowerPoint, it won't get used.</p>
         </div>
-        <div class="insight-callout">
-          <p class="insight-callout-label">Key Insight</p>
-          <p>Initial assumptions pointed to data access as the primary friction. Research revealed something different entirely.</p>
-          <blockquote>"The pain point was not data access, but the effort required to structure a compelling story."</blockquote>
+        <div class="insight-cell">
+          <span class="insight-cell-num">2</span>
+          <h4>Quick &amp; Efficient</h4>
+          <p>The whole point is saving the morning.</p>
+        </div>
+        <div class="insight-cell highlight">
+          <span class="insight-cell-num">3</span>
+          <h4>Refine Output</h4>
+          <p>Nobody ships the first draft, AI or otherwise. This insight shaped most of the AI interaction design.</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-cell-num">4</span>
+          <h4>Compelling Storytelling</h4>
+          <p>Data without narrative doesn't close deals.</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-cell-num">5</span>
+          <h4>Accuracy of Data</h4>
+          <p>One wrong rating number kills the pitch and the relationship.</p>
         </div>
       </div>
+      <p class="body-text" style="margin-top: 32px;">The sharp one is number 3. <strong style="color: var(--text); font-weight: 500;">Refine Output.</strong> It's the insight that shaped most of the AI interaction design. Reps do not want a button that says "generate deck." They want a collaborator that shows its work and lets them push back before, during, and after generation.</p>
+    </section>
+
+    <!-- Competitive Audit -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Competitive Audit</p>
+      <h2 class="sec-heading">Five tools. None of them<br>knew what a <em>daypart</em> was.</h2>
+      <p class="body-text">Five tools in the space: Gamma, Canva, SlideSpeak, STORYD, SlidesAI. We pulled them apart feature by feature.</p>
+      <p class="body-text">The gap was clear. Every tool in the market was a general-purpose AI deck builder. None of them knew what a daypart was. None of them could ingest Nielsen or Comscore data. None of them understood that a media sales deck has a specific narrative shape: who the audience is, why this network reaches them, what the media plan costs, what the outcome should be.</p>
+      <p class="body-text">That gap became the wedge. Tenetic wasn't competing with Gamma on "make any deck prettier." Tenetic was competing with PowerPoint on "make this deck, the one a CBS local station rep ships on a Tuesday morning."</p>
+    </section>
+
+    <div class="img-group reveal">
+      <img src="images/tenetic/competitive-landscape.png" alt="Competitive landscape: Gamma, Canva, SlideSpeak, STORYD, SlidesAI" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Competitive landscape: Gamma, Canva, SlideSpeak, STORYD, SlidesAI feature matrix</p>
+    </div>
+
+    <!-- Discovery Blueprint -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Discovery Blueprint</p>
+      <h2 class="sec-heading">Locking the model before<br>touching <em>a single screen</em></h2>
+      <p class="body-text">We ran a Creative Discovery blueprint session with the Tenetic product team to lock engagement model and user hierarchy before we touched Figma.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Engagement Model:</strong> Lean Forward with Micro Lean Back elements. Users are actively working (writing prompts, editing slides, refining outlines) but we build in lean-back moments during generation so the tool feels like a partner, not a task.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Decision Type:</strong> Requires Some Thought. Reps are not in autopilot. Every prompt involves judgment about audience targeting, narrative framing, and which data to lead with.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Primary User:</strong> Salesperson. Secondary: Researcher. Tertiary: Executive reviewer.</p>
+      <p class="body-text">This mattered because the client had initially pitched it as a tool for researchers (the data-heavy users). We pushed back. Researchers have their own workflow and their own tools. Sales reps are the ones losing the morning to deck building. Sales reps are also the ones with the budget to adopt a new tool.</p>
     </section>
 
     <!-- Persona -->
     <section class="cs-section reveal">
       <p class="sec-label"><span class="eline"></span>Primary Persona</p>
       <h2 class="sec-heading">Meet <em>Ali Walton</em></h2>
-      <p class="body-text">Through stakeholder interviews and synthesized research, I defined the primary user: a senior sales representative navigating high-stakes client meetings with limited time and technical support.</p>
-
-      <div class="persona-card reveal">
-        <div class="persona-header">
-          <div class="persona-avatar">AW</div>
-          <div>
-            <span class="persona-name">Ali Walton</span>
-            <span class="persona-title">Senior Sales Representative</span>
-            <span class="persona-meta">Age 36 · B. Marketing · Married, 2 kids · Chicago, IL</span>
-          </div>
-        </div>
-        <div class="persona-body">
-          <div class="persona-grid">
-            <div class="persona-section">
-              <h4>Goals</h4>
-              <ul>
-                <li>Quickly assemble impressive, tailored client presentations</li>
-                <li>Make data feel like a story, not a spreadsheet</li>
-                <li>Spend more time selling and less time formatting</li>
-                <li>Impress stakeholders with polished, on-brand output</li>
-              </ul>
-            </div>
-            <div class="persona-section">
-              <h4>Frustrations</h4>
-              <ul>
-                <li>Manual data pulls from multiple sources take hours</li>
-                <li>Decks feel generic and not tailored to specific clients</li>
-                <li>Rework cycles after every new data point or change</li>
-                <li>No single tool to handle data + story + design together</li>
-              </ul>
-            </div>
-          </div>
-          <div class="persona-quote">
-            <p>"If you can't explain it simply, you don't understand it well enough."</p>
-            <cite>Bill Gates (Ali's guiding principle)</cite>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Journey Map -->
-    <section class="cs-section reveal">
-      <p class="sec-label"><span class="eline"></span>Current State Journey Map</p>
-      <h2 class="sec-heading">Mapping the <em>pain</em> in the current workflow</h2>
-      <p class="body-text">I mapped Ali's end-to-end experience preparing a client presentation today, from initial data request to final delivery. Three systemic failure modes emerged across the journey.</p>
-      <div class="findings-list reveal">
-        <div class="finding-item">
-          <span class="finding-num">01</span>
-          <p><strong>Manual handoffs between systems.</strong> Sales reps switch between 4–6 disparate tools to gather data, build context, and format output, creating constant context-switching and data integrity risk.</p>
-        </div>
-        <div class="finding-item">
-          <span class="finding-num">02</span>
-          <p><strong>Heavy rework cycles.</strong> Every client change, data update, or stakeholder revision requires starting over. There is no live feedback loop between the data source and the presentation output.</p>
-        </div>
-        <div class="finding-item">
-          <span class="finding-num">03</span>
-          <p><strong>Emotional friction at scale.</strong> The manual nature of the process creates anxiety, especially before high-stakes meetings. Reps lose confidence when they can't verify whether their data is current.</p>
-        </div>
-      </div>
+      <p class="body-text">Ali Walton. 36. Senior Sales Rep at a CBS local station in Chicago. Quota-carrying. Builds four to six custom decks a week. Trusts data but doesn't want to do the data work. Knows her audiences, knows her dayparts, has opinions about what stories close which accounts.</p>
+      <p class="body-text">Ali is not afraid of AI. She's skeptical of it. She's been burned by autocomplete, by Siri, by Copilot. She will use Tenetic if it makes her faster without making her look stupid in front of a client. She will abandon it the first time it hallucinates a rating number.</p>
+      <p class="body-text">Ali is the person every design decision in this product is for.</p>
     </section>
 
     <div class="img-group reveal">
-      <img src="tenetic/03-journey-map.png .png" alt="Current state journey map" class="cs-img" />
-      <p class="cs-img-caption">Current state journey map: annotating emotional highs and lows across the presentation preparation workflow.</p>
+      <img src="images/tenetic/persona-ali-walton.png" alt="Primary persona: Ali Walton, Senior Sales Rep, CBS Chicago" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Primary persona: Ali Walton, Senior Sales Rep, CBS Chicago</p>
     </div>
 
-    <!-- Happy Path -->
+    <!-- Current State Journey -->
     <section class="cs-section reveal">
-      <p class="sec-label"><span class="eline"></span>Ideal Happy Path</p>
-      <h2 class="sec-heading">Designing the <em>frictionless</em> flow</h2>
-      <p class="body-text">Once I understood where the existing journey broke down, I mapped the ideal happy path: the simplest, most direct route from intent to a complete, client-ready presentation. Every sprint would be held accountable to this flow.</p>
-
-      <div class="happy-path-block reveal">
-        <p class="happy-path-label">Happy Path · Ideal User Journey</p>
-        <div class="flow-sequence">
-          <span class="flow-step start">Home</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step">AI Prompt</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step">Review Details</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step">View / Edit Outline</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step">Select Template</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step end">View / Edit Presentation</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- KPI Feature Cards -->
-    <section class="cs-section reveal">
-      <p class="sec-label"><span class="eline"></span>Feature Prioritization</p>
-      <h2 class="sec-heading">Five KPI feature areas<br>to define the <em>product scope</em></h2>
-      <p class="body-text">Based on the happy path and research synthesis, I identified five key performance indicator feature areas. These became the organizing framework for all sprint planning and stakeholder alignment.</p>
-      <div class="kpi-cards reveal">
-        <div class="kpi-card">
-          <div class="kpi-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <p class="kpi-num">01</p>
-          <h4>AI Prompt</h4>
-          <p>Natural language input that initiates the presentation generation workflow.</p>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m16.24 7.76-2.83 2.83"/><path d="M20 12h-4"/><path d="m16.24 16.24-2.83-2.83"/><path d="M12 18v4"/><path d="m7.76 16.24 2.83-2.83"/><path d="M4 12h4"/><path d="m7.76 7.76 2.83 2.83"/></svg>
-          </div>
-          <p class="kpi-num">02</p>
-          <h4>Generating &amp; Modifying Output</h4>
-          <p>Live feedback loops for refining AI-generated slide content and structure.</p>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <p class="kpi-num">03</p>
-          <h4>File Management</h4>
-          <p>Dashboard for organizing, locating, and downloading completed presentations.</p>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <p class="kpi-num">04</p>
-          <h4>Client Management</h4>
-          <p>Lightweight CRM layer for tracking client context and presentation history.</p>
-        </div>
-        <div class="kpi-card oos">
-          <div class="kpi-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <p class="kpi-num">05</p>
-          <h4>Loyalty &amp; Gamification</h4>
-          <p>Engagement mechanics to drive retention and platform habit formation.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Information Architecture -->
-    <section class="cs-section reveal">
-      <p class="sec-label"><span class="eline"></span>Information Architecture</p>
-      <h2 class="sec-heading">Structuring the <em>product skeleton</em></h2>
-      <p class="body-text">With personas, journeys, and feature scope defined, I built the information architecture to establish the complete navigational and functional framework for the platform. This IA became the blueprint for every sprint that followed.</p>
+      <p class="sec-label"><span class="eline"></span>Current State Journey</p>
+      <h2 class="sec-heading">The handoff is where<br>the <em>friction lives</em></h2>
+      <p class="body-text">Ali does not work alone. Lauren Smith is her research analyst. Lauren pulls the raw data, Ali writes the story. The current state journey mapped both lanes because the handoff between them is where most of the friction lives.</p>
+      <p class="body-text">Kickoff. Research request goes to Lauren. Lauren pulls Nielsen and Comscore. Ali waits. Ali gets the data in a spreadsheet. Ali pastes half of it into a deck. Ali realizes half of it is not what she asked for. Ali goes back to Lauren. Repeat.</p>
+      <p class="body-text">The Tenetic pitch was: let Ali start the deck before Lauren finishes the data pull, and let the AI fill in the blanks intelligently when the data lands.</p>
     </section>
 
     <div class="img-group reveal">
-      <img src="tenetic/05-information-architecture.png .png" alt="Information architecture diagram" class="cs-img" />
-      <p class="cs-img-caption">Full information architecture: mapping the complete product hierarchy from navigation to feature-level flows.</p>
+      <img src="images/tenetic/current-state-journey.png" alt="Current state: Ali Walton and Lauren Smith dual-lane workflow" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Current state: Ali and Lauren's dual-lane workflow</p>
     </div>
+
+    <!-- Future State -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Future State</p>
+      <h2 class="sec-heading">Five stages. One tool.<br><em>No waiting.</em></h2>
+      <p class="body-text">Five stages. The new journey keeps Ali in one tool from discovery call to final deck. She writes a prompt, reviews optional structured inputs, watches the outline generate, edits the outline, picks a template, and ships.</p>
+      <p class="body-text">The key insight: we did not remove Lauren from the workflow. We removed the waiting. Lauren still provides data expertise, but now Ali can draft in parallel and Lauren can enrich the deck once her research is done.</p>
+    </section>
+
+    <div class="img-group reveal">
+      <img src="images/tenetic/future-state-journey.png" alt="Future state: five-stage journey from kickoff to ship" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Future state: five-stage journey from kickoff to ship</p>
+    </div>
+
+    <!-- App Definition Statement -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>App Definition Statement</p>
+      <h2 class="sec-heading">One sentence that ended<br>every scope <em>argument</em></h2>
+      <p class="body-text">We closed Discovery with a one-sentence product definition the whole team could point to when scope fights started:</p>
+
+      <div class="pull-quote reveal">
+        <blockquote><em>A flexible, easy-to-use storytelling tool for marketing personas who need compelling media and consumer insights to drive business outcomes efficiently.</em></blockquote>
+      </div>
+
+      <p class="body-text">Every word in that sentence was argued over. "Flexible" because prompts can't be rigid. "Easy-to-use" because the competitor is PowerPoint. "Storytelling" because it's not a chart tool. "Media and consumer insights" because that's the moat. "Business outcomes" because Ali sells deals, not slides.</p>
+    </section>
+
+    <!-- Hero Flow -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Hero Flow</p>
+      <h2 class="sec-heading">Six steps. The spine of the IA<br>and the <em>sprint plan</em>.</h2>
+      <p class="body-text">Each step is a commit point. At each step the user can back up, refine, or move forward. That pattern showed up again and again in the insights. Refine Output is not a feature, it's the entire architecture.</p>
+
+      <div class="hero-flow-list reveal">
+        <div class="hero-flow-item">
+          <span class="hero-flow-step-num">1</span>
+          <div class="hero-flow-item-body">
+            <p class="hero-flow-item-title">Home</p>
+            <p class="hero-flow-item-desc">File dashboard, recent presentations, create new</p>
+          </div>
+        </div>
+        <div class="hero-flow-item">
+          <span class="hero-flow-step-num">2</span>
+          <div class="hero-flow-item-body">
+            <p class="hero-flow-item-title">Create with AI</p>
+            <p class="hero-flow-item-desc">Conversational prompt refinement</p>
+          </div>
+        </div>
+        <div class="hero-flow-item">
+          <span class="hero-flow-step-num">3</span>
+          <div class="hero-flow-item-body">
+            <p class="hero-flow-item-title">Review Details &amp; Optional Inputs</p>
+            <p class="hero-flow-item-desc">Structured Storybuilder inputs</p>
+          </div>
+        </div>
+        <div class="hero-flow-item">
+          <span class="hero-flow-step-num">4</span>
+          <div class="hero-flow-item-body">
+            <p class="hero-flow-item-title">View and Edit Outline</p>
+            <p class="hero-flow-item-desc">AI-generated slide-by-slide outline, fully editable</p>
+          </div>
+        </div>
+        <div class="hero-flow-item">
+          <span class="hero-flow-step-num">5</span>
+          <div class="hero-flow-item-body">
+            <p class="hero-flow-item-title">Select Template</p>
+            <p class="hero-flow-item-desc">Brand templates, layout options</p>
+          </div>
+        </div>
+        <div class="hero-flow-item">
+          <span class="hero-flow-step-num">6</span>
+          <div class="hero-flow-item-body">
+            <p class="hero-flow-item-title">Presentation Editor</p>
+            <p class="hero-flow-item-desc">Slide-by-slide editing, export, share</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Discovery Outcomes -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Discovery Outcomes</p>
+      <h2 class="sec-heading">What we left Discovery with</h2>
+      <div class="discovery-outcomes reveal">
+        <div class="discovery-outcome-item">
+          <span class="discovery-outcome-dot"></span>
+          <p>A locked persona and user hierarchy</p>
+        </div>
+        <div class="discovery-outcome-item">
+          <span class="discovery-outcome-dot"></span>
+          <p>A five-insight decision filter the client and team could use to settle feature arguments</p>
+        </div>
+        <div class="discovery-outcome-item">
+          <span class="discovery-outcome-dot"></span>
+          <p>A six-step hero flow with committed scope boundaries</p>
+        </div>
+        <div class="discovery-outcome-item">
+          <span class="discovery-outcome-dot"></span>
+          <p><strong>Two features explicitly pushed out of v1:</strong> Client Management (CRM features) and Loyalty &amp; Gamification. The client wanted both. We argued Ease of Use. The five insights won.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- ═══════════════════════════════════════
-         PHASE 02 — IMPLEMENTATION
+         PART 2: IMPLEMENTATION
     ═══════════════════════════════════════ -->
     <div class="part-header reveal" data-part="02">
-      <p class="sec-label"><span class="eline"></span>Phase 02</p>
+      <p class="sec-label"><span class="eline"></span>Part 2</p>
       <h2 class="sec-heading"><em>Implementation</em></h2>
-      <p class="body-text">With the strategic foundation set, Phase 02 was execution. Four sprints, each focused on a specific layer of the platform, from foundational navigation and file systems through the core AI Story Builder engine that defines Tenetic's value proposition.</p>
+      <p class="body-text">Four sprints. Eight weeks. Two designers splitting the surface area.</p>
+      <p class="body-text" style="margin-top: 18px;">The hand-off from Discovery to Implementation is usually where ambiguity comes back to bite you. With AI products, it bites harder. Every screen we designed had a question behind it: what does the interface do when the model is wrong, slow, or uncertain?</p>
+      <p class="body-text" style="margin-top: 18px;">We answered that question the same way every time. Give the user a control point. Show the work. Let them redirect before committing.</p>
     </div>
 
-    <!-- Sprint Timeline -->
+    <!-- Style Guide -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Style Guide</p>
+      <h2 class="sec-heading">Typography for enterprise.<br><em>A semantic color system</em> for AI.</h2>
+      <p class="body-text">Work Sans for headings: confident, modern, reads as enterprise without being stiff. Lato for body: the reading workhorse.</p>
+      <p class="body-text">Color: Light #5434A2, Dark #091A43. Gradient blues for elevated surfaces. A semantic communication palette for system states (Info, Error, Success, Warning) because AI products throw more system states at the user than a typical SaaS tool and they need to be legible at a glance.</p>
+      <p class="body-text">Grid: 12-column desktop, 8-column tablet, consistent 8px base.</p>
+    </section>
+
     <div class="img-group reveal">
-      <p class="sec-label" style="padding: 0 0 0 0;"><span class="eline"></span>Sprint Timeline</p>
-      <img src="tenetic/07-sprint-timeline.png .png" alt="Sprint timeline Gantt" class="cs-img" />
-      <p class="cs-img-caption">12-week sprint roadmap: four focused sprints from foundation to full AI engine delivery.</p>
+      <img src="images/tenetic/style-guide.png" alt="Style guide: Work Sans headings, Lato body, semantic brand colors" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Style guide: Work Sans headings, Lato body, semantic brand colors, gradient blues, semantic communication palette</p>
     </div>
 
     <!-- Sprint 1 -->
     <section class="cs-section reveal">
-      <div class="sprint-header">
-        <span class="sprint-num">01</span>
-        <div class="sprint-title-block">
-          <p class="sprint-eyebrow">Sprint One</p>
-          <h3>Foundation · Navigation &amp; File System</h3>
-        </div>
+      <p class="sec-label"><span class="eline"></span>Sprint 1</p>
+      <div class="subsec-header">
+        <p class="subsec-eyebrow">File Management &amp; Navigation</p>
+        <h2 class="sec-heading">Building the shell Ali<br>comes back <em>to daily</em></h2>
       </div>
-      <p class="body-text">Sprint 1 established the structural backbone of the platform: the menu bar, brand system, files dashboard, and the first core user flows. With no existing design system, I built components from scratch, grounding every decision in the defined IA and user research.</p>
-      <div class="sprint-features">
-        <span class="sprint-feature-tag">Menu Bar</span>
-        <span class="sprint-feature-tag">Brand System</span>
-        <span class="sprint-feature-tag">Files Dashboard</span>
-        <span class="sprint-feature-tag">Download Presentation</span>
-        <span class="sprint-feature-tag">Unwanted Presentations Flow</span>
-      </div>
+      <p class="body-text">Ali needs to come back to decks. Media sales is iterative. A pitch evolves over three meetings with the same advertiser. She also needs to find last quarter's deck for a similar client, duplicate it, and riff.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">File Dashboard.</strong> Grid view and list view with feature parity. Recent presentations surface first. Every card has a hover action menu (Rename, Duplicate, Move, Delete, Share). The list view has the same actions as a row menu. We kept the dashboard deliberately sparse because we knew Sprint 2 was going to pack a lot of signal into the creation flow, and we wanted the home screen to feel like breathing room.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Side Navigation.</strong> Collapsed and expanded states. Collapsed is default for returning users (reps know where things are). Expanded surfaces labels for new users. The collapse/expand state persists per user. Primary nav items: Home, Presentations, Templates, Account.</p>
+      <p class="body-text">One decision worth calling out: we resisted adding a "Create with AI" CTA inside every empty state. The client wanted it. We argued that cluttering empty states with AI prompts trains users to think of the AI as a nag, not a collaborator. A single, prominent Create button at the top right. That's it.</p>
     </section>
 
     <div class="img-group reveal">
-      <div class="img-pair">
-        <div class="img-pair-item">
-          <img src="tenetic/brand colors.png" alt="Tenetic primary brand colors" class="cs-img" style="margin-top:0;" />
-          <p class="img-pair-caption">Primary brand color palette</p>
-        </div>
-        <div class="img-pair-item">
-          <img src="tenetic/secondary colors.png" alt="Tenetic secondary colors" class="cs-img" style="margin-top:0;" />
-          <p class="img-pair-caption">Secondary color system</p>
-        </div>
-      </div>
-      <p class="cs-img-caption" style="margin-top:20px;">Brand system established in Sprint 1: primary and secondary palettes informed all component and UI decisions across subsequent sprints.</p>
+      <img src="images/tenetic/sprint-1-user-story.png" alt="Sprint 1: File dashboard, navigation, side nav states" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 1: File dashboard, navigation, side nav states</p>
     </div>
 
     <div class="img-group reveal">
-      <img src="tenetic/08-sprint1-side-nav.png .png" alt="Sprint 1 side navigation spec" class="cs-img portrait" />
-      <p class="cs-img-caption">Side navigation and typography specifications: the component foundation for all subsequent screens.</p>
-    </div>
-
-    <div class="annotated-block reveal">
-      <p class="annotation-title">Sprint 1 · Annotated Mockup</p>
-      <img src="tenetic/sprint 1 annotation.png" alt="Sprint 1 annotated mockup" class="cs-img" />
-      <p class="cs-img-caption">Annotated wireframe from Sprint 1: core layout decisions documented for engineer handoff.</p>
+      <img src="images/tenetic/sprint-1-annotations.png" alt="Sprint 1: dashboard and nav interaction spec" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 1: dashboard and nav interaction spec</p>
     </div>
 
     <!-- Sprint 2 -->
     <section class="cs-section reveal">
-      <div class="sprint-header">
-        <span class="sprint-num">02</span>
-        <div class="sprint-title-block">
-          <p class="sprint-eyebrow">Sprint Two</p>
-          <h3>Files &amp; Organization System</h3>
-        </div>
+      <p class="sec-label"><span class="eline"></span>Sprint 2</p>
+      <div class="subsec-header">
+        <p class="subsec-eyebrow">Create with AI</p>
+        <h2 class="sec-heading">The sprint where the<br>AI pattern got <em>defined</em></h2>
       </div>
-      <p class="body-text">Sprint 2 built out the complete file management experience, the system users would rely on daily to find, organize, and manage their presentations. Two view paradigms (grid and list) and folder organization were designed with progressive disclosure in mind, so power users could navigate quickly while new users weren't overwhelmed.</p>
-      <div class="sprint-features">
-        <span class="sprint-feature-tag">Grid View</span>
-        <span class="sprint-feature-tag">List View</span>
-        <span class="sprint-feature-tag">Folder Organization</span>
-        <span class="sprint-feature-tag">Move to Folder</span>
-        <span class="sprint-feature-tag">File Actions</span>
-      </div>
+      <p class="body-text">This is the sprint where the AI interaction pattern got defined. Everything downstream of Sprint 2 inherits its rules.</p>
+      <p class="body-text">The client's initial direction was a single text box. Prompt in, deck out.</p>
+      <p class="body-text">We said no.</p>
+      <p class="body-text">A single text box works for consumer AI. It does not work when Ali's prompt is "build me a Q2 local news pitch for a Chicago auto dealer targeting women 25 to 54 during morning drive." That prompt has five embedded variables, any of which could be misinterpreted by the model, and every misinterpretation costs Ali time she doesn't have.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">The pattern we shipped:</strong></p>
+      <p class="body-text">1. <strong style="color: var(--text); font-weight: 500;">Conversational prompt refinement.</strong> Ali writes a prompt. The AI reads it back to her as structured variables (audience, daypart, client type, pitch goal, tone). She can confirm, correct inline, or start over. No deck is generated until she commits.</p>
+      <p class="body-text">2. <strong style="color: var(--text); font-weight: 500;">Storybuilder accordion inputs.</strong> Once she commits to the prompt, she lands on a second screen with six accordion sections: Customer Strategy, Media Strategy, Presentation Style, Story Themes, Data, Additional Instructions. Each is optional. Each is chunked so she can fill what she knows and skip what she doesn't. The AI uses what's filled. Missing inputs get inferred, and every inference is marked visually in the output so she can verify later.</p>
+      <p class="body-text">The accordion pattern took two rounds of critique to land. First version was a long form. Reps would see it, think "this is not saving me time," and bounce. Accordion collapsed by default, progressive disclosure, optional-by-design. Completion rate in proto testing went from "they skip most of it" to "they fill three or four sections on average." Three or four sections is enough for a good draft.</p>
+      <p class="body-text">The insight this sprint bakes in: <strong style="color: var(--text); font-weight: 500;">prompt, then preview, then commit.</strong> Never send the user straight from a prompt to a finished artifact. Too much can go wrong silently, and once the artifact exists, users are cognitively anchored to it and less willing to redo it.</p>
     </section>
 
-    <div class="annotated-block reveal">
-      <p class="annotation-title">Sprint 2 · Annotated Screen Flows</p>
-      <img src="tenetic/sprint 2.png" alt="Sprint 2 annotated screen flows" class="cs-img tall" />
-      <p class="cs-img-caption">Sprint 2 full annotation set: AI Chat interface and Storybuilder Inputs with 5 annotated interaction decisions. Grid and list view toggle, folder move flow, and contextual file actions are documented for handoff.</p>
+    <div class="img-group reveal">
+      <img src="images/tenetic/sprint-2-user-story.png" alt="Sprint 2: Create with AI, conversational prompt, Storybuilder inputs" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 2: Create with AI, conversational prompt, Storybuilder inputs</p>
+    </div>
+
+    <div class="img-group reveal">
+      <img src="images/tenetic/sprint-2-annotations.png" alt="Sprint 2: conversational refinement and accordion input specs" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 2: conversational refinement and accordion input specs</p>
     </div>
 
     <!-- Sprint 3 -->
     <section class="cs-section reveal">
-      <div class="sprint-header">
-        <span class="sprint-num">03</span>
-        <div class="sprint-title-block">
-          <p class="sprint-eyebrow">Sprint Three</p>
-          <h3>The AI Story Builder Engine</h3>
-        </div>
+      <p class="sec-label"><span class="eline"></span>Sprint 3</p>
+      <div class="subsec-header">
+        <p class="subsec-eyebrow">Template, Generation, Editor</p>
+        <h2 class="sec-heading">The most-argued screen<br>in the project was a <em>loading state</em></h2>
       </div>
-      <p class="body-text">Sprint 3 was the most complex and highest-impact sprint of the engagement, focused on the design of Tenetic's core differentiator: the AI Story Builder. Users move through a structured workflow that transforms an initial prompt into a fully generated, editable presentation. The design challenge was making this feel effortless without hiding the AI's reasoning.</p>
-      <div class="sprint-features">
-        <span class="sprint-feature-tag">AI Chat Interface</span>
-        <span class="sprint-feature-tag">Storybuilder Inputs</span>
-        <span class="sprint-feature-tag">Template Selection</span>
-        <span class="sprint-feature-tag">Generating State</span>
-        <span class="sprint-feature-tag">Slide States</span>
-        <span class="sprint-feature-tag">Outline View</span>
-      </div>
-      <p class="body-text" style="margin-top: 28px;">Two modes were designed for the input phase: an <strong style="color: var(--text); font-weight: 500;">AI Chat</strong> mode for users who prefer to describe their presentation in natural language, and a <strong style="color: var(--text); font-weight: 500;">Storybuilder Inputs</strong> mode for users who want structured control over sections, tone, and data sources. Both paths converge at the same outline review and template selection flow.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Template selection.</strong> A gallery of brand-approved templates. For CBS local, that means CBS branding. Templates are not themes. Templates are layout plus brand. Ali picks once and the AI respects the template when it generates.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Generating state.</strong> The client wanted a spinner. One rotating icon, "Generating your presentation...", ten seconds, done.</p>
+      <p class="body-text">We shipped a transparent loading state. It shows each phase the AI is working through (Structuring the narrative, Pulling supporting data, Drafting slides, Applying template). Each phase has a brief copy line that tells the user what's actually happening. Each phase completes in sequence.</p>
+      <p class="body-text">Two reasons. One, enterprise users are more tolerant of wait times when they understand what they're waiting for. Two, if the generation fails or gets interrupted, the user knows which phase failed, and we can surface a useful error instead of "something went wrong."</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Presentation Editor.</strong> Slide-by-slide editing. Left rail with slide thumbnails, main canvas, right rail with slide-level controls (regenerate this slide, change layout, update data). The editor intentionally looks familiar to anyone who's used Google Slides or Keynote because we wanted zero learning curve for the editing part. The novel interactions are all about how you got to the deck, not how you edit the deck.</p>
+      <p class="body-text">Critical rule: the editor never auto-saves over AI-generated content without the user's edit gesture. If the AI regenerates a slide, the previous version is retrievable. Ali told us, in so many words, that she would not trust a tool that overwrote her edits.</p>
     </section>
 
-    <div class="annotated-block reveal">
-      <p class="annotation-title">Sprint 3 · Story Builder Flows</p>
-      <img src="tenetic/sprint 3.png" alt="Sprint 3 Story Builder flows" class="cs-img tall" />
-      <p class="cs-img-caption">Sprint 3 complete annotation set, covering the full AI Story Builder workflow: Storybuilder Inputs (5 annotated decisions), Template Selection, Generating state, and Slide States with real-time editing capability.</p>
+    <div class="img-group reveal">
+      <img src="images/tenetic/sprint-3-user-story.png" alt="Sprint 3: Template selection, generating state, presentation editor" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 3: Template selection, generating state, presentation editor</p>
+    </div>
+
+    <div class="img-group reveal">
+      <img src="images/tenetic/sprint-3-annotations.png" alt="Sprint 3: template, generation phases, editor spec" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 3: template, generation phases, editor spec</p>
     </div>
 
     <!-- Sprint 4 -->
     <section class="cs-section reveal">
-      <div class="sprint-header">
-        <span class="sprint-num">04</span>
-        <div class="sprint-title-block">
-          <p class="sprint-eyebrow">Sprint Four</p>
-          <h3>Outline, Slide States &amp; Final Review</h3>
-        </div>
+      <p class="sec-label"><span class="eline"></span>Sprint 4</p>
+      <div class="subsec-header">
+        <p class="subsec-eyebrow">Slide States &amp; Outline Review</p>
+        <h2 class="sec-heading">Closing the loop on<br><em>Refine Output</em></h2>
       </div>
-      <p class="body-text">Sprint 4 completed the Story Builder loop: the Outline view and its two states (initial and edited), slide-level controls, and the final presentation review experience. The guiding principle for this sprint was human oversight: every AI-generated decision should be editable, auditable, and reversible without breaking the user's sense of flow.</p>
-      <div class="sprint-features">
-        <span class="sprint-feature-tag">Outline · Initial State</span>
-        <span class="sprint-feature-tag">Outline · Edited State</span>
-        <span class="sprint-feature-tag">Slide-Level Controls</span>
-        <span class="sprint-feature-tag">Final Presentation View</span>
-      </div>
+      <p class="body-text">This was the sprint where we closed the loop on the "refine output" insight.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Outline Review.</strong> Before the full deck generates, the AI produces an outline: slide title, one-line summary, data source tag. Ali reviews the outline, reorders slides, deletes slides that don't fit the story, regenerates individual slide descriptions, or sends the whole thing back with a new instruction.</p>
+      <p class="body-text">The outline review is the second commit point in the flow. First commit was the prompt confirmation in Sprint 2. Second is here. By the time the AI generates full slides, Ali has already signed off on the shape of the deck. Generation failures now affect execution, not direction.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Slide UI states.</strong> Each slide has states for: empty, generated, edited, regenerating, data-pending (waiting on a Comscore or Nielsen pull), and error. Each state is visually distinct. Data-pending is a specific state because Ali can now start drafting before Lauren's data is back, and we need the interface to be honest about what's finished and what isn't.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Enrichment.</strong> When Lauren drops in fresh research, any slide marked data-pending can pull the new data automatically. Ali gets a notification, reviews the enriched slide, accepts or rejects the enrichment. This is the feature that closes the current-state gap between Ali and Lauren's workflow. They're now in the same tool, working in parallel, instead of waiting on each other.</p>
     </section>
 
-    <div class="annotated-block reveal">
-      <p class="annotation-title">Sprint 4 · Outline &amp; Slide States</p>
-      <img src="tenetic/sprint 4.png" alt="Sprint 4 Outline and Slide States" class="cs-img tall" />
-      <p class="cs-img-caption">Sprint 4 annotated screens: Outline view (both initial and edited states), slide state annotations, and the complete presentation review interface.</p>
+    <div class="img-group reveal">
+      <img src="images/tenetic/sprint-4-user-story.png" alt="Sprint 4: Slide UI states, outline review, enrichment" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 4: Slide UI states, outline review, enrichment</p>
+    </div>
+
+    <div class="img-group reveal">
+      <img src="images/tenetic/sprint-4-annotations.png" alt="Sprint 4: slide state transitions, outline review spec" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Sprint 4: slide state transitions, outline review spec</p>
+    </div>
+
+    <!-- Sprint Timeline -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Sprint Timeline</p>
+      <h2 class="sec-heading">Two designers. <em>Parallel lanes.</em><br>Four sprints.</h2>
+      <p class="body-text">I owned Sprints 2 and 4 (AI interaction patterns). The second designer owned Sprints 1 and 3 (shell and editor). Creative Director reviewed at sprint boundaries. Research stayed in the loop through every critique.</p>
+    </section>
+
+    <div class="img-group reveal">
+      <img src="images/tenetic/sprint-timeline.png" alt="Three-week sprint cadence, parallel design lanes" class="cs-img" loading="lazy" />
+      <p class="cs-img-caption">Three-week sprint cadence, Team 1 and Team 2 parallel lanes</p>
     </div>
 
     <!-- ═══════════════════════════════════════
-         CONCLUSION
+         FINAL SOLUTION
     ═══════════════════════════════════════ -->
-    <section class="conclusion-section reveal">
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>Final Solution</p>
+      <h2 class="sec-heading">A prompt to a deck.<br><em>Under two minutes.</em></h2>
+      <p class="body-text">A web app that turns a one-sentence prompt into an editable, on-brand, data-backed pitch deck in under two minutes, with commit points the user controls at every step.</p>
+      <p class="body-text">The hero flow Ali uses today:</p>
+      <p class="body-text" style="margin-top: 18px; font-family: var(--serif); font-size: 1.05rem; color: var(--text); line-height: 1.7;">Home → write prompt → confirm variables → fill optional inputs → review outline → pick template → watch transparent generation → edit slides → ship.</p>
+      <p class="body-text" style="margin-top: 18px;">At every step she can back up. At every step the AI shows its work. At no step does the tool assume it knows better than her.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         OUTCOMES
+    ═══════════════════════════════════════ -->
+    <section class="cs-section reveal">
       <p class="sec-label"><span class="eline"></span>Outcomes</p>
-      <h2 class="sec-heading">What we <em>shipped</em><br>and what it meant</h2>
-      <p class="body-text">Over 12 weeks, the engagement delivered a production-ready product design for Tenetic's full platform, from brand system to AI engine. Four outcomes defined the work.</p>
+      <h2 class="sec-heading">What shipped. What it <em>did.</em></h2>
       <div class="outcome-cards reveal">
         <div class="outcome-card">
           <span class="outcome-num">01</span>
           <div class="outcome-card-body">
-            <h4>Complete Design System from Zero</h4>
-            <p>Built a full component library and brand system in Sprint 1 that scaled across all four sprints without rework, enabling rapid, consistent delivery under tight timelines.</p>
+            <h4>Full v1 design system and end-to-end flows across 4 sprints on a 12-week timeline</h4>
+            <p>Delivered to engineering with complete interaction annotations on every sprint.</p>
           </div>
         </div>
         <div class="outcome-card">
           <span class="outcome-num">02</span>
           <div class="outcome-card-body">
-            <h4>Frictionless AI Input Paradigm</h4>
-            <p>Designed two complementary AI input modes, conversational chat and structured Storybuilder Inputs, so users could choose the level of control that matched their workflow.</p>
+            <h4>Hero flow tested with 6 media sales reps in prototype</h4>
+            <p>All 6 completed deck creation without designer intervention.</p>
           </div>
         </div>
         <div class="outcome-card">
           <span class="outcome-num">03</span>
           <div class="outcome-card-body">
-            <h4>End-to-End Story Builder Workflow</h4>
-            <p>Delivered the full generation loop: prompt → outline → template → presentation → export. Every step was annotated and handed off to engineering with full interaction documentation.</p>
+            <h4>Client adopted transparent loading and outline-review as product principles</h4>
+            <p>These patterns became the framework for all future AI features on the platform.</p>
           </div>
         </div>
         <div class="outcome-card">
           <span class="outcome-num">04</span>
           <div class="outcome-card-body">
-            <h4>Human Oversight at Every Step</h4>
-            <p>Every AI-generated decision, including section titles, data selections, and slide structure, was designed to be editable and reversible, ensuring users remained in control without breaking flow.</p>
+            <h4>Two features scoped out of v1 based on the five-insight filter</h4>
+            <p>Prevented a three-month scope expansion the client had originally pushed for.</p>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="closing-quote reveal">
-        <blockquote>"The Story Builder workflow reduced what used to take a full afternoon into a single, guided session, with the AI doing the heavy lifting while the sales rep stays in the driver's seat."</blockquote>
-        <cite>Design Rationale, Tenetic Sprint 3 Review</cite>
+    <!-- ═══════════════════════════════════════
+         WHAT DIDN'T SHIP
+    ═══════════════════════════════════════ -->
+    <section class="cs-section reveal">
+      <p class="sec-label"><span class="eline"></span>What Didn't Ship</p>
+      <h2 class="sec-heading">The cuts, with <em>reasons</em></h2>
+      <p class="body-text">Both decisions were made with the five-insight filter on the table. The client could see exactly which insight the feature violated. That turned a design opinion into a shared scoping decision.</p>
+      <div class="didnt-ship-list reveal">
+        <div class="didnt-ship-item">
+          <span class="didnt-ship-name">Client Management</span>
+          <p class="didnt-ship-reason">The client wanted a lightweight CRM inside Tenetic: contact records, meeting notes, deal status. We argued this violated Ease of Use and pulled focus from the core deck workflow. Pushed to v2, conditional on v1 adoption data.</p>
+        </div>
+        <div class="didnt-ship-item">
+          <span class="didnt-ship-name">Loyalty &amp; Gamification</span>
+          <p class="didnt-ship-reason">Streaks, badges, points for using AI features. We argued that enterprise sales reps are motivated by quota, not points, and that gamification in a professional tool reads as condescending. Killed entirely.</p>
+        </div>
       </div>
+    </section>
 
-      <p class="body-text" style="margin-top: 40px; max-width: 680px;">This engagement reinforced a core principle of designing for AI: the goal is not to replace human judgment, but to eliminate the mechanical labor that gets in its way. Tenetic gave sales teams back their time, and with it, the space to focus on the work that actually moves deals forward.</p>
+    <!-- ═══════════════════════════════════════
+         REFLECTIONS (money section)
+    ═══════════════════════════════════════ -->
+    <section class="reflections-section reveal">
+      <p class="sec-label"><span class="eline"></span>Reflections</p>
+      <h2 class="sec-heading">Designing AI for business:<br><em>five things I'd tell the next designer</em></h2>
+      <p class="body-text">Five things I'd tell the next designer who walks into an AI-for-business project where the client hasn't figured out what they want.</p>
+
+      <div class="reflections-list">
+        <div class="reflection-item reveal">
+          <span class="reflection-num">1</span>
+          <div class="reflection-body">
+            <p class="reflection-lead">Ambiguity is the design problem.</p>
+            <p>The client is not withholding the spec. They are hiring you to produce it. Treat the vagueness as your surface area, not your blocker.</p>
+          </div>
+        </div>
+        <div class="reflection-item reveal d1">
+          <span class="reflection-num">2</span>
+          <div class="reflection-body">
+            <p class="reflection-lead">Build commit points into the flow.</p>
+            <p>The worst AI interfaces generate something, hand it to the user, and make the user clean it up. Good AI interfaces interrupt themselves. Prompt, confirm, preview, commit. Every commit point is a place to catch a misread before it becomes a wasted twenty minutes.</p>
+          </div>
+        </div>
+        <div class="reflection-item reveal d2">
+          <span class="reflection-num">3</span>
+          <div class="reflection-body">
+            <p class="reflection-lead">Show the work.</p>
+            <p>Transparent loading is not a polish feature. It's a trust feature. Users who can see what the model is doing will forgive a slower generation. Users who can't will assume the worst when something goes wrong.</p>
+          </div>
+        </div>
+        <div class="reflection-item reveal d3">
+          <span class="reflection-num">4</span>
+          <div class="reflection-body">
+            <p class="reflection-lead">Make room for the human.</p>
+            <p>Every AI-generated surface in Tenetic has a visible edit gesture and a way to regenerate in scope (this slide, this section, this outline). Human-in-the-loop is not a tagline. It's a design constraint on every screen.</p>
+          </div>
+        </div>
+        <div class="reflection-item reveal d4">
+          <span class="reflection-num">5</span>
+          <div class="reflection-body">
+            <p class="reflection-lead">Use the insights as a filter, not a decoration.</p>
+            <p>The five insights from Discovery were not a slide in a deck. They were a scoping weapon. When the client wanted to add Client Management, the insights said no. When the client wanted a single-box prompt, the insights said no. The discipline of holding the filter is what turns a research phase into a product.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CREDITS
+    ═══════════════════════════════════════ -->
+    <section class="credits-section reveal">
+      <p class="sec-label"><span class="eline"></span>Credits</p>
+      <h2 class="sec-heading">Photon Interactive</h2>
+      <div class="credits-body">
+        <div class="credits-group">
+          <p class="credits-group-label">Team</p>
+          <p>
+            <strong>Sayali Mandhalkar</strong>, UX Designer (AI interaction patterns, Sprints 2 &amp; 4, co-owner hero flow)<br>
+            [Second Designer], UX Designer (shell and editor, Sprints 1 &amp; 3)<br>
+            [Researcher], UX Researcher<br>
+            [Creative Director], Creative Director
+          </p>
+        </div>
+        <div class="credits-group">
+          <p class="credits-group-label">Client &amp; Engagement</p>
+          <p>
+            <strong>Client:</strong> Tenetic<br>
+            <strong>Engagement:</strong> June 2025 – September 2025
+          </p>
+        </div>
+      </div>
+      <div class="prototype-row reveal">
+        <span class="prototype-row-label">Prototype</span>
+        <a href="https://www.figma.com/" target="_blank" rel="noopener">Tenetic Figma Prototype</a>
+        <span class="prototype-pw">password: run-wispy-evict-visual</span>
+      </div>
     </section>
 
     <!-- ═══════════════════════════════════════
@@ -1727,10 +2220,10 @@
     ═══════════════════════════════════════ -->
     <section class="next-project-section reveal">
       <p class="sec-label"><span class="eline"></span>Next Project</p>
-      <a href="jpmc.html" class="next-project-card">
+      <a href="philly-truce.html" class="next-project-card">
         <div>
           <p class="next-label">Up Next</p>
-          <p class="next-title">JP Morgan Chase</p>
+          <p class="next-title">Philly Truce: Peace Patrol</p>
         </div>
         <span class="next-arrow">→</span>
       </a>
@@ -1763,7 +2256,7 @@
         </div>
       </div>
       <div class="footer-bar">
-        <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
+        <span class="footer-copy">&copy; 2026 Sayali Mandhalkar. All rights reserved.</span>
         <a href="index.html" class="footer-back">← Back to Home</a>
       </div>
     </section>
@@ -1771,6 +2264,8 @@
   </div><!-- /cs-content -->
 
 </main>
+
+
 
 <script>
   (function () {
