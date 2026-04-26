@@ -647,19 +647,12 @@
 
     /* ── PART HEADER ── */
     .part-header {
-      padding: 80px 100px 0;
+      padding: 72px 100px 48px;
       position: relative;
+      border-top: 1px solid rgba(201,169,110,0.18);
+      background: linear-gradient(180deg, rgba(201,169,110,0.03) 0%, transparent 55%);
     }
-    .part-header::after {
-      content: attr(data-part);
-      font-family: var(--serif);
-      font-size: clamp(80px, 14vw, 180px);
-      font-weight: 300;
-      color: rgba(201,169,110,0.04);
-      position: absolute; right: 80px; top: 40px;
-      line-height: 1; letter-spacing: 0.04em;
-      pointer-events: none; user-select: none;
-    }
+    .part-header::after { display: none; }
 
     /* ── TWO-COL TEXT LAYOUT ── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; align-items: start; }
@@ -1756,6 +1749,22 @@
       flex-shrink: 0;
     }
 
+    /* ── Part number badge ── */
+    .part-num {
+      font-family: var(--serif);
+      font-size: clamp(56px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1);
+      margin-bottom: 18px;
+      display: block;
+    }
+    .part-header.visible .part-num { opacity: 0.28; transform: translateX(0); }
+
     /* ── Side-by-side image pair ── */
     .img-pair-group {
       padding: 0 100px;
@@ -1924,11 +1933,10 @@
          PART 01: DISCOVERY
     ═══════════════════════════════════════ -->
     <div class="part-header reveal" data-part="01">
+      <span class="part-num" aria-hidden="true">01</span>
       <p class="sec-label"><span class="eline"></span>Part 01</p>
       <h2 class="sec-heading">From Hypothesis to<br><em>Product Shape</em></h2>
-      <p class="body-text">A four-week Creative Discovery sprint that the three designers ran together with the Creative Director. No separate research team. We owned the interviews, the affinity mapping, the synthesis, the persona, and the competitive audit.</p>
-      <p class="body-text" style="margin-top: 18px;">Discovery on this product was harder than usual, and it's worth being honest about why. We could not find a single team that had designed an AI deck-builder for media sales reps before. The competitive set we audited was full of general-purpose tools, none of which understood dayparts, audience targeting, or how a media buy actually gets pitched. We had to build the mental model of the user from scratch and then figure out where AI should sit inside it, with no prior art to lean on. That meant slower discovery than budgeted, more interviews than scoped, and a lot of conversations with the client about what should be in v1 and what should wait.</p>
-      <p class="body-text" style="margin-top: 18px;">What came out of it was a filter we used to settle every feature debate after that.</p>
+      <p class="body-text">Four weeks. Three designers, one Creative Director, no separate research team. We owned the interviews, synthesis, persona, and competitive audit. No prior art existed for an AI deck-builder in media sales, so we built the user's mental model from scratch. What came out of it was a filter we used to settle every feature debate after that.</p>
     </div>
 
     <!-- Five Insights -->
@@ -2097,10 +2105,10 @@
          PART 02: IMPLEMENTATION
     ═══════════════════════════════════════ -->
     <div class="part-header reveal" data-part="02">
+      <span class="part-num" aria-hidden="true">02</span>
       <p class="sec-label"><span class="eline"></span>Part 02</p>
       <h2 class="sec-heading">Designing AI as a <em>Collaborator,</em><br>Not a Black Box</h2>
-      <p class="body-text">Four sprints of Implementation. Eight weeks. Three designers working in parallel inside every sprint, splitting screens by surface area rather than by week. Engineering and the Tenetic BAs sat in on every critique to flag feasibility and business rules early. The client ran a UX review and a UI review at the close of every sprint.</p>
-      <p class="body-text" style="margin-top: 18px;">There are five questions every AI screen has to answer in shipping detail. We worked from these as a checklist on every critique.</p>
+      <p class="body-text">Four sprints, eight weeks. Three designers in parallel, splitting screens by surface area. Engineering and BAs in every critique. Client UX and UI review at close of each sprint. Five questions on every screen — these were the checklist.</p>
 
       <div class="ai-questions reveal" style="margin-top: 32px;">
         <div class="ai-question-item">
@@ -2176,13 +2184,11 @@
         <p class="subsec-eyebrow">Create with AI</p>
         <h2 class="sec-heading">The sprint that defined<br>every <em>AI pattern downstream</em></h2>
       </div>
-      <p class="body-text">This sprint defined every AI interaction pattern downstream. Most of the patterns we kept reaching for in later sprints came out of arguments that happened here.</p>
-      <p class="body-text">The client originally wanted a single text box. Prompt in, deck out, ChatGPT-style. We pushed back through the entire first week of the sprint. The reasoning we eventually landed on: a single text box works for consumer AI because the user's intent is exploratory and the cost of a bad output is low. In media sales, a typical prompt looks like "build me a Q2 local news pitch for a Chicago auto dealer targeting women 25 to 54 during morning drive." That sentence has five embedded variables, every one of which the model could misread, and every misread costs Ali twenty minutes of rework. With four to six decks a week, the misreads compound fast.</p>
-      <p class="body-text">In AI UX research, business users tend to prefer conversational interfaces for exploration and structured forms for repeatable high-stakes work. We used both, on purpose, in the same flow.</p>
-      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Conversational refinement (the open mode).</strong> Ali types her prompt. The AI parses it and reads the variables back to her as a structured summary. She confirms inline or corrects, and nothing generates until she commits. The interface negotiates the prompt with her, so she never has to learn how to write one. Prompt engineering, exposed as UI.</p>
-      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Storybuilder accordion (the structured mode).</strong> Six optional sections (Customer Strategy, Media Strategy, Presentation Style, Story Themes, Data, Additional Instructions). Collapsed by default, progressive disclosure, optional by design. Each section maps to a schema-bound input, which constrains the model to known media-sales variables (audiences, dayparts, genres, KPIs) instead of free-text guessing. Schema-binding turned out to be the single biggest hallucination reducer we shipped.</p>
-      <p class="body-text">The accordion took two rounds of critique to land. The first version was a long form, and reps in proto testing took one look at it and bounced. Collapsing by default and treating every section as optional doubled completion.</p>
-      <p class="body-text">There's one more reason we built the conversational summary step before generation: output anchoring. Once an AI artifact exists, users get cognitively attached to it and become reluctant to redo it, even when they should. Inserting a "confirm what I heard" step moves the anchoring point upstream onto a structured summary the user owns, which makes redirecting cheap. Most teams skip this and pay for it in user complaints later.</p>
+      <p class="body-text">This sprint defined every AI interaction pattern downstream. The client wanted a single text box — prompt in, deck out. We pushed back. In media sales, a prompt like "Q2 local news pitch for a Chicago auto dealer targeting women 25–54 during morning drive" has five embedded variables. Every misread costs Ali twenty minutes. With four to six decks a week, misreads compound.</p>
+      <p class="body-text">We shipped two modes in the same flow: conversational for exploration, structured for repeatable high-stakes work.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Conversational refinement.</strong> Ali types her prompt. The AI reads the variables back as a structured summary. She confirms or corrects, nothing generates until she commits. Prompt engineering, exposed as UI.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Storybuilder accordion.</strong> Six optional sections, collapsed by default. Each maps to a schema-bound input — audiences, dayparts, genres, KPIs — instead of free-text guessing. Schema-binding was the single biggest hallucination reducer we shipped. First version was a long open form; reps bounced on sight. Collapsing by default and making every section optional doubled completion.</p>
+      <p class="body-text">One more reason for the confirm step: output anchoring. Once an AI artifact exists, users get attached and won't redo it even when they should. Moving the anchor point upstream onto a summary the user owns makes redirecting cheap.</p>
     </section>
 
     <div class="img-pair-group reveal">
@@ -2231,12 +2237,10 @@
         <h2 class="sec-heading">Closing the loop on<br><em>Refine Output</em></h2>
       </div>
       <p class="body-text">This sprint closed the loop on Refine Output and built in two patterns I now treat as defaults for any AI generation product.</p>
-      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Outline review as a cheap commit point.</strong> The AI's first artifact in this flow isn't a deck. It's an outline. Slide title, one-line summary, data source tag, that's it. Ali reviews, reorders, deletes slides, regenerates individual lines, or sends the whole outline back with new instructions. By the time full slides generate, the structure is locked. Generation failures now affect execution, and execution failures are recoverable in seconds. Direction failures cost twenty minutes per regeneration, so making structure cheap to negotiate first saves the user real time.</p>
-      <p class="body-text">This is supported by a finding from AI usability research: editing AI output is harder than starting over when the AI got the structure wrong. The design move is to negotiate structure first, on a cheap artifact, and only spend the model's tokens on full generation once structure is locked.</p>
-      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Slide states as the AI failure surface.</strong> Standard SaaS apps have two states per object, loading and loaded. AI products need at least six. Ours: empty, generated, edited, regenerating, data-pending, and error-recoverable. Each has a distinct visual treatment so Ali always knows which slides are her work, which are model-generated, which are waiting on Lauren's research, and which need her attention.</p>
-      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Data-pending and HOTL/HITL granularity.</strong> Ali drafts before Lauren's research lands. When the data arrives, data-pending slides auto-enrich. The model proposes an updated slide; Ali accepts, rejects, or edits. The user is on the loop continuously and in the loop at the commit gate. For high-stakes business artifacts, this is the right granularity. Approving every keystroke would be exhausting, and letting the AI commit final state without a human gate would be unsafe.</p>
-      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Inferred vs. user-provided values, marked.</strong> Wherever the model filled in a variable Ali didn't supply (a daypart she didn't specify, an audience the model assumed), the slide carries a subtle marker. She can hover to see what was inferred and override in one click. This is trust calibration: the interface tells the user where the model is guessing so the user can audit only those points. Without it, reps either over-trust the output and ship a bad number, or under-trust it and re-do everything anyway.</p>
-      <p class="body-text">The slide editor also enforces data grounding. Every Nielsen, Comscore, or MRI number on a generated slide carries its source citation. Reps need to defend numbers in front of advertisers, and an unattributed number is unusable in client-facing work. Data grounding was the single thing that made the legal review approve the tool for use with paying clients.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Outline review as a cheap commit point.</strong> The AI's first artifact isn't a deck — it's an outline. Slide title, one-line summary, data source tag. Ali reviews, reorders, regenerates individual lines, or sends it back with new instructions. Structure locks before any full slide generates. Direction failures cost twenty minutes; execution failures are recoverable in seconds. Negotiate structure first.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Slide states as the AI failure surface.</strong> Standard SaaS has two states: loading and loaded. AI products need at least six. Ours: empty, generated, edited, regenerating, data-pending, error-recoverable. Each has a distinct visual treatment so Ali always knows what's her work, what's model-generated, and what needs attention.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Data-pending and HOTL/HITL granularity.</strong> Ali drafts before Lauren's research lands. When data arrives, pending slides auto-enrich. The model proposes; Ali accepts, rejects, or edits. Human on the loop continuously, human in the loop at the commit gate.</p>
+      <p class="body-text"><strong style="color: var(--text); font-weight: 500;">Inferred vs. user-provided values, marked.</strong> Where the model filled in a variable Ali didn't supply, the slide carries a subtle marker. Hover to see what was inferred, override in one click. Without this, reps either over-trust and ship a bad number, or under-trust and redo everything. Data grounding was the single thing that made legal approve the tool for client-facing use.</p>
     </section>
 
     <div class="img-pair-group reveal">
