@@ -647,12 +647,62 @@
 
     /* ── PART HEADER ── */
     .part-header {
-      padding: 72px 100px 48px;
+      padding: 80px 100px 64px 140px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
       position: relative;
-      border-top: 1px solid rgba(201,169,110,0.18);
-      background: linear-gradient(180deg, rgba(201,169,110,0.03) 0%, transparent 55%);
+      overflow: hidden;
     }
-    .part-header::after { display: none; }
+    .part-header::after {
+      content: attr(data-part);
+      font-family: var(--serif);
+      font-size: clamp(100px, 16vw, 220px);
+      font-weight: 300;
+      position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+      line-height: 1; letter-spacing: -0.03em;
+      pointer-events: none; user-select: none;
+      background: linear-gradient(105deg,
+        rgba(201,169,110,0.22) 0%, rgba(201,169,110,0.22) 38%,
+        rgba(245,230,192,0.55) 48%, rgba(255,253,247,0.65) 52%,
+        rgba(201,169,110,0.22) 58%, rgba(201,169,110,0.22) 100%);
+      background-size: 300% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 3.6s ease-in-out infinite;
+    }
+    @keyframes shimmerText {
+      0%   { background-position: 200% 0; }
+      50%  { background-position: -50% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .ph-label {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+    }
+    .ph-label::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold); opacity: 0.8; }
+    .ph-title {
+      font-family: var(--serif); font-size: clamp(36px, 4.5vw, 60px);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--text); position: relative; z-index: 1;
+    }
+    .ph-title em { font-style: italic; color: var(--gold); }
+    .ph-pull {
+      font-family: var(--serif); font-size: clamp(17px, 1.5vw, 21px);
+      font-weight: 300; font-style: italic; color: var(--text);
+      line-height: 1.7; border-left: 2px solid var(--gold);
+      padding-left: 24px; margin: 20px 0 16px; max-width: 640px;
+      position: relative; z-index: 1;
+    }
+    .ph-desc {
+      max-width: 640px; font-size: 0.94rem; line-height: 1.85;
+      color: var(--muted); position: relative; z-index: 1;
+    }
+    @media (max-width: 960px) {
+      .part-header { padding: 56px 28px 48px; }
+      .part-header::after { font-size: 80px; right: 20px; }
+    }
 
     /* ── TWO-COL TEXT LAYOUT ── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; align-items: start; }
@@ -1749,22 +1799,6 @@
       flex-shrink: 0;
     }
 
-    /* ── Part number badge ── */
-    .part-num {
-      font-family: var(--serif);
-      font-size: clamp(56px, 7vw, 88px);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: var(--gold);
-      opacity: 0;
-      transform: translateX(-16px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1);
-      margin-bottom: 18px;
-      display: block;
-    }
-    .part-header.visible .part-num { opacity: 0.28; transform: translateX(0); }
-
     /* ── Side-by-side image pair ── */
     .img-pair-group {
       padding: 0 100px;
@@ -1933,10 +1967,10 @@
          PART 01: DISCOVERY
     ═══════════════════════════════════════ -->
     <div class="part-header reveal" data-part="01">
-      <span class="part-num" aria-hidden="true">01</span>
-      <p class="sec-label"><span class="eline"></span>Part 01</p>
-      <h2 class="sec-heading">From Hypothesis to<br><em>Product Shape</em></h2>
-      <p class="body-text">Four weeks. Three designers, one Creative Director, no separate research team. We owned the interviews, synthesis, persona, and competitive audit. No prior art existed for an AI deck-builder in media sales, so we built the user's mental model from scratch. What came out of it was a filter we used to settle every feature debate after that.</p>
+      <p class="ph-label">Part 01 of 02 · Discovery</p>
+      <h2 class="ph-title">From Hypothesis to <em>Product Shape.</em></h2>
+      <p class="ph-pull">No prior art. No competitor to reference. We built the user's mental model for an AI deck-builder in media sales from scratch.</p>
+      <p class="ph-desc">Four weeks. Three designers, one Creative Director, no separate research team. We owned the interviews, synthesis, persona, and competitive audit. What came out was a filter we used to settle every feature debate after that.</p>
     </div>
 
     <!-- Five Insights -->
@@ -2105,10 +2139,10 @@
          PART 02: IMPLEMENTATION
     ═══════════════════════════════════════ -->
     <div class="part-header reveal" data-part="02">
-      <span class="part-num" aria-hidden="true">02</span>
-      <p class="sec-label"><span class="eline"></span>Part 02</p>
-      <h2 class="sec-heading">Designing AI as a <em>Collaborator,</em><br>Not a Black Box</h2>
-      <p class="body-text">Four sprints, eight weeks. Three designers in parallel, splitting screens by surface area. Engineering and BAs in every critique. Client UX and UI review at close of each sprint. Five questions on every screen — these were the checklist.</p>
+      <p class="ph-label">Part 02 of 02 · Implementation</p>
+      <h2 class="ph-title">Designing AI as a <em>Collaborator,</em><br>Not a Black Box.</h2>
+      <p class="ph-pull">Five questions on every AI screen. If you can't answer them, the screen isn't done.</p>
+      <p class="ph-desc">Four sprints, eight weeks. Three designers in parallel, splitting screens by surface area. Engineering and BAs in every critique. Client UX and UI review at close of each sprint.</p>
 
       <div class="ai-questions reveal" style="margin-top: 32px;">
         <div class="ai-question-item">
