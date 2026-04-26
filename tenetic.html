@@ -1756,6 +1756,20 @@
       flex-shrink: 0;
     }
 
+    /* ── Side-by-side image pair ── */
+    .img-pair-group {
+      padding: 0 100px;
+      margin-bottom: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .img-pair-group .cs-img { margin-top: 0; }
+    @media (max-width: 960px) {
+      .img-pair-group { grid-template-columns: 1fr; padding: 0 28px; }
+    }
+
     /* ── Subsec header ── */
     .subsec-header {
       margin-bottom: 20px;
@@ -1958,7 +1972,7 @@
     </div>
 
     <!-- Competitive Audit -->
-    <section class="cs-section reveal">
+    <section class="cs-section reveal" style="padding-bottom: 12px;">
       <p class="sec-label"><span class="eline"></span>The Market Gap</p>
       <h2 class="sec-heading">Five tools audited.<br>None of them <em>spoke media-sales fluently.</em></h2>
     </section>
@@ -1974,13 +1988,13 @@
     </section>
 
     <!-- Persona -->
-    <section class="cs-section reveal">
+    <section class="cs-section reveal" style="padding-bottom: 12px;">
       <p class="sec-label"><span class="eline"></span>Primary Persona</p>
       <h2 class="sec-heading">Meet <em>Ali</em></h2>
     </section>
 
     <div class="img-group reveal">
-      <img src="images/tenetic/persona-ali-walton.png" alt="Ali Walton, 36, Senior Sales Rep at a CBS local station in Chicago" class="cs-img" loading="lazy" />
+      <img src="images/tenetic/persona-ali-walton.png" alt="Ali Walton, 36, Senior Sales Rep at a CBS local station in Chicago" class="cs-img" style="max-width: 720px;" loading="lazy" />
       <p class="cs-img-caption">Ali Walton, 36, Senior Sales Rep at a CBS local station in Chicago. Builds 4 to 6 custom decks a week.</p>
     </div>
 
@@ -2034,14 +2048,15 @@
       </div>
     </section>
 
-    <div class="img-group reveal">
-      <img src="images/tenetic/current-state-journey.png" alt="Current state: Ali and Lauren on parallel tracks with the wait gap that creates rework" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Current state. Ali and Lauren on parallel tracks with the wait gap that creates rework.</p>
-    </div>
-
-    <div class="img-group reveal">
-      <img src="images/tenetic/future-state-journey.png" alt="Future state: Ali stays in one tool from kickoff to ship" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Future state. Ali stays in one tool from kickoff to ship.</p>
+    <div class="img-pair-group reveal">
+      <div>
+        <img src="images/tenetic/current-state-journey.png" alt="Current state: Ali and Lauren on parallel tracks with the wait gap that creates rework" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Current state. Ali and Lauren on parallel tracks with the wait gap that creates rework.</p>
+      </div>
+      <div>
+        <img src="images/tenetic/future-state-journey.png" alt="Future state: Ali stays in one tool from kickoff to ship" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Future state. Ali stays in one tool from kickoff to ship.</p>
+      </div>
     </div>
 
     <!-- App Definition Statement -->
@@ -2125,7 +2140,7 @@
     </section>
 
     <div class="img-group reveal">
-      <img src="images/tenetic/style-guide.png" alt="Style guide: Work Sans headings, Lato body, semantic brand colors" class="cs-img" loading="lazy" />
+      <img src="images/tenetic/style-guide.png" alt="Style guide: Work Sans headings, Lato body, semantic brand colors" class="cs-img" style="max-width: 860px;" loading="lazy" />
       <p class="cs-img-caption">Work Sans for headings, Lato for body. Brand colors Light #5434A2 and Dark #091A43, with a semantic communication palette built specifically for AI system states.</p>
     </div>
 
@@ -2139,14 +2154,15 @@
       <p class="body-text">The shell. Where Ali comes back to her decks, finds last quarter's work, and starts something new.</p>
     </section>
 
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-1-user-story.png" alt="File dashboard, navigation, side nav states" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">File dashboard, navigation, side nav states.</p>
-    </div>
-
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-1-annotations.png" alt="Grid and list view feature parity, hover and row action menus, side nav collapse" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Grid and list view feature parity. Hover and row action menus. Side nav collapse state persists per user.</p>
+    <div class="img-pair-group reveal">
+      <div>
+        <img src="images/tenetic/sprint-1-user-story.png" alt="File dashboard, navigation, side nav states" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">File dashboard, navigation, side nav states.</p>
+      </div>
+      <div>
+        <img src="images/tenetic/sprint-1-annotations.png" alt="Grid and list view feature parity, hover and row action menus, side nav collapse" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Grid and list view feature parity. Hover and row action menus. Side nav collapse state persists per user.</p>
+      </div>
     </div>
 
     <section class="cs-section reveal">
@@ -2169,14 +2185,15 @@
       <p class="body-text">There's one more reason we built the conversational summary step before generation: output anchoring. Once an AI artifact exists, users get cognitively attached to it and become reluctant to redo it, even when they should. Inserting a "confirm what I heard" step moves the anchoring point upstream onto a structured summary the user owns, which makes redirecting cheap. Most teams skip this and pay for it in user complaints later.</p>
     </section>
 
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-2-user-story.png" alt="Create with AI: conversational prompt and Storybuilder accordion inputs" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Create with AI. Conversational prompt and Storybuilder accordion inputs.</p>
-    </div>
-
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-2-annotations.png" alt="Two distinct interaction modes: conversational refinement and structured form" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Two distinct interaction modes side by side. Conversational refinement (open) for prompt clarification, structured form (constrained) for repeatable inputs.</p>
+    <div class="img-pair-group reveal">
+      <div>
+        <img src="images/tenetic/sprint-2-user-story.png" alt="Create with AI: conversational prompt and Storybuilder accordion inputs" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Create with AI. Conversational prompt and Storybuilder accordion inputs.</p>
+      </div>
+      <div>
+        <img src="images/tenetic/sprint-2-annotations.png" alt="Two distinct interaction modes: conversational refinement and structured form" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Two distinct interaction modes side by side. Conversational refinement (open) for prompt clarification, structured form (constrained) for repeatable inputs.</p>
+      </div>
     </div>
 
     <div class="sprint-pq reveal" style="margin: 0 100px 56px;">
@@ -2195,14 +2212,15 @@
       <p class="body-text">Two more details baked into this screen. Cancel exists on the loading state because aborting a bad generation early is cheaper than waiting for it to finish and starting over. Cost matters here, because every regeneration burns API budget the client has to model into their pricing. And the editor itself was built to look like Slides or Keynote on purpose. The novel interactions in Tenetic are about how the deck got there. The editing surface should feel invisible, not innovative. AI tools that try to redesign the slide editor lose users on the first edit.</p>
     </section>
 
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-3-user-story.png" alt="Template selection, transparent generating state, presentation editor" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Template selection, transparent generating state, presentation editor.</p>
-    </div>
-
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-3-annotations.png" alt="Generation phases visible during loading, editor inherits familiar slide-by-slide patterns" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Generation phases visible during loading. Editor inherits familiar slide-by-slide patterns from Slides and Keynote so editing has zero learning curve.</p>
+    <div class="img-pair-group reveal">
+      <div>
+        <img src="images/tenetic/sprint-3-user-story.png" alt="Template selection, transparent generating state, presentation editor" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Template selection, transparent generating state, presentation editor.</p>
+      </div>
+      <div>
+        <img src="images/tenetic/sprint-3-annotations.png" alt="Generation phases visible during loading, editor inherits familiar slide-by-slide patterns" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Generation phases visible during loading. Editor inherits familiar slide-by-slide patterns from Slides and Keynote so editing has zero learning curve.</p>
+      </div>
     </div>
 
     <!-- Sprint 04 -->
@@ -2221,14 +2239,15 @@
       <p class="body-text">The slide editor also enforces data grounding. Every Nielsen, Comscore, or MRI number on a generated slide carries its source citation. Reps need to defend numbers in front of advertisers, and an unattributed number is unusable in client-facing work. Data grounding was the single thing that made the legal review approve the tool for use with paying clients.</p>
     </section>
 
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-4-user-story.png" alt="Slide UI states, outline review, AI enrichment when research data lands" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Slide UI states, outline review, AI enrichment when research data lands.</p>
-    </div>
-
-    <div class="img-group reveal">
-      <img src="images/tenetic/sprint-4-annotations.png" alt="Outline review is the second commit point" class="cs-img" loading="lazy" />
-      <p class="cs-img-caption">Outline review is the second commit point. The user signs off on deck shape before any full slide generates.</p>
+    <div class="img-pair-group reveal">
+      <div>
+        <img src="images/tenetic/sprint-4-user-story.png" alt="Slide UI states, outline review, AI enrichment when research data lands" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Slide UI states, outline review, AI enrichment when research data lands.</p>
+      </div>
+      <div>
+        <img src="images/tenetic/sprint-4-annotations.png" alt="Outline review is the second commit point" class="cs-img" loading="lazy" />
+        <p class="cs-img-caption">Outline review is the second commit point. The user signs off on deck shape before any full slide generates.</p>
+      </div>
     </div>
 
     <!-- AI Design Patterns -->
