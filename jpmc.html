@@ -322,6 +322,117 @@
     .footer-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.7; transition: opacity 0.2s; }
     .footer-back:hover { opacity: 1; }
 
+    /* ─── Persona image light bg (RGBA PNGs designed for light backgrounds) ─── */
+    .persona-img-wrap {
+      background: #f4f0eb;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    .persona-img-wrap img {
+      border-radius: 0;
+      border: none;
+      display: block;
+      width: 100%;
+    }
+
+    /* ─── HTML persona card (used when image file is blank) ─── */
+    .persona-card {
+      margin-top: 40px;
+      background: #161616;
+      border: 1px solid rgba(201,169,110,0.18);
+      border-radius: 14px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .persona-card-left {
+      padding: 48px 44px;
+      border-right: 1px solid rgba(201,169,110,0.1);
+    }
+    .persona-card-right {
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .persona-tag {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.9;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+    }
+    .persona-tag::before { content: ''; width: 18px; height: 1px; background: var(--gold); opacity: 0.8; }
+    .persona-name-big {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 300; color: var(--text);
+      line-height: 1.1; letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .persona-role-line {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 28px;
+    }
+    .persona-quote-block {
+      border-left: 2px solid var(--gold);
+      padding-left: 20px;
+    }
+    .persona-quote-block p {
+      font-family: var(--serif); font-size: clamp(16px, 1.4vw, 19px);
+      font-weight: 300; font-style: italic;
+      color: var(--text); line-height: 1.65;
+    }
+    .persona-stat-group { display: flex; flex-direction: column; gap: 20px; }
+    .persona-stat { }
+    .persona-stat-label {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.8;
+      margin-bottom: 5px; display: block;
+    }
+    .persona-stat-val {
+      font-size: 0.9rem; color: var(--text); line-height: 1.55;
+    }
+    .persona-pain-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .persona-pain-list li {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+      padding-left: 16px; position: relative;
+    }
+    .persona-pain-list li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 6px; height: 1px; background: var(--gold); opacity: 0.7;
+    }
+
+    /* ─── Stepper 2-col: text left, image right ─── */
+    .stepper-layout {
+      display: grid;
+      grid-template-columns: 1fr 44%;
+      gap: 56px;
+      align-items: start;
+      margin-top: 40px;
+    }
+    .stepper-text { min-width: 0; }
+    .stepper-img-col {
+      position: sticky;
+      top: 40px;
+      align-self: start;
+    }
+    .stepper-img-col img {
+      width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      object-position: top center;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: #f8f6f2;
+    }
+    @media (max-width: 960px) {
+      .stepper-layout { grid-template-columns: 1fr; }
+      .stepper-img-col { width: 80%; }
+    }
+
     /* ─── Responsive ─── */
     @media (max-width: 960px) {
       :root { --sw: 0px; }
@@ -577,9 +688,11 @@
 
     <!-- Meet Rachel -->
     <h3 class="cs-h3 reveal">Meet Rachel</h3>
-    <div class="cs-img-wrap reveal d1">
-      <img src="images/jpmc/persona-rachel-thomson.png" alt="Persona: Rachel Thomson, Trade Operations Analyst" class="cs-img-full" loading="lazy" />
-      <p class="cs-img-caption">Rachel Thomson, 28. Trade Operations Analyst. 7-10 years in trade finance. Lives in the Loan Setup workflow.</p>
+    <div class="reveal d1">
+      <div class="persona-img-wrap">
+        <img src="images/jpmc/persona-rachel-thomson.png?v=3" alt="Persona: Rachel Thomson, Trade Operations Analyst" loading="lazy" />
+      </div>
+      <p class="cs-img-caption">Rachel Thomson, 28. Trade Operations Analyst. 7–10 years in trade finance. Lives in the Loan Setup workflow.</p>
     </div>
     <p class="body-text reveal" style="margin-top: 28px;">
       Rachel is fast, accurate, and skeptical of new tools. She uses the new system if it makes her faster than the legacy one. She abandons it the first time it loses her work.
@@ -623,7 +736,7 @@
     <!-- Foundational screens -->
     <h3 class="cs-h3 reveal">Foundational screens</h3>
     <div class="cs-img-wrap reveal d1">
-      <img src="images/jpmc/foundational-screens.png" alt="Core layout and component patterns for Loan Setup" class="cs-img-full" loading="lazy" />
+      <img src="images/jpmc/foundational-screens.png?v=3" alt="Core layout and component patterns for Loan Setup" class="cs-img-full" loading="lazy" />
       <p class="cs-img-caption">Core layout, grid, and component patterns reused across every Loan Setup stage. Designed for dual-monitor desktops, sized 748px to 1838px because that's what fits next to a SWIFT terminal.</p>
     </div>
     <div class="cs-img-wrap reveal d1">
@@ -634,16 +747,30 @@
       The JPMC design system already shipped buttons, inputs, type tokens, and color. What it didn't have was an enterprise-workflow vocabulary. Our work extended it with the patterns trade ops needed: gated stepper, section-level autosave indicator, dependency-flag treatment, audit-log row, role-gated approval card. Every pattern shipped back to the system library so the next JPMC product team inherits it.
     </p>
 
-    <!-- Annotated mockups: Loan Setup -->
-    <h3 class="cs-h3 reveal">Annotated mockups · Loan Setup</h3>
+    <!-- Stepper in context -->
+    <h3 class="cs-h3 reveal">The stepper, up close</h3>
+    <div class="stepper-layout reveal d1">
+      <div class="stepper-text">
+        <p class="body-text">Each circle in the stepper is a validation gate. A completed stage turns green. The active stage is highlighted blue. Everything downstream stays grey until the user earns it by completing what came before.</p>
+        <p class="body-text" style="margin-top: 18px;">This isn't arbitrary. Compliance teams must prove the user could not skip a required check. The stepper makes that provable. The audit log records every stage transition with a timestamp and user ID, so the trail exists whether or not anyone asks for it.</p>
+        <p class="body-text" style="margin-top: 18px;">Backward navigation stays open at every stage. If Rachel needs to revise Party Details after reaching Compliance, she clicks back. The system flags every downstream stage that depends on what she changed and marks them for re-review. She doesn't lose her work. She just loses the certifications that were grounded in the value she just changed.</p>
+        <p class="body-text" style="margin-top: 18px;">Identifiers — LEI, BIC, internal counterparty IDs — are entered via search and lookup, never free text. One typo in a counterparty identifier can route a payment to the wrong entity. Constrained input removes that category of error entirely.</p>
+      </div>
+      <div class="stepper-img-col">
+        <img src="images/jpmc/guided-stepper.png" alt="Loan Setup guided stepper showing all stages" loading="lazy" />
+        <p class="cs-img-caption" style="margin-top: 12px;">All stages. Each circle is a validation gate. Green = complete, blue = active, grey = locked.</p>
+      </div>
+    </div>
+
+    <!-- Error prevention -->
+    <h3 class="cs-h3 reveal" style="margin-top: 56px;">Validation &amp; error prevention</h3>
     <div class="cs-img-wrap reveal d1">
       <img src="images/jpmc/error-prevention-patterns.png" alt="Error prevention patterns and inline validation" class="cs-img-full" loading="lazy" />
       <p class="cs-img-caption">Mandatory fields visually distinct. Inline validation at field exit. Stage transition blocked when any required field is empty or fails business rule validation.</p>
     </div>
-    <div class="cs-img-wrap reveal d1">
-      <img src="images/jpmc/guided-stepper.png" alt="Guided stepper with counterparty identifiers and role grouping" class="cs-img-full" loading="lazy" />
-      <p class="cs-img-caption">Identifiers (LEI, BIC, internal counterparty IDs) entered via search and lookup, never free text. Roles grouped visually so the user reads counterparty relationships at a glance. Primary parties rendered side-by-side because that's how analysts pair them mentally.</p>
-    </div>
+
+    <!-- Annotated mockups: Loan Setup -->
+    <h3 class="cs-h3 reveal" style="margin-top: 56px;">Annotated mockups · Loan Setup</h3>
     <div class="cs-img-wrap reveal d1">
       <img src="images/jpmc/annotated-mockups-loan.png" alt="Annotated mockups for Loan Setup workflow" class="cs-img-full" loading="lazy" />
       <p class="cs-img-caption">Field grouping, validation states, progress indicators, dependency flags. Dense by design, structured so the density doesn't punish the user.</p>
@@ -688,8 +815,10 @@
 
     <!-- Meet Sam -->
     <h3 class="cs-h3 reveal">Meet Sam</h3>
-    <div class="cs-img-wrap reveal d1">
-      <img src="images/jpmc/persona-sam-jones.png" alt="Persona: Sam Jones, Senior Collections Operations Analyst" class="cs-img-full" loading="lazy" />
+    <div class="reveal d1">
+      <div class="persona-img-wrap">
+        <img src="images/jpmc/persona-sam-jones.png" alt="Persona: Sam Jones, Senior Collections Operations Analyst" loading="lazy" />
+      </div>
       <p class="cs-img-caption">Sam Jones, Senior Collections Operations Analyst. SWIFT, FX, payment reconciliation.</p>
     </div>
     <p class="body-text reveal" style="margin-top: 28px;">
@@ -702,7 +831,7 @@
     <!-- The flow -->
     <h3 class="cs-h3 reveal">The flow</h3>
     <div class="cs-img-wrap reveal d1">
-      <img src="images/jpmc/collections-user-flow.png" alt="Collections workflow: Identification through Release" class="cs-img-full" loading="lazy" />
+      <img src="images/jpmc/collections-user-flow.png?v=3" alt="Collections workflow: Identification through Release" class="cs-img-full" loading="lazy" />
       <p class="cs-img-caption">Identification &rarr; Payment Detail Review &rarr; Action and Adjustment &rarr; Compliance Screening &rarr; Release. Non-linear in practice, structured in the UI.</p>
     </div>
 
