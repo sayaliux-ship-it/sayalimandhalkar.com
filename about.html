@@ -262,7 +262,25 @@
       color: var(--text); margin-bottom: 20px;
       opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
     }
-    .about-hero-name em { font-style: italic; color: var(--gold); }
+    @keyframes shimmerText {
+      0%   { background-position: 200% 0; }
+      50%  { background-position: -50% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .about-hero-name em {
+      font-style: italic;
+      display: inline-block;
+      background: linear-gradient(105deg,
+        #c9a96e 0%, #c9a96e 35%,
+        #f5e6c0 45%, #fffdf7 50%,
+        #c9a96e 55%, #c9a96e 100%);
+      background-size: 300% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 3.6s ease-in-out infinite;
+    }
     .about-hero-tagline { display: none; }
     /* I am a(n) list */
     .about-iam-label {
@@ -914,7 +932,6 @@
         <div class="about-hero-photo-wrap">
           <img src="about-me-photo.jpg" alt="Sayali Mandhalkar speaking at Thomas Jefferson University" class="about-hero-photo" />
         </div>
-        <p class="about-photo-caption">Speaking at Thomas Jefferson University, Philadelphia</p>
       </div>
     </div>
   </section>
