@@ -447,6 +447,122 @@
       .next-project-card { flex-direction: column; align-items: flex-start; gap: 24px; padding: 32px 28px; }
       .nda-disclaimer { margin: 0 28px; }
     }
+
+    /* ════════ PASSWORD GATE ════════ */
+    .gate {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; background: var(--bg2); position: relative;
+      overflow: hidden; padding: 60px 40px;
+    }
+    .gate::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(201,169,110,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 30% at 20% 80%, rgba(201,169,110,0.02) 0%, transparent 60%),
+        radial-gradient(ellipse 25% 25% at 80% 20%, rgba(201,169,110,0.02) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .gate::after {
+      content: 'NDA'; font-family: var(--serif);
+      font-size: clamp(120px, 20vw, 260px); font-weight: 300;
+      color: rgba(201,169,110,0.03); position: absolute;
+      right: -20px; bottom: -30px; line-height: 1; letter-spacing: 0.1em;
+      pointer-events: none; user-select: none;
+    }
+    .gate-inner {
+      position: relative; z-index: 1; display: flex; flex-direction: column;
+      align-items: center; text-align: center; width: 100%; max-width: 440px;
+      animation: gateIn 0.7s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    @keyframes gateIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .gate-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+    }
+    .gate-eyebrow-line { width: 24px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .gate-lock {
+      width: 52px; height: 52px; border: 1px solid rgba(201,169,110,0.25);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--gold); background: rgba(201,169,110,0.05); margin-bottom: 28px;
+      box-shadow: 0 0 0 8px rgba(201,169,110,0.04), 0 0 0 16px rgba(201,169,110,0.02);
+    }
+    .gate-heading {
+      font-family: var(--serif); font-size: clamp(36px, 5vw, 52px);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .gate-sub {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+      max-width: 360px; margin-bottom: 40px;
+    }
+    .gate-divider {
+      width: 40px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.4), transparent);
+      margin-bottom: 40px;
+    }
+    .gate-input-wrap { position: relative; width: 100%; margin-bottom: 16px; }
+    .gate-input {
+      width: 100%; height: 54px; padding: 0 52px 0 20px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 6px; font-family: var(--sans); font-size: 1rem;
+      font-weight: 400; color: var(--text); letter-spacing: 0.15em;
+      outline: none; transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
+      -webkit-appearance: none;
+    }
+    .gate-input::placeholder { color: rgba(232,228,220,0.28); letter-spacing: 0.05em; font-size: 0.85rem; }
+    .gate-input:focus {
+      border-color: rgba(201,169,110,0.7); background: rgba(255,255,255,0.04);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.08);
+    }
+    .gate-input.error {
+      border-color: rgba(185,74,74,0.8) !important;
+      box-shadow: 0 0 0 3px rgba(185,74,74,0.1) !important;
+      animation: shake 0.38s cubic-bezier(0.36,0.07,0.19,0.97) both;
+    }
+    @keyframes shake {
+      10%, 90%  { transform: translateX(-2px); }
+      20%, 80%  { transform: translateX(4px); }
+      30%, 50%, 70% { transform: translateX(-5px); }
+      40%, 60%  { transform: translateX(5px); }
+    }
+    .gate-eye {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: rgba(232,228,220,0.35); padding: 4px;
+      display: flex; align-items: center; justify-content: center; transition: color 0.2s;
+    }
+    .gate-eye:hover { color: var(--gold); }
+    .gate-error {
+      font-size: 0.76rem; color: rgba(220,100,100,0.9); letter-spacing: 0.03em;
+      line-height: 1.55; text-align: center; margin-bottom: 20px;
+      min-height: 18px; max-width: 340px;
+      transition: opacity 0.25s; opacity: 0; pointer-events: none;
+    }
+    .gate-error.visible { opacity: 1; pointer-events: auto; }
+    .gate-btn {
+      width: 100%; height: 52px; background: var(--gold); border: none;
+      border-radius: 6px; font-family: var(--sans); font-size: 0.72rem;
+      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #0a0a09; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background 0.22s, transform 0.18s, box-shadow 0.22s; margin-bottom: 32px;
+    }
+    .gate-btn:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,169,110,0.25); }
+    .gate-btn:active { transform: translateY(0); }
+    .gate-access { font-size: 0.8rem; color: rgba(232,228,220,0.4); margin-bottom: 28px; }
+    .gate-access a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(201,169,110,0.35); text-underline-offset: 3px; transition: color 0.2s; }
+    .gate-access a:hover { color: var(--gold-lt); }
+    .gate-return {
+      font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(232,228,220,0.3); transition: color 0.22s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .gate-return:hover { color: var(--muted); }
+    .cs-content { display: none; flex: 1; }
   </style>
 </head>
 <body>
@@ -537,6 +653,62 @@
 
 <!-- ════════ MAIN ════════ -->
 <main class="main" id="main-content">
+
+  <!-- ═══ PASSWORD GATE ═══ -->
+  <section class="gate" id="gate" aria-label="Protected content">
+    <div class="gate-inner">
+      <p class="gate-eyebrow" aria-label="NDA Project">
+        <span class="gate-eyebrow-line" aria-hidden="true"></span>
+        NDA Project
+        <span class="gate-eyebrow-line" aria-hidden="true"></span>
+      </p>
+      <div class="gate-lock" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h1 class="gate-heading">Private Content</h1>
+      <p class="gate-sub">This case study is protected under NDA.<br>Enter passcode to continue.</p>
+      <div class="gate-divider" aria-hidden="true"></div>
+      <div class="gate-input-wrap">
+        <input type="password" id="gateInput" class="gate-input" placeholder="Enter passcode"
+          maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="off"
+          spellcheck="false" aria-label="Passcode" />
+        <button class="gate-eye" id="eyeToggle" type="button" aria-label="Toggle visibility">
+          <svg id="eyeOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <svg id="eyeClosed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+        </button>
+      </div>
+      <p class="gate-error" id="gateError" role="alert" aria-live="polite">
+        Incorrect password. Please try again or email <a href="mailto:sayali.ux@gmail.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">sayali.ux@gmail.com</a> for access.
+      </p>
+      <button class="gate-btn" id="gateBtn" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+        </svg>
+        Unlock Case Study
+      </button>
+      <p class="gate-access">Need access? Email me at <a href="mailto:sayali.ux@gmail.com">sayali.ux@gmail.com</a></p>
+      <a href="index.html" class="gate-return">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+        </svg>
+        Return to Home
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ CASE STUDY CONTENT (shown after unlock) ═══ -->
+  <div class="cs-content" id="csContent">
 
   <!-- ═══ HERO ═══ -->
   <section class="cs-hero">
@@ -967,15 +1139,77 @@
     </div>
   </section>
 
+  </div><!-- /cs-content -->
 </main>
 
 <script>
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  (function () {
+    // btoa('9137') === 'OTEzNw=='
+    function _ok(v) { try { return btoa(String(v)) === 'OTEzNw=='; } catch(e) { return false; } }
+
+    var input    = document.getElementById('gateInput');
+    var btn      = document.getElementById('gateBtn');
+    var errEl    = document.getElementById('gateError');
+    var gate     = document.getElementById('gate');
+    var content  = document.getElementById('csContent');
+    var eyeBtn   = document.getElementById('eyeToggle');
+    var eyeOpen  = document.getElementById('eyeOpen');
+    var eyeClosed = document.getElementById('eyeClosed');
+    var _t;
+
+    eyeBtn.addEventListener('click', function () {
+      var isPass = input.type === 'password';
+      input.type = isPass ? 'text' : 'password';
+      eyeOpen.style.display   = isPass ? 'none' : '';
+      eyeClosed.style.display = isPass ? ''     : 'none';
     });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); attempt(); }
+    });
+
+    input.addEventListener('input', function () {
+      if (errEl.classList.contains('visible')) {
+        errEl.classList.remove('visible');
+        input.classList.remove('error');
+      }
+    });
+
+    btn.addEventListener('click', attempt);
+
+    function attempt() {
+      clearTimeout(_t);
+      var val = input.value.trim();
+      if (!val) return;
+
+      if (_ok(val)) {
+        gate.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+        gate.style.opacity    = '0';
+        gate.style.transform  = 'translateY(-12px)';
+        setTimeout(function () {
+          gate.style.display    = 'none';
+          content.style.display = 'flex';
+          content.style.flexDirection = 'column';
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              var revEls = content.querySelectorAll('.reveal');
+              var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                  if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                });
+              }, { threshold: 0.05 });
+              revEls.forEach(function(el) { obs.observe(el); });
+            });
+          });
+        }, 480);
+      } else {
+        input.classList.add('error');
+        errEl.classList.add('visible');
+        _t = setTimeout(function () { input.classList.remove('error'); }, 600);
+      }
+    }
+  })();
 </script>
 <script>sessionStorage.setItem('sb_v','1');</script>
 </body>
