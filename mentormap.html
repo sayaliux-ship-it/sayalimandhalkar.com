@@ -12,142 +12,68 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --sw:      280px;
-      --bg:      #111111;
-      --bg2:     #0e0e0e;
-      --bg3:     #1a1a1a;
-      --sidebar: #000000;
-      --border:  rgba(255,255,255,0.07);
-      --gold:    #c9a96e;
-      --gold-lt: #dfc08a;
-      --gold-dim:rgba(201,169,110,0.1);
-      --text:    #e8e4dc;
-      --muted:   rgba(232,228,220,0.72);
-      --faint:   rgba(232,228,220,0.55);
-      --serif:   'Cormorant Garamond', Georgia, serif;
-      --sans:    'DM Sans', system-ui, sans-serif;
+      --sw:       280px;
+      --bg:       #111111;
+      --bg2:      #0e0e0e;
+      --bg3:      #1a1a1a;
+      --sidebar:  #000000;
+      --border:   rgba(255,255,255,0.07);
+      --gold:     #c9a96e;
+      --gold-lt:  #dfc08a;
+      --gold-dim: rgba(201,169,110,0.1);
+      --text:     #e8e4dc;
+      --muted:    rgba(232,228,220,0.72);
+      --faint:    rgba(232,228,220,0.55);
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      display: flex;
-    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; display: flex; }
     a { color: inherit; text-decoration: none; }
 
-    /* ── Global image & video quality ── */
     img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-      object-fit: contain;
-      object-position: center top;
-      filter: none !important;
-      -webkit-filter: none !important;
-      
-      
+      display: block; width: 100%; height: auto; max-width: 100%;
+      object-fit: contain; object-position: center top;
+      filter: none !important; -webkit-filter: none !important;
       border-radius: 12px;
     }
-    video, iframe {
-      display: block;
-      width: 100%;
-      height: auto;
-      filter: none !important;
-      border-radius: 12px;
-    }
+    video, iframe { display: block; width: 100%; height: auto; filter: none !important; border-radius: 12px; }
 
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
     :focus:not(:focus-visible) { outline: none; }
 
-    /* ════════════════════════════════
-       SIDEBAR
-    ════════════════════════════════ */
-    .sidebar {
-      position: fixed; top: 0; left: 0;
-      width: var(--sw); height: 100vh;
-      background: var(--sidebar);
-      border-right: 1px solid var(--border);
-      border-top: 2px solid var(--gold);
-      display: flex; flex-direction: column;
-      z-index: 200; overflow-y: auto; scrollbar-width: none;
-      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
-    }
+    /* ════════ SIDEBAR ════════ */
+    .sidebar { position: fixed; top: 0; left: 0; width: var(--sw); height: 100vh; background: var(--sidebar); border-right: 1px solid var(--border); border-top: 2px solid var(--gold); display: flex; flex-direction: column; z-index: 200; overflow-y: auto; scrollbar-width: none; animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both; }
     .sidebar::-webkit-scrollbar { display: none; }
-    @keyframes sidebarIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
+    @keyframes sidebarIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
     html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
     html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
     html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
 
-    .sb-profile {
-      display: flex; align-items: center; gap: 13px;
-      padding: 28px 22px 24px; border-bottom: 1px solid var(--border);
-      transition: background 0.25s ease; cursor: pointer;
-    }
+    .sb-profile { display: flex; align-items: center; gap: 13px; padding: 28px 22px 24px; border-bottom: 1px solid var(--border); transition: background 0.25s ease; cursor: pointer; }
     .sb-profile:hover { background: rgba(201,169,110,0.05); }
     .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
     .sb-profile:hover .sb-name { color: var(--gold-lt); }
-    .sb-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, #2a2218, #4a3828);
-      border: 1.5px solid rgba(201,169,110,0.3); flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; transition: border-color 0.25s ease;
-    }
+    .sb-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #2a2218, #4a3828); border: 1.5px solid rgba(201,169,110,0.3); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: border-color 0.25s ease; }
     .sb-avatar-initials { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--gold); letter-spacing: 0.02em; line-height: 1; }
     .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
     .sb-role { font-size: 0.74rem; color: var(--muted); margin-top: 1px; display: block; }
 
     .sb-nav { flex: 1; padding: 8px 0; }
     .sb-section { padding: 18px 0 6px; }
-    .sb-section-label {
-      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.55;
-      padding: 0 22px 0 20px; margin-bottom: 4px;
-      display: flex; align-items: center; gap: 8px;
-    }
+    .sb-section-label { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
     .sb-section-label::before { content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0; }
     .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
 
-    .sb-row {
-      display: flex; align-items: center; gap: 0;
-      padding: 0 14px; height: 44px; cursor: pointer;
-      position: relative; opacity: 0;
-      animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
-    }
-    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
-    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
-    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
-    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
-    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
-    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
-    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
-    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
-    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
-    @keyframes rowIn {
-      from { opacity: 0; transform: translateX(-10px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
+    .sb-row { display: flex; align-items: center; gap: 0; padding: 0 14px; height: 44px; cursor: pointer; position: relative; opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+    .sb-row:nth-child(1) { animation-delay: 0.12s; } .sb-row:nth-child(2) { animation-delay: 0.17s; } .sb-row:nth-child(3) { animation-delay: 0.22s; } .sb-row:nth-child(4) { animation-delay: 0.27s; } .sb-row:nth-child(5) { animation-delay: 0.32s; } .sb-row:nth-child(6) { animation-delay: 0.37s; } .sb-row:nth-child(7) { animation-delay: 0.42s; } .sb-row:nth-child(8) { animation-delay: 0.47s; } .sb-row:nth-child(9) { animation-delay: 0.52s; }
+    @keyframes rowIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
 
-    .sb-row::before {
-      content: ''; position: absolute; left: 0; top: 50%;
-      transform: translateY(-50%); width: 2px; height: 0;
-      background: var(--gold); border-radius: 0 2px 2px 0; transition: height 0.25s ease;
-    }
+    .sb-row::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0; transition: height 0.25s ease; }
     .sb-row:hover::before, .sb-row.active::before { height: 56%; }
     .sb-row:hover { background: rgba(255,255,255,0.03); }
-    .sb-row.active {
-      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
-      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
-    }
+    .sb-row.active { background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%); box-shadow: inset 0 0 20px rgba(201,169,110,0.04); }
     .sb-icon-left { width: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); transition: color 0.2s; }
     .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
     .sb-label { flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted); transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -169,363 +95,136 @@
     .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
     .sb-link.full { grid-column: span 2; }
 
-    /* ════════════════════════════════
-       MAIN
-    ════════════════════════════════ */
+    /* ════════ MAIN ════════ */
     .main { margin-left: var(--sw); width: calc(100% - var(--sw)); min-height: 100vh; background: var(--bg); }
 
     /* ─── Reveal ─── */
     .reveal { opacity: 0; transition: opacity 0.75s ease; }
     .reveal.visible { opacity: 1; }
-    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
-    .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
 
     /* ─── Section label ─── */
-    .sec-label {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
-    }
+    .sec-label { display: flex; align-items: center; gap: 12px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
     .sec-label .eline { display: block; width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
 
-    /* ════════════════════════════════
-       HERO
-    ════════════════════════════════ */
+    /* ════════ HERO ════════ */
     .cs-hero {
-      position: relative; width: 100%; min-height: 80vh;
-      overflow: hidden; display: flex; align-items: flex-end;
+      position: relative;
+      width: 100%;
+      min-height: 82vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0d0d0d 0%, #111008 60%, #0d0b07 100%);
+      border-bottom: 1px solid rgba(201,169,110,0.1);
     }
-    .cs-hero-img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
+    .cs-hero-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
       object-fit: cover; object-position: center top;
       border-radius: 0;
+      z-index: 0;
+      opacity: 0.45;
     }
-    .cs-hero::before {
-      content: ''; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to bottom, rgba(17,17,17,0.1) 0%, rgba(17,17,17,0.4) 45%, rgba(17,17,17,0.92) 85%, #111 100%);
+    .cs-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.82) 100%);
+      pointer-events: none;
+      z-index: 1;
     }
-    .cs-hero-content { position: relative; z-index: 2; padding: 0 100px 72px; width: 100%; }
-
+    .cs-hero-content {
+      position: relative; z-index: 2;
+      padding: 0 100px 80px;
+      width: 100%;
+    }
     .cs-hero-eyebrow {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px; opacity: 0.9;
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.85;
+      margin-bottom: 24px;
     }
-    .cs-hero-eyebrow span { display: block; width: 32px; height: 1px; background: var(--gold); }
-
+    .cs-hero-eyebrow span { display: block; width: 26px; height: 1px; background: var(--gold); opacity: 0.65; flex-shrink: 0; }
     .cs-hero-title {
       font-family: var(--serif);
-      font-size: clamp(52px, 7vw, 96px);
-      font-weight: 300; line-height: 0.95; letter-spacing: -0.025em;
-      color: var(--text); margin-bottom: 16px;
+      font-size: clamp(52px, 5vw, 80px);
+      font-weight: 300; line-height: 1.0; letter-spacing: -0.02em;
+      color: #f5f0e8; margin-bottom: 18px;
     }
-    .cs-hero-subtitle {
+    .cs-hero-bridge {
       font-family: var(--serif);
-      font-size: clamp(16px, 1.8vw, 22px);
+      font-size: clamp(20px, 2vw, 28px);
       font-weight: 300; font-style: italic;
-      color: var(--gold-lt); opacity: 0.9;
-      line-height: 1.4; margin-bottom: 40px;
-      max-width: 560px;
+      color: var(--gold); line-height: 1.4; margin-bottom: 44px; opacity: 0.9;
     }
     .cs-hero-meta {
-      display: grid; grid-template-columns: repeat(3, auto);
-      gap: 0; width: fit-content;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 4px; overflow: hidden;
-      background: rgba(0,0,0,0.5);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; max-width: 900px;
+      border: 1px solid rgba(201,169,110,0.14);
+      border-radius: 3px; overflow: hidden;
+      background: rgba(0,0,0,0.45);
     }
-    .cs-meta-item { padding: 14px 28px; border-right: 1px solid rgba(255,255,255,0.08); }
+    .cs-meta-item {
+      padding: 18px 24px;
+      border-right: 1px solid rgba(201,169,110,0.1);
+    }
     .cs-meta-item:last-child { border-right: none; }
-    .cs-meta-key { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 4px; display: block; }
-    .cs-meta-val { font-size: 0.82rem; color: var(--text); line-height: 1.3; display: block; }
+    .cs-meta-key {
+      font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.82;
+      margin-bottom: 6px; display: block;
+    }
+    .cs-meta-val {
+      font-size: 0.85rem; color: rgba(245,240,232,0.9); line-height: 1.4; display: block;
+    }
 
-    /* ════════════════════════════════
-       CONTENT
-    ════════════════════════════════ */
+    /* ════════ CONTENT BASE ════════ */
     .cs-section { padding: 80px 100px; border-top: 1px solid var(--border); }
     .cs-section.no-border { border-top: none; }
     .cs-section.tight { padding-top: 56px; padding-bottom: 56px; }
-    .cs-section.snug { padding-top: 48px; padding-bottom: 48px; }
 
-    .body-text { max-width: 760px; font-size: 1rem; line-height: 1.85; color: var(--muted); }
+    .body-text { font-size: 0.96rem; line-height: 1.9; color: var(--muted); max-width: 860px; }
     .body-text + .body-text { margin-top: 20px; }
 
-    .cs-h2 {
-      font-family: var(--serif);
-      font-size: clamp(28px, 3.2vw, 44px);
-      font-weight: 300; line-height: 1.15; letter-spacing: -0.01em;
-      color: var(--text); margin-bottom: 20px;
-    }
+    .cs-h2 { font-family: var(--serif); font-size: clamp(28px, 3.2vw, 44px); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; color: var(--text); margin-bottom: 20px; }
     .cs-h2 em { font-style: italic; color: var(--gold); }
 
-    /* ─── Opening text (overview) ─── */
-    .opening-text {
-      max-width: 820px;
-      font-family: var(--serif);
-      font-size: clamp(20px, 2.4vw, 30px);
-      font-weight: 300; line-height: 1.55; color: var(--muted);
-      letter-spacing: 0.005em;
-    }
-    .opening-text em { font-style: italic; color: var(--text); }
+    .cs-h3 { font-family: var(--serif); font-size: clamp(20px, 2vw, 28px); font-weight: 300; line-height: 1.2; color: var(--text); margin-bottom: 16px; margin-top: 48px; letter-spacing: -0.01em; }
+    .cs-h3:first-child { margin-top: 0; }
 
-    /* ─── My Role card ─── */
-    .role-card {
-      background: #161616; border: 1px solid rgba(201,169,110,0.22);
-      border-radius: 16px; padding: 40px 44px; margin-top: 40px; max-width: 760px;
-    }
-    .role-card-title { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid rgba(201,169,110,0.15); }
-    .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-    .role-item-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.75; margin-bottom: 8px; display: block; }
-    .role-item-val { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+    /* ─── Images ─── */
+    .cs-img-full { width: 100%; display: block; border-radius: 12px; border: 1px solid rgba(255,255,255,0.07); }
+    .cs-img-wrap { position: relative; margin-top: 40px; }
+    .cs-img-caption { font-size: 0.78rem; color: var(--muted); margin-top: 14px; letter-spacing: 0.03em; line-height: 1.6; font-style: italic; text-align: center; }
 
-    /* ─── Stat callout ─── */
-    .stat-callout {
-      display: flex; align-items: flex-start; gap: 20px;
-      max-width: 760px; margin-bottom: 48px;
-      padding: 28px 32px;
-      background: rgba(201,169,110,0.05);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 8px 8px 0;
-    }
-    .stat-callout-number {
-      font-family: var(--serif);
-      font-size: clamp(52px, 6vw, 76px);
-      font-weight: 300; line-height: 0.9;
-      color: var(--gold); flex-shrink: 0; letter-spacing: -0.03em;
-    }
-    .stat-callout-desc {
-      padding-top: 8px;
-    }
-    .stat-callout-desc strong {
-      display: block; font-family: var(--serif); font-size: 1.1rem;
-      font-weight: 400; color: var(--text); margin-bottom: 6px;
-    }
-    .stat-callout-desc p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    /* ─── Pull quote ─── */
+    .pull-quote { max-width: 760px; border-left: 3px solid var(--gold); padding: 8px 0 8px 36px; margin: 40px 0; }
+    .pull-quote-text { font-family: var(--serif); font-size: clamp(20px, 2.6vw, 32px); font-weight: 300; font-style: italic; line-height: 1.45; color: var(--text); letter-spacing: 0.01em; }
 
-    /* ─── Full-width image ─── */
-    .cs-img-full { width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); }
-    .cs-img-wrap { position: relative; }
-    .cs-img-caption { font-size: 0.78rem; color: var(--faint); margin-top: 12px; text-align: center; letter-spacing: 0.04em; }
+    /* ─── Feature pills ─── */
+    .feature-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .feature-pill { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 8px 20px; font-size: 0.78rem; color: var(--muted); }
 
-    /* ─── Two-column ─── */
-    .cs-img-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: flex-start; }
-    .cs-img-2col img { width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); object-fit: contain; }
+    /* ════════ PART CHAPTER ════════ */
+    .part-section { padding: 80px 100px 64px 140px; background: var(--bg2); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+    .part-section::after { content: attr(data-part); font-family: var(--serif); font-size: clamp(80px, 10vw, 140px); font-weight: 300; position: absolute; right: 60px; top: 50%; transform: translateY(-50%); line-height: 1; letter-spacing: -0.03em; pointer-events: none; user-select: none; background: linear-gradient(105deg, rgba(201,169,110,0.22) 0%, rgba(201,169,110,0.22) 38%, rgba(245,230,192,0.55) 48%, rgba(255,253,247,0.65) 52%, rgba(201,169,110,0.22) 58%, rgba(201,169,110,0.22) 100%); background-size: 300% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmerText 3.6s ease-in-out infinite; }
+    @keyframes shimmerText { 0% { background-position: 200% 0; } 50% { background-position: -50% 0; } 100% { background-position: 200% 0; } }
+    .part-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .part-label::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold); opacity: 0.8; }
+    .part-title { font-family: var(--serif); font-size: clamp(32px, 3.8vw, 54px); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); position: relative; z-index: 1; max-width: 68%; }
+    .part-title em { font-style: italic; color: var(--gold); }
+    .part-subtitle { font-family: var(--sans); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.08em; color: var(--faint); margin-top: 14px; position: relative; z-index: 1; }
+    .part-desc { max-width: 660px; font-size: 0.94rem; line-height: 1.85; color: var(--muted); margin-top: 16px; position: relative; z-index: 1; }
 
-    /* ─── Three-column ─── */
-    .cs-img-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: flex-start; }
-    .cs-img-3col img { width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); object-fit: contain; }
+    /* ─── Closing quote ─── */
+    .closing-quote { max-width: 760px; margin-top: 64px; padding: 36px 40px; background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.14); border-radius: 2px; border-left: 3px solid var(--gold); }
+    .closing-quote-text { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 30px); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text); }
 
-    .img-gap { margin-top: 40px; }
-    .img-gap-lg { margin-top: 60px; }
+    /* ─── What's next ─── */
+    .whats-next { max-width: 660px; margin-top: 36px; font-size: 0.9rem; line-height: 1.85; color: var(--muted); }
 
-    /* ─── Gold link button ─── */
-    .gold-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 20px;
-      border: 1px solid rgba(201,169,110,0.4);
-      color: var(--gold); padding: 9px 20px;
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; border-radius: 2px;
-      transition: background 0.25s, color 0.25s, border-color 0.25s;
-    }
-    .gold-link:hover { background: var(--gold); color: #000; border-color: var(--gold); }
-    .gold-link svg { flex-shrink: 0; transition: transform 0.2s; }
-    .gold-link:hover svg { transform: translate(2px, -2px); }
-
-    /* ════════════════════════════════
-       PROBLEM STATEMENT — MAGAZINE MOMENT
-    ════════════════════════════════ */
-    .hmw-section {
-      padding: 100px 100px;
-      background: linear-gradient(135deg, rgba(201,169,110,0.06) 0%, rgba(201,169,110,0.02) 50%, transparent 100%);
-      border-top: 1px solid rgba(201,169,110,0.15);
-      border-bottom: 1px solid rgba(201,169,110,0.15);
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .hmw-section::before {
-      content: '"';
-      font-family: var(--serif);
-      font-size: clamp(200px, 28vw, 400px);
-      font-weight: 300; color: rgba(201,169,110,0.04);
-      position: absolute; top: -60px; left: 50%;
-      transform: translateX(-50%); line-height: 1;
-      pointer-events: none; user-select: none;
-    }
-    .hmw-label { position: relative; z-index: 1; justify-content: center; margin-bottom: 32px; }
-    .hmw-question {
-      font-family: var(--serif);
-      font-size: clamp(24px, 3.2vw, 46px);
-      font-weight: 300; font-style: italic;
-      line-height: 1.4; color: var(--text);
-      max-width: 860px; margin: 0 auto;
-      letter-spacing: 0.01em;
-      position: relative; z-index: 1;
-    }
-    .hmw-question em { color: var(--gold); }
-    .hmw-note {
-      margin-top: 28px; font-size: 0.82rem; color: var(--faint);
-      letter-spacing: 0.06em; font-style: normal;
-      position: relative; z-index: 1;
-    }
-
-    /* ════════════════════════════════
-       USABILITY TESTING — OUTCOME PILLS
-    ════════════════════════════════ */
-    .outcome-pills {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin-top: 28px; max-width: 760px;
-    }
-    .outcome-pill {
-      background: rgba(201,169,110,0.08);
-      border: 1px solid rgba(201,169,110,0.2);
-      border-radius: 100px; padding: 7px 18px;
-      font-size: 0.78rem; color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-
-    /* ════════════════════════════════
-       BUSINESS SECTION
-    ════════════════════════════════ */
-    .business-section {
-      padding: 80px 100px;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-    }
-
-    /* Revenue stream cards */
-    .revenue-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 40px;
-      max-width: 900px;
-      align-items: stretch;
-    }
-    .revenue-card {
-      background: #161616;
-      border: 1px solid rgba(201,169,110,0.18);
-      border-radius: 12px;
-      padding: 28px 26px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .revenue-card:hover { border-color: rgba(201,169,110,0.45); transform: translateY(-2px); }
-    .revenue-card-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: rgba(201,169,110,0.1);
-      border: 1px solid rgba(201,169,110,0.2);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold); margin-bottom: 16px;
-    }
-    .revenue-card-title { font-size: 0.9rem; font-weight: 500; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
-    .revenue-card-desc { font-size: 0.78rem; color: var(--faint); line-height: 1.6; }
-
-    /* Stat cards */
-    .stat-cards-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 56px;
-      align-items: stretch;
-    }
-    .stat-card {
-      background: #161616;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px; padding: 36px 32px;
-      text-align: center;
-      transition: border-color 0.3s;
-    }
-    .stat-card:hover { border-color: rgba(201,169,110,0.35); }
-    .stat-card-num {
-      font-family: var(--serif);
-      font-size: clamp(56px, 6vw, 80px);
-      font-weight: 300; line-height: 1;
-      color: var(--gold); letter-spacing: -0.03em;
-      display: block; margin-bottom: 12px;
-    }
-    .stat-card-label { font-size: 0.84rem; color: var(--muted); line-height: 1.5; }
-
-    /* ════════════════════════════════
-       VALIDATION CARDS
-    ════════════════════════════════ */
-    .validation-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 40px;
-    }
-    .validation-card {
-      background: #161616;
-      border-radius: 14px; padding: 32px 28px;
-      border-top: 3px solid transparent;
-      transition: transform 0.3s;
-    }
-    .validation-card:hover { transform: translateY(-3px); }
-    .validation-card.passed { border-top-color: var(--gold); }
-    .validation-card.failed { border-top-color: rgba(185, 74, 74, 0.7); }
-    .validation-card-status {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; margin-bottom: 14px;
-    }
-    .validation-card.passed .validation-card-status { color: var(--gold); }
-    .validation-card.failed .validation-card-status { color: rgba(215, 100, 100, 0.85); }
-    .validation-status-dot {
-      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-    }
-    .validation-card.passed .validation-status-dot { background: var(--gold); }
-    .validation-card.failed .validation-status-dot { background: rgba(215, 100, 100, 0.85); }
-    .validation-card-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--text); margin-bottom: 14px; line-height: 1.3; }
-    .validation-card-result {
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 12px;
-    }
-    .validation-card.passed .validation-card-result { color: var(--gold); }
-    .validation-card.failed .validation-card-result { color: rgba(215, 100, 100, 0.85); }
-    .validation-card-desc { font-size: 0.84rem; color: var(--faint); line-height: 1.7; }
-
-    /* ════════════════════════════════
-       CONCLUSION — NUMBERED LEARNINGS
-    ════════════════════════════════ */
-    .conclusion-section {
-      padding: 96px 100px 80px;
-      border-top: 1px solid var(--border);
-    }
-    .learnings-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; max-width: 820px; }
-    .learning-item {
-      display: grid; grid-template-columns: 80px 1fr;
-      gap: 0; align-items: start;
-      padding: 36px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .learning-item:first-child { border-top: 1px solid var(--border); }
-    .learning-num {
-      font-family: var(--serif);
-      font-size: clamp(48px, 5vw, 68px);
-      font-weight: 300; line-height: 1;
-      color: rgba(201,169,110,0.35); letter-spacing: -0.03em;
-      padding-top: 4px;
-    }
-    .learning-text {
-      padding-top: 10px;
-    }
-    .learning-text h3 {
-      font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
-      color: var(--text); margin-bottom: 10px; line-height: 1.35;
-    }
-    .learning-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
-
-    /* ════════════════════════════════
-       NEXT PROJECT CTA
-    ════════════════════════════════ */
+    /* ════════ NEXT PROJECT ════════ */
     .next-project-section { padding: 0 100px 80px; }
-    .next-project-card {
-      background: #141414; border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px; padding: 48px 56px;
-      display: flex; align-items: center; justify-content: space-between;
-      transition: border-color 0.35s, background 0.35s, transform 0.35s;
-      cursor: pointer;
-    }
+    .next-project-card { background: #141414; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.35s, background 0.35s, transform 0.35s; }
     .next-project-card:hover { border-color: rgba(201,169,110,0.45); background: #181818; transform: translateY(-3px); }
     .next-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 8px; }
     .next-title { font-family: var(--serif); font-size: clamp(28px, 3vw, 42px); font-weight: 300; color: var(--text); letter-spacing: -0.01em; }
@@ -533,16 +232,14 @@
     .next-arrow { width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(201,169,110,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; transition: background 0.25s, border-color 0.25s, transform 0.25s; }
     .next-project-card:hover .next-arrow { background: rgba(201,169,110,0.12); border-color: rgba(201,169,110,0.55); transform: translate(3px, -3px); }
 
-    /* ════════════════════════════════
-       FOOTER / CONTACT
-    ════════════════════════════════ */
+    /* ════════ FOOTER ════════ */
     .contact-section { background: #000; padding: 72px 100px 0; border-top: 1px solid var(--border); position: relative; overflow: hidden; }
     .contact-section::before { content: 'SM'; font-family: var(--serif); font-size: clamp(180px, 24vw, 320px); font-weight: 300; color: rgba(201,169,110,0.07); position: absolute; left: 40px; bottom: 40px; line-height: 1; letter-spacing: -0.04em; pointer-events: none; user-select: none; }
     .footer-body { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; position: relative; z-index: 1; }
     .footer-left { max-width: 520px; }
     .sec-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.1; color: var(--text); letter-spacing: -0.01em; }
     .sec-title em { font-style: italic; color: var(--gold); }
-    .contact-sub { font-size: 0.9rem; line-height: 1.95; color: var(--muted); font-family: var(--sans); }
+    .contact-sub { font-size: 0.9rem; line-height: 1.95; color: var(--muted); }
     .contact-sub span { display: block; }
     .contact-btns { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
     .cta-btn { width: 200px; height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1); font-family: var(--sans); font-size: 0.71rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s; }
@@ -555,26 +252,73 @@
     .footer-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.7; transition: opacity 0.2s; }
     .footer-back:hover { opacity: 1; }
 
+    /* ════════ PAGE-SPECIFIC COMPONENTS ════════ */
+
+    /* ─── 2-col student quote grid ─── */
+    .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 36px 0; }
+    .quote-card { border-left: 2px solid var(--gold); padding: 20px 24px; background: rgba(201,169,110,0.03); border-radius: 0 6px 6px 0; }
+    .quote-card-text { font-family: var(--serif); font-size: clamp(16px, 1.4vw, 19px); font-weight: 300; font-style: italic; line-height: 1.65; color: var(--text); }
+    .quote-card-attr { font-size: 0.75rem; color: var(--faint); margin-top: 10px; letter-spacing: 0.04em; }
+
+    /* ─── Closing italic line ─── */
+    .closing-italic { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--faint); line-height: 1.7; margin-top: 28px; max-width: 760px; }
+
+    /* ─── HMW callout ─── */
+    .hmw-callout { border-left: 3px solid var(--gold); padding: 24px 0 24px 36px; margin: 40px 0; }
+    .hmw-callout-text { font-family: var(--serif); font-size: clamp(22px, 2.4vw, 32px); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text); }
+
+    /* ─── Stat cards (3-col) ─── */
+    .stat-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+    .stat-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 28px 24px; text-align: center; }
+    .stat-card-num { font-family: var(--serif); font-size: clamp(32px, 3.5vw, 48px); font-weight: 300; color: var(--gold); line-height: 1.1; display: block; margin-bottom: 10px; }
+    .stat-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+    /* ─── AI feature cards (3-col) ─── */
+    .ai-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
+    .ai-card { background: var(--bg3); border: 1px solid rgba(201,169,110,0.15); border-radius: 8px; padding: 28px 26px; }
+    .ai-card-title { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 10px; }
+    .ai-card-body { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+    /* ─── Revenue cards ─── */
+    .revenue-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+    .revenue-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 24px 22px; }
+    .revenue-card-title { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+    .revenue-card-body { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* ─── Pretotype cards (3-col) ─── */
+    .pretotype-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
+    .pretotype-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 28px 26px; position: relative; }
+    .pretotype-card-title { font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 14px; line-height: 1.4; padding-right: 90px; }
+    .pretotype-card-body { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+    /* ─── Status pill ─── */
+    .status-pill { position: absolute; top: 16px; right: 16px; border-radius: 100px; padding: 3px 10px; font-size: 0.63rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .status-pill.passed { background: rgba(80,180,80,0.15); border: 1px solid rgba(80,180,80,0.4); color: #7ec87e; }
+    .status-pill.failed { background: rgba(180,80,80,0.15); border: 1px solid rgba(180,80,80,0.4); color: #c87e7e; }
+
+    /* ─── Gold inline link ─── */
+    .gold-link { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 28px; background: var(--gold); border: 1px solid var(--gold); border-radius: 3px; font-family: var(--sans); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #000; text-decoration: none; margin-top: 20px; transition: background 0.22s, border-color 0.22s, transform 0.18s, box-shadow 0.22s; }
+    .gold-link:hover { background: var(--gold-lt); border-color: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,169,110,0.25); }
+
     /* ─── Responsive ─── */
     @media (max-width: 960px) {
       :root { --sw: 0px; }
       .sidebar { display: none; }
       .main { margin-left: 0; }
-      .cs-hero-content, .cs-section, .business-section, .hmw-section,
-      .conclusion-section, .next-project-section, .contact-section { padding-left: 28px; padding-right: 28px; }
-      .cs-hero-meta { grid-template-columns: repeat(2, auto); }
-      .role-grid { grid-template-columns: 1fr; gap: 20px; }
-      .cs-img-2col, .cs-img-3col { grid-template-columns: 1fr; }
-      .revenue-grid, .stat-cards-row, .validation-grid { grid-template-columns: 1fr; }
+      .cs-hero-content, .cs-section, .part-section, .next-project-section, .contact-section { padding-left: 28px !important; padding-right: 28px !important; }
+      .cs-hero-meta { grid-template-columns: repeat(2, 1fr); }
+      .cs-meta-item { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.1); }
+      .quote-grid, .stat-cards, .ai-cards, .pretotype-cards, .revenue-cards { grid-template-columns: 1fr; }
       .footer-body { grid-template-columns: 1fr; gap: 40px; }
       .footer-bar { flex-direction: column; gap: 10px; }
-      .next-project-card { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .next-project-card { flex-direction: column; align-items: flex-start; gap: 24px; padding: 32px 28px; }
+      .part-section { padding-left: 28px !important; }
     }
   </style>
 </head>
 <body>
 
-<a href="#main-content" class="skip-link" style="position:absolute;top:-100px;left:16px;z-index:9999;padding:10px 20px;background:var(--gold);color:#0a0a09;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border-radius:3px;transition:top 0.2s;">Skip to main content</a>
+<a href="#main-content" style="position:absolute;top:-100px;left:16px;z-index:9999;padding:10px 20px;background:var(--gold);color:#0a0a09;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border-radius:3px;transition:top 0.2s;">Skip to main content</a>
 
 <!-- ════════ SIDEBAR ════════ -->
 <aside class="sidebar" aria-label="Site navigation">
@@ -606,7 +350,7 @@
       <a href="mentormap.html" class="sb-row active">
         <span class="sb-icon-left" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
         <span class="sb-label">MentorMap</span>
-        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
       </a>
 
       <a href="philly-truce.html" class="sb-row">
@@ -663,333 +407,419 @@
 
   <!-- ═══ HERO ═══ -->
   <section class="cs-hero">
-    <img src="Mentor map/Herobanner.png" alt="MentorMap — mentorship platform for architecture students" class="cs-hero-img" loading="eager" />
+    <img src="images/mentormap/hero.png" alt="" class="cs-hero-bg" aria-hidden="true" loading="eager" />
+    <div class="cs-hero-overlay"></div>
     <div class="cs-hero-content">
-      <p class="cs-hero-eyebrow"><span></span>Case Study · Master's Thesis</p>
+      <p class="cs-hero-eyebrow"><span></span>Case Study</p>
       <h1 class="cs-hero-title">MentorMap</h1>
-      <p class="cs-hero-subtitle">Designing a clearer path to mentorship for architecture students</p>
+      <p class="cs-hero-bridge">The help architecture students need is usually three desks down. Most can't see it.</p>
       <div class="cs-hero-meta">
         <div class="cs-meta-item">
           <span class="cs-meta-key">Role</span>
-          <span class="cs-meta-val">End-to-end UX</span>
-        </div>
-        <div class="cs-meta-item">
-          <span class="cs-meta-key">Type</span>
-          <span class="cs-meta-val">Master's Thesis</span>
+          <span class="cs-meta-val">Solo end-to-end UX</span>
         </div>
         <div class="cs-meta-item">
           <span class="cs-meta-key">Timeline</span>
-          <span class="cs-meta-val">Dec 2024 – Dec 2025</span>
+          <span class="cs-meta-val">Dec 2024 to Dec 2025</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="cs-meta-key">Context</span>
+          <span class="cs-meta-val">Master's Thesis &middot; Thomas Jefferson University</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="cs-meta-key">Methods</span>
+          <span class="cs-meta-val">13 interviews &middot; MoSCoW &middot; 3 pretotypes &middot; 5 usability rounds</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══ OVERVIEW ═══ -->
-  <section class="cs-section no-border">
+  <section class="cs-section no-border" style="padding-top: 72px;">
     <p class="sec-label reveal"><span class="eline"></span>Overview</p>
-    <p class="opening-text reveal d1">
-      An architecture student, late at night in the studio, stuck on a rendering, a model, or a tool they were expected to <em>"already know."</em>
-    </p>
-    <p class="body-text reveal d2" style="margin-top: 28px;">
-      The core insight that shaped MentorMap: uncertainty about whom to approach, what to ask, and whether a question even merits asking actively discourages help-seeking behavior. Students weren't failing to seek mentorship because of lack of effort; they lacked visibility into the support that already existed around them.
+    <h2 class="cs-h2 reveal d1">Every existing solution misses the real shape of the problem.</h2>
+    <p class="body-text reveal d2">
+      One studio project takes 20 to 25 distinct skills. Rhino, Grasshopper, Revit, V-Ray, Lumion, parametric modeling, fabrication, working drawings, rendering. Nobody masters all of them. Most students go deep on two or three. The expertise to fill in the rest is sitting in the same studio.
     </p>
     <p class="body-text reveal d3">
-      MentorMap is a hybrid mentorship platform designed to make peer expertise visible within architecture studios, combining physical touchpoints with digital depth, context, and actionability.
+      Every existing solution treats this as a matching problem. ADPList, LinkedIn, university Slack channels, formal mentorship programs. They all try to find more mentors or build a better directory. That assumption misses the real shape of the problem.
     </p>
-  </section>
 
-  <!-- ═══ MY ROLE ═══ -->
-  <section class="cs-section tight" style="border-top: none; padding-top: 0;">
-    <p class="sec-label reveal"><span class="eline"></span>My Role</p>
-    <div class="role-card reveal d1">
-      <p class="role-card-title">End-to-End UX · Master's Thesis</p>
-      <div class="role-grid">
-        <div>
-          <span class="role-item-label">Responsibilities</span>
-          <p class="role-item-val">End-to-end UX design: research, synthesis, ideation, interaction design, prototyping, usability testing, and validation across a 12-month thesis project.</p>
-        </div>
-        <div>
-          <span class="role-item-label">Timeline</span>
-          <p class="role-item-val">December 2024 – December 2025. Thomas Jefferson University, Master's Degree in UX &amp; Interaction Design.</p>
-        </div>
+    <div class="quote-grid reveal">
+      <div class="quote-card">
+        <p class="quote-card-text">"I spent hours searching online just to solve small issues in software. A mentor could have told me the answer in two minutes."</p>
+        <p class="quote-card-attr">P2</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-card-text">"Eventually I understood that for everything, you have to go to an expert and ask."</p>
+        <p class="quote-card-attr">P4</p>
       </div>
     </div>
+
+    <p class="closing-italic reveal">The brief stopped being "build a mentorship app" and became "make the existing help-seeking system visible."</p>
   </section>
 
-  <!-- ═══ HOW BIG IS THE PROBLEM ═══ -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>How Big Is the Problem</p>
-    <h2 class="cs-h2 reveal d1">The research <em>speaks.</em></h2>
-    <div class="stat-callout reveal d2">
-      <span class="stat-callout-number">13</span>
-      <div class="stat-callout-desc">
-        <strong>In-depth interviews conducted</strong>
-        <p>12 architecture students across academic years at Thomas Jefferson University, plus 1 faculty stakeholder interview, revealing the full arc of mentorship friction from first year to thesis.</p>
-      </div>
-    </div>
-    <p class="body-text reveal d3">
-      Across every year of study, the same pattern emerged: students weren't asking for help not because help wasn't available, but because the path to it was invisible. The question wasn't "is there support?" but rather "who, exactly, and how do I ask without looking incompetent?"
-    </p>
-    <div class="cs-img-wrap img-gap reveal d4">
-      <img src="Mentor map/03-how-big-problem.png .png" alt="How big is the problem — research findings overview" class="cs-img-full" loading="lazy" />
-    </div>
-  </section>
-
-  <!-- ═══ PROBLEM STATEMENT — MAGAZINE MOMENT ═══ -->
-  <div class="hmw-section reveal">
-    <p class="sec-label hmw-label"><span class="eline"></span>Problem Statement</p>
-    <p class="hmw-question">
-      "How Might We reduce poor peer mentor matches by making it easier for architecture students to see <em>who can support them</em> with specific skills, tools, or guidance they need at each stage of their education?"
-    </p>
-    <p class="hmw-note">Derived from 13 qualitative interviews · Thomas Jefferson University, 2024</p>
+  <!-- ═══ PART 01 HEADER ═══ -->
+  <div class="part-section reveal" data-part="01">
+    <p class="part-label">Part 01</p>
+    <h2 class="part-title">The expertise is already in the room. <em>Students just can't see it.</em></h2>
+    <p class="part-subtitle">Research · 13 interviews · affinity mapping · problem tree</p>
   </div>
 
-  <!-- ═══ RESEARCH & DISCOVERY ═══ -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Research &amp; Discovery</p>
-    <h2 class="cs-h2 reveal d1">Listening before <em>designing.</em></h2>
+  <!-- ═══ PART 01 CONTENT ═══ -->
+  <section class="cs-section" style="background: var(--bg2);">
+
+    <h3 class="cs-h3 reveal">13 interviews. Four patterns. One root cause.</h3>
+    <p class="body-text reveal d1">
+      13 interviews across current students, faculty, and recent graduates. Synthesized through affinity mapping, a studio journey map, and a problem tree.
+    </p>
     <p class="body-text reveal d2">
-      Research was structured to capture both the emotional texture and practical friction of mentorship within architecture programs. Interviews were semi-structured, allowing students to navigate their own experiences, revealing not just what they struggled with, but what they had silently normalized.
+      <strong style="color: var(--text); font-weight: 500;">Inefficiencies.</strong> Students burned days on problems a mentor could solve in two minutes. They knew this. They still burned the days.
     </p>
     <p class="body-text reveal d3">
-      Key themes: visibility gaps in peer expertise, hierarchical perception of asking for help, and the absence of a shared language for "what I need" versus "what I can offer."
+      <strong style="color: var(--text); font-weight: 500;">Identifying the right mentor.</strong> Most students assumed "mentor" meant a senior or a professor. They missed peers sitting next to them.
     </p>
-    <div class="cs-img-wrap img-gap reveal d4">
-      <img src="Mentor map/04-research-interviews.png png.png" alt="Research interviews — synthesis and affinity mapping" class="cs-img-full" loading="lazy" />
+    <p class="body-text reveal">
+      <strong style="color: var(--text); font-weight: 500;">Hesitation.</strong> Studio culture treats interruption as rude. Introverts had it worst.
+    </p>
+    <p class="body-text reveal">
+      <strong style="color: var(--text); font-weight: 500;">Access barriers.</strong> Formal mentorship lived behind email threads. Informal mentorship depended on already knowing the right people, which is exactly what new students don't have.
+    </p>
+    <p class="body-text reveal" style="margin-top: 24px;">
+      Root cause: distributed expertise is invisible. Students default to whoever is easiest to reach. The best-suited mentors stay invisible.
+    </p>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/how-big-is-the-problem.png" alt="Problem tree: where help-seeking breaks down at architecture school" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Problem tree: where help-seeking breaks down at architecture school.</p>
     </div>
 
-    <div class="cs-img-2col" style="margin-top: 56px;">
-      <div class="reveal">
-        <p class="sec-label" style="margin-bottom: 12px;"><span class="eline"></span>Ideation</p>
-        <img src="Mentor map/05-ideation-1.png .png" alt="Ideation session — concept sketches and explorations" class="cs-img-full" loading="lazy" style="margin-top: 8px;" />
+    <h3 class="cs-h3 reveal">What invisibility actually costs students.</h3>
+    <p class="body-text reveal d1">
+      24.2% of architecture students experienced anxiety, 30.6% experienced stress, 77.2% cited workload as the cause (American College Health Association, 2017; Lived Experiences study, 2024). Without peer mentors, students were 4.16x more likely to consider leaving university in their first 10 weeks (Collings et al., 2014).
+    </p>
+    <div class="pull-quote reveal d2">
+      <p class="pull-quote-text"><em>"Because we don't want people pulling all-nighters."</em> The studios were locked. The help-seeking system wasn't.</p>
+    </div>
+
+    <div class="stat-cards reveal">
+      <div class="stat-card">
+        <span class="stat-card-num">24.2%</span>
+        <p class="stat-card-desc">anxiety in architecture students</p>
       </div>
-      <div class="reveal d1">
-        <p class="sec-label" style="margin-bottom: 12px; opacity: 0;">&nbsp;</p>
-        <img src="Mentor map/05-ideation-2.png .png" alt="Ideation session — concept mapping and decision making" class="cs-img-full" loading="lazy" style="margin-top: 8px;" />
+      <div class="stat-card">
+        <span class="stat-card-num">30.6%</span>
+        <p class="stat-card-desc">experienced stress</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-num">4.16x</span>
+        <p class="stat-card-desc">more likely to consider leaving without peer mentors</p>
       </div>
     </div>
-    <p class="cs-img-caption reveal" style="margin-top: 14px;">Ideation: divergent concept explorations across physical and digital touchpoints, narrowed through feasibility and impact framing.</p>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/research-stats.png" alt="The numbers behind the qualitative pattern" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">The numbers behind the qualitative pattern.</p>
+    </div>
+
+    <h3 class="cs-h3 reveal">The question that killed every other version of the product.</h3>
+    <div class="hmw-callout reveal d1">
+      <p class="hmw-callout-text">How might we make it easier for architecture students to see who can support them with the specific skills, tools, or guidance they need at each stage of their education?</p>
+    </div>
+    <p class="body-text reveal d2">
+      This line killed the "build another LinkedIn" version of the product. Every feature that got cut, every pretotype that got run, every fix that got shipped traces back to it.
+    </p>
+
   </section>
 
-  <!-- ═══ DESIGNING THE FLOW ═══ -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Designing the Flow</p>
-    <h2 class="cs-h2 reveal d1">Mapping the path <em>through.</em></h2>
+  <!-- ═══ PART 02 HEADER ═══ -->
+  <div class="part-section reveal" data-part="02">
+    <p class="part-label">Part 02</p>
+    <h2 class="part-title">Help-seeking happens in hallways. <em>The product had to live there too.</em></h2>
+    <p class="part-subtitle">Product design · user flows · wireframes · AI features · MVP scoping</p>
+  </div>
+
+  <!-- ═══ PART 02 CONTENT ═══ -->
+  <section class="cs-section" style="background: var(--bg2);">
+
+    <h3 class="cs-h3 reveal">Why help has to live in the hallway.</h3>
+    <p class="body-text reveal d1">
+      Students don't seek help from a phone at their desk in the middle of a panic. They seek help in transitional moments. Walking between classes. Refilling coffee. Standing in the hallway looking at a printed plan.
+    </p>
     <p class="body-text reveal d2">
-      With research insights synthesized, we mapped the complete user journey, from a student discovering they need help, to finding the right peer mentor, initiating contact, and completing the support loop. The flow had to account for first-time users, returning users, and the hybrid nature of the platform.
+      The Skill Wall is a physical board in the studio hallway. Mentor cards live on the wall with skills, availability, and a QR code. The QR opens directly to that mentor's profile. Booking, messaging, and live sessions happen in the digital layer.
     </p>
     <p class="body-text reveal d3">
-      Mentorship didn't need more complexity; it needed <em>visibility</em> in the places students already were.
-    </p>
-    <div class="reveal d4" style="margin-top: 24px;">
-      <a href="https://miro.com/app/board/uXjVJFtRPRU=/?share_link_id=185127074556" target="_blank" rel="noopener" class="gold-link">
-        See full User Flow
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
-    </div>
-
-    <p class="sec-label reveal" style="margin-top: 56px; margin-bottom: 20px;"><span class="eline"></span>Onboarding Flow</p>
-    <div class="cs-img-2col reveal d1">
-      <img src="Mentor map/07-onboarding-flow-1.png .png" alt="Onboarding flow — screen 1" loading="lazy" />
-      <img src="Mentor map/08-onboarding-flow-2.png .png" alt="Onboarding flow — screen 2" loading="lazy" />
-    </div>
-    <p class="cs-img-caption reveal" style="margin-top: 14px;">Onboarding: designed to establish skill profile, set mentorship preferences, and connect with the studio community in under 3 minutes.</p>
-  </section>
-
-  <!-- ═══ WIREFRAMES ═══ -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Wireframes</p>
-    <h2 class="cs-h2 reveal d1">Structure before <em>polish.</em></h2>
-    <p class="body-text reveal d2">
-      Wireframes were used as a communication tool as much as a design artifact, presenting flows to faculty stakeholders and testing early structural decisions before investing in high-fidelity work. Each screen was annotated to document rationale, edge cases, and open questions.
-    </p>
-    <div class="cs-img-wrap img-gap reveal d3">
-      <img src="Mentor map/10-wireframes.png .png" alt="Wireframe explorations — full screen layouts and flow connections" class="cs-img-full" loading="lazy" />
-    </div>
-    <div class="reveal d4" style="margin-top: 20px;">
-      <a href="https://www.figma.com/design/c15ZQoRbPFDjBnSitDvqgs/Thesis-Defence---Sayali?node-id=0-1&t=rbyHm1U9f59TFBE4-1" target="_blank" rel="noopener" class="gold-link">
-        See all Wireframes
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ═══ ANNOTATED MOCKUPS ═══ -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Annotated Mockups</p>
-    <h2 class="cs-h2 reveal d1">Every decision <em>documented.</em></h2>
-    <p class="body-text reveal d2">
-      High-fidelity mockups were annotated to capture the thinking behind each design choice, including interaction states, accessibility considerations, and edge cases, creating a handoff artifact that communicated intent as clearly as execution.
-    </p>
-    <div class="cs-img-wrap img-gap reveal d3">
-      <img src="Mentor map/13-annotated-mockups.png .png" alt="Annotated high-fidelity mockups with design rationale" class="cs-img-full" loading="lazy" />
-    </div>
-    <div class="reveal d4" style="margin-top: 20px;">
-      <a href="https://www.figma.com/design/c15ZQoRbPFDjBnSitDvqgs/Thesis-Defence---Sayali?node-id=1296-2490&t=rbyHm1U9f59TFBE4-1" target="_blank" rel="noopener" class="gold-link">
-        See all Annotated Mockups
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ═══ USABILITY TESTING ═══ -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Usability Testing</p>
-    <h2 class="cs-h2 reveal d1">Testing with the <em>people it's for.</em></h2>
-    <p class="body-text reveal d2">
-      Five rounds of usability testing were conducted across design iterations, each round targeted at a specific hypothesis. Sessions were moderated, task-based, and followed by a brief debrief to capture post-task sentiment and surface moments of hesitation that metrics alone couldn't explain.
-    </p>
-    <div class="cs-img-wrap img-gap reveal d3">
-      <img src="Mentor map/usablity testing.png" alt="Usability testing — session documentation and key observations" class="cs-img-full" loading="lazy" />
-    </div>
-    <div class="reveal d4" style="margin-top: 20px;">
-      <a href="https://miro.com/app/board/uXjVJFtRPRU=/?share_link_id=732948382186" target="_blank" rel="noopener" class="gold-link">
-        See Full Usability Testing
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
-    </div>
-    <p class="body-text reveal" style="margin-top: 40px;">Key issues surfaced and resolved across testing rounds:</p>
-    <div class="outcome-pills reveal d1">
-      <span class="outcome-pill">Navigation clarity</span>
-      <span class="outcome-pill">Skill vs. mentor prioritization</span>
-      <span class="outcome-pill">Entry points for first-time users</span>
-      <span class="outcome-pill">Confidence in taking action</span>
-    </div>
-  </section>
-
-  <!-- ═══ LET'S TALK BUSINESS ═══ -->
-  <section class="business-section">
-    <p class="sec-label reveal"><span class="eline"></span>Let's Talk Business</p>
-    <h2 class="cs-h2 reveal d1">Designed to <em>sustain itself.</em></h2>
-    <p class="body-text reveal d2">
-      A great product with no viable model is a prototype. MentorMap was designed with sustainability in mind, identifying revenue streams, defining success metrics, and pressure-testing assumptions before committing to a direction.
+      The wall handles visibility. The app handles action. Both have to exist because the help-seeking behavior splits between physical attention and digital follow-through.
     </p>
 
-    <div class="revenue-grid reveal d2">
-      <div class="revenue-card">
-        <div class="revenue-card-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
-        </div>
-        <h4 class="revenue-card-title">Premium AI Features</h4>
-        <p class="revenue-card-desc">Intelligent mentor matching, skill-gap analysis, and personalized learning path recommendations for power users.</p>
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/ideation.png" alt="From sketch to system: pairing the Skill Wall with the app" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">From sketch to system: pairing the Skill Wall with the app.</p>
+    </div>
+
+    <h3 class="cs-h3 reveal">Twenty-six features considered. Seven survived.</h3>
+    <p class="body-text reveal d1">
+      A MoSCoW analysis on 26 features locked the MVP to seven Must-Haves:
+    </p>
+    <div class="feature-pills reveal d2">
+      <span class="feature-pill">Profile &amp; onboarding</span>
+      <span class="feature-pill">Search &amp; browse mentors</span>
+      <span class="feature-pill">Session booking</span>
+      <span class="feature-pill">User dashboard</span>
+      <span class="feature-pill">Mentor portfolio</span>
+      <span class="feature-pill">Skill tags &amp; filters</span>
+      <span class="feature-pill">Skill Wall QR cards</span>
+    </div>
+    <p class="body-text reveal" style="margin-top: 24px;">
+      Recognition badges, AR mentor gallery, voice booking, interactive whiteboard: cut. They expand the platform without proving the visibility hypothesis. That hypothesis is the whole thesis.
+    </p>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/key-features.png" alt="Seven features. Each one earns its place by serving the visibility hypothesis." class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Seven features. Each one earns its place by serving the visibility hypothesis.</p>
+    </div>
+
+    <h3 class="cs-h3 reveal">How a student actually finds someone in three taps.</h3>
+    <p class="body-text reveal d1">
+      Two flows mattered most: onboarding (cold-start trust) and homepage discovery (the moment a student has to find someone).
+    </p>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/onboarding-user-flow.png" alt="Onboarding user flow" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Onboarding: surfaces skills before profile polish, so the system has signal from minute one.</p>
+    </div>
+
+    <div class="cs-img-wrap reveal" style="margin-top: 36px;">
+      <img src="images/mentormap/homepage-user-flow.png" alt="Homepage user flow" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Homepage: every path lands on a mentor profile within three taps.</p>
+    </div>
+
+    <a href="https://miro.com/app/board/uXjVJFtRPRU=/?share_link_id=185127074556" target="_blank" rel="noopener" class="gold-link reveal">See full User Flow on Miro &rarr;</a>
+
+    <h3 class="cs-h3 reveal">Wireframes locked the structure before any visual decisions.</h3>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/wireframes.png" alt="Wireframes locked the navigation model before any visual decisions" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Wireframes locked the navigation model before any visual decisions.</p>
+    </div>
+
+    <a href="https://www.figma.com/design/c15ZQoRbPFDjBnSitDvqgs/Thesis-Defence---Sayali?node-id=0-1&t=rbyHm1U9f59TFBE4-1" target="_blank" rel="noopener" class="gold-link reveal">See all Wireframes on Figma &rarr;</a>
+
+    <h3 class="cs-h3 reveal">A mentor profile you can read in three seconds.</h3>
+    <p class="body-text reveal d1">
+      The header gives expertise, rating, availability, and an In-Person / Virtual toggle. Skill tags below let students scan specialties without reading paragraphs. Tabs for About, Portfolio, Reviews keep the page short. Book Session CTA sticks to the bottom on long profiles. (That stickiness was a usability-test fix. See Part 04.)
+    </p>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/annotated-mockups.png" alt="Annotated mockups: every decision on the mentor profile mapped to a research finding" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Annotated mockups: every decision on the mentor profile mapped to a research finding.</p>
+    </div>
+
+    <a href="https://www.figma.com/design/c15ZQoRbPFDjBnSitDvqgs/Thesis-Defence---Sayali?node-id=1296-2490&t=rbyHm1U9f59TFBE4-1" target="_blank" rel="noopener" class="gold-link reveal">See all Annotated Mockups on Figma &rarr;</a>
+
+    <h3 class="cs-h3 reveal">AI generates. Students edit. Mentors validate.</h3>
+    <p class="body-text reveal d1">
+      Three AI features, each one a draft a human refines:
+    </p>
+    <div class="ai-cards reveal">
+      <div class="ai-card">
+        <p class="ai-card-title">AI Project Roadmap</p>
+        <p class="ai-card-body">Breaks a studio project into stages, suggests skills per stage, recommends mentors per stage. Editable end to end. Any section can be regenerated.</p>
       </div>
-      <div class="revenue-card">
-        <div class="revenue-card-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h4 class="revenue-card-title">Community Workshops &amp; Events</h4>
-        <p class="revenue-card-desc">Curated skill-sharing sessions, critique workshops, and portfolio reviews hosted within the platform ecosystem.</p>
+      <div class="ai-card">
+        <p class="ai-card-title">AI Live Notes</p>
+        <p class="ai-card-body">Captures key takeaways in real time during a session. The student tags any note as a to-do.</p>
       </div>
-      <div class="revenue-card">
-        <div class="revenue-card-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-        </div>
-        <h4 class="revenue-card-title">Partnerships with Software</h4>
-        <p class="revenue-card-desc">Co-branded skill modules and integrations with Rhino, AutoCAD, Revit, and other architecture-focused tools students actually use.</p>
+      <div class="ai-card">
+        <p class="ai-card-title">AI Session Summary</p>
+        <p class="ai-card-body">Structured recap and to-do list, emailed after the session ends.</p>
       </div>
     </div>
+    <p class="body-text reveal" style="margin-top: 24px;">
+      This shape came directly from a failed pretotype. See Part 03.
+    </p>
 
-    <div class="stat-cards-row">
-      <div class="stat-card reveal">
+    <h3 class="cs-h3 reveal">What the free tier proves. What premium proves.</h3>
+    <p class="body-text reveal d1">
+      Free covers Skill Wall, mentor browsing, booking, live sessions. Premium ($9.99/mo, 7-day free trial) unlocks AI Roadmap and AI Summary. The free tier carries the visibility hypothesis. The premium tier carries the AI augmentation hypothesis. They are priced separately because they do separate jobs.
+    </p>
+
+  </section>
+
+  <!-- ═══ PART 03 HEADER ═══ -->
+  <div class="part-section reveal" data-part="03">
+    <p class="part-label">Part 03</p>
+    <h2 class="part-title">The three things that <em>could kill the thesis.</em></h2>
+    <p class="part-subtitle">Pretotyping · 3 assumption tests · XYZ validation</p>
+    <p class="part-desc">Three pretotypes, each one testing an assumption that would sink the project if wrong. Each had an XYZ statement: hypothesis, population, threshold.</p>
+  </div>
+
+  <!-- ═══ PART 03 CONTENT ═══ -->
+  <section class="cs-section" style="background: var(--bg2);">
+
+    <div class="cs-img-wrap reveal" style="margin-top: 0;">
+      <img src="images/mentormap/risky-assumption-matrix.png" alt="Risky-assumption matrix" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Risky-assumption matrix: the three highest-risk, highest-unknown assumptions became the three pretotypes.</p>
+    </div>
+
+    <div class="pretotype-cards reveal" style="margin-top: 48px;">
+      <div class="pretotype-card">
+        <span class="status-pill passed">PASSED 140%</span>
+        <p class="pretotype-card-title">Will students stop and scan a QR card on a hallway wall?</p>
+        <p class="pretotype-card-body">Six mentor QR cards posted in the studio hallway for two days. Threshold: 10 unique scans. Result: 14. Scans clustered in transitional moments, almost none during a panic. The wall belongs in the hallway, away from the studio entrance.</p>
+      </div>
+      <div class="pretotype-card">
+        <span class="status-pill passed">PASSED 35%</span>
+        <p class="pretotype-card-title">Will introverts opt into a peer-led session from a stranger?</p>
+        <p class="pretotype-card-body">A landing page advertising "Open Peer Mentorship Session," Join Now button, Coming Soon page behind it. Threshold: 30% click-through. Result: 35%. Killed the assumption that introverts would refuse peer-led sessions. They opted in at the same rate as everyone else. The session was framed as shared struggle, and the host was a peer rather than an authority.</p>
+      </div>
+      <div class="pretotype-card">
+        <span class="status-pill failed">FAILED</span>
+        <p class="pretotype-card-title">Will students trust an AI to plan their learning?</p>
+        <p class="pretotype-card-body">A mock AI interface appearing to generate personalized roadmaps. Five students rated trust, relevance, and intent to follow. Threshold: 3 of 5 would call it useful and trustworthy. Result: 60% said no, 20% yes, 20% maybe.</p>
+      </div>
+    </div>
+
+    <p class="body-text reveal" style="margin-top: 36px;">
+      Failed test, most useful finding. Students wanted to edit, regenerate, refine. They liked the structure. They didn't trust the AI to read their project correctly. Most explicitly said they wanted AI as a companion. They would not trust it as an authoritative planner.
+    </p>
+    <p class="body-text reveal" style="margin-top: 20px;">
+      That feedback rebuilt the AI feature. The roadmap is editable at every stage. Mentors are surfaced inside each step. The AI generates a draft. The student edits. The mentor validates. That loop came directly out of a failed pretotype.
+    </p>
+
+  </section>
+
+  <!-- ═══ PART 04 HEADER ═══ -->
+  <div class="part-section reveal" data-part="04">
+    <p class="part-label">Part 04</p>
+    <h2 class="part-title">What watching five people fumble <em>actually changed.</em></h2>
+    <p class="part-subtitle">Usability testing · 5 participants · moderated think-aloud</p>
+  </div>
+
+  <!-- ═══ PART 04 CONTENT ═══ -->
+  <section class="cs-section" style="background: var(--bg2);">
+
+    <p class="body-text reveal">
+      Five architecture students, mobile prototype, moderated think-aloud. Mixed-method scoring on confidence and ease per task. Frequency-severity matrix on every issue.
+    </p>
+
+    <div class="cs-img-wrap reveal" style="max-width: 50%; margin-left: auto; margin-right: auto;">
+      <img src="images/mentormap/usability-testing-overview.png" alt="Usability testing overview" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Usability testing: confidence and ease scored per task, then issues plotted on frequency vs. severity.</p>
+    </div>
+
+    <a href="https://miro.com/app/board/uXjVJFtRPRU=/?share_link_id=732948382186" target="_blank" rel="noopener" class="gold-link reveal">See full Usability Testing on Miro &rarr;</a>
+
+    <p class="body-text reveal" style="margin-top: 36px;">
+      <strong style="color: var(--text); font-weight: 500;">Card selectability.</strong> Users assumed the whole In-Person / Virtual session block was tappable. Only the radio button was. Fix: full card now selectable, radio button is a visual indicator.
+    </p>
+    <p class="body-text reveal" style="margin-top: 16px;">
+      <strong style="color: var(--text); font-weight: 500;">Sticky CTA.</strong> Users scrolled past About, Portfolio, Reviews, then couldn't find Book Session. Fix: CTA pins to the bottom on the mentor profile.
+    </p>
+    <p class="body-text reveal" style="margin-top: 16px;">
+      <strong style="color: var(--text); font-weight: 500;">AI affordance.</strong> A plain notes icon didn't communicate "AI-powered." Users overlooked the feature. Fix: added a small AI spark indicator. Discoverability without a tutorial.
+    </p>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/iterations.png" alt="Iterations: card selectability, sticky CTA, AI affordance" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Iterations: card selectability, sticky CTA, AI affordance, each fix mapped to the test that surfaced it.</p>
+    </div>
+
+    <p class="body-text reveal" style="margin-top: 32px;">
+      Boring fixes. The kind you only catch by watching five people fumble through the same micro-friction five times in a row.
+    </p>
+
+  </section>
+
+  <!-- ═══ PART 05 HEADER ═══ -->
+  <div class="part-section reveal" data-part="05">
+    <p class="part-label">Part 05</p>
+    <h2 class="part-title">What it takes to put a Skill Wall <em>in every studio.</em></h2>
+    <p class="part-subtitle">Business model · revenue streams · growth strategy</p>
+  </div>
+
+  <!-- ═══ PART 05 CONTENT ═══ -->
+  <section class="cs-section" style="background: var(--bg2);">
+
+    <h3 class="cs-h3 reveal">What we're trying to make permanent.</h3>
+    <p class="body-text reveal d1">
+      Make skill visibility a permanent feature of studio culture. Not a thesis pilot. Not a one-program experiment.
+    </p>
+
+    <h3 class="cs-h3 reveal">Five ways this pays for itself.</h3>
+    <div class="revenue-cards reveal">
+      <div class="revenue-card">
+        <p class="revenue-card-title">Premium subscription</p>
+        <p class="revenue-card-body">$9.99/mo, AI Roadmap + AI Summary</p>
+      </div>
+      <div class="revenue-card">
+        <p class="revenue-card-title">Institutional licensing</p>
+        <p class="revenue-card-body">Campus-wide deployment for architecture departments</p>
+      </div>
+      <div class="revenue-card">
+        <p class="revenue-card-title">Workshops &amp; training</p>
+        <p class="revenue-card-body">Paid mentorship programs and skill workshops</p>
+      </div>
+      <div class="revenue-card">
+        <p class="revenue-card-title">Educational grants</p>
+        <p class="revenue-card-body">Innovation funding for higher-ed pilots</p>
+      </div>
+      <div class="revenue-card">
+        <p class="revenue-card-title">Software partnerships</p>
+        <p class="revenue-card-body">Rhino, AutoCAD, Revit, Adobe student bundles</p>
+      </div>
+    </div>
+
+    <h3 class="cs-h3 reveal">What success looks like in numbers.</h3>
+    <div class="stat-cards reveal">
+      <div class="stat-card">
         <span class="stat-card-num">30%</span>
-        <p class="stat-card-label">Reduced time searching for the right help, by surfacing mentor availability and expertise contextually.</p>
+        <p class="stat-card-desc">reduction in help-seeking time</p>
       </div>
-      <div class="stat-card reveal d1">
+      <div class="stat-card">
         <span class="stat-card-num">40%</span>
-        <p class="stat-card-label">Overall skill improvement timeline: students reach proficiency faster with structured peer guidance.</p>
+        <p class="stat-card-desc">reduction in skill acquisition timeline</p>
       </div>
-      <div class="stat-card reveal d2">
+      <div class="stat-card">
         <span class="stat-card-num">50%</span>
-        <p class="stat-card-label">Student adoption &amp; engagement target, driven by visibility, ease of entry, and social proof within the studio.</p>
+        <p class="stat-card-desc">adoption first-semester target</p>
       </div>
     </div>
 
-    <div class="cs-img-wrap img-gap-lg reveal">
-      <img src="Mentor map/16-business-model-canvas.png .png" alt="Business Model Canvas — MentorMap" class="cs-img-full" loading="lazy" />
-      <p class="cs-img-caption">Business Model Canvas: mapping value propositions, customer segments, revenue streams, and key partnerships.</p>
-    </div>
-  </section>
-
-  <!-- ═══ VALIDATING THE PRODUCT ═══ -->
-  <section class="cs-section">
-    <p class="sec-label reveal"><span class="eline"></span>Validating the Product</p>
-    <h2 class="cs-h2 reveal d1">Testing the <em>riskiest assumptions.</em></h2>
-    <p class="body-text reveal d2">
-      Before building at scale, three pretotyping experiments were designed to test the riskiest assumptions: not whether the product was usable, but whether the core behaviors it depended on would actually occur in the real world.
+    <h3 class="cs-h3 reveal">From one program to every design discipline.</h3>
+    <p class="body-text reveal d1">
+      Phase 1: architecture program. Phase 2: interior design, industrial design, graphic design, landscape architecture. Phase 3: cross-program ecosystem with a 40% lift in cross-discipline collaboration. The model transfers because the underlying problem, distributed and invisible expertise inside a project-based curriculum, is the same across every design discipline.
     </p>
-    <div class="reveal d3" style="margin-top: 24px;">
-      <a href="https://miro.com/app/board/uXjVJFtRPRU=/?share_link_id=732948382186" target="_blank" rel="noopener" class="gold-link">
-        See all tests and results
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-      </a>
+
+    <div class="cs-img-wrap reveal">
+      <img src="images/mentormap/business-model-canvas.png" alt="Business model canvas" class="cs-img-full" loading="lazy" />
+      <p class="cs-img-caption">Business model canvas: revenue streams, partners, channels, and value propositions in one frame.</p>
     </div>
 
-    <div class="validation-grid" style="margin-top: 48px;">
-      <div class="validation-card passed reveal">
-        <div class="validation-card-status"><span class="validation-status-dot"></span>Pretotype 01</div>
-        <h3 class="validation-card-title">One-Night-Stand Test</h3>
-        <p class="validation-card-result">✓ Passed</p>
-        <p class="validation-card-desc">The physical Skill Wall consistently sparked real conversations in studio spaces, confirming that visibility and proximity lower hesitation and drive mentorship interactions. Students engaged without prompting.</p>
-      </div>
-      <div class="validation-card passed reveal d1">
-        <div class="validation-card-status"><span class="validation-status-dot"></span>Pretotype 02</div>
-        <h3 class="validation-card-title">Fake Front Door Test</h3>
-        <p class="validation-card-result">✓ Passed</p>
-        <p class="validation-card-desc">High engagement rates validated genuine interest in public mentorship sessions and skill-based discovery. Students clicked through and expressed intent to use the platform before it existed.</p>
-      </div>
-      <div class="validation-card failed reveal d2">
-        <div class="validation-card-status"><span class="validation-status-dot"></span>Pretotype 03</div>
-        <h3 class="validation-card-title">Mechanical Turk (AI Guidance)</h3>
-        <p class="validation-card-result">✗ Failed</p>
-        <p class="validation-card-desc">Students were hesitant to rely on AI-generated guidance without context or control. Key learning: AI-supported mentorship is only valuable when it augments human support, offers customization, and preserves user agency.</p>
-      </div>
-    </div>
   </section>
 
-  <!-- ═══ CONCLUSION ═══ -->
-  <section class="conclusion-section">
-    <p class="sec-label reveal"><span class="eline"></span>Key Learnings</p>
-    <h2 class="cs-h2 reveal d1" style="max-width: 600px;">Five things this project <em>taught me.</em></h2>
-    <p class="body-text reveal d2">A year of research, design, testing, and iteration, distilled into the moments that shaped how I think.</p>
+  <!-- ═══ REFLECTION ═══ -->
+  <section class="cs-section">
+    <p class="sec-label reveal"><span class="eline"></span>Reflection</p>
+    <h2 class="cs-h2 reveal d1">Confidence is the real deliverable.</h2>
+    <p class="body-text reveal d2">
+      A year in, the phrase that stuck: <em>confidence is the real deliverable.</em>
+    </p>
+    <p class="body-text reveal d3">
+      Once mentorship reads as a visibility problem, the design reads differently. The Skill Wall works as a permission slip in disguise. Open Sessions become social proof that asking is normal. The AI Roadmap stops trying to replace planning and starts handling the cold-start, so the human conversation can do the real work.
+    </p>
+    <p class="body-text reveal" style="margin-top: 20px;">
+      Cheap experiments are more honest than pretty mockups. A printed wall in a hallway told the truth faster than two months of high-fidelity testing would have. The failed AI test saved the entire AI feature from shipping in the wrong shape.
+    </p>
 
-    <div class="learnings-list">
-      <div class="learning-item reveal">
-        <span class="learning-num">01</span>
-        <div class="learning-text">
-          <h3>Visibility, not effort, is the barrier.</h3>
-          <p>Students struggle not because they don't try, but because the support around them is invisible. Design that surfaces existing resources is often more impactful than design that creates new ones.</p>
-        </div>
-      </div>
-      <div class="learning-item reveal d1">
-        <span class="learning-num">02</span>
-        <div class="learning-text">
-          <h3>Hierarchy creates hesitation.</h3>
-          <p>When mentorship feels hierarchical, unclear roles make students reluctant to ask. Framing peers as collaborators rather than authorities, even subtly in copy and UI, meaningfully reduced perceived risk.</p>
-        </div>
-      </div>
-      <div class="learning-item reveal d2">
-        <span class="learning-num">03</span>
-        <div class="learning-text">
-          <h3>Expertise is invisible in physical spaces.</h3>
-          <p>Peer knowledge exists in abundance within studios, but without a shared layer to surface it, students reinvent the wheel daily. Physical-digital hybrids can bridge this without requiring behavior change.</p>
-        </div>
-      </div>
-      <div class="learning-item reveal d3">
-        <span class="learning-num">04</span>
-        <div class="learning-text">
-          <h3>AI must augment, never replace, human connection.</h3>
-          <p>AI-supported guidance is valuable only when it augments human support, offers customization, and preserves user control. When AI felt opaque or uncontrollable, students rejected it, even when technically useful.</p>
-        </div>
-      </div>
-      <div class="learning-item reveal d4">
-        <span class="learning-num">05</span>
-        <div class="learning-text">
-          <h3>Mentorship that works changes how people feel.</h3>
-          <p>The most meaningful outcome wasn't skill transfer; it was reduced anxiety, increased confidence, and a sense of direction. Designing for emotional outcomes, not just functional ones, is what makes the difference.</p>
-        </div>
-      </div>
+    <div class="closing-quote reveal">
+      <p class="closing-quote-text">"Research is the product. The artifact at the end is just where the research lands."</p>
     </div>
+
+    <p class="whats-next reveal">
+      <strong style="color: var(--text); font-weight: 500;">What's next:</strong> Three architecture departments at peer universities running concurrent Skill Walls. A longitudinal study tracking the 30% help-seeking-time reduction over a full semester.
+    </p>
   </section>
 
   <!-- ═══ NEXT PROJECT ═══ -->
@@ -997,7 +827,7 @@
     <a href="pur.html" class="next-project-card reveal">
       <div>
         <p class="next-label">Next Project</p>
-        <h3 class="next-title">PUR Waters <em>→</em></h3>
+        <h3 class="next-title">PUR Waters <em>&rarr;</em></h3>
       </div>
       <div class="next-arrow" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
@@ -1032,20 +862,26 @@
       </div>
     </div>
     <div class="footer-bar">
-      <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
-      <a href="index.html" class="footer-back">← Back to Home</a>
+      <span class="footer-copy">&copy; 2026 Sayali Mandhalkar. All rights reserved.</span>
+      <a href="index.html" class="footer-back">&larr; Back to Home</a>
     </div>
   </section>
 
 </main>
 
 <script>
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  (function () {
+    var revEls = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    revEls.forEach(function (el) { obs.observe(el); });
+  })();
 </script>
 <script>sessionStorage.setItem('sb_v','1');</script>
 </body>
