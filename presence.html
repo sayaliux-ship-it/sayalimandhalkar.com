@@ -148,14 +148,28 @@
       padding: 120px 100px 96px;
       position: relative; overflow: hidden;
       border-top: none;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero-section-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      border-radius: 0;
+      z-index: 0;
+      opacity: 0.4;
     }
     .hero-section::before {
       content:'';
       position:absolute; inset:0;
-      background:
-        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(201,169,110,0.04) 0%, transparent 70%),
-        radial-gradient(ellipse 30% 50% at 90% 20%, rgba(201,169,110,0.025) 0%, transparent 60%);
+      background: linear-gradient(to bottom, rgba(10,10,10,0.45) 0%, rgba(10,10,10,0.88) 100%);
       pointer-events:none;
+      z-index: 1;
+    }
+    .hero-pill, .hero-name, .hero-sub, .hero-meta, .hero-divider {
+      position: relative; z-index: 2;
     }
     .hero-pill {
       display:inline-flex; align-items:center; gap:10px;
@@ -545,6 +559,7 @@
        SECTION 1 — HERO
   ═══════════════════════════════════ -->
   <section class="hero-section">
+    <img src="images/presence/hero-family.jpg" alt="" class="hero-section-bg" aria-hidden="true" loading="eager" />
     <p class="hero-pill">Speculative Design · Accessibility · AI Wearable</p>
     <h1 class="hero-name reveal">Presence.</h1>
     <p class="hero-sub reveal d1">Smart glasses that help people with dementia live with more confidence, independence, and dignity.</p>
@@ -703,8 +718,8 @@
       </div>
 
       <div class="img-block reveal d3">
-        <img src="Presence/02-glasses-product.jpg   .jpg" alt="Presence smart glasses — product overview with component annotations" class="case-img" />
-        <p class="img-caption">Five components. One purpose: quiet, dignified support.</p>
+        <img src="images/presence/lifestyle.jpg" alt="Presence smart glasses — product overview with component annotations" class="case-img" />
+        <p class="img-caption">"David. Your Son." Whispered privately the moment he walks in. No one else hears it.</p>
       </div>
 
       <div class="hw-grid reveal">
@@ -741,22 +756,22 @@
       </div>
 
       <div class="img-block reveal d3">
-        <img src="Presence/04-hero-family.jpg.jpg" alt="Family member arriving at the door" class="case-img" />
-        <p class="img-caption">"David. Your Son." Whispered privately the moment he walks in. No one else hears it.</p>
+        <img src="images/presence/hero-family.jpg" alt="Family member arriving at the door" class="case-img" />
+        <p class="img-caption">The full Presence system: AI-powered glasses and the companion app for family and caregivers.</p>
       </div>
 
       <div class="img-block reveal">
-        <img src="Presence/2.png" alt="Glasses view showing street navigation — turn directions and distance to home" class="case-img" />
+        <img src="images/presence/glasses-nav.png" alt="Glasses view showing street navigation — turn directions and distance to home" class="case-img" />
         <p class="img-caption">"Turn left at the post box. Home is 200m ahead." Gentle navigation for familiar routes that feel suddenly unfamiliar.</p>
       </div>
 
       <div class="img-block reveal">
-        <img src="Presence/01-hero-stove..jpg" alt="Kitchen stove with Presence safety monitoring" class="case-img" />
+        <img src="images/presence/stove.jpg" alt="Kitchen stove with Presence safety monitoring" class="case-img" />
         <p class="img-caption">"Stove. Still on. You left the kitchen 10 minutes ago." A gentle reminder, not an alarm.</p>
       </div>
 
       <div class="img-block reveal">
-        <img src="Presence/3.png" alt="Glasses view showing medication detection — morning pills confirmed and afternoon reminder" class="case-img" />
+        <img src="images/presence/glasses-medication.png" alt="Glasses view showing medication detection — morning pills confirmed and afternoon reminder" class="case-img" />
         <p class="img-caption">"Morning pills taken · 8:22am. Now it's time for your afternoon pill." Medication confirmed without asking, without a phone, without any effort.</p>
       </div>
 
@@ -875,12 +890,12 @@
       </div>
 
       <div class="img-block reveal">
-        <img src="Presence/1.png" alt="Onboarding screens — setting up people, daily routine, and glasses connection" class="case-img" />
+        <img src="images/presence/onboarding.png" alt="Onboarding screens — setting up people, daily routine, and glasses connection" class="case-img" />
         <p class="img-caption">Onboarding designed for simplicity: set up your people, your routine, and your glasses in minutes.</p>
       </div>
 
       <div class="img-block reveal d1">
-        <img src="Presence/03-app-screens.jpg.jpg" alt="Presence companion app — three screens showing Home, My People, and My Day" class="case-img" />
+        <img src="images/presence/app-screens.jpg" alt="Presence companion app — three screens showing Home, My People, and My Day" class="case-img" />
         <p class="img-caption">Designed for the wearer, not the caregiver. Control always stays with the person.</p>
       </div>
     </div>
