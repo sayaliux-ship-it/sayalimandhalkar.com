@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INNBEAUTY Project, Redesign &amp; Campaign System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Gilda+Display&display=swap">
+<style>
+:root{
+  --ink:#27292B; --ink-soft:#494A4A; --grey-400:#A1A1A1; --grey-50:#F5F5F7;
+  --sand:#F5E4D6; --blush:#EBE1E1; --cream:#FCF1EB; --rose:#F5D9DF; --clay:#C28F8C;
+  --fir:#1E3B31; --void:#0E0F11;
+  --serif:'Prata','Gilda Display',Georgia,serif;
+  --ui:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --pad:5vw;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--ui);
+     -webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* ── masthead ─────────────────────────────────────────────────────────────── */
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+     gap:24px;padding:0 var(--pad);height:68px;background:rgba(252,241,235,.86);
+     -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+     border-bottom:1px solid rgba(39,41,43,.12)}
+.top img{height:17px;width:auto}
+.top nav{display:flex;gap:26px}
+.top a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+       color:var(--ink);transition:opacity .2s ease}
+.top a:hover{opacity:.55}
+.top a.back{color:var(--clay);margin-right:4px}
+
+/* ── section intro ────────────────────────────────────────────────────────── */
+.intro{max-width:1500px;margin:0 auto;padding:clamp(64px,7vw,110px) var(--pad) clamp(38px,4vw,60px);text-align:center}
+.intro--tight{padding-top:clamp(46px,5vw,80px)}
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);margin:0 0 22px}
+h1{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.03em;line-height:1.02;
+   font-size:clamp(38px,5.2vw,76px);text-wrap:balance}
+h2{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.03em;line-height:1.04;
+   font-size:clamp(30px,3.8vw,54px);text-wrap:balance}
+.lede{max-width:72ch;margin:26px auto 0;font-size:15px;line-height:1.9;color:var(--ink-soft)}
+.scope{max-width:74ch;margin:26px auto 0;font-size:14px;line-height:1.95;color:var(--ink-soft)}
+.scope b{color:var(--clay);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+.meta{display:flex;justify-content:center;flex-wrap:wrap;gap:0 clamp(24px,3vw,52px);margin-top:34px}
+.meta div{display:flex;flex-direction:column;gap:5px;padding-top:13px;border-top:1px solid var(--ink);min-width:118px}
+.meta b{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1}
+.meta span{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft)}
+.jump{display:inline-flex;align-items:center;gap:9px;margin-top:30px;padding-bottom:4px;
+      border-bottom:1px solid var(--ink);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+      text-decoration:none;transition:opacity .2s ease}
+.jump:hover{opacity:.55}
+.jump i{display:inline-block;width:9px;height:9px;border-top:1px solid var(--ink);
+        border-right:1px solid var(--ink);transform:rotate(45deg) translateY(-1px)}
+
+/* ── showcase band ────────────────────────────────────────────────────────── */
+.band{position:relative;overflow:hidden;padding:clamp(76px,8vw,130px) var(--pad) clamp(56px,6vw,96px)}
+.band--grey{background:var(--grey-50)}
+.band--blush{background:var(--blush)}
+.band--sand{background:var(--sand)}
+.band--void{background:#1B1D20}
+.band--fir{background:#141D18}
+.mark{position:absolute;left:50%;top:clamp(10px,1.6vw,34px);transform:translateX(-50%);
+      font-family:var(--serif);font-size:clamp(150px,23vw,380px);line-height:.78;letter-spacing:-.045em;
+      color:transparent;-webkit-text-stroke:1px rgba(39,41,43,.16);white-space:nowrap;
+      pointer-events:none;user-select:none}
+.band--void .mark,.band--fir .mark{-webkit-text-stroke-color:rgba(255,255,255,.16)}
+.band-head{position:relative;z-index:3;max-width:1500px;margin:0 auto clamp(30px,3vw,48px);
+           display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.band-head h3{font-family:var(--serif);font-weight:400;margin:0;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.02em}
+.band-head span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.band--void .band-head h3,.band--fir .band-head h3{color:#fff}
+.band--void .band-head span,.band--fir .band-head span{color:#B7B1AC}
+
+/* how the decision was taken, the case-study part */
+.why{position:relative;z-index:3;max-width:1500px;margin:clamp(34px,3.4vw,54px) auto 0;
+     display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(20px,2.4vw,40px)}
+.why div{padding-top:14px;border-top:1px solid rgba(39,41,43,.22)}
+.why h5{margin:0 0 8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay)}
+.why p{margin:0;font-size:14px;line-height:1.8;color:var(--ink-soft)}
+.band--void .why div,.band--fir .why div{border-top-color:rgba(255,255,255,.24)}
+.band--void .why p,.band--fir .why p{color:#B7B1AC}
+
+.stage{position:relative;z-index:2;display:flex;justify-content:center;align-items:flex-start;
+       gap:clamp(18px,2.4vw,40px);flex-wrap:wrap;max-width:1500px;margin:0 auto}
+
+/* full-length page shots, trimmed to a readable window */
+.frame-scroll{overflow-y:auto;overscroll-behavior:contain;background:#fff;
+              outline:1px solid rgba(39,41,43,.12);outline-offset:-1px;
+              scrollbar-width:thin;scrollbar-color:rgba(39,41,43,.30) transparent}
+.frame-scroll::-webkit-scrollbar{width:7px}
+.frame-scroll::-webkit-scrollbar-track{background:transparent}
+.frame-scroll::-webkit-scrollbar-thumb{background:rgba(39,41,43,.28);border-radius:4px}
+.frame-scroll img{width:100%;height:auto;display:block}
+.band--void .frame-scroll,.band--fir .frame-scroll{outline-color:rgba(255,255,255,.16);
+  scrollbar-color:rgba(255,255,255,.34) transparent}
+.band--void .frame-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.32)}
+
+.pageshot{width:clamp(320px,42vw,620px);height:min(clamp(520px,58vw,780px),76vh)}
+.phone{width:clamp(200px,22vw,300px);height:min(clamp(520px,58vw,780px),76vh)}
+.hscroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
+  height:min(var(--fh,520px),78vh);
+  outline:1px solid rgba(39,41,43,.12);outline-offset:-1px;
+  scrollbar-width:thin;scrollbar-color:rgba(39,41,43,.30) transparent}
+.hscroll::-webkit-scrollbar{height:7px}
+.hscroll::-webkit-scrollbar-track{background:transparent}
+.hscroll::-webkit-scrollbar-thumb{background:rgba(39,41,43,.28);border-radius:4px}
+.hscroll img,.wide .hscroll img,.grid .hscroll img,.grid figure .hscroll img{height:100%;width:auto;max-width:none;display:block}
+.band--void .hscroll,.band--fir .hscroll{outline-color:rgba(255,255,255,.16);
+  scrollbar-color:rgba(255,255,255,.34) transparent}
+.band--void .hscroll::-webkit-scrollbar-thumb,
+.band--fir .hscroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.32)}
+.grid>*,.grid figure{min-width:0}
+.grid figure .hscroll{width:100%;max-width:100%}
+.hcap{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft)}
+.band--void .hcap,.band--fir .hcap{color:#B7B1AC}
+.hcap i,.grid figure:has(.hscroll) figcaption{font-style:normal;display:inline-flex;
+  align-items:center;gap:6px}
+.hcap i{opacity:.62}
+.hcap i::after,.grid figure:has(.hscroll) figcaption::after{content:"";width:7px;height:7px;
+  border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+  transform:rotate(-45deg) translate(-1px,1px);opacity:.62;flex:none;margin-left:2px}
+.shotcap{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+         font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);width:100%}
+.shotcap i{font-style:normal;opacity:.62;display:inline-flex;align-items:center;gap:6px}
+.shotcap i::after{content:"";width:7px;height:7px;border-right:1px solid currentColor;
+                  border-bottom:1px solid currentColor;transform:rotate(45deg) translate(-1px,-1px)}
+.col{width:auto}
+.col{display:flex;flex-direction:column;align-items:center}
+
+/* email wall */
+.mail{width:clamp(240px,23vw,340px);height:min(clamp(520px,58vw,780px),76vh);background:var(--void)}
+
+/* asset grids */
+.grid{position:relative;z-index:2;display:grid;gap:clamp(14px,1.6vw,26px);max-width:1500px;margin:0 auto}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.grid figure{margin:0}
+.grid img{width:100%;height:auto;background:#fff;outline:1px solid rgba(255,255,255,.10);outline-offset:-1px}
+.grid figcaption{margin-top:10px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft)}
+.band--void .grid figcaption,.band--fir .grid figcaption{color:#B7B1AC}
+.wide{position:relative;z-index:2;max-width:1500px;margin:0 auto}
+.wide img{width:100%}
+
+/* details */
+.details{max-width:1500px;margin:0 auto;padding:clamp(64px,7vw,110px) var(--pad) clamp(80px,8vw,130px);
+         display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:34px}
+.details h4{margin:0 0 12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
+.details p{margin:0;font-size:14px;line-height:1.85;color:var(--ink-soft)}
+footer{background:var(--ink);color:#fff;padding:44px var(--pad);display:flex;
+       align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+footer img{height:18px;width:auto;opacity:.8}
+footer span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#A1A1A1}
+
+@media (max-width:760px){
+  /* leave a page gutter either side so the frame never traps touch scrolling */
+  .pageshot{width:min(78vw,420px);height:min(62vh,540px)}
+  .phone{width:min(44vw,220px);height:min(62vh,540px)}
+  .mail{width:min(62vw,320px);height:min(62vh,540px)}
+  .stage{gap:18px}
+}
+@media (max-width:520px){
+  .pageshot{width:min(80vw,300px);height:min(56vh,440px)}
+  .phone{width:min(46vw,168px);height:min(56vh,440px)}
+  .mail{width:min(64vw,240px);height:min(56vh,440px)}
+  .stage{gap:16px}
+}
+@media (max-width:900px){
+  .g3,.g4{grid-template-columns:repeat(2,1fr)}
+  .top nav{display:none}
+  .mark{font-size:clamp(90px,24vw,150px)}
+}
+@media (max-width:560px){ .g2,.g3,.g4{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <img src="images/innbeauty/logo@3x.png" alt="INNBEAUTY Project">
+  <nav>
+    <a href="branding.html" class="back">&larr;&nbsp;Portfolio</a>
+    <a href="#website">Website</a>
+    <a href="#blackfriday">Black Friday</a>
+    <a href="#christmas">Christmas</a>
+    <a href="#details">Display</a>
+    <a href="#details">Details</a>
+  </nav>
+</header>
+
+<!-- ── overview ────────────────────────────────────────────────────────────── -->
+<section class="intro">
+  <p class="eyebrow">Clinical skincare · DTC</p>
+  <h1>INNBEAUTY Project<br>Redesign &amp; Campaign System</h1>
+  <p class="lede">A redesign of a clinical skincare storefront, extended into a campaign system. I started by measuring the brand from the live site: every colour, type size and spacing value, taken from the theme stylesheets and computed styles. The storefront was rebuilt on that documented system, then scaled across email, retail and social.</p>
+  <p class="scope">
+    <b>Scope</b> A written design system, four responsive storefront pages, two campaign directions and thirty-two campaign artboards. Every screen and asset is exported by an automated pipeline, so the case study regenerates from source in one command.
+  </p>
+  <div class="meta">
+    <div><b>4</b><span>Storefront pages</span></div>
+    <div><b>29</b><span>Campaign artboards</span></div>
+    <div><b>2</b><span>Campaign directions</span></div>
+    <div><b>54</b><span>Exported assets</span></div>
+  </div>
+</section>
+
+<!-- ── website ─────────────────────────────────────────────────────────────── -->
+<section class="intro intro--tight" id="website">
+  <p class="eyebrow">01, Storefront</p>
+  <h2>The redesign</h2>
+  <p class="lede">
+    The brand runs on one rule: serif for feeling, uppercase sans for fact. The live site followed it inconsistently. Here it holds throughout, alongside square cards, no shadows, a single 4px radius on interactive chrome, and warm neutrals used as full-bleed bands rather than component tints.
+  </p>
+  <a class="jump" href="innbeauty-demo/index.html">View the live build <i></i></a>
+</section>
+
+<div class="band band--grey">
+  <span class="mark">Desktop</span>
+  <div class="band-head"><h3>Storefront, desktop</h3><span>1440px · full-length capture</span></div>
+  <div class="stage">
+    <div class="col"><div class="pageshot frame-scroll"><img src="images/innbeauty/preview/home-desktop.png" alt="Homepage, desktop"></div><p class="shotcap"><span>Home</span><i>Scroll</i></p></div>
+    <div class="col"><div class="pageshot frame-scroll"><img src="images/innbeauty/preview/shop-desktop.png" alt="Collection, desktop"></div><p class="shotcap"><span>Best sellers</span><i>Scroll</i></p></div>
+  </div>
+  <div class="why"><div><h5>Serif for feeling, sans for fact</h5><p>The one rule the live site half-followed. Display serif carries the emotional line; everything functional, nav, price, badge, CTA, is uppercase Helvetica. Applied consistently, it is what makes the pages read as one brand.</p></div><div><h5>Bands, not boxes</h5><p>Warm neutrals run full-bleed as section grounds rather than tinting cards. Cards are content on white: no border, no radius, no shadow. Separation comes from colour blocks and whitespace.</p></div><div><h5>Numbers as proof</h5><p>Ratings carry two decimals, actives are stated as 8–10, price as $28+. Precision is the brand's credibility device, so the numerals are set in the display serif and given their own hairline rules.</p></div></div>
+</div>
+
+<div class="band band--grey" style="padding-top:0">
+  <div class="stage">
+    <div class="col"><div class="pageshot frame-scroll"><img src="images/innbeauty/preview/product-desktop.png" alt="Product page, desktop"></div><p class="shotcap"><span>Product</span><i>Scroll</i></p></div>
+    <div class="col"><div class="pageshot frame-scroll"><img src="images/innbeauty/preview/rewards-desktop.png" alt="Rewards, desktop"></div><p class="shotcap"><span>Rewards</span><i>Scroll</i></p></div>
+  </div>
+</div>
+
+<div class="band band--blush">
+  <span class="mark">Mobile</span>
+  <div class="band-head"><h3>Storefront, mobile</h3><span>390px · full-length capture</span></div>
+  <div class="stage">
+    <div class="col"><div class="phone frame-scroll"><img src="images/innbeauty/preview/home-mobile.png" alt="Homepage, mobile"></div><p class="shotcap"><span>Home</span><i>Scroll</i></p></div>
+    <div class="col"><div class="phone frame-scroll"><img src="images/innbeauty/preview/shop-mobile.png" alt="Collection, mobile"></div><p class="shotcap"><span>Best sellers</span><i>Scroll</i></p></div>
+    <div class="col"><div class="phone frame-scroll"><img src="images/innbeauty/preview/product-mobile.png" alt="Product, mobile"></div><p class="shotcap"><span>Product</span><i>Scroll</i></p></div>
+  </div>
+  <div class="why"><div><h5>Reordered, not reflowed</h5><p>The desktop hero paints display type over the image. On mobile that collapses, so the image sits above and the type below, a different composition, not a squeezed one.</p></div><div><h5>Two-up product grid</h5><p>One product per row makes a 15-item collection unreadably long. The grid holds two columns to 375px, which is what beauty commerce actually does.</p></div><div><h5>Nothing below 11px</h5><p>Type was audited at production size. 202 instances sat under 12px; the floor is now 11px, with body copy at 15–16px and 52px CTA targets.</p></div></div>
+</div>
+
+<!-- ── black friday ────────────────────────────────────────────────────────── -->
+<section class="intro" id="blackfriday">
+  <p class="eyebrow">02, Campaign</p>
+  <h2>Black Friday: Everything off.</h2>
+  <p class="lede">
+    The brand's own hero line, read literally. A company built on the promise of pro-level results without the markups cannot run an ordinary sale, so the campaign frames this as the only markdown of the year. The palette inverts to near-black. The brand declares one highlight pink and spends it once on the live site; each email spends it once, on the offer.
+  </p>
+  <p class="scope"><b>Four sends</b> Launch, offer, reminder, last chance. Urgency escalates across the flight. One device carries all four: the site's proof ticker, re-cut to read as a promotional strip.</p>
+</section>
+
+<div class="band band--void">
+  <span class="mark">Email</span>
+  <div class="band-head"><h3>Black Friday, CRM</h3><span>600px container · 4 sends</span></div>
+  <div class="stage">
+    <div class="col"><div class="mail frame-scroll"><img src="images/innbeauty/black-friday/black-friday-email-01.png" alt="Launch email"></div><p class="shotcap" style="color:#B7B1AC"><span>01, Launch</span><i>Scroll</i></p></div>
+    <div class="col"><div class="mail frame-scroll"><img src="images/innbeauty/black-friday/black-friday-email-02.png" alt="Offer email"></div><p class="shotcap" style="color:#B7B1AC"><span>02, Offer</span><i>Scroll</i></p></div>
+  </div>
+  <div class="why"><div><h5>Black carries the message, bone carries the product</h5><p>The hero and offer sit on near-black for drama. The product shelves lift to a warm bone, because a packshot and its contact shadow need a surface to read against, on black they went muddy.</p></div><div><h5>One pink, once</h5><p>The brand declares a single highlight pink and uses it once on the whole live site. Each email spends it once, on the offer. On the bone shelves it steps down to a deeper magenta to hold contrast.</p></div><div><h5>The ticker as campaign device</h5><p>The site's proof ticker, re-cut to read EVERYTHING OFF · 25% SITEWIDE. It repeats between sections in all four sends, so the campaign is recognisable before you read a word.</p></div></div>
+</div>
+
+<div class="band band--void" style="padding-top:0">
+  <div class="stage">
+    <div class="col"><div class="mail frame-scroll"><img src="images/innbeauty/black-friday/black-friday-email-03.png" alt="Reminder email"></div><p class="shotcap" style="color:#B7B1AC"><span>03, Reminder</span><i>Scroll</i></p></div>
+    <div class="col"><div class="mail frame-scroll"><img src="images/innbeauty/black-friday/black-friday-email-04.png" alt="Last chance email"></div><p class="shotcap" style="color:#B7B1AC"><span>04, Last chance</span><i>Scroll</i></p></div>
+  </div>
+</div>
+
+<!-- ── christmas ───────────────────────────────────────────────────────────── -->
+<section class="intro" id="christmas">
+  <p class="eyebrow">03, Campaign</p>
+  <h2>Christmas: Give what works.</h2>
+  <p class="lede">
+    No red and green. The season comes from the packaging instead: deep fir against the brand's warm neutrals, with a champagne foil taken from the rose-gold caps. A pine sprig and a bell, both drawn hairline, act as the seasonal signature. The campaign gifts rather than discounts, so sets lead and the offer reads as from $52 rather than a percentage.
+  </p>
+  <a class="jump" href="innbeauty-campaigns/index.html">Open the artboard preview <i></i></a>
+</section>
+
+<div class="band band--sand">
+  <span class="mark">Website</span>
+  <div class="band-head"><h3>Christmas, DTC site modules</h3><span>1920×800 hero · 1440 banners · 1080 tile</span></div>
+  <div class="wide">
+    <div class="hscroll" style="--fh:800px"><img src="images/innbeauty/christmas/christmas-dtc-site-hero-1920x800.png" alt="Christmas site hero"></div><p class="hcap"><span>DTC Site Hero &middot; 1920 &times; 800</span><i>Pan</i></p>
+    <div class="grid g2" style="margin-top:clamp(14px,1.6vw,26px)">
+      <figure><div class="hscroll" style="--fh:520px"><img src="images/innbeauty/christmas/christmas-dtc-category-banner-1440x520.png" alt="Category banner"></div><figcaption>DTC Category Banner · 1440 × 520</figcaption></figure>
+      <figure><div class="hscroll" style="--fh:400px"><img src="images/innbeauty/christmas/christmas-dtc-promo-banner-1440x400.png" alt="Promo banner"></div><figcaption>DTC Promo Banner · 1440 × 400</figcaption></figure>
+    </div>
+    <div class="grid g3" style="margin-top:clamp(14px,1.6vw,26px)">
+      <figure><div class="hscroll" style="--fh:250px"><img src="images/innbeauty/christmas/christmas-dtc-thin-banner-1440x250.png" alt="Thin banner"></div><figcaption>DTC Thin Banner · 1440 × 250</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-dtc-tile-1080x1080.png" alt="Campaign tile"><figcaption>DTC Tile · 1080 × 1080</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-dtc-site-hero-mobile-750x1000.png" alt="Hero, mobile"><figcaption>DTC Site Hero, mobile · 750 × 1000</figcaption></figure>
+    </div>
+  </div>
+  <div class="why"><div><h5>Christmas through the packaging</h5><p>No red and green. The season is carried by deep fir against the brand's warm neutrals, with a champagne foil lifted straight from the rose-gold caps.</p></div><div><h5>Two marks, drawn hairline</h5><p>A pine sprig and a bell, both reduced to line and blocked in foil. They behave like a signature, one or two per composition, never scattered.</p></div><div><h5>Gifting, not discounting</h5><p>The brand's guardrail is value framing over percentages. Christmas states sets from $52 and a 22 December cut-off; the only campaign that discounts is Black Friday.</p></div></div>
+</div>
+
+<div class="band band--grey">
+  <span class="mark">Retail</span>
+  <div class="band-head"><h3>Christmas, retail &amp; marketplace</h3><span>3000×1200 store banner · safe-area composed</span></div>
+  <div class="wide">
+    <div class="hscroll" style="--fh:700px"><img src="images/innbeauty/christmas/christmas-retail-store-banner-3000x1200.png" alt="Amazon store banner"></div><p class="hcap"><span>Amazon Store Banner &middot; 3000 &times; 1200</span><i>Pan</i></p>
+    <div class="grid g3" style="margin-top:clamp(14px,1.6vw,26px)">
+      <figure><div class="hscroll" style="--fh:600px"><img src="images/innbeauty/christmas/christmas-retail-banner-1500x600.png" alt="Wide promotional banner"></div><figcaption>Retail Banner · 1500 &times; 600</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-retail-tile-1000x1000.png" alt="Campaign tile"><figcaption>Retail Tile · 1000 &times; 1000</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-retail-mobile-750x1000.png" alt="Mobile campaign banner"><figcaption>Retail Mobile · 750 &times; 1000</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<div class="band band--fir">
+  <span class="mark">Social</span>
+  <div class="band-head"><h3>Christmas, social</h3><span>Feed 1:1 &amp; 4:5 · Story 9:16 · Landscape 1.91:1</span></div>
+  <div class="grid g4"><figure><img src="images/innbeauty/christmas/christmas-instagram-square-announce.png" alt="Feed · announcement"><figcaption>Feed · announcement</figcaption></figure><figure><img src="images/innbeauty/christmas/christmas-instagram-square-product.png" alt="Feed · product"><figcaption>Feed · product</figcaption></figure><figure><img src="images/innbeauty/christmas/christmas-instagram-square-sets.png" alt="Feed · the gift edit"><figcaption>Feed · the gift edit</figcaption></figure><figure><img src="images/innbeauty/christmas/christmas-instagram-square-bells.png" alt="Feed · unwrapping"><figcaption>Feed · unwrapping</figcaption></figure></div>
+  <div class="grid g3" style="margin-top:clamp(14px,1.6vw,26px)"><figure><img src="images/innbeauty/christmas/christmas-instagram-portrait-gifting.png" alt="Portrait · gifting"><figcaption>Portrait · gifting</figcaption></figure><figure><img src="images/innbeauty/christmas/christmas-instagram-portrait-product.png" alt="Portrait · product"><figcaption>Portrait · product</figcaption></figure><figure><img src="images/innbeauty/christmas/christmas-facebook-1200x628.png" alt="Landscape · 1200 × 628"><figcaption>Landscape · 1200 × 628</figcaption></figure></div>
+  <div class="grid g3" style="margin-top:clamp(14px,1.6vw,26px)"><figure><img src="images/innbeauty/christmas/christmas-instagram-story-announce.png" alt="Story · announcement"><figcaption>Story · announcement</figcaption></figure><figure><img src="images/innbeauty/christmas/christmas-instagram-story-gifting.png" alt="Story · the gift edit"><figcaption>Story · the gift edit</figcaption></figure><figure><img src="images/innbeauty/christmas/christmas-instagram-story-lastminute.png" alt="Story · last minute"><figcaption>Story · last minute</figcaption></figure></div>
+  <div class="why"><div><h5>Recomposed, never resized</h5><p>Each ratio gets its own hierarchy. The square leads with type, the portrait leads with product, the story leads with image and lands the CTA inside the safe zone.</p></div><div><h5>Fir as the seasonal ground</h5><p>Deep fir against pale packshots is what makes the set read as Christmas at thumbnail size, before any copy is legible.</p></div><div><h5>One idea per post</h5><p>Announcement, product, gift edit, unwrapping, last-minute. Five angles rather than one layout repeated ten times.</p></div></div>
+</div>
+
+<div class="band band--grey">
+  <span class="mark">Display</span>
+  <div class="wide">
+    <div class="grid g4">
+      <figure><img src="images/innbeauty/black-friday/black-friday-display-300x250.png" alt="Black Friday 300x250"><figcaption>Black Friday · 300 &times; 250</figcaption></figure>
+      <figure><img src="images/innbeauty/black-friday/black-friday-display-300x600.png" alt="Black Friday 300x600"><figcaption>Black Friday · 300 &times; 600</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-display-300x250.png" alt="Christmas 300x250"><figcaption>Christmas · 300 &times; 250</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-display-300x600.png" alt="Christmas 300x600"><figcaption>Christmas · 300 &times; 600</figcaption></figure>
+    </div>
+    <div class="grid g2" style="margin-top:clamp(14px,1.6vw,26px)">
+      <figure><div class="hscroll" style="--fh:90px"><img src="images/innbeauty/black-friday/black-friday-display-728x90.png" alt="Black Friday leaderboard"></div><figcaption>Leaderboard · 728 &times; 90</figcaption></figure>
+      <figure><div class="hscroll" style="--fh:90px"><img src="images/innbeauty/christmas/christmas-display-728x90.png" alt="Christmas leaderboard"></div><figcaption>Leaderboard · 728 &times; 90</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<section class="details" id="details">
+  <div><h4>Client</h4><p>INNBEAUTY Project, concept redesign. Clinical skincare, direct to consumer.</p></div>
+  <div><h4>Scope</h4><p>Design system audit, storefront redesign, campaign identity, email, retail and social creative, automated export pipeline.</p></div>
+  <div><h4>Built with</h4><p>HTML, CSS, SVG. Prata and Helvetica Neue. Playwright and Pillow for asset preparation and export.</p></div>
+  <div><h4>Deliverables</h4><p>4 storefront pages, 4 campaign emails, 25 campaign artboards, 54 exported PNG and PDF assets, one written design system.</p></div>
+</section>
+
+<footer>
+  <img src="images/innbeauty/logo-white@3x.png" alt="INNBEAUTY Project">
+  <span>Concept redesign</span>
+</footer>
+
+</body>
+</html>

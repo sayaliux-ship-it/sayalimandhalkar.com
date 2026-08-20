@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mineral Sun Glow SPF — INNBEAUTY Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Gilda+Display&display=swap">
+<style>
+:root{
+  --ink:#27292B; --ink-soft:#494A4A; --grey-400:#A1A1A1; --grey-50:#F5F5F7;
+  --sand:#F5E4D6; --blush:#EBE1E1; --cream:#FCF1EB; --rose:#F5D9DF; --clay:#C28F8C;
+  --serif:'Prata','Gilda Display',Georgia,serif;
+  --ui:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --pad:4.2vw;
+  /* section rhythm — one scale, no ad hoc values */
+  --sec:clamp(96px,9vw,128px);      /* standard band */
+  --sec-lg:clamp(120px,11vw,160px); /* the two statement bands */
+  --gap:clamp(26px,2.6vw,38px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);font-family:var(--ui);color:var(--ink);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+.page{background:#FFFFFF;max-width:1600px;margin:0 auto;overflow-x:hidden}
+
+/* interaction — opacity only, never colour */
+a{transition:opacity .2s ease}
+.lnk{color:var(--ink);text-decoration:none;white-space:nowrap}
+.lnk:hover{opacity:.55}
+.btn{display:inline-flex;align-items:center;height:50px;padding:0 34px;border-radius:4px;
+     font-size:12px;letter-spacing:1.8px;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.btn:hover{opacity:.86}
+.btn--dark{background:var(--ink);color:#FFFFFF}
+.btn--light{background:#FFFFFF;color:var(--ink)}
+.btn--outline{color:var(--ink);border:1px solid var(--ink)}
+.btn--outline:hover{opacity:.6}
+.rule-lnk{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink);
+          text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px}
+.rule-lnk:hover{opacity:.55}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft)}
+.tile{text-decoration:none;color:var(--ink);display:block}
+.tile:hover{opacity:.88}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* ── announcement + header ── */
+.announce{height:34px;display:flex;align-items:center;justify-content:center;gap:14px;
+          background:var(--ink);color:#FFFFFF;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.head{height:88px;display:flex;align-items:center;justify-content:space-between;gap:32px;
+      padding:0 var(--pad);background:var(--cream)}
+.wordmark{font-size:16px;letter-spacing:2.6px;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
+.head nav{display:flex;gap:clamp(16px,1.9vw,30px)}
+.head nav a,.head .utils a{font-size:12px;letter-spacing:1.4px;text-transform:uppercase}
+.head .utils{display:flex;gap:clamp(14px,1.6vw,24px)}
+
+/* ── hero — full-bleed band, display type over the image ── */
+.hero{position:relative;background:var(--cream);min-height:clamp(520px,45vw,740px);
+      display:flex;align-items:center;overflow:hidden}
+.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center}
+.hero__scrim{position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(252,241,235,.94) 0%,rgba(252,241,235,.82) 30%,rgba(252,241,235,.42) 48%,rgba(252,241,235,0) 64%)}
+.hero__inner{position:relative;z-index:2;width:100%;padding:clamp(56px,6vw,88px) var(--pad) clamp(56px,6vw,88px) calc(var(--pad) + 26px);
+             display:flex;flex-direction:column;gap:24px;max-width:min(50%,680px)}
+.hero__title{margin:0;font-family:var(--serif);font-weight:400;
+             font-size:clamp(38px,4.6vw,66px);line-height:1.06;letter-spacing:-.03em;text-wrap:nowrap}
+.hero__sub{margin:0;max-width:38ch;font-size:16px;line-height:1.8;color:var(--ink-soft)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center}
+.hero__edge{position:absolute;left:16px;bottom:clamp(28px,3vw,44px);transform-origin:left bottom;
+            transform:rotate(-90deg);z-index:2;font-size:11px;letter-spacing:2.6px;text-transform:uppercase;
+            color:var(--ink-soft);white-space:nowrap;pointer-events:none}
+
+/* hero meta — stats on hairlines, packshot overhanging the next band */
+.hero-meta{position:relative;background:var(--cream);
+           padding:clamp(34px,3.4vw,48px) var(--pad) clamp(38px,3.8vw,54px)}
+.hero-meta__stats{display:flex;gap:clamp(24px,3vw,44px);max-width:660px;width:100%}
+.stat{display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid var(--ink);flex:1}
+.stat b{font-family:var(--serif);font-size:26px;line-height:1;font-weight:400}
+.stat span{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-soft)}
+.hero__packshot{position:absolute;right:var(--pad);bottom:14px;z-index:3;
+                width:clamp(150px,14vw,208px);aspect-ratio:3/4;object-fit:cover;background:#FFFFFF}
+
+/* ── proof ticker — charcoal marquee, the brand's own device ── */
+.ticker{background:var(--ink);color:#FFFFFF;overflow:hidden;padding:20px 0;
+        border-top:1px solid rgba(39,41,43,.1)}
+.ticker__track{display:flex;width:max-content;align-items:center;
+               animation:marquee 42s linear infinite}
+.ticker__set{display:flex;align-items:center;gap:clamp(30px,4vw,60px);
+             padding-right:clamp(30px,4vw,60px);font-size:13px;letter-spacing:2.4px;
+             text-transform:uppercase;white-space:nowrap}
+.ticker__set i{color:var(--clay);font-style:normal;font-size:15px;line-height:0}
+.ticker:hover .ticker__track{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .ticker{overflow-x:auto}
+  .ticker__track{animation:none}
+}
+
+/* ── 01 proof ── */
+.proof{padding:var(--sec-lg) var(--pad);background:#FFFFFF;position:relative;overflow:hidden}
+.proof__statement{margin:clamp(48px,5vw,72px) 0 0 20%;max-width:880px;font-family:var(--serif);
+                  font-weight:400;font-size:clamp(38px,4.2vw,60px);line-height:1.16;letter-spacing:-.02em}
+.proof__foot{margin:clamp(36px,4vw,56px) 0 0 20%;display:flex;align-items:flex-end;
+             gap:clamp(28px,4.4vw,64px);flex-wrap:wrap}
+.proof__foot p{margin:0;max-width:400px;font-size:15px;line-height:1.85;color:var(--ink-soft)}
+.proof__texture{position:absolute;right:-2vw;top:var(--sec-lg);
+                width:clamp(200px,21vw,300px);aspect-ratio:3/2;object-fit:cover;background:var(--sand)}
+
+/* ── 02 best sellers ── */
+.sellers{padding:0 var(--pad) var(--sec);background:#FFFFFF}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:40px;padding-bottom:56px}
+.sec-head h2,.sec-title{margin:0;font-family:var(--serif);font-weight:400;
+                        font-size:clamp(38px,3.9vw,56px);line-height:1.04;letter-spacing:-.025em}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);align-items:stretch}
+.card{display:flex;flex-direction:column;gap:0;height:100%}
+.card--drop{margin-top:86px}
+.card__media{position:relative}
+.card__media img{aspect-ratio:4/5;width:100%;object-fit:cover;display:block}
+.badge{position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;height:24px;
+       padding:0 8px;border-radius:4px;background:#FFFFFF;color:var(--ink);font-size:12px;
+       line-height:12px;letter-spacing:-.3px;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 18px}
+.chip{font-family:var(--ui);font-size:12px;font-weight:400;letter-spacing:.3px;padding:5px 9px;
+      border:1px solid transparent;border-radius:4px;background:transparent;color:var(--ink-soft);
+      cursor:pointer;transition:color .2s ease,border-color .2s ease}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);font-weight:700}
+.card__row{display:flex;align-items:baseline;justify-content:space-between;margin-top:20px;gap:14px}
+.card__row h3{margin:0;min-width:0;overflow-wrap:anywhere;font-family:var(--serif);font-weight:400;font-size:clamp(20px,1.7vw,26px);
+              line-height:1.14;letter-spacing:-.01em}
+.card__price{flex:none;font-size:16px;font-weight:700;line-height:1.2;
+             font-variant-numeric:tabular-nums;color:var(--ink)}
+.card__price s{font-weight:400;color:var(--grey-400);margin-right:5px}
+.card p{margin:7px 0 0;font-size:13px;line-height:1.5;letter-spacing:0;text-transform:none;color:var(--ink-soft)}
+.card__meta{display:flex;align-items:center;gap:8px;margin-top:10px;
+            font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-soft)}
+.card__meta b{font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.4px;color:var(--ink)}
+.card__meta i{display:block;width:14px;height:1px;background:rgba(39,41,43,.28);font-style:normal}
+.add{display:flex;align-items:center;justify-content:center;height:46px;margin-top:auto;
+     padding:0 16px;border:1px solid var(--ink);border-radius:4px;font-size:12px;letter-spacing:1.8px;
+     text-transform:uppercase;color:var(--ink);text-decoration:none;transition:background .2s ease,color .2s ease}
+.add:hover{background:var(--ink);color:#FFFFFF}
+.add s{color:var(--grey-400)}
+.add span:last-child{font-variant-numeric:tabular-nums}
+
+/* ── 03 in focus ── */
+.focus{position:relative;min-height:700px;background:var(--clay);color:var(--ink);overflow:hidden}
+.focus__img{position:absolute;right:0;top:0;bottom:0;width:58%;height:100%;object-fit:cover;background:#CE9E9B}
+.focus__body{position:relative;z-index:2;padding:clamp(88px,8.3vw,120px) var(--pad);max-width:560px;
+             display:flex;flex-direction:column;gap:26px}
+.focus__body .eyebrow{color:rgba(39,41,43,.7)}
+.focus__body h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(54px,5.4vw,78px);
+                line-height:.98;letter-spacing:-.03em}
+.focus__body p{margin:0;max-width:400px;font-size:16px;line-height:1.8}
+.focus__stats{display:flex;gap:36px;padding-top:6px}
+.focus__stats div{display:flex;flex-direction:column;gap:4px;padding-top:12px;
+                  border-top:1px solid rgba(39,41,43,.5);min-width:88px}
+.focus__stats b{font-family:var(--serif);font-size:24px;line-height:1;font-weight:400}
+.focus__stats span{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:rgba(39,41,43,.75)}
+
+/* ── 04 concerns — portrait category tiles, staggered ── */
+.concerns{padding:var(--sec) var(--pad);background:#FFFFFF}
+.concerns__head{display:flex;flex-direction:column;gap:18px;margin-bottom:clamp(52px,5.3vw,76px);max-width:640px}
+.concern-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);align-items:start}
+.concern{position:relative}
+.concern:nth-child(2){margin-top:clamp(48px,5vw,72px)}
+.concern img{aspect-ratio:5/7;width:100%;object-fit:cover;background:var(--blush)}
+.concern__label{position:absolute;left:0;bottom:clamp(18px,2vw,28px);background:#FFFFFF;
+                padding:18px 26px 0 0;display:flex;flex-direction:column;gap:6px;max-width:88%}
+.concern:nth-child(2) .concern__label{left:auto;right:0;padding:18px 0 0 26px;text-align:right}
+.concern__label small{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft)}
+.concern__label strong{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.2vw,32px);
+                       line-height:1.05;letter-spacing:-.024em}
+
+/* ── 05 refill ── */
+.refill{background:var(--ink);color:#FFFFFF;padding:var(--sec) var(--pad)}
+.refill h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(44px,4.6vw,66px);
+           line-height:1;letter-spacing:-.03em}
+.refill__intro{max-width:620px;display:flex;flex-direction:column;gap:22px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,44px);
+       margin-top:clamp(52px,5vw,72px);max-width:900px}
+.steps div{display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.35)}
+.steps b{font-family:var(--serif);font-weight:400;font-size:38px;line-height:1;color:var(--clay)}
+.steps h3{margin:0;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.steps p{margin:0;font-size:14px;line-height:1.75;color:var(--grey-50)}
+
+/* ── drop teaser ── */
+.drop{position:relative;min-height:460px;display:flex;align-items:center;background:var(--rose);overflow:hidden}
+.drop__img{position:absolute;right:0;top:0;bottom:0;width:62%;height:100%;object-fit:cover}
+.drop__body{position:relative;z-index:2;padding:60px var(--pad);max-width:600px;display:flex;flex-direction:column;gap:16px}
+.drop__body h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(44px,4.3vw,62px);
+               line-height:.98;letter-spacing:-.03em}
+.signup{display:flex;margin-top:12px;max-width:400px}
+.signup input{height:50px;flex:1;padding:0 16px;background:transparent;border:1px solid var(--ink);
+              border-right:0;border-radius:4px 0 0 4px;color:var(--ink);font-family:inherit;font-size:12px;letter-spacing:2px}
+.signup button{height:50px;padding:0 26px;background:var(--ink);color:#FFFFFF;border:0;border-radius:0 4px 4px 0;
+               font-family:inherit;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;transition:opacity .2s ease}
+.signup button:hover{opacity:.86}
+
+/* ── 06 real results ── */
+.results{padding:var(--sec-lg) var(--pad);background:var(--cream)}
+.results__grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(48px,7vw,100px);align-items:start}
+.score{display:flex;flex-direction:column;gap:16px;align-items:flex-start;position:sticky;top:40px}
+.score b{font-family:var(--serif);font-weight:400;font-size:clamp(80px,9vw,132px);
+         line-height:1;letter-spacing:-.03em;display:block}
+.score span{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft)}
+.quotes{display:flex;flex-direction:column;gap:clamp(34px,3.4vw,46px);max-width:660px}
+.quotes figure{margin:0;display:flex;flex-direction:column;gap:16px}
+.quotes figure+figure{gap:14px;padding-top:clamp(32px,3.2vw,44px);border-top:1px solid rgba(39,41,43,.18)}
+.quotes blockquote{margin:0;font-family:var(--serif);font-size:clamp(24px,2.4vw,34px);line-height:1.28;letter-spacing:-.018em}
+.quotes figure+figure blockquote{font-family:var(--ui);font-size:16px;line-height:1.75;color:var(--ink);letter-spacing:0}
+.quotes figcaption{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft)}
+.proofshot{margin:clamp(56px,5.4vw,78px) 0 0;max-width:620px;display:flex;flex-direction:column;gap:12px}
+.proofshot img{width:100%;object-fit:cover;background:var(--blush)}
+.proofshot__scale{display:flex;justify-content:space-between;font-size:11px;letter-spacing:1.4px;
+                  text-transform:uppercase;color:var(--ink-soft)}
+.proofshot figcaption{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft)}
+
+/* ── 07 why we built it ── */
+.founders{display:grid;grid-template-columns:58% 42%;background:var(--blush);align-items:stretch}
+.founders img{width:100%;height:100%;min-height:560px;object-fit:cover;object-position:center 28%;background:#E0D4D4}
+.founders__body{padding:clamp(72px,8vw,120px) var(--pad) clamp(64px,6vw,88px) clamp(40px,5vw,72px);
+                display:flex;flex-direction:column;gap:24px}
+.founders__body h2{margin:0;font-family:var(--serif);font-weight:400;
+                   font-size:clamp(34px,3.4vw,50px);line-height:1.04;letter-spacing:-.03em}
+.founders__body p{margin:0;font-size:15px;line-height:1.85;color:var(--ink-soft)}
+
+/* ── footer ── */
+footer{background:var(--ink);color:#FFFFFF;padding:clamp(72px,7vw,100px) var(--pad) clamp(20px,2.2vw,32px)}
+.foot__grid{display:grid;grid-template-columns:1fr repeat(3,minmax(140px,auto));
+            gap:0 clamp(36px,5vw,72px);padding-bottom:clamp(52px,5vw,72px)}
+.foot__news{display:flex;flex-direction:column;gap:18px;max-width:360px}
+.foot__news h3{margin:0;font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;letter-spacing:-.6px}
+.foot__news p{margin:0;font-size:13px;line-height:1.8;color:var(--grey-400)}
+.foot__news .signup input{border-color:rgba(255,255,255,.45);color:#FFFFFF;height:48px}
+.foot__news .signup button{background:#FFFFFF;color:var(--ink);height:48px;padding:0 24px}
+footer nav{display:flex;flex-direction:column;gap:14px}
+footer nav h4{margin:0 0 8px;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--grey-400)}
+footer nav a{color:#FFFFFF;text-decoration:none;font-size:13px;letter-spacing:.5px}
+footer nav a:hover{opacity:.6}
+.foot__base{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;
+            padding:28px 0 30px;border-top:1px solid rgba(255,255,255,.18);
+            font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--grey-400)}
+.foot__base div{display:flex;gap:22px}
+.foot__base a{color:var(--grey-400);text-decoration:none}
+.foot__sign{display:block;width:100%;max-width:1060px;height:auto;opacity:.32;
+            margin:clamp(18px,2vw,30px) 0 0}
+
+@media (max-width:900px){
+  :root{--pad:20px}
+  .announce{height:auto;min-height:34px;padding:8px 16px;gap:8px;font-size:8px;letter-spacing:1.3px;text-align:center}
+  .head{height:64px}
+  .head nav{display:none}
+  .head .utils{gap:14px}
+  .head .utils a:not(:last-child){display:none}
+  .wordmark{font-size:12px;letter-spacing:2.4px}
+  .hero{min-height:0;display:block}
+  .hero__bg{position:relative;height:auto;aspect-ratio:3/2;object-position:62% center}
+  .hero__scrim{display:none}
+  .hero__inner{max-width:none;padding:28px var(--pad) 8px}
+  .hero__title{font-size:clamp(34px,9.4vw,52px);text-wrap:balance}
+  .hero__edge{display:none}
+  .hero-meta{padding-top:30px;padding-bottom:34px}
+  .ticker__set{font-size:12px;letter-spacing:1.8px}
+  .hero-meta__stats{gap:16px}
+  .hero__packshot{display:none}
+    .founders{grid-template-columns:1fr}
+  .founders img{min-height:0;aspect-ratio:4/3}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .card--drop{margin-top:0}
+  .concern-grid{grid-template-columns:1fr}
+  .concern:nth-child(2){margin-top:0}
+  .concern:nth-child(2) .concern__label{left:0;right:auto;padding:18px 26px 0 0;text-align:left}
+  .focus{min-height:0}
+  .focus__img{position:relative;width:100%;height:auto;aspect-ratio:4/3}
+  .steps{grid-template-columns:1fr}
+  .drop__img{position:relative;width:100%;aspect-ratio:3/2}
+  .drop{display:block}
+  .results__grid,.foot__grid{grid-template-columns:1fr;gap:40px}
+  .foot__base{flex-direction:column;align-items:flex-start;gap:18px}
+  .foot__base div{flex-wrap:wrap;gap:14px}
+  .foot__sign{max-width:100%;opacity:.36}
+  .proof__texture{position:relative;right:auto;top:auto;width:100%;margin-top:40px}
+  .proof__statement,.proof__foot{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ══ header ══════════════════════════════════════════════════ */
+.head{position:sticky;top:0;z-index:60;height:76px;display:flex;align-items:center;
+      justify-content:space-between;gap:28px;padding:0 var(--pad);background:var(--cream);
+      transition:background .3s ease}
+.head.is-stuck{background:rgba(252,241,235,.82);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+               border-bottom:1px solid rgba(39,41,43,.1)}
+.wordmark{display:flex;align-items:center;gap:10px;font-size:15px;letter-spacing:3.4px;
+          text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap;flex:none}
+.wordmark img{height:21px;width:auto;display:block}
+.nav{display:flex;align-items:center;gap:clamp(14px,1.7vw,28px);height:100%}
+.nav__item{position:relative;height:100%;display:flex;align-items:center}
+.nav__link{display:inline-flex;align-items:center;gap:6px;height:100%;padding:0;border:0;background:none;
+           font-family:var(--ui);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
+           color:var(--ink);text-decoration:none;white-space:nowrap;cursor:pointer;
+           position:relative;transition:opacity .2s ease}
+.nav__link:hover{opacity:.55}
+.nav__link::after{content:"";position:absolute;left:0;right:0;bottom:24px;height:1px;
+                  background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav__item[aria-current] .nav__link::after,
+.nav__item.is-open .nav__link::after{transform:scaleX(1)}
+.nav__caret{width:7px;height:7px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+            transform:translateY(-2px) rotate(45deg);transition:transform .25s ease}
+.nav__item.is-open .nav__caret{transform:translateY(1px) rotate(-135deg)}
+.mega{position:absolute;left:0;right:0;top:76px;z-index:55;background:var(--cream);
+      border-top:1px solid rgba(39,41,43,.1);border-bottom:1px solid rgba(39,41,43,.1);
+      padding:clamp(30px,3vw,44px) var(--pad) clamp(34px,3.4vw,50px);
+      display:grid;grid-template-columns:1fr 1fr minmax(220px,320px);gap:clamp(28px,4vw,72px);
+      opacity:0;visibility:hidden;transform:translateY(-6px);
+      transition:opacity .22s ease,transform .22s ease,visibility .22s}
+.mega.is-open{opacity:1;visibility:visible;transform:none}
+.mega h3{margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid rgba(39,41,43,.18);
+         font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft)}
+.mega ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.mega a{font-size:15px;color:var(--ink);text-decoration:none;transition:opacity .2s ease}
+.mega a:hover{opacity:.55}
+.mega__feature{display:block;text-decoration:none;color:var(--ink)}
+.mega__feature img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--blush)}
+.mega__feature b{display:block;margin-top:14px;font-family:var(--serif);font-weight:400;font-size:20px}
+.mega__feature span{display:block;margin-top:4px;font-size:12px;color:var(--ink-soft)}
+.scrim{position:fixed;inset:76px 0 0;z-index:50;background:rgba(39,41,43,.22);
+       opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s}
+.scrim.is-open{opacity:1;visibility:visible}
+.utils{display:flex;align-items:center;gap:clamp(10px,1.3vw,20px);flex:none}
+.utils a,.utils button{font-family:var(--ui);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
+        color:var(--ink);text-decoration:none;background:none;border:0;cursor:pointer;
+        white-space:nowrap;transition:opacity .2s ease}
+.utils a:hover,.utils button:hover{opacity:.55}
+.cart{display:inline-flex;align-items:center;gap:7px}
+.cart__n{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;
+         padding:0 5px;border-radius:999px;background:var(--ink);color:#FFFFFF;
+         font-size:10px;letter-spacing:0;font-variant-numeric:tabular-nums}
+.srch{display:flex;align-items:center;gap:8px}
+.srch input{width:0;opacity:0;padding:0;border:0;border-bottom:1px solid var(--ink);background:none;
+            font-family:var(--ui);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink);
+            transition:width .3s ease,opacity .3s ease,padding .3s ease}
+.srch.is-open input{width:clamp(120px,13vw,190px);opacity:1;padding:5px 0}
+.srch input:focus{outline:none}
+@media (max-width:980px){
+  .head{height:64px}
+  .nav{display:none}
+  .mega,.scrim{display:none}
+  .wordmark{font-size:11px;letter-spacing:2.4px}
+  .wordmark img{height:17px}
+  .utils a:not(.cart),.utils .srch{display:none}
+}
+
+/* ══ skin concierge ══════════════════════════════════════════ */
+.ask{position:fixed;right:22px;bottom:22px;z-index:80;display:inline-flex;align-items:center;gap:10px;
+     height:48px;padding:0 20px;border:0;border-radius:999px;background:var(--ink);color:#FFFFFF;
+     font-family:var(--ui);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;cursor:pointer;
+     transition:opacity .2s ease,transform .25s ease}
+.ask:hover{opacity:.88}
+.ask.is-hidden{opacity:0;transform:translateY(8px) scale(.96);pointer-events:none}
+.ask__dot{width:7px;height:7px;border-radius:50%;background:var(--clay)}
+.chat{position:fixed;right:22px;bottom:22px;z-index:81;width:min(372px,calc(100vw - 44px));
+      max-height:min(600px,calc(100vh - 44px));display:flex;flex-direction:column;overflow:hidden;
+      background:#FFFFFF;border:1px solid rgba(39,41,43,.18);border-radius:4px;
+      opacity:0;visibility:hidden;transform:translateY(10px);
+      transition:opacity .25s ease,transform .25s ease,visibility .25s}
+.chat.is-open{opacity:1;visibility:visible;transform:none}
+.chat__top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+           padding:18px 18px 16px;background:var(--ink);color:#FFFFFF}
+.chat__top b{display:block;font-family:var(--serif);font-weight:400;font-size:19px;letter-spacing:-.01em}
+.chat__top span{display:block;margin-top:3px;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#B9B4B1}
+.chat__x{border:0;background:none;color:#FFFFFF;font-size:19px;line-height:1;cursor:pointer;padding:2px 2px 0;
+         transition:opacity .2s ease}
+.chat__x:hover{opacity:.6}
+.chat__log{flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:86%;font-size:14px;line-height:1.6;padding:12px 14px;border-radius:4px}
+.msg--bot{align-self:flex-start;background:var(--cream);color:var(--ink)}
+.msg--me{align-self:flex-end;background:var(--ink);color:#FFFFFF}
+.rec{align-self:flex-start;width:86%;display:flex;gap:12px;padding:12px;background:var(--grey-50);border-radius:4px}
+.rec img{width:62px;aspect-ratio:4/5;object-fit:cover;flex:none;display:block}
+.rec__b{display:flex;flex-direction:column;gap:3px;justify-content:center}
+.rec__b b{font-family:var(--serif);font-weight:400;font-size:16px;line-height:1.15}
+.rec__b span{font-size:12px;color:var(--ink-soft)}
+.rec__b a{margin-top:5px;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink);
+          text-decoration:none;border-bottom:1px solid var(--ink);align-self:flex-start;padding-bottom:2px}
+.chat__quick{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 14px}
+.qchip{padding:8px 12px;border:1px solid rgba(39,41,43,.25);border-radius:4px;background:none;
+       font-family:var(--ui);font-size:12px;color:var(--ink-soft);cursor:pointer;
+       transition:border-color .2s ease,color .2s ease}
+.qchip:hover{border-color:var(--ink);color:var(--ink)}
+.chat__form{display:flex;border-top:1px solid rgba(39,41,43,.14)}
+.chat__form input{flex:1;height:50px;padding:0 16px;border:0;background:none;
+                  font-family:var(--ui);font-size:14px;color:var(--ink)}
+.chat__form input:focus{outline:none}
+.chat__form button{padding:0 18px;border:0;background:none;color:var(--ink);cursor:pointer;
+                   font-family:var(--ui);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;
+                   transition:opacity .2s ease}
+.chat__form button:hover{opacity:.55}
+@media (max-width:560px){ .ask{right:14px;bottom:14px} .chat{right:14px;bottom:14px;width:calc(100vw - 28px)} }
+
+</style>
+<style>
+/* ── product hero: thumbnail rail, one main frame, sticky panel ── */
+.pdp{display:grid;grid-template-columns:78px minmax(0,1fr) minmax(330px,37%);
+     gap:0 clamp(24px,3vw,54px);align-items:start;background:#FFFFFF;
+     padding:clamp(26px,2.8vw,42px) var(--pad) clamp(64px,6vw,92px)}
+
+.thumbs{display:flex;flex-direction:column;gap:10px}
+.thumb{padding:0;border:0;background:none;cursor:pointer;line-height:0;
+       outline:1px solid transparent;outline-offset:0;transition:outline-color .2s ease,opacity .2s ease}
+.thumb img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:var(--grey-50)}
+.thumb:hover{opacity:.82}
+.thumb.is-on{outline-color:var(--ink)}
+.thumb:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.frame{position:relative;background:var(--grey-50)}
+.frame img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.fnav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;
+      display:flex;align-items:center;justify-content:center;border:0;border-radius:4px;
+      background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+      cursor:pointer;transition:opacity .2s ease}
+.fnav:hover{opacity:.7}
+.fnav:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.fnav--prev{left:14px} .fnav--next{right:14px}
+.fnav::before{content:"";width:9px;height:9px;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.fnav--prev::before{transform:rotate(45deg);margin-left:3px}
+.fnav--next::before{transform:rotate(-135deg);margin-right:3px}
+.fcount{position:absolute;left:14px;bottom:14px;padding:5px 10px;border-radius:4px;
+        background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+        font-size:11px;letter-spacing:1.3px;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+/* panel — grouped rhythm rather than one flat gap */
+.pdp__panel{position:sticky;top:24px;display:flex;flex-direction:column}
+.crumb{margin:0 0 22px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft)}
+.crumb a{color:var(--ink-soft);text-decoration:none}.crumb a:hover{opacity:.6}
+.pdp h1{margin:0;font-family:var(--serif);font-weight:400;
+        font-size:clamp(32px,3.1vw,46px);line-height:1.06;letter-spacing:-.03em}
+.pdp__sub{margin:10px 0 0;font-size:14px;letter-spacing:.4px;color:var(--ink-soft)}
+.pdp__price{display:flex;align-items:baseline;gap:16px;margin-top:26px;
+            padding-bottom:24px;border-bottom:1px solid rgba(39,41,43,.16)}
+.pdp__price b{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.pdp__price span{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-soft)}
+.pdp__price em{font-style:normal;font-weight:700;color:var(--ink)}
+.pdp__body{margin:24px 0 0;font-size:15px;line-height:1.8;color:var(--ink-soft);max-width:46ch}
+
+.shades{display:flex;flex-direction:column;gap:12px;margin-top:32px}
+.shades__label{display:flex;justify-content:space-between;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft)}
+.shades__label b{color:var(--ink);font-weight:700}
+.shades__row{display:flex;gap:8px;flex-wrap:wrap}
+.shade{display:flex;align-items:center;gap:9px;padding:8px 13px 8px 9px;border:1px solid transparent;
+       border-radius:4px;background:transparent;font-family:var(--ui);font-size:12px;color:var(--ink-soft);
+       cursor:pointer;transition:border-color .2s ease,color .2s ease}
+.shade:hover{color:var(--ink)}
+.shade.is-on{border-color:var(--ink);color:var(--ink);font-weight:700}
+.shade__dot{width:22px;height:22px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(39,41,43,.12)}
+
+.buy{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+.buy .btn{width:100%;justify-content:center;height:54px}
+.buy__note{margin:0;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-soft);text-align:center}
+
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 26px;margin-top:38px}
+.fact{display:flex;flex-direction:column;gap:4px;padding-top:13px;border-top:1px solid rgba(39,41,43,.18)}
+.fact b{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1}
+.fact span{font-size:11px;line-height:1.4;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-soft)}
+
+.accs{margin-top:40px}
+.acc{border-top:1px solid rgba(39,41,43,.16)}
+.acc:last-of-type{border-bottom:1px solid rgba(39,41,43,.16)}
+.acc summary{list-style:none;cursor:pointer;padding:19px 34px 19px 0;position:relative;font-size:14px;letter-spacing:.3px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.acc summary i{position:absolute;right:2px;top:50%;width:11px;height:11px;transform:translateY(-50%)}
+.acc summary i::before,.acc summary i::after{content:"";position:absolute;background:var(--ink);left:0;top:5px;width:11px;height:1px;transition:transform .2s ease}
+.acc summary i::after{transform:rotate(90deg)}
+.acc[open] summary i::after{transform:rotate(0)}
+.acc__body{padding:0 0 22px}
+.acc__body p{margin:0;font-size:14px;line-height:1.75;color:var(--ink-soft)}
+
+/* ── clinical claim, set as a statement not a badge ── */
+.claim{background:var(--ink);color:#FFFFFF;padding:var(--sec-lg) var(--pad);text-align:center}
+.claim b{display:block;font-family:var(--serif);font-weight:400;
+         font-size:clamp(64px,9vw,150px);line-height:.9;letter-spacing:-.04em;color:var(--clay)}
+.claim p{margin:clamp(22px,2.4vw,34px) auto 0;max-width:22ch;font-family:var(--serif);
+         font-size:clamp(22px,2.4vw,34px);line-height:1.28;letter-spacing:-.02em;color:#FFFFFF}
+.claim small{display:block;margin-top:26px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#9A9694}
+
+/* ── shades in use ── */
+.ba__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,26px)}
+.ba{margin:0;display:flex;flex-direction:column;gap:14px}
+.ba__frame{position:relative}
+.ba__frame img{width:100%;display:block;background:var(--blush)}
+.ba__frame::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.55)}
+.ba__tag{position:absolute;top:10px;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;
+         color:#FFFFFF;text-shadow:0 0 6px rgba(39,41,43,.45)}
+.ba__tag--l{left:12px} .ba__tag--r{left:calc(50% + 12px)}
+.ba figcaption{display:flex;flex-direction:column;gap:3px}
+.ba figcaption b{font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:-.01em}
+.ba figcaption span{font-size:12px;color:var(--ink-soft)}
+
+/* ── ingredients ── */
+.ings{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(18px,2vw,30px)}
+.ing{display:flex;flex-direction:column;gap:14px}
+.ing img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.ing h3{margin:0;font-size:13px;font-weight:700;letter-spacing:.4px;line-height:1.35;
+        padding-top:14px;border-top:1px solid rgba(39,41,43,.2)}
+.ing p{margin:0;font-size:13px;line-height:1.6;color:var(--ink-soft)}
+
+/* ── routine ── */
+.rsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.rstep{display:flex;flex-direction:column;gap:10px}
+.rstep img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;margin-bottom:8px}
+.rstep__no{font-family:var(--serif);font-size:24px;line-height:1;color:var(--clay)}
+.rstep h3{margin:0;font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.16}
+.rstep p{margin:0;font-size:13px;line-height:1.55;color:var(--ink-soft)}
+
+@media (max-width:980px){
+  .pdp{grid-template-columns:1fr;gap:0;padding:0 0 clamp(48px,6vw,64px)}
+  .frame{order:1}
+  .thumbs{order:2;flex-direction:row;gap:8px;overflow-x:auto;scrollbar-width:none;
+          padding:10px var(--pad) 0}
+  .thumbs::-webkit-scrollbar{display:none}
+  .thumb{flex:none;width:70px}
+  .pdp__panel{order:3;position:static;padding:clamp(30px,5vw,44px) var(--pad) 0}
+  .ings{grid-template-columns:repeat(2,1fr)}
+  .rsteps{grid-template-columns:repeat(2,1fr)}
+  .ba__grid{grid-template-columns:1fr;gap:32px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){ .ings{grid-template-columns:1fr} .rsteps{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="announce">
+    <span>A smarter cleanse — 08.21</span><span style="opacity:.35">/</span><span style="opacity:.65">Free shipping over $60</span>
+  </div>
+
+  <header class="head" id="siteHead">
+    <a href="index.html" class="wordmark" aria-label="INNBEAUTY Project — home">
+      <img src="assets/logo.png" alt="INNBEAUTY Project">
+    </a>
+
+    <nav class="nav">
+      <div class="nav__item" data-mega>
+        <button class="nav__link" type="button" aria-expanded="false">Shop <i class="nav__caret"></i></button>
+      </div>
+      <div class="nav__item" aria-current="page"><a class="nav__link" href="product.html">SPF</a></div>
+      <div class="nav__item"><a class="nav__link" href="shop.html">Bundles</a></div>
+      <div class="nav__item"><a class="nav__link" href="index.html#refill">Refills</a></div>
+      <div class="nav__item"><a class="nav__link" href="rewards.html">Rewards</a></div>
+    </nav>
+
+    <div class="utils">
+      <div class="srch">
+        <button type="button" id="srchBtn" aria-label="Open search">Search</button>
+        <input type="search" placeholder="Search" aria-label="Search products">
+      </div>
+      <a href="rewards.html">Account</a>
+      <a href="#" class="cart">Cart <span class="cart__n">0</span></a>
+    </div>
+  </header>
+
+  <div class="mega" id="mega">
+    <div><h3>Shop by concern</h3><ul><li><a href="shop.html">Firming &amp; wrinkles</a></li><li><a href="shop.html">Dark spots &amp; tone</a></li><li><a href="shop.html">Dry skin</a></li><li><a href="shop.html">Texture &amp; pores</a></li><li><a href="shop.html">Eye care</a></li><li><a href="shop.html">Acne &amp; breakouts</a></li></ul></div>
+    <div><h3>Shop by product</h3><ul><li><a href="shop.html">Moisturizers</a></li><li><a href="shop.html">Serums &amp; treatments</a></li><li><a href="shop.html">Eye care</a></li><li><a href="shop.html">Cleansers &amp; exfoliants</a></li><li><a href="product.html">SPF &amp; glow</a></li><li><a href="shop.html">Refills</a></li></ul></div>
+    <a class="mega__feature" href="product.html">
+      <img src="assets/pdp/g2.jpg" alt="Mineral Sun Glow SPF on skin">
+      <b>Mineral Sun Glow SPF</b>
+      <span>Award winner &mdash; three sheer shades, no white cast</span>
+    </a>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+
+  <section class="pdp">
+    <div class="thumbs"><button class="thumb is-on" type="button" data-i="0" aria-label="View image 1">
+          <img src="assets/pdp/g1.jpg" alt="Mineral Sun Glow SPF with swatch"></button><button class="thumb" type="button" data-i="1" aria-label="View image 2">
+          <img src="assets/pdp/g2.jpg" alt="Applied to skin, no white cast"></button><button class="thumb" type="button" data-i="2" aria-label="View image 3">
+          <img src="assets/pdp/g3.jpg" alt="All three shades"></button><button class="thumb" type="button" data-i="3" aria-label="View image 4">
+          <img src="assets/pdp/g4.jpg" alt="Shade texture"></button><button class="thumb" type="button" data-i="4" aria-label="View image 5">
+          <img src="assets/pdp/g5.jpg" alt="Swatches of the three shades"></button></div>
+
+    <div class="frame">
+      <img id="mainImg" src="assets/pdp/g1.jpg" alt="Mineral Sun Glow SPF with swatch">
+      <button class="fnav fnav--prev" type="button" aria-label="Previous image"></button>
+      <button class="fnav fnav--next" type="button" aria-label="Next image"></button>
+      <span class="fcount"><b id="fnow">1</b> / 5</span>
+    </div>
+
+    <div class="pdp__panel">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="shop.html">Shop</a> &nbsp;/&nbsp; SPF &amp; glow</p>
+      <h1>Mineral Sun Glow SPF</h1>
+      <p class="pdp__sub">Broad Spectrum SPF 43 &nbsp;|&nbsp; PA+++</p>
+      <div class="pdp__price">
+        <b>$36</b>
+        <span><em>4.87</em> &nbsp;&mdash;&nbsp; 1,204 verified reviews</span>
+      </div>
+      <p class="pdp__body">A first-of-its-kind mineral SPF that increases hydration for 24 hours rather than drying skin down, with added defence against blue light and infrared. Three sheer shades blend in with no white cast.</p>
+
+      <div class="shades">
+        <div class="shades__label"><span>Shade</span><b id="shadeName">Fair-Light</b></div>
+        <div class="shades__row"><button class="shade is-on" type="button" data-shade="Fair-Light" data-i="0" aria-pressed="true">
+            <span class="shade__dot" style="background:#ECC6B5"></span><span class="shade__name">Fair-Light</span>
+          </button><button class="shade" type="button" data-shade="Medium" data-i="1" aria-pressed="false">
+            <span class="shade__dot" style="background:#D9A374"></span><span class="shade__name">Medium</span>
+          </button><button class="shade" type="button" data-shade="Tan-Deep" data-i="2" aria-pressed="false">
+            <span class="shade__dot" style="background:#B87449"></span><span class="shade__name">Tan-Deep</span>
+          </button></div>
+      </div>
+
+      <div class="buy">
+        <a href="#" class="btn btn--dark">Add to cart &mdash; $36</a>
+        <p class="buy__note">Free shipping over $60 &nbsp;·&nbsp; Free 30-day returns</p>
+      </div>
+
+      <div class="facts"><div class="fact"><b>SPF 43</b><span>PA+++ broad spectrum</span></div><div class="fact"><b>24 hrs</b><span>Clinically proven hydration</span></div><div class="fact"><b>100%</b><span>Non-nano zinc, no white cast</span></div><div class="fact"><b>3</b><span>Flexible sheer shades</span></div></div>
+
+      <div class="accs">
+      <details class="acc" open><summary>How to use<i aria-hidden="true"></i></summary>
+        <div class="acc__body"><p>Apply as the final step of your morning routine, before makeup. Use roughly two finger-lengths for face and neck. Reapply every two hours in direct sun.</p></div></details>
+      <details class="acc"><summary>Full ingredients<i aria-hidden="true"></i></summary>
+        <div class="acc__body"><p>Active: 14.28% non-nano zinc oxide. Plus a super antioxidant complex, Blue Oleoactif&trade; (black, red and brown rice extracts), a peptide complex and natural moisturizing factors. Non-comedogenic, hypoallergenic, fragrance free.</p></div></details>
+      <details class="acc"><summary>Shipping &amp; returns<i aria-hidden="true"></i></summary>
+        <div class="acc__body"><p>Free shipping on orders over $60. Free returns within 30 days, opened or unopened.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="claim">
+    <b>73%</b>
+    <p>immediate boost in hydration after one application.</p>
+    <small>Based on independent third-party clinical measurements and expert grading</small>
+  </section>
+
+  <section style="padding:var(--sec) var(--pad);background:#FFFFFF">
+    <span class="eyebrow">01 &mdash; The shades</span>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin:18px 0 clamp(44px,4.4vw,64px)">
+      <h2 class="sec-title" style="margin:0">Three shades.<br>No white cast.</h2>
+      <p style="margin:0;padding-top:12px;border-top:1px solid var(--ink);font-size:11px;line-height:1.6;
+                letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft);max-width:26ch">
+        Allure Best of Beauty<br>Award winner, 2024</p>
+    </div>
+    <div class="ba__grid">
+        <figure class="ba">
+          <div class="ba__frame"><img src="assets/pdp/shade-fair.jpg" alt="Without and with Mineral Sun Glow, Fair-Light" loading="lazy"><span class="ba__tag ba__tag--l">Without</span><span class="ba__tag ba__tag--r">With SPF</span></div>
+          <figcaption><b>Fair-Light</b><span>with neutral undertones</span></figcaption>
+        </figure>        <figure class="ba">
+          <div class="ba__frame"><img src="assets/pdp/shade-medium.jpg" alt="Without and with Mineral Sun Glow, Medium" loading="lazy"><span class="ba__tag ba__tag--l">Without</span><span class="ba__tag ba__tag--r">With SPF</span></div>
+          <figcaption><b>Medium</b><span>with warm undertones</span></figcaption>
+        </figure>        <figure class="ba">
+          <div class="ba__frame"><img src="assets/pdp/shade-tan.jpg" alt="Without and with Mineral Sun Glow, Tan-Deep" loading="lazy"><span class="ba__tag ba__tag--l">Without</span><span class="ba__tag ba__tag--r">With SPF</span></div>
+          <figcaption><b>Tan-Deep</b><span>with golden undertones</span></figcaption>
+        </figure>
+    </div>
+  </section>
+
+  <section style="padding:var(--sec) var(--pad);background:var(--cream)">
+    <span class="eyebrow">02 &mdash; Inside the formula</span>
+    <h2 class="sec-title" style="margin:18px 0 clamp(44px,4.4vw,64px)">Eight to ten actives.<br>Five that do the work.</h2>
+    <ul class="ings">
+        <li class="ing">
+          <img src="assets/pdp/ing-1.jpg" alt="" loading="lazy">
+          <h3>14.28% Non-nano zinc oxide</h3><p>Broad spectrum UVA + UVB protection</p>
+        </li>        <li class="ing">
+          <img src="assets/pdp/ing-2.jpg" alt="" loading="lazy">
+          <h3>Super antioxidant complex</h3><p>Visibly brightens and improves radiance</p>
+        </li>        <li class="ing">
+          <img src="assets/pdp/ing-3.jpg" alt="" loading="lazy">
+          <h3>Blue Oleoactif&trade;</h3><p>Black, red and brown rice extracts. Blue-light and environmental protection</p>
+        </li>        <li class="ing">
+          <img src="assets/pdp/ing-4.jpg" alt="" loading="lazy">
+          <h3>Peptide complex</h3><p>Visibly firms, plumps and hydrates</p>
+        </li>        <li class="ing">
+          <img src="assets/pdp/ing-5.jpg" alt="" loading="lazy">
+          <h3>Natural moisturizing factors</h3><p>Clinically proven to boost hydration for 24 hours</p>
+        </li>
+    </ul>
+  </section>
+
+  <section style="padding:var(--sec) var(--pad);background:#FFFFFF">
+    <span class="eyebrow">03 &mdash; The routine</span>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin:18px 0 clamp(44px,4.4vw,64px)">
+      <h2 class="sec-title" style="margin:0">Where it sits in<br>your morning.</h2>
+      <a href="shop.html" class="rule-lnk">Shop the routine</a>
+    </div>
+    <ul class="rsteps">
+        <li class="rstep">
+          <img src="assets/shop/p-extreme-eye.jpg" alt="Extreme Cream Eye" loading="lazy">
+          <span class="rstep__no">01</span>
+          <h3>Extreme Cream Eye</h3><p>Visibly depuffs and smooths lines</p>
+        </li>        <li class="rstep">
+          <img src="assets/shop/p-pro-c.jpg" alt="Pro C Serum" loading="lazy">
+          <span class="rstep__no">02</span>
+          <h3>Pro C Serum</h3><p>Visibly plumps and improves elasticity</p>
+        </li>        <li class="rstep">
+          <img src="assets/shop/p-extreme-cream.jpg" alt="Extreme Cream" loading="lazy">
+          <span class="rstep__no">03</span>
+          <h3>Extreme Cream</h3><p>Visibly firms, smooths and hydrates</p>
+        </li>        <li class="rstep">
+          <img src="assets/shop/p-sun-glow.jpg" alt="Mineral Sun Glow SPF" loading="lazy">
+          <span class="rstep__no">04</span>
+          <h3>Mineral Sun Glow SPF</h3><p>Protects and hydrates</p>
+        </li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="foot__grid">
+      <div class="foot__news">
+        <h3>Get 15% off your<br>first order.</h3>
+        <p>Clinical skincare notes, drop dates, and refill reminders. No noise.</p>
+        <form class="signup" onsubmit="return false">
+          <input type="email" placeholder="EMAIL ADDRESS" aria-label="Email address">
+          <button type="button">Sign up</button>
+        </form>
+      </div>
+      <nav><h4>Shop</h4><a href="shop.html">Best sellers</a><a href="#">New arrivals</a><a href="#">Sets &amp; kits</a><a href="#">Refills</a></nav>
+      <nav><h4>Concerns</h4><a href="#">Firming &amp; wrinkles</a><a href="#">Dark spots</a><a href="#">Dry skin</a><a href="#">Eye care</a></nav>
+      <nav><h4>Help</h4><a href="rewards.html">Insider rewards</a><a href="#">Contact us</a><a href="#">FAQs</a><a href="#">Shipping &amp; returns</a><a href="#">Recycle with us</a></nav>
+    </div>
+    <div class="foot__base">
+      <span>© 2026 INNBEAUTY Project</span>
+      <div><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">YouTube</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <img class="foot__sign" src="assets/logo-white.png" alt="INNBEAUTY Project">
+  </footer>
+
+
+  <button class="ask" id="askBtn" type="button"><span class="ask__dot"></span>Ask a skin question</button>
+
+  <aside class="chat" id="chat" role="dialog" aria-label="Skin concierge">
+    <div class="chat__top">
+      <div><b>Skin concierge</b><span>Usually replies instantly</span></div>
+      <button class="chat__x" id="chatX" type="button" aria-label="Close">&times;</button>
+    </div>
+    <div class="chat__log" id="chatLog">
+      <div class="msg msg--bot">Tell me what your skin is doing and I&rsquo;ll point you to the right formula. What are you working on?</div>
+    </div>
+    <div class="chat__quick" id="chatQuick"></div>
+    <form class="chat__form" id="chatForm">
+      <input type="text" id="chatIn" placeholder="Type a message" aria-label="Message">
+      <button type="submit">Send</button>
+    </form>
+  </aside>
+</div>
+
+<script>
+(function(){
+  var imgs=[].slice.call(document.querySelectorAll('.thumb')).map(function(t){
+    var i=t.querySelector('img'); return {src:i.getAttribute('src'),alt:i.getAttribute('alt')};
+  });
+  var main=document.getElementById('mainImg'), now=document.getElementById('fnow'), cur=0;
+  function show(i){
+    cur=(i+imgs.length)%imgs.length;
+    main.setAttribute('src',imgs[cur].src);
+    main.setAttribute('alt',imgs[cur].alt);
+    now.textContent=cur+1;
+    document.querySelectorAll('.thumb').forEach(function(t,n){t.classList.toggle('is-on',n===cur)});
+  }
+  document.querySelectorAll('.thumb').forEach(function(t){
+    t.addEventListener('click',function(){show(+t.dataset.i)});
+  });
+  document.querySelector('.fnav--prev').addEventListener('click',function(){show(cur-1)});
+  document.querySelector('.fnav--next').addEventListener('click',function(){show(cur+1)});
+  document.querySelector('.frame').addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft')show(cur-1); if(e.key==='ArrowRight')show(cur+1);
+  });
+
+  var name=document.getElementById('shadeName');
+  document.querySelectorAll('.shade').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.shade').forEach(function(x){x.classList.remove('is-on');x.setAttribute('aria-pressed','false')});
+      b.classList.add('is-on'); b.setAttribute('aria-pressed','true');
+      name.textContent=b.dataset.shade;
+      if(b.dataset.i==='1')show(3); else if(b.dataset.i==='2')show(4); else show(0);
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var head=document.getElementById('siteHead');
+  addEventListener('scroll',function(){head.classList.toggle('is-stuck',scrollY>8)},{passive:true});
+
+  var item=document.querySelector('[data-mega]'), mega=document.getElementById('mega'), scrim=document.getElementById('scrim');
+  if(item){
+    var btn=item.querySelector('.nav__link'), t;
+    function open(v){
+      item.classList.toggle('is-open',v); mega.classList.toggle('is-open',v);
+      scrim.classList.toggle('is-open',v); btn.setAttribute('aria-expanded',v);
+    }
+    btn.addEventListener('click',function(){open(!mega.classList.contains('is-open'))});
+    [item,mega].forEach(function(el){
+      el.addEventListener('mouseenter',function(){clearTimeout(t);open(true)});
+      el.addEventListener('mouseleave',function(){t=setTimeout(function(){open(false)},160)});
+    });
+    scrim.addEventListener('click',function(){open(false)});
+    addEventListener('keydown',function(e){if(e.key==='Escape')open(false)});
+  }
+  var sb=document.getElementById('srchBtn');
+  if(sb) sb.addEventListener('click',function(){
+    var w=sb.parentElement; w.classList.toggle('is-open');
+    if(w.classList.contains('is-open')) w.querySelector('input').focus();
+  });
+
+  var ask=document.getElementById('askBtn'), chat=document.getElementById('chat'),
+      log=document.getElementById('chatLog'), quick=document.getElementById('chatQuick');
+  var TOPICS=[
+    {q:'Firming',a:'For loss of firmness, copper peptides plus encapsulated retinal do the heavy lifting. Extreme Cream is our most reordered for exactly this.',
+     p:['Extreme Cream','Firming &amp; Lifting Moisturizer','assets/shop/p-extreme-cream.jpg','shop.html']},
+    {q:'Dark spots',a:'Vitamin C at 15% with acetyl glycyl beta-alanine is the combination we test for tone. Give it eight weeks of daily use.',
+     p:['Pro C Serum','Brightening Solution','assets/shop/p-pro-c.jpg','shop.html']},
+    {q:'SPF',a:'A mineral SPF that hydrates instead of drying down, in three sheer shades with no white cast. It is the last step of your morning.',
+     p:['Mineral Sun Glow SPF','Broad Spectrum SPF 43','assets/shop/p-sun-glow.jpg','product.html']},
+    {q:'Texture',a:'Glycolic acid with peptides, three nights a week to start. Most people see smoother texture by the second jar.',
+     p:['Skin Prep Pads','Brightening &amp; Smoothing Toner Pads','assets/shop/p-skin-prep.jpg','shop.html']},
+    {q:'Under eyes',a:'Peptides and amino acids for contouring, morning and night. Depuffing shows first, lines take longer.',
+     p:['Extreme Cream Eye','Firming &amp; Contouring Eye Cream','assets/shop/p-extreme-eye.jpg','shop.html']},
+    {q:'Refills',a:'Every hero product refills. You keep the glass jar, reorder the pod, and it costs about a third less.',
+     p:['Extreme Cream','Refillable &mdash; jar plus pod','assets/shop/p-extreme-cream.jpg','shop.html']}
+  ];
+  function el(h){var d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild}
+  function push(n){log.appendChild(n);log.scrollTop=log.scrollHeight}
+  function bot(topic){
+    setTimeout(function(){
+      push(el('<div class="msg msg--bot">'+topic.a+'</div>'));
+      setTimeout(function(){
+        push(el('<div class="rec"><img src="'+topic.p[2]+'" alt=""><div class="rec__b"><b>'+topic.p[0]+
+                '</b><span>'+topic.p[1]+'</span><a href="'+topic.p[3]+'">View product</a></div></div>'));
+      },320);
+    },260);
+  }
+  TOPICS.forEach(function(t){
+    var b=el('<button class="qchip" type="button">'+t.q+'</button>');
+    b.addEventListener('click',function(){push(el('<div class="msg msg--me">'+t.q+'</div>'));bot(t)});
+    quick.appendChild(b);
+  });
+  function openChat(v){
+    chat.classList.toggle('is-open',v); ask.classList.toggle('is-hidden',v);
+    if(v) setTimeout(function(){document.getElementById('chatIn').focus()},260);
+  }
+  ask.addEventListener('click',function(){openChat(true)});
+  document.getElementById('chatX').addEventListener('click',function(){openChat(false)});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&chat.classList.contains('is-open'))openChat(false)});
+  document.getElementById('chatForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var i=document.getElementById('chatIn'), v=i.value.trim(); if(!v)return;
+    push(el('<div class="msg msg--me">'+v.replace(/[<>]/g,'')+'</div>')); i.value='';
+    var hit=TOPICS.filter(function(t){return v.toLowerCase().indexOf(t.q.toLowerCase().split(' ')[0])>-1})[0];
+    if(hit){bot(hit)}
+    else{setTimeout(function(){push(el('<div class="msg msg--bot">I can help with firming, dark spots, texture, under eyes, SPF or refills &mdash; pick one and I will point you to the formula we test for it.</div>'))},260)}
+  });
+})();
+</script>
+
+</body>
+</html>

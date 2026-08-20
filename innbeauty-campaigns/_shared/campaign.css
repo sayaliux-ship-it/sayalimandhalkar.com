@@ -1,0 +1,77 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   INNBEAUTY — campaign artboard system
+   Tokens lifted verbatim from the live site. Two campaign directions layered
+   on top: Black Friday (inverted, urgent) and Christmas (warm, gifting).
+   Every .board renders at exact pixel size and is exported as-is.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* site tokens — unchanged */
+  --ink:#27292B; --ink-soft:#494A4A; --grey-400:#A1A1A1; --grey-50:#F5F5F7;
+  --sand:#F5E4D6; --blush:#EBE1E1; --cream:#FCF1EB; --rose:#F5D9DF; --clay:#C28F8C;
+  --serif:'Prata','Gilda Display',Georgia,serif;
+  --ui:'Helvetica Neue',Helvetica,Arial,sans-serif;
+
+  /* Black Friday — the brand inverted */
+  --bf-void:#0E0F11; --bf-ground:#16171A; --bf-raise:#1E2023;
+  --bf-line:rgba(255,255,255,.16);
+  --bf-pink:#FF6ED7;
+
+  /* Christmas — champagne, taken from the rose-gold caps */
+  --xm-ground:#FCF1EB; --xm-deep:#F0E2D4;
+  --foil:linear-gradient(100deg,#EBD3B0 0%,#C9A176 26%,#F3E3C9 50%,#B98F63 74%,#E8CBA8 100%);
+  --foil-line:linear-gradient(90deg,#C9A176,#F3E3C9,#B98F63);
+}
+
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+html,body{margin:0;padding:0;background:#B9B9BC;font-family:var(--ui);color:var(--ink)}
+img{display:block;max-width:100%}
+
+/* ── artboard ────────────────────────────────────────────────────────────── */
+.board{position:relative;overflow:hidden;flex:none;background:#fff}
+.board *{ -webkit-font-smoothing:antialiased }
+
+/* ── shared type ─────────────────────────────────────────────────────────── */
+.d{font-family:var(--serif);font-weight:400;letter-spacing:-.03em;line-height:1}
+.k{font-family:var(--ui);text-transform:uppercase;letter-spacing:.18em;font-weight:400}
+.kb{font-family:var(--ui);text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+.body{font-family:var(--ui);line-height:1.65;font-weight:400}
+
+.foil{background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent}
+.foil-rule{height:1px;background:var(--foil-line);border:0;width:100%}
+.hair{height:1px;background:rgba(39,41,43,.22);border:0;width:100%}
+.hair-w{height:1px;background:var(--bf-line);border:0;width:100%}
+
+/* buttons — site geometry, 4px radius, no shadow */
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:4px;
+     font-family:var(--ui);text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.btn--light{background:#FFFFFF;color:var(--ink)}
+.btn--ink{background:var(--ink);color:#FFFFFF}
+.btn--void{background:var(--bf-void);color:#FFFFFF}
+.btn--ghostw{border:1px solid rgba(255,255,255,.55);color:#FFFFFF}
+.btn--ghosti{border:1px solid var(--ink);color:var(--ink)}
+
+/* the christmas mark — a hairline four-point star, used sparingly */
+.star{display:inline-block;position:relative}
+.star::before,.star::after{content:"";position:absolute;left:50%;top:50%;background:#C9A176}
+.star::before{width:1px;height:100%;transform:translate(-50%,-50%)}
+.star::after{width:100%;height:1px;transform:translate(-50%,-50%)}
+
+/* safe-area guide — preview only, stripped on export */
+.safe{position:absolute;inset:0;pointer-events:none;outline:1px dashed rgba(255,110,215,.55);outline-offset:-0px;display:none}
+body.guides .safe{display:block}
+
+/* ── preview shell (never exported) ──────────────────────────────────────── */
+.wrap{max-width:1600px;margin:0 auto;padding:56px 40px 120px}
+.page-head{color:#17181A;margin-bottom:44px}
+.page-head h1{font-family:var(--serif);font-weight:400;font-size:44px;margin:0 0 10px;letter-spacing:-.02em}
+.page-head p{margin:0;font-size:14px;line-height:1.7;color:#3C3E40;max-width:74ch}
+.sec-title{display:flex;align-items:baseline;gap:16px;margin:56px 0 22px;color:#17181A}
+.sec-title h2{font-family:var(--serif);font-weight:400;font-size:26px;margin:0}
+.sec-title span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#5A5C5E}
+.rail{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+.cell{background:#fff;padding:14px;border-radius:2px}
+.cell figcaption{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#5A5C5E;
+                 padding-top:11px;display:flex;justify-content:space-between;gap:14px}
+.cell figcaption b{color:#17181A;font-weight:700}
+.scaled{transform-origin:top left}
