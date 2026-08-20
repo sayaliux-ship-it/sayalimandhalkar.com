@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>INNBEAUTY Project, Redesign &amp; Campaign System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Gilda+Display&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Gilda+Display&family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap">
 <style>
 :root{
   --ink:#27292B; --ink-soft:#494A4A; --grey-400:#A1A1A1; --grey-50:#F5F5F7;
@@ -18,7 +19,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--ui);
+body{margin:0;display:flex;background:var(--cream);color:var(--ink);font-family:var(--ui);
      -webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
@@ -33,7 +34,8 @@ a{color:inherit}
 .top a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
        color:var(--ink);transition:opacity .2s ease}
 .top a:hover{opacity:.55}
-.top a.back{color:var(--clay);margin-right:4px}
+.top a.back{color:var(--clay);margin-right:4px;display:none}
+@media (max-width:960px){.top a.back{display:inline}}
 
 /* ── section intro ────────────────────────────────────────────────────────── */
 .intro{max-width:1500px;margin:0 auto;padding:clamp(64px,7vw,110px) var(--pad) clamp(38px,4vw,60px);text-align:center}
@@ -102,29 +104,7 @@ h2{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.03em;line-
 
 .pageshot{width:clamp(320px,42vw,620px);height:min(clamp(520px,58vw,780px),76vh)}
 .phone{width:clamp(200px,22vw,300px);height:min(clamp(520px,58vw,780px),76vh)}
-.hscroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
-  height:min(var(--fh,520px),78vh);
-  outline:1px solid rgba(39,41,43,.12);outline-offset:-1px;
-  scrollbar-width:thin;scrollbar-color:rgba(39,41,43,.30) transparent}
-.hscroll::-webkit-scrollbar{height:7px}
-.hscroll::-webkit-scrollbar-track{background:transparent}
-.hscroll::-webkit-scrollbar-thumb{background:rgba(39,41,43,.28);border-radius:4px}
-.hscroll img,.wide .hscroll img,.grid .hscroll img,.grid figure .hscroll img{height:100%;width:auto;max-width:none;display:block}
-.band--void .hscroll,.band--fir .hscroll{outline-color:rgba(255,255,255,.16);
-  scrollbar-color:rgba(255,255,255,.34) transparent}
-.band--void .hscroll::-webkit-scrollbar-thumb,
-.band--fir .hscroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.32)}
 .grid>*,.grid figure{min-width:0}
-.grid figure .hscroll{width:100%;max-width:100%}
-.hcap{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;
-  font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft)}
-.band--void .hcap,.band--fir .hcap{color:#B7B1AC}
-.hcap i,.grid figure:has(.hscroll) figcaption{font-style:normal;display:inline-flex;
-  align-items:center;gap:6px}
-.hcap i{opacity:.62}
-.hcap i::after,.grid figure:has(.hscroll) figcaption::after{content:"";width:7px;height:7px;
-  border-right:1px solid currentColor;border-bottom:1px solid currentColor;
-  transform:rotate(-45deg) translate(-1px,1px);opacity:.62;flex:none;margin-left:2px}
 .shotcap{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;
          font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);width:100%}
 .shotcap i{font-style:normal;opacity:.62;display:inline-flex;align-items:center;gap:6px}
@@ -177,8 +157,328 @@ footer span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#
 }
 @media (max-width:560px){ .g2,.g3,.g4{grid-template-columns:1fr} }
 </style>
+<style>
+
+    /* portfolio chrome — vars scoped to .sidebar so they never reach the
+       case study's own Prata/cream type system */
+    :root { --sw: 280px; }
+    .sidebar {
+      --bg:#111111; --sidebar:#000000; --border:rgba(255,255,255,0.07);
+      --gold:#c9a96e; --gold-dim:rgba(201,169,110,0.1); --gold-lt:#dfc08a;
+      --text:#e8e4dc; --muted:rgba(232,228,220,0.72); --faint:rgba(232,228,220,0.55);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      text-align: left;
+    }
+    .sidebar a { text-decoration: none; }
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s ease;
+    }
+    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0;
+      transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
+    }
+
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    @media (max-width: 960px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; width: 100%; }
+    }
+  </style>
 </head>
 <body>
+
+<aside class="sidebar" aria-label="Site navigation">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer</span>
+    </div>
+  </a>
+
+  <nav class="sb-nav" aria-label="Primary">
+
+    <!-- UX PROJECTS -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">UX Projects</span>
+
+      <a href="tenetic.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+
+      <a href="pur.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="mentormap.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="presence.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Presence</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="philly-truce.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- BRANDING & MARKETING -->
+    <a href="branding.html" class="sb-row active">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
+      </span>
+      <span class="sb-label">Branding &amp; Marketing</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- CERTIFICATIONS -->
+    <a href="certifications.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+          <circle cx="12" cy="8" r="6"/>
+        </svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- ABOUT ME -->
+    <a href="about.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+  </nav>
+
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
 
 <header class="top">
   <img src="images/innbeauty/logo@3x.png" alt="INNBEAUTY Project">
@@ -287,13 +587,13 @@ footer span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#
   <span class="mark">Website</span>
   <div class="band-head"><h3>Christmas, DTC site modules</h3><span>1920×800 hero · 1440 banners · 1080 tile</span></div>
   <div class="wide">
-    <div class="hscroll" style="--fh:800px"><img src="images/innbeauty/christmas/christmas-dtc-site-hero-1920x800.png" alt="Christmas site hero"></div><p class="hcap"><span>DTC Site Hero &middot; 1920 &times; 800</span><i>Pan</i></p>
+    <img src="images/innbeauty/christmas/christmas-dtc-site-hero-1920x800.png" alt="Christmas site hero">
     <div class="grid g2" style="margin-top:clamp(14px,1.6vw,26px)">
-      <figure><div class="hscroll" style="--fh:520px"><img src="images/innbeauty/christmas/christmas-dtc-category-banner-1440x520.png" alt="Category banner"></div><figcaption>DTC Category Banner · 1440 × 520</figcaption></figure>
-      <figure><div class="hscroll" style="--fh:400px"><img src="images/innbeauty/christmas/christmas-dtc-promo-banner-1440x400.png" alt="Promo banner"></div><figcaption>DTC Promo Banner · 1440 × 400</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-dtc-category-banner-1440x520.png" alt="Category banner"><figcaption>DTC Category Banner · 1440 × 520</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-dtc-promo-banner-1440x400.png" alt="Promo banner"><figcaption>DTC Promo Banner · 1440 × 400</figcaption></figure>
     </div>
     <div class="grid g3" style="margin-top:clamp(14px,1.6vw,26px)">
-      <figure><div class="hscroll" style="--fh:250px"><img src="images/innbeauty/christmas/christmas-dtc-thin-banner-1440x250.png" alt="Thin banner"></div><figcaption>DTC Thin Banner · 1440 × 250</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-dtc-thin-banner-1440x250.png" alt="Thin banner"><figcaption>DTC Thin Banner · 1440 × 250</figcaption></figure>
       <figure><img src="images/innbeauty/christmas/christmas-dtc-tile-1080x1080.png" alt="Campaign tile"><figcaption>DTC Tile · 1080 × 1080</figcaption></figure>
       <figure><img src="images/innbeauty/christmas/christmas-dtc-site-hero-mobile-750x1000.png" alt="Hero, mobile"><figcaption>DTC Site Hero, mobile · 750 × 1000</figcaption></figure>
     </div>
@@ -305,9 +605,9 @@ footer span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#
   <span class="mark">Retail</span>
   <div class="band-head"><h3>Christmas, retail &amp; marketplace</h3><span>3000×1200 store banner · safe-area composed</span></div>
   <div class="wide">
-    <div class="hscroll" style="--fh:700px"><img src="images/innbeauty/christmas/christmas-retail-store-banner-3000x1200.png" alt="Amazon store banner"></div><p class="hcap"><span>Amazon Store Banner &middot; 3000 &times; 1200</span><i>Pan</i></p>
+    <img src="images/innbeauty/christmas/christmas-retail-store-banner-3000x1200.png" alt="Amazon store banner">
     <div class="grid g3" style="margin-top:clamp(14px,1.6vw,26px)">
-      <figure><div class="hscroll" style="--fh:600px"><img src="images/innbeauty/christmas/christmas-retail-banner-1500x600.png" alt="Wide promotional banner"></div><figcaption>Retail Banner · 1500 &times; 600</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-retail-banner-1500x600.png" alt="Wide promotional banner"><figcaption>Retail Banner · 1500 &times; 600</figcaption></figure>
       <figure><img src="images/innbeauty/christmas/christmas-retail-tile-1000x1000.png" alt="Campaign tile"><figcaption>Retail Tile · 1000 &times; 1000</figcaption></figure>
       <figure><img src="images/innbeauty/christmas/christmas-retail-mobile-750x1000.png" alt="Mobile campaign banner"><figcaption>Retail Mobile · 750 &times; 1000</figcaption></figure>
     </div>
@@ -333,8 +633,8 @@ footer span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#
       <figure><img src="images/innbeauty/christmas/christmas-display-300x600.png" alt="Christmas 300x600"><figcaption>Christmas · 300 &times; 600</figcaption></figure>
     </div>
     <div class="grid g2" style="margin-top:clamp(14px,1.6vw,26px)">
-      <figure><div class="hscroll" style="--fh:90px"><img src="images/innbeauty/black-friday/black-friday-display-728x90.png" alt="Black Friday leaderboard"></div><figcaption>Leaderboard · 728 &times; 90</figcaption></figure>
-      <figure><div class="hscroll" style="--fh:90px"><img src="images/innbeauty/christmas/christmas-display-728x90.png" alt="Christmas leaderboard"></div><figcaption>Leaderboard · 728 &times; 90</figcaption></figure>
+      <figure><img src="images/innbeauty/black-friday/black-friday-display-728x90.png" alt="Black Friday leaderboard"><figcaption>Leaderboard · 728 &times; 90</figcaption></figure>
+      <figure><img src="images/innbeauty/christmas/christmas-display-728x90.png" alt="Christmas leaderboard"><figcaption>Leaderboard · 728 &times; 90</figcaption></figure>
     </div>
   </div>
 </div>
@@ -351,5 +651,8 @@ footer span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#
   <span>Concept redesign</span>
 </footer>
 
+</main>
+
+<script>sessionStorage.setItem('sb_v','1');</script>
 </body>
 </html>
