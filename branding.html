@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Branding &amp; Marketing · Sayali Mandhalkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sw:       280px;
+      --bg:       #111111;
+      --bg2:      #0e0e0e;
+      --bg3:      #1a1a1a;
+      --sidebar:  #000000;
+      --border:   rgba(255,255,255,0.07);
+      --gold:     #c9a96e;
+      --gold-dim: rgba(201,169,110,0.1);
+      --gold-lt:  #dfc08a;
+      --text:     #e8e4dc;
+      --muted:    rgba(232,228,220,0.72);
+      --faint:    rgba(232,228,220,0.55);
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s ease;
+    }
+    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0;
+      transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
+    }
+
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ════════════════════════════════
+       PAGE HEADER
+    ════════════════════════════════ */
+    .pg-header {
+      padding: 80px 100px 64px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .pg-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,169,110,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 40% at 10% 80%, rgba(201,169,110,0.02) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Large watermark */
+    .pg-header::after {
+      content: '✦';
+      font-family: var(--serif);
+      font-size: clamp(120px, 20vw, 280px);
+      color: rgba(201,169,110,0.035);
+      position: absolute;
+      right: 60px; bottom: -20px;
+      line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .pg-header-inner { position: relative; z-index: 1; }
+    .pg-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .pg-eyebrow-line { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .pg-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .pg-title em { font-style: italic; color: var(--gold); }
+    .pg-sub {
+      font-size: 1rem; line-height: 1.8; color: var(--muted);
+      max-width: 520px; font-weight: 300;
+    }
+
+    /* ════════════════════════════════
+       PROJECTS AREA
+    ════════════════════════════════ */
+    .projects-area {
+      flex: 1;
+      padding: 72px 100px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+
+    /* ════════════════════════════════
+       PROJECT CARD
+    ════════════════════════════════ */
+    .proj-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+    }
+    .proj-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+    }
+
+    /* Active card — gold border glow */
+    .proj-card.active {
+      border-color: rgba(201,169,110,0.35);
+      background: linear-gradient(135deg, #181510 0%, var(--bg3) 100%);
+    }
+    .proj-card.active:hover {
+      border-color: rgba(201,169,110,0.6);
+      box-shadow: 0 12px 56px rgba(201,169,110,0.12), 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    /* Coming soon card — more muted */
+    .proj-card.coming-soon {
+      border-color: rgba(255,255,255,0.05);
+      opacity: 0.75;
+    }
+    .proj-card.coming-soon:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+
+    /* ── Number column ── */
+    .proj-num-col {
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 40px 0 40px;
+      border-right: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+    }
+    .proj-card.active .proj-num-col {
+      background: rgba(201,169,110,0.04);
+      border-right-color: rgba(201,169,110,0.15);
+    }
+    .proj-number {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6vw, 80px);
+      font-weight: 300;
+      line-height: 1;
+      color: rgba(201,169,110,0.15);
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+    .proj-card.active .proj-number { color: rgba(201,169,110,0.25); }
+    .proj-card.coming-soon .proj-number { color: rgba(232,228,220,0.08); }
+
+    /* ── Content column ── */
+    .proj-content {
+      padding: 40px 48px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .proj-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .proj-category {
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.8;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .proj-category::before {
+      content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0;
+    }
+    .proj-card.coming-soon .proj-category { color: var(--muted); opacity: 0.5; }
+    .proj-card.coming-soon .proj-category::before { background: var(--muted); }
+
+    /* Status badge */
+    .proj-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 13px;
+      border-radius: 100px;
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; flex-shrink: 0;
+    }
+    .proj-badge.available {
+      background: var(--gold);
+      color: #0a0a09;
+    }
+    .proj-badge.available::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: #0a0a09; flex-shrink: 0;
+    }
+    .proj-badge.soon {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(232,228,220,0.45);
+    }
+
+    .proj-title-block { display: flex; flex-direction: column; gap: 6px; }
+    .proj-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .proj-card.coming-soon .proj-title { color: rgba(232,228,220,0.6); }
+    .proj-subtitle {
+      font-family: var(--serif);
+      font-size: clamp(14px, 1.4vw, 17px);
+      font-weight: 300; font-style: italic;
+      color: var(--muted); line-height: 1.4;
+    }
+
+    .proj-divider {
+      height: 1px;
+      background: var(--border);
+    }
+    .proj-card.active .proj-divider { background: rgba(201,169,110,0.12); }
+
+    .proj-desc {
+      font-size: 0.92rem; line-height: 1.85; color: var(--muted);
+      max-width: 600px;
+    }
+    .proj-card.coming-soon .proj-desc { color: rgba(232,228,220,0.4); }
+
+    /* CTA button */
+    .proj-cta {
+      margin-top: 8px;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 28px;
+      border: 1px solid rgba(201,169,110,0.5);
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold);
+      transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .proj-cta:hover {
+      border-color: var(--gold);
+      background: rgba(201,169,110,0.1);
+      color: var(--gold-lt);
+      transform: translateX(3px);
+    }
+    .proj-cta svg { transition: transform 0.2s; }
+    .proj-cta:hover svg { transform: translateX(3px); }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    .contact-section {
+      background: #000; padding: 72px 100px 0;
+      border-top: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: 'SM'; font-family: var(--serif); font-size: clamp(180px, 24vw, 320px);
+      font-weight: 300; color: rgba(201,169,110,0.07); position: absolute;
+      left: 40px; bottom: 40px; line-height: 1; letter-spacing: -0.04em;
+      pointer-events: none; user-select: none;
+    }
+    .footer-body {
+      display: grid; grid-template-columns: 1fr auto; gap: 80px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .footer-left { max-width: 520px; }
+    .sec-label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .eline { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .sec-title {
+      font-family: var(--serif); font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300; line-height: 1.1; color: var(--text); letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+    .sec-title em { font-style: italic; color: var(--gold); }
+    .contact-sub { font-size: 0.9rem; line-height: 1.95; color: var(--muted); }
+    .contact-sub span { display: block; }
+    .contact-btns { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+    .cta-btn {
+      width: 200px; height: 52px; display: inline-flex; align-items: center;
+      justify-content: center; gap: 10px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1); font-family: var(--sans);
+      font-size: 0.71rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--muted); transition: border-color 0.28s, color 0.28s, background 0.28s, transform 0.22s;
+    }
+    .cta-btn svg { flex-shrink: 0; }
+    .cta-btn:hover { border-color: rgba(201,169,110,0.45); color: var(--gold-lt); transform: translateX(-3px); }
+    .cta-btn.primary { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 600; }
+    .cta-btn.primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); color: #000; transform: translateX(-3px); }
+    .footer-bar {
+      margin-top: 60px; padding: 24px 0 28px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;
+    }
+    .footer-copy { font-size: 0.72rem; color: rgba(232,228,220,0.45); }
+    .footer-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.7; transition: opacity 0.2s; }
+    .footer-back:hover { opacity: 1; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 960px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .pg-header, .projects-area, .contact-section { padding-left: 28px; padding-right: 28px; }
+      .proj-card { grid-template-columns: 72px 1fr; }
+      .proj-content { padding: 28px 24px; }
+      .proj-number { font-size: 36px; }
+      .footer-body { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bar { flex-direction: column; gap: 10px; }
+      .pg-header { padding-top: 48px; padding-bottom: 40px; }
+      .projects-area { padding-top: 48px; padding-bottom: 60px; }
+    }
+  </style>
+  <style>
+    /* ════════════════════════════════
+       TABS
+    ════════════════════════════════ */
+    .tab-bar {
+      display: flex;
+      gap: 2px;
+      padding: 0 100px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(17,17,17,0.92);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+    .tab-btn {
+      appearance: none;
+      background: none;
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--faint);
+      padding: 22px 26px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      left: 26px; right: 26px; bottom: -1px;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .tab-btn:hover { color: var(--muted); }
+    .tab-btn[aria-selected="true"] { color: var(--gold-lt); }
+    .tab-btn[aria-selected="true"]::after { transform: scaleX(1); }
+    .tab-count {
+      font-size: 0.58rem;
+      color: var(--gold);
+      opacity: 0.5;
+      margin-left: 7px;
+      letter-spacing: 0.1em;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.is-active {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      animation: panelIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .tab-bar { padding: 0 28px; overflow-x: auto; scrollbar-width: none; }
+      .tab-bar::-webkit-scrollbar { display: none; }
+      .tab-btn { padding: 18px 18px; white-space: nowrap; }
+      .tab-btn::after { left: 18px; right: 18px; }
+    }
+  </style>
+
+
+  <style>
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 9999;
+      padding: 10px 20px; background: var(--gold); color: #0a0a09;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; border-radius: 3px; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; outline: 2px solid #fff; outline-offset: 2px; }
+  </style>
+</head>
+
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<aside class="sidebar" aria-label="Site navigation">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer</span>
+    </div>
+  </a>
+
+  <nav class="sb-nav" aria-label="Primary">
+
+    <!-- UX PROJECTS -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">UX Projects</span>
+
+      <a href="tenetic.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+
+      <a href="pur.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="mentormap.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="presence.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Presence</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="philly-truce.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- BRANDING & MARKETING -->
+    <a href="branding.html" class="sb-row active">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
+      </span>
+      <span class="sb-label">Branding &amp; Marketing</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- CERTIFICATIONS -->
+    <a href="certifications.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+          <circle cx="12" cy="8" r="6"/>
+        </svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- ABOUT ME -->
+    <a href="about.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+  </nav>
+
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<main class="main" id="main-content">
+
+  <!-- ═══ PAGE HEADER ═══ -->
+  <header class="pg-header">
+    <div class="pg-header-inner">
+      <p class="pg-eyebrow">
+        <span class="pg-eyebrow-line"></span>
+        Branding &amp; Marketing
+        <span class="pg-eyebrow-line"></span>
+      </p>
+      <h1 class="pg-title">Brand, Campaign<br>&amp; <em>Motion</em></h1>
+      <p class="pg-sub">Graphic design and brand work: identity systems, campaign assets, and motion pieces made for the moments before a product interface ever loads.</p>
+    </div>
+  </header>
+
+  <!-- ═══ TABS ═══ -->
+  <div class="tab-bar" role="tablist" aria-label="Branding sections">
+    <button class="tab-btn" id="tab-work" role="tab" aria-selected="true"
+            aria-controls="panel-work" data-panel="panel-work" type="button">
+      Work<span class="tab-count">03</span>
+    </button>
+    <button class="tab-btn" id="tab-motion" role="tab" aria-selected="false"
+            aria-controls="panel-motion" data-panel="panel-motion" type="button" tabindex="-1">
+      Motion Design<span class="tab-count">02</span>
+    </button>
+  </div>
+
+  <!-- ═══ PANELS ═══ -->
+  <div class="projects-area">
+
+    <div class="tab-panel is-active" id="panel-work" role="tabpanel" aria-labelledby="tab-work">
+      <div class="proj-card coming-soon reveal">
+        <div class="proj-num-col">
+          <span class="proj-number">01</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">Brand Identity</p>
+            <span class="proj-badge soon">Coming Soon</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">Brand Identity</h2>
+          <p class="proj-subtitle">Logo systems, type, and visual language</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">Identity work spanning logo systems, typographic hierarchy, and the visual language that holds a brand together across every touchpoint.</p>
+        </div>
+      </div>
+
+      <div class="proj-card coming-soon reveal d1">
+        <div class="proj-num-col">
+          <span class="proj-number">02</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">Campaign &amp; Marketing</p>
+            <span class="proj-badge soon">Coming Soon</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">Campaign &amp; Marketing</h2>
+          <p class="proj-subtitle">Launch campaigns and channel assets</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">Launch campaigns built as systems: a master key visual adapted into channel-specific executions for social, retail media, and brand-site placements.</p>
+        </div>
+      </div>
+
+      <div class="proj-card coming-soon reveal d1">
+        <div class="proj-num-col">
+          <span class="proj-number">03</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">Packaging &amp; Print</p>
+            <span class="proj-badge soon">Coming Soon</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">Packaging &amp; Print</h2>
+          <p class="proj-subtitle">Physical-first design work</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">Packaging, collateral, and print work where material, scale, and production constraints shape the design as much as the brief does.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-motion" role="tabpanel" aria-labelledby="tab-motion">
+      <div class="proj-card coming-soon reveal">
+        <div class="proj-num-col">
+          <span class="proj-number">01</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">Motion Reel</p>
+            <span class="proj-badge soon">Coming Soon</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">Motion Reel</h2>
+          <p class="proj-subtitle">A short cut of selected motion work</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">A compiled reel of motion pieces: brand animations, UI motion studies, and typographic sequences edited into a single short cut.</p>
+        </div>
+      </div>
+
+      <div class="proj-card coming-soon reveal d1">
+        <div class="proj-num-col">
+          <span class="proj-number">02</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">Social &amp; Ad Motion</p>
+            <span class="proj-badge soon">Coming Soon</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">Social &amp; Ad Motion</h2>
+          <p class="proj-subtitle">Short-form motion built for feed</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">Short-form animated assets designed for feed and story placements, where the first second has to earn the next five.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="contact-section">
+    <div class="footer-body">
+      <div class="footer-left">
+        <p class="sec-label"><span class="eline"></span>Get In Touch</p>
+        <h2 class="sec-title">Let's create something<br><em>remarkable</em> together.</h2>
+        <p class="contact-sub">
+          <span>Available for full-time roles in the USA &amp; design conversations.</span>
+          <span>To enquire about my projects, shoot me an email.</span>
+        </p>
+      </div>
+      <div class="contact-btns">
+        <a href="mailto:sayali.ux@gmail.com" class="cta-btn primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Send an Email
+        </a>
+        <a href="https://www.linkedin.com/in/sayali-mandhalkar-0a449616a/" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://medium.com/@sayalim" target="_blank" rel="noopener" class="cta-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          Medium
+        </a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span class="footer-copy">© 2026 Sayali Mandhalkar. All rights reserved.</span>
+      <a href="index.html" class="footer-back">← Back to Home</a>
+    </div>
+  </section>
+
+
+</main>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+
+  // ── Tabs ──
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = (t === tab);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.dataset.panel);
+        if (panel) panel.classList.toggle('is-active', on);
+      });
+      // reveal cards in the panel that just became visible
+      var active = document.getElementById(tab.dataset.panel);
+      if (active) {
+        active.querySelectorAll('.reveal').forEach(function (el) {
+          el.classList.add('visible');
+        });
+      }
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if (e.key === 'ArrowLeft')  next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (next) { e.preventDefault(); next.focus(); select(next); }
+      });
+    });
+  })();
+</script>
+<script>sessionStorage.setItem('sb_v','1');</script>
+</body>
+</html>
