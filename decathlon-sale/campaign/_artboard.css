@@ -1,0 +1,36 @@
+/* Campaign artboard kit — same tokens and graphic devices as the homepage,
+   re-cut for fixed-size social and display formats. */
+
+:root{
+  --blue:#0082C3; --blue-600:#006ba2; --blue-700:#00679b; --blue-900:#00567f;
+  --ink:#1A2A34; --ink-deep:#0F2029; --yellow:#FFEA28; --red:#E3262F;
+  --grey-100:#EFF1F3; --grey-50:#F4F6F8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff}
+body{font-family:"Roboto Condensed",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:none}
+
+.board{position:relative;overflow:hidden;background:var(--blue)}
+
+/* graphic devices */
+.lines{position:absolute;inset:0;pointer-events:none}
+.line{position:absolute;transform:skewX(-14deg)}
+.chip{display:inline-block;background:var(--yellow);color:var(--ink);font-weight:700;
+      text-transform:uppercase;transform:skewX(-10deg)}
+.chip>span{display:inline-block;transform:skewX(10deg)}
+.chip--red{background:var(--red);color:#fff}
+.chip--ink{background:var(--ink);color:#fff}
+.slab{display:inline-block;background:var(--yellow);transform:skewX(-10deg)}
+.slab>span{display:inline-block;transform:skewX(10deg);font-weight:700;font-style:italic;
+           text-transform:uppercase;color:var(--ink)}
+.rule{display:block;background:var(--yellow);transform:skewX(-14deg)}
+
+.title{font-weight:700;font-style:italic;text-transform:uppercase;line-height:.84;
+       letter-spacing:-.02em;color:#fff;margin:0}
+.kicker{font-weight:700;text-transform:uppercase;letter-spacing:.22em}
+.meta{font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+
+.photo{position:absolute;background-repeat:no-repeat;background-size:cover}
+.scrim{position:absolute;inset:0}
+.logo{position:absolute;object-fit:contain}

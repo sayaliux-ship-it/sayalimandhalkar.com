@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SERA &middot; The Blue Hour &middot; Campaign Case Study</title>
+<meta name="description" content="Launch campaign for Sera One, a portable lamp. Brand, art direction, campaign and digital design.">
+<link rel="icon" href="sera/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap">
+
+<style>
+/* ══════════════════════════════════════════════════════
+   SERA — The Blue Hour · case study
+   Quiet editorial system: plaster / ink / dusk
+   ══════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('sera/assets/fonts/newsreader-300.woff2') format('woff2');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('sera/assets/fonts/newsreader-regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('sera/assets/fonts/newsreader-italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('sera/assets/fonts/newsreader-500.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'InterSera';
+  src: url('sera/assets/fonts/inter-regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'InterSera';
+  src: url('sera/assets/fonts/inter-500.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+.cs {
+  --plaster: #EFEDE7;
+  --ink: #24262C;
+  --dusk: #35465C;
+  --hairline: #D9D5CB;
+  --cs-muted: #7A776E;
+  --cs-serif: 'Newsreader', Georgia, serif;
+  --cs-sans: 'InterSera', 'Helvetica Neue', Arial, sans-serif;
+  --wrap: 68rem;
+  --gut: clamp(1.25rem, 4vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #EFEDE7; }
+img { display: block; max-width: 100%; height: auto; }
+
+.cs {
+  font-family: var(--cs-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--plaster);
+  -webkit-font-smoothing: antialiased;
+}
+.cs a { color: inherit; }
+
+.cs .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gut); }
+.cs .section { padding-block: clamp(4rem, 9vw, 8rem); }
+.cs .rule { border: 0; border-top: 1px solid var(--hairline); max-width: calc(var(--wrap) - 2 * var(--gut)); margin-inline: auto; }
+
+/* ---------- masthead ---------- */
+.cs .masthead {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 5;
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 1.4rem var(--gut);
+  color: #EDEBE4;
+}
+.cs .wordmark { font-weight: 500; font-size: 0.9rem; letter-spacing: 0.42em; }
+.cs .masthead-note { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; }
+
+/* ---------- hero ---------- */
+.cs .hero { position: relative; background: var(--dusk); }
+.cs .hero-img { width: 100%; height: min(92svh, 58rem); object-fit: cover; object-position: center 55%; }
+.cs .hero-copy {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: clamp(2rem, 6vw, 4.5rem) var(--gut);
+  background: linear-gradient(to top, rgba(18, 24, 34, 0.55), rgba(18, 24, 34, 0));
+  color: #F2F0E9;
+}
+.cs .hero-copy h1 {
+  font-family: var(--cs-serif); font-weight: 300;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.02; letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+}
+.cs .hero-copy h1 em { font-style: italic; }
+.cs .hero-copy p { margin: 0; font-size: 1rem; opacity: 0.9; max-width: 34rem; }
+
+/* ---------- shared type ---------- */
+.cs .label {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--cs-muted); margin: 0 0 1.6rem;
+}
+.cs .label-inline {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--cs-muted); margin-right: 0.8em;
+}
+.cs h2 {
+  font-family: var(--cs-serif); font-weight: 300;
+  font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+  line-height: 1.15; letter-spacing: -0.005em;
+  max-width: 26ch;
+  margin: 0 0 1.4rem;
+}
+.cs .lede {
+  font-family: var(--cs-serif); font-weight: 300;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  line-height: 1.45;
+  max-width: 44rem;
+  margin: 0;
+}
+.cs .body { max-width: 40rem; color: #3A3C42; margin: 0; }
+.cs .caption, .cs figcaption {
+  font-size: 0.9375rem; line-height: 1.6; color: var(--cs-muted);
+  margin: 0.9rem 0 0; max-width: 36rem;
+}
+.cs figure { margin: 0; }
+
+/* ---------- setup ---------- */
+.cs .setup { padding-bottom: clamp(3rem, 6vw, 5rem); }
+.cs .meta-strip {
+  display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 4vw, 4rem);
+  margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+  border-top: 1px solid var(--hairline);
+  padding-top: 1.4rem;
+}
+.cs .meta-strip div { max-width: 26rem; }
+.cs .meta-strip dt {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--cs-muted); margin-bottom: 0.3rem;
+}
+.cs .meta-strip dd { font-size: 0.9375rem; line-height: 1.55; margin: 0; }
+
+/* ---------- object ---------- */
+.cs .object-grid {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 4.5rem); align-items: start;
+}
+.cs .object-side { display: grid; gap: clamp(1.6rem, 3vw, 2.5rem); }
+.cs .specs { border-top: 1px solid var(--hairline); }
+.cs .specs div {
+  display: flex; justify-content: space-between; gap: 2rem;
+  padding: 0.85rem 0; border-bottom: 1px solid var(--hairline);
+  font-size: 0.9375rem;
+}
+.cs .specs span:first-child {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--cs-muted); padding-top: 0.25em;
+}
+
+/* ---------- campaign ---------- */
+.cs .campaign h2 { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.cs .campaign-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  margin-bottom: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
+}
+.cs .wide-fig img { width: 100%; }
+
+/* ---------- commerce ---------- */
+.cs .sell { padding-top: clamp(3rem, 6vw, 5rem); }
+.cs .dtc { border: 1px solid var(--hairline); background: #E9E6DE; box-shadow: 0 24px 60px -30px rgba(36, 38, 44, 0.25); }
+.cs .dtc-chrome {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.6rem 1rem; border-bottom: 1px solid var(--hairline);
+}
+.cs .dtc-chrome i { width: 8px; height: 8px; border-radius: 50%; background: #C9C5B9; }
+.cs .dtc-chrome span {
+  margin-inline: auto; font-size: 0.75rem; color: var(--cs-muted); letter-spacing: 0.06em;
+  background: var(--plaster); padding: 0.15em 1.5em; border-radius: 2px;
+}
+.cs .dtc-hero {
+  position: relative;
+  background: var(--dusk) url('sera/assets/images/terrace-alt.jpg') center 60% / cover no-repeat;
+  min-height: clamp(26rem, 40vw, 36rem);
+  display: flex; flex-direction: column;
+  color: #F2F0E9;
+}
+.cs .dtc-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(16, 22, 32, 0.55), rgba(16, 22, 32, 0.08) 55%);
+}
+.cs .dtc-hero nav {
+  position: relative; z-index: 1;
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 1.3rem clamp(1.4rem, 3vw, 2.6rem);
+  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.cs .dtc-mark { font-weight: 500; letter-spacing: 0.42em; }
+.cs .dtc-copy {
+  position: relative; z-index: 1;
+  margin-top: auto;
+  padding: clamp(1.4rem, 3vw, 2.6rem);
+  max-width: 30rem;
+}
+.cs .dtc-copy h3 {
+  font-family: var(--cs-serif); font-weight: 300;
+  font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.05;
+  margin: 0 0 0.8rem;
+}
+.cs .dtc-copy p { font-size: 0.9375rem; opacity: 0.9; margin: 0 0 1.4rem; max-width: 24rem; }
+.cs .dtc-btn {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #F2F0E9;
+  border: 1px solid rgba(242, 240, 233, 0.65);
+  padding: 0.9em 2.2em;
+}
+.cs .sell .caption { margin-top: 1.2rem; }
+
+/* ---------- in circulation ---------- */
+.cs .circ { padding-top: clamp(3rem, 6vw, 5rem); }
+.cs .circ h2 { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.cs .circ-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3.5vw, 3rem); align-items: start;
+}
+.cs .poster, .cs .story-tile, .cs .feed-tile {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 18px 44px -24px rgba(36, 38, 44, 0.35);
+}
+.cs .poster { aspect-ratio: 2 / 3; }
+.cs .story-tile { aspect-ratio: 9 / 16; }
+.cs .feed-tile { aspect-ratio: 4 / 5; }
+.cs .poster img, .cs .story-tile img, .cs .feed-tile img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.cs .story-tile img { object-position: 30% center; }
+.cs .feed-tile img { object-position: center 40%; }
+.cs .poster-overlay, .cs .story-overlay, .cs .feed-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; flex-direction: column;
+  padding: clamp(1rem, 2vw, 1.6rem);
+  color: #F2F0E9;
+}
+.cs .poster-mark { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.42em; }
+.cs .poster-overlay { background: linear-gradient(to top, rgba(16, 22, 32, 0.45), rgba(16, 22, 32, 0) 45%); }
+.cs .poster-line {
+  margin-top: auto;
+  font-family: var(--cs-serif); font-weight: 300;
+  font-size: clamp(1.3rem, 2vw, 1.8rem); line-height: 1.1;
+}
+.cs .poster-line em { font-style: italic; }
+.cs .story-overlay { background: linear-gradient(to top, rgba(16, 22, 32, 0.5), rgba(16, 22, 32, 0) 40%); }
+.cs .story-line {
+  margin-top: auto;
+  font-family: var(--cs-serif); font-weight: 300; font-style: italic;
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  margin-bottom: 0.9rem;
+}
+.cs .story-cta {
+  align-self: flex-start;
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  border: 1px solid rgba(242, 240, 233, 0.7);
+  padding: 0.6em 1.6em; border-radius: 100px;
+  margin-bottom: 1.6rem;
+}
+.cs .feed-overlay { background: linear-gradient(to bottom, rgba(16, 22, 32, 0.28), rgba(16, 22, 32, 0) 40%); }
+
+/* ---------- close ---------- */
+.cs .close-line {
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  max-width: none;
+  margin-bottom: clamp(3rem, 7vw, 5.5rem);
+}
+.cs .close-line em { font-style: italic; }
+.cs .credits { border-top: 1px solid var(--hairline); padding-top: 1.6rem; }
+.cs .credits p { font-size: 0.9375rem; line-height: 1.7; color: var(--cs-muted); max-width: 46rem; margin: 0; }
+.cs .colophon {
+  margin-top: 2.4rem !important;
+  font-size: 0.72rem !important; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink) !important;
+}
+
+/* ---------- reveal ---------- */
+.cs .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.cs .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .cs .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- case study responsive ---------- */
+@media (max-width: 1100px) {
+  .cs .circ-grid { gap: 1.2rem; }
+}
+@media (max-width: 860px) {
+  .cs .object-grid { grid-template-columns: 1fr; }
+  .cs .campaign-grid { grid-template-columns: 1fr; }
+  .cs .masthead-note { display: none; }
+  .cs .circ-grid { grid-template-columns: 1fr; max-width: 24rem; }
+  .cs .poster-line { font-size: 1.6rem; }
+  .cs .story-line { font-size: 1.45rem; }
+}
+@media (max-width: 560px) {
+  .cs .hero-img { height: 78svh; object-position: 38% 55%; }
+  .cs .meta-strip { flex-direction: column; gap: 1.2rem; }
+  .cs .dtc-hero { min-height: 30rem; }
+  .cs .dtc-links { display: none; }
+}
+</style>
+
+<style>
+
+    /* portfolio chrome — vars scoped to .sidebar so they never reach the
+       case study's own Newsreader/plaster type system */
+    :root { --sw: 280px; }
+    .sidebar {
+      --bg:#111111; --sidebar:#000000; --border:rgba(255,255,255,0.07);
+      --gold:#c9a96e; --gold-dim:rgba(201,169,110,0.1); --gold-lt:#dfc08a;
+      --text:#e8e4dc; --muted:rgba(232,228,220,0.72); --faint:rgba(232,228,220,0.55);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      text-align: left;
+    }
+    .sidebar a { text-decoration: none; }
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s ease;
+    }
+    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0;
+      transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
+    }
+
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      position: relative;
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+    }
+
+    /* back to work, mobile only — the sidebar is the way back on desktop */
+    .cs-back {
+      display: none;
+      position: absolute; top: 1.35rem; right: var(--gut); z-index: 6;
+      font-family: var(--cs-sans);
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #EDEBE4; text-decoration: none;
+      border: 1px solid rgba(237,235,228,0.55); border-radius: 100px;
+      padding: 0.5em 1.1em;
+      background: rgba(18,24,34,0.28);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    }
+
+    @media (max-width: 960px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; width: 100%; }
+      .cs-back { display: inline-block; }
+    }
+  </style></head>
+<body>
+
+<aside class="sidebar" aria-label="Site navigation">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer &middot; New York</span>
+    </div>
+  </a>
+
+  <nav class="sb-nav" aria-label="Primary">
+
+    <!-- UX PROJECTS -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">UX Projects</span>
+
+      <a href="tenetic.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+
+      <a href="pur.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="mentormap.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="presence.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Presence</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="philly-truce.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- BRANDING & MARKETING -->
+    <a href="branding.html" class="sb-row active">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
+      </span>
+      <span class="sb-label">Branding &amp; Marketing</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- CERTIFICATIONS -->
+    <a href="certifications.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+          <circle cx="12" cy="8" r="6"/>
+        </svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- ABOUT ME -->
+    <a href="about.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+  </nav>
+
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<main class="main cs">
+
+  <a href="branding.html" class="cs-back">&larr; Work</a>
+
+  <header class="masthead">
+    <span class="wordmark">S E R A</span>
+    <span class="masthead-note">The Blue Hour &middot; Campaign case study, 2026</span>
+  </header>
+
+  <!-- 01 · COVER -->
+  <section class="hero">
+    <img src="sera/assets/images/hero-terrace.jpg" alt="A dinner table set with linen and ceramics in an olive grove at dusk, lit only by the warm glow of the Sera One portable lamp at its center" class="hero-img" width="2000" height="1333">
+    <div class="hero-copy">
+      <h1>The blue hour,<br><em>carried.</em></h1>
+      <p>Launch campaign for Sera One, a portable lamp for the hours after daylight.</p>
+    </div>
+  </section>
+
+  <!-- 02 · SETUP -->
+  <section class="section setup">
+    <div class="wrap">
+      <p class="lede reveal">Sera is a lighting brand with a single object to launch: a cordless lamp the size of a wine bottle. This case study covers the campaign idea, the photography direction and the commerce layer.</p>
+      <dl class="meta-strip reveal">
+        <div><dt>Role</dt><dd>Brand &middot; Art direction &middot; Campaign &middot; Digital design &middot; AI-assisted imagery</dd></div>
+        <div><dt>Deliverables</dt><dd>Key visuals &middot; DTC &middot; OOH &middot; Social</dd></div>
+        <div><dt>Year</dt><dd>2026</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 03 · IDEA -->
+  <section class="section idea">
+    <div class="wrap">
+      <p class="label reveal">The idea</p>
+      <h2 class="reveal">Lamps are photographed in daylight. Sera is sold at the only hour that matters.</h2>
+      <p class="body reveal">Every frame in the campaign is set in the blue hour, the cold minutes after sunset when rooms lose their color, and holds exactly one warm source: the product. Cool world, warm object. The contrast is the brand, and it survives any crop.</p>
+    </div>
+  </section>
+
+  <!-- 04 · OBJECT -->
+  <section class="section object">
+    <div class="wrap object-grid">
+      <figure class="reveal">
+        <img src="sera/assets/images/product.jpg" alt="Sera One portable lamp with charcoal dome and champagne-grey tapered stem, glowing on a limestone block against dusk blue" loading="lazy" width="1728" height="2304">
+        <figcaption>Sera One. Charcoal over champagne, anodized aluminum, no visible logo. Design objects introduce themselves by silhouette.</figcaption>
+      </figure>
+      <div class="object-side">
+        <figure class="reveal">
+          <img src="sera/assets/images/macro.jpg" alt="Macro of the lamp's dome rim, warm light grazing the matte metal against blue" loading="lazy" width="2000" height="1500">
+          <figcaption>The only detail shot the campaign needs: where the cold metal meets the warm light.</figcaption>
+        </figure>
+        <div class="specs reveal">
+          <div><span>Finish</span><span>Charcoal / Bone</span></div>
+          <div><span>Height</span><span>27 cm</span></div>
+          <div><span>Runtime</span><span>36 hours</span></div>
+          <div><span>Light</span><span>2200 K, dimmable</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 05 · CAMPAIGN -->
+  <section class="section campaign">
+    <div class="wrap">
+      <p class="label reveal">The campaign</p>
+      <h2 class="reveal">One warm source in a cooling world.</h2>
+    </div>
+    <div class="wrap campaign-grid">
+      <figure class="reveal">
+        <img src="sera/assets/images/reading.jpg" alt="A leather armchair beside a stool stacked with books at dusk, the Sera One lighting the corner" loading="lazy" width="1728" height="2304">
+        <figcaption>Indoors, the lamp claims a corner, not a room. Light as furniture.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <img src="sera/assets/images/carry.jpg" alt="A person seen from behind carrying the glowing Sera One down a dark hallway like a candle" loading="lazy" width="1728" height="2304">
+        <figcaption>The portability story told in one gesture: carried like a candle, no cable in sight.</figcaption>
+      </figure>
+    </div>
+    <figure class="wrap wide-fig reveal">
+      <img src="sera/assets/images/duo.jpg" alt="Both finishes of the Sera One side by side on an oak bench in soft daylight, the bone version lit" loading="lazy" width="2000" height="1500">
+      <figcaption>The range shot breaks the rule on purpose: daylight, so the two finishes read true for commerce.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 06 · COMMERCE -->
+  <section class="section sell">
+    <div class="wrap">
+      <p class="label reveal">Designed to sell</p>
+      <div class="dtc reveal">
+        <div class="dtc-chrome"><i></i><i></i><i></i><span>sera-lighting.com</span></div>
+        <div class="dtc-hero">
+          <nav><span class="dtc-mark">S E R A</span><span class="dtc-links">Objects &middot; Journal &middot; Stockists</span><span>Bag &middot; 0</span></nav>
+          <div class="dtc-copy">
+            <h3>For the hours<br>after daylight.</h3>
+            <p>Sera One. Portable, 36-hour runtime, light like a candle that behaves.</p>
+            <span class="dtc-btn">Discover &middot; &euro;180</span>
+          </div>
+        </div>
+      </div>
+      <p class="caption reveal">DTC hero. The serif speaks, the sans sells; the price sits inside the button so the click already knows what it costs.</p>
+    </div>
+  </section>
+
+  <!-- 07 · IN CIRCULATION -->
+  <section class="section circ">
+    <div class="wrap">
+      <p class="label reveal">In circulation</p>
+      <h2 class="reveal">The same hour, at street scale.</h2>
+      <div class="circ-grid">
+        <div class="circ-item reveal">
+          <div class="poster">
+            <img src="sera/assets/images/carry.jpg" alt="OOH poster: the lamp carried down a dark hallway, with the campaign line and Sera wordmark" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-mark">S E R A</span>
+              <span class="poster-line">The blue hour,<br><em>carried.</em></span>
+            </div>
+          </div>
+          <p class="caption">OOH. Six words and a silhouette; posters are read at walking pace, so the image does the arguing.</p>
+        </div>
+        <div class="circ-item reveal">
+          <div class="story-tile">
+            <img src="sera/assets/images/reading.jpg" alt="Social story: the reading corner at dusk with a short campaign line" loading="lazy">
+            <div class="story-overlay">
+              <span class="poster-mark">S E R A</span>
+              <span class="story-line">After daylight.</span>
+              <span class="story-cta">Discover</span>
+            </div>
+          </div>
+          <p class="caption">Story, 9:16. Nothing load-bearing in the bottom third; the tap target clears the reply bar.</p>
+        </div>
+        <div class="circ-item reveal">
+          <div class="feed-tile">
+            <img src="sera/assets/images/macro.jpg" alt="Social feed tile: macro of the lamp rim with the Sera wordmark" loading="lazy">
+            <div class="feed-overlay">
+              <span class="poster-mark">S E R A</span>
+            </div>
+          </div>
+          <p class="caption">Feed, 4:5. The macro carries recognition on texture alone; the wordmark is the only type allowed in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · CLOSE -->
+  <section class="section close">
+    <div class="wrap">
+      <h2 class="close-line reveal">Cool world, warm object.<br><em>The rest is restraint.</em></h2>
+      <footer class="credits reveal">
+        <p><span class="label-inline">Disclosure</span> Sera is a fictional brand created for this concept case study; it has no affiliation with any real company. All imagery was AI-generated and art-directed: a single master product shot was referenced in every scene, and each frame was reviewed for design drift, anatomy and artifacts. Newsreader and Inter, SIL Open Font License. No performance data is claimed.</p>
+        <p class="caption colophon">SERA &middot; The Blue Hour &middot; Case study, 2026</p>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* sections settle in as they come into view */
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if (!('IntersectionObserver' in window) || reduced) {
+    els.forEach(function (e) { e.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (en) {
+    en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -5% 0px', threshold: 0.15 });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+<script>sessionStorage.setItem('sb_v','1');</script>
+</body>
+</html>
