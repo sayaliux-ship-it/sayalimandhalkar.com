@@ -653,6 +653,16 @@
     }
     .vid-desc { font-size: 0.83rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
 
+
+    /* vertical 9:16 reels sit in the same grid, frame constrained so a
+       portrait card does not blow out the row height */
+    .vid-card.portrait .vid-frame { aspect-ratio: 9 / 16; max-width: 296px; margin: 0 auto; }
+    .vid-card.portrait .vid-meta  { max-width: 296px; margin: 0 auto; }
+    @media (max-width: 900px) {
+      .vid-card.portrait .vid-frame,
+      .vid-card.portrait .vid-meta { max-width: 320px; }
+    }
+
     @media (max-width: 900px) {
       .vid-grid { grid-template-columns: 1fr; }
       .vid-card.feature { grid-column: auto; }
@@ -826,7 +836,7 @@
     </button>
     <button class="tab-btn" id="tab-motion" role="tab" aria-selected="false"
             aria-controls="panel-motion" data-panel="panel-motion" type="button" tabindex="-1">
-      Motion Design<span class="tab-count">07</span>
+      Motion Design<span class="tab-count">09</span>
     </button>
   </div>
 
@@ -888,15 +898,15 @@
         </div>
         <div class="proj-content">
           <div class="proj-top">
-            <p class="proj-category">E-commerce &middot; Listing &amp; Infographic Design</p>
+            <p class="proj-category">Amazon &middot; Product Listing &amp; A+ Premium</p>
             <span class="proj-badge available">Available &rarr;</span>
           </div>
           <div class="proj-title-block">
-            <h2 class="proj-title">Mossora &mdash; Amazon Listing</h2>
-            <p class="proj-subtitle">Eight square assets that sell a body cream you can&rsquo;t touch</p>
+            <h2 class="proj-title">Mossora &mdash; Amazon Product Listing</h2>
+            <p class="proj-subtitle">Seven gallery images and a video that sell a body cream</p>
           </div>
           <div class="proj-divider"></div>
-          <p class="proj-desc">A botanical body cream sold with no shelf, no tester and no sales assistant &mdash; just a gallery of squares on a phone. A main-image spec, four infographic frames, lifestyle and a silent motion loop, all sequenced by the objections a shopper raises in order. Self-initiated concept; Mossora is a fictional brand.</p>
+          <p class="proj-desc">On Amazon there is no shelf, no tester and nobody to ask &mdash; seven square images and a short video have to do all of it. Benefit, texture, ingredients, how to use, scale, and where it lives. Self-initiated concept; Mossora is a fictional brand.</p>
           <span class="proj-cta">
             View Case Study
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1121,6 +1131,52 @@
           <p class="vid-cat">Abstract Promo</p>
           <h2 class="vid-name">Splash Portrait</h2>
           <p class="vid-desc">Paint-burst portrait resolving inside a scanning interface frame.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="vid-card portrait reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/melt-mode.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Melt Mode"></video>
+          <button class="vid-ov" type="button" aria-label="Play Melt Mode">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Social Reel &middot; 9:16 &middot; 0:08</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:08</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Social Reel &middot; 9:16</p>
+          <h2 class="vid-name">Melt Mode</h2>
+          <p class="vid-desc">Vertical launch spot for the gloss: swatch, texture and wear, closing on the product end card.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="vid-card portrait reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/shop-the-lineup.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Shop the Lineup"></video>
+          <button class="vid-ov" type="button" aria-label="Play Shop the Lineup">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Social Reel &middot; 9:16 &middot; 0:08</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:08</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Social Reel &middot; 9:16</p>
+          <h2 class="vid-name">Shop the Lineup</h2>
+          <p class="vid-desc">Vertical lineup spot moving from sun balm to gloss, landing on a shop-the-lineup card.</p>
         </figcaption>
       </figure>
       </div>
