@@ -511,7 +511,29 @@ img { display: block; max-width: 100%; height: auto; }
       .main { margin-left: 0; width: 100%; }
       .cs-back { display: inline-block; }
     }
-  </style></head>
+  </style>
+<style>
+  /* floating return to Branding & Marketing */
+  .fab-back{
+    position:fixed;right:26px;bottom:26px;z-index:500;
+    display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 20px 0 15px;
+    background:#c9a96e;color:#24262C;
+    font-family:'InterSera','Helvetica Neue',Arial,sans-serif;
+    font-size:10px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;text-decoration:none;border-radius:999px;border:0;
+    box-shadow:0 8px 30px rgba(0,0,0,.28);
+    opacity:0;transform:translateY(14px);pointer-events:none;
+    transition:opacity .35s ease,transform .35s ease,background .25s ease;
+  }
+  .fab-back.show{opacity:1;transform:none;pointer-events:auto}
+  .fab-back:hover{background:#dfc08a}
+  .fab-back svg{flex:none}
+  @media (max-width:560px){
+    .fab-back{right:14px;bottom:14px;height:40px;padding:0 15px 0 12px;font-size:9px;letter-spacing:.12em}
+  }
+  @media (prefers-reduced-motion:reduce){ .fab-back{transition:none} }
+</style>
+</head>
 <body>
 
 <aside class="sidebar" aria-label="Site navigation">
@@ -830,5 +852,19 @@ img { display: block; max-width: 100%; height: auto; }
 })();
 </script>
 <script>sessionStorage.setItem('sb_v','1');</script>
+
+<a href="branding.html" class="fab-back" aria-label="Back to Branding and Marketing">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+  <span>Branding &amp; Marketing</span>
+</a>
+<script>
+  (function () {
+    var f = document.querySelector('.fab-back');
+    if (!f) return;
+    function upd() { f.classList.toggle('show', (window.scrollY || 0) > 380); }
+    window.addEventListener('scroll', upd, { passive: true });
+    upd();
+  })();
+</script>
 </body>
 </html>
