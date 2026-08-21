@@ -591,6 +591,12 @@
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background: linear-gradient(90deg, rgba(0,0,0,0.34) 0%, transparent 38%, rgba(26,26,26,0.5) 100%);
     }
+    /* scrim so the number reads on light and dark cover art alike */
+    .proj-cover::before {
+      content: ''; position: absolute; left: 0; top: 0;
+      width: 52%; height: 38%; z-index: 1; pointer-events: none;
+      background: linear-gradient(135deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 42%, transparent 76%);
+    }
     .proj-cover .proj-number {
       position: absolute; left: 18px; top: 12px; z-index: 2;
       font-size: clamp(30px, 3vw, 42px);
