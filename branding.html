@@ -570,6 +570,53 @@
   </style>
 
   <style>
+
+
+    /* ── cover art on live project cards ── */
+    .proj-card.has-cover { grid-template-columns: minmax(0, 46%) 1fr; }
+    .proj-cover {
+      position: relative; overflow: hidden; background: #0b0b0b;
+      border-right: 1px solid var(--border);
+    }
+    .proj-card.active.has-cover .proj-cover { border-right-color: rgba(201,169,110,0.15); }
+    .proj-cover img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      border-radius: 0; display: block;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .proj-card.has-cover:hover .proj-cover img { transform: scale(1.04); }
+    .proj-cover::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(90deg, rgba(0,0,0,0.34) 0%, transparent 38%, rgba(26,26,26,0.5) 100%);
+    }
+    .proj-cover .proj-number {
+      position: absolute; left: 18px; top: 12px; z-index: 2;
+      font-size: clamp(30px, 3vw, 42px);
+      color: rgba(255,255,255,0.62);
+      text-shadow: 0 2px 14px rgba(0,0,0,0.55);
+    }
+    @media (max-width: 900px) {
+      .proj-card.has-cover { grid-template-columns: 1fr; }
+      .proj-cover { aspect-ratio: 16 / 10; border-right: 0; border-bottom: 1px solid var(--border); }
+      .proj-card.active.has-cover .proj-cover { border-bottom-color: rgba(201,169,110,0.15); }
+    }
+
+    /* ── skills + tools ── */
+    .pg-tools { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; max-width: 660px; }
+    .pg-tools-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .pg-tools-label {
+      width: 100%; margin-bottom: -3px; flex: none;
+      font-size: 0.55rem; font-weight: 500; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.7;
+    }
+    .pg-chip {
+      font-size: 0.68rem; letter-spacing: 0.03em; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 5px 13px; background: rgba(255,255,255,0.02); white-space: nowrap;
+    }
+
     /* ════════════════════════════════
        MOTION GRID
     ════════════════════════════════ */
@@ -824,7 +871,28 @@
         <span class="pg-eyebrow-line"></span>
       </p>
       <h1 class="pg-title">Brand, Campaign<br>&amp; <em>Motion</em></h1>
-      <p class="pg-sub">Graphic design and brand work: identity systems, campaign assets, and motion pieces made for the moments before a product interface ever loads.</p>
+      <p class="pg-sub">Identity systems, campaign assets and motion, built for the moments before a product interface ever loads.</p>
+      <div class="pg-tools">
+        <div class="pg-tools-row">
+          <span class="pg-tools-label">Skills</span>
+          <span class="pg-chip">Brand Identity</span>
+          <span class="pg-chip">Art Direction</span>
+          <span class="pg-chip">Campaign Design</span>
+          <span class="pg-chip">Packaging &amp; Print</span>
+          <span class="pg-chip">Motion Design</span>
+          <span class="pg-chip">Retouching</span>
+        </div>
+        <div class="pg-tools-row">
+          <span class="pg-tools-label">Tools</span>
+          <span class="pg-chip">Photoshop</span>
+          <span class="pg-chip">Illustrator</span>
+          <span class="pg-chip">InDesign</span>
+          <span class="pg-chip">After Effects</span>
+          <span class="pg-chip">Premiere Pro</span>
+          <span class="pg-chip">Figma</span>
+          <span class="pg-chip">Generative AI</span>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -844,8 +912,9 @@
   <div class="projects-area">
 
     <div class="tab-panel is-active" id="panel-work" role="tabpanel" aria-labelledby="tab-work">
-      <a href="innbeauty.html" class="proj-card active reveal" style="text-decoration:none;">
-        <div class="proj-num-col">
+      <a href="innbeauty.html" class="proj-card active reveal has-cover" style="text-decoration:none;">
+        <div class="proj-cover">
+          <img src="images/covers/innbeauty.jpg" alt="INNBEAUTY storefront hero" loading="lazy" decoding="async">
           <span class="proj-number">01</span>
         </div>
         <div class="proj-content">
@@ -868,8 +937,9 @@
         </div>
       </a>
 
-      <a href="decathlon.html" class="proj-card active reveal d1" style="text-decoration:none;">
-        <div class="proj-num-col">
+      <a href="decathlon.html" class="proj-card active reveal d1 has-cover" style="text-decoration:none;">
+        <div class="proj-cover">
+          <img src="images/covers/decathlon.jpg" alt="Decathlon campaign key visual" loading="lazy" decoding="async">
           <span class="proj-number">02</span>
         </div>
         <div class="proj-content">
@@ -892,8 +962,9 @@
         </div>
       </a>
 
-      <a href="mossora.html" class="proj-card active reveal d1" style="text-decoration:none;">
-        <div class="proj-num-col">
+      <a href="mossora.html" class="proj-card active reveal d1 has-cover" style="text-decoration:none;">
+        <div class="proj-cover">
+          <img src="images/covers/mossora.jpg" alt="Mossora body cream product shot" loading="lazy" decoding="async">
           <span class="proj-number">03</span>
         </div>
         <div class="proj-content">
