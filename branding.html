@@ -568,6 +568,96 @@
     }
     .skip-link:focus { top: 16px; outline: 2px solid #fff; outline-offset: 2px; }
   </style>
+
+  <style>
+    /* ════════════════════════════════
+       MOTION GRID
+    ════════════════════════════════ */
+    .vid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 22px; }
+    .vid-card { margin: 0; min-width: 0; }
+    .vid-card.feature { grid-column: 1 / -1; }
+
+    .vid-frame {
+      position: relative; aspect-ratio: 16 / 9; background: #000;
+      border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+    }
+    .vid-frame video {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; border-radius: 0; background: #000;
+    }
+
+    /* click-to-play cover */
+    .vid-ov {
+      position: absolute; inset: 0; width: 100%; padding: 0; border: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; cursor: pointer;
+      background: linear-gradient(180deg, rgba(10,10,10,0.22) 0%, rgba(10,10,10,0.62) 100%);
+      transition: opacity 0.35s ease, background 0.35s ease;
+    }
+    .vid-ov:hover { background: linear-gradient(180deg, rgba(10,10,10,0.12) 0%, rgba(10,10,10,0.5) 100%); }
+    .vid-card.started .vid-ov { opacity: 0; pointer-events: none; }
+    .vid-play {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--gold); color: #000;
+      display: grid; place-items: center;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .vid-ov:hover .vid-play { transform: scale(1.09); }
+    .vid-dur {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold-lt);
+    }
+
+    /* transport */
+    .vid-ctl {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      display: flex; align-items: center; gap: 11px; padding: 12px 14px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.86) 0%, transparent 100%);
+      opacity: 0; transition: opacity 0.25s ease;
+    }
+    .vid-card.started .vid-frame:hover .vid-ctl,
+    .vid-card.started.is-paused .vid-ctl,
+    .vid-ctl:focus-within { opacity: 1; }
+    .vid-btn {
+      appearance: none; background: none; border: 0; color: var(--text);
+      cursor: pointer; display: grid; place-items: center; padding: 4px;
+      border-radius: 3px; transition: color 0.2s ease; flex: none;
+    }
+    .vid-btn:hover { color: var(--gold); }
+    .vid-seek {
+      flex: 1; min-width: 0; height: 3px; appearance: none; cursor: pointer;
+      background: rgba(255,255,255,0.22); border-radius: 2px;
+    }
+    .vid-seek::-webkit-slider-thumb {
+      appearance: none; width: 11px; height: 11px; border-radius: 50%;
+      background: var(--gold); border: 0;
+    }
+    .vid-seek::-moz-range-thumb {
+      width: 11px; height: 11px; border-radius: 50%; background: var(--gold); border: 0;
+    }
+    .vid-time {
+      font-size: 0.6rem; letter-spacing: 0.06em; color: var(--faint);
+      font-variant-numeric: tabular-nums; white-space: nowrap; flex: none;
+    }
+
+    .vid-meta { padding: 16px 2px 0; }
+    .vid-cat {
+      font-size: 0.56rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.75;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .vid-cat::before { content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.6; flex: none; }
+    .vid-name {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 300;
+      color: var(--text); margin: 9px 0 7px; line-height: 1.2;
+    }
+    .vid-desc { font-size: 0.83rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
+
+    @media (max-width: 900px) {
+      .vid-grid { grid-template-columns: 1fr; }
+      .vid-card.feature { grid-column: auto; }
+    }
+  </style>
 </head>
 
 <body>
@@ -732,11 +822,11 @@
   <div class="tab-bar" role="tablist" aria-label="Branding sections">
     <button class="tab-btn" id="tab-work" role="tab" aria-selected="true"
             aria-controls="panel-work" data-panel="panel-work" type="button">
-      Work<span class="tab-count">04</span>
+      Work<span class="tab-count">06</span>
     </button>
     <button class="tab-btn" id="tab-motion" role="tab" aria-selected="false"
             aria-controls="panel-motion" data-panel="panel-motion" type="button" tabindex="-1">
-      Motion Design<span class="tab-count">02</span>
+      Motion Design<span class="tab-count">07</span>
     </button>
   </div>
 
@@ -768,9 +858,57 @@
         </div>
       </a>
 
-      <div class="proj-card coming-soon reveal d1">
+      <a href="decathlon.html" class="proj-card active reveal d1" style="text-decoration:none;">
         <div class="proj-num-col">
           <span class="proj-number">02</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">Retail Campaign &middot; E-commerce</p>
+            <span class="proj-badge available">Available &rarr;</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">Decathlon &mdash; Your Next Move</h2>
+            <p class="proj-subtitle">A 25% off sale campaign, homepage to skyscraper</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">A sitewide sale built end to end: a responsive homepage coded from a high-fidelity handoff, a three-send email flight, nine social artboards and four display sizes &mdash; all driven by one campaign idea and a single countdown timestamp. Self-directed concept work, not affiliated with the brand.</p>
+          <span class="proj-cta">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="mossora.html" class="proj-card active reveal d1" style="text-decoration:none;">
+        <div class="proj-num-col">
+          <span class="proj-number">03</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">E-commerce &middot; Listing &amp; Infographic Design</p>
+            <span class="proj-badge available">Available &rarr;</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">Mossora &mdash; Amazon Listing</h2>
+            <p class="proj-subtitle">Eight square assets that sell a body cream you can&rsquo;t touch</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">A botanical body cream sold with no shelf, no tester and no sales assistant &mdash; just a gallery of squares on a phone. A main-image spec, four infographic frames, lifestyle and a silent motion loop, all sequenced by the objections a shopper raises in order. Self-initiated concept; Mossora is a fictional brand.</p>
+          <span class="proj-cta">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+
+      <div class="proj-card coming-soon reveal d1">
+        <div class="proj-num-col">
+          <span class="proj-number">04</span>
         </div>
         <div class="proj-content">
           <div class="proj-top">
@@ -788,7 +926,7 @@
 
       <div class="proj-card coming-soon reveal d1">
         <div class="proj-num-col">
-          <span class="proj-number">03</span>
+          <span class="proj-number">05</span>
         </div>
         <div class="proj-content">
           <div class="proj-top">
@@ -806,7 +944,7 @@
 
       <div class="proj-card coming-soon reveal d1">
         <div class="proj-num-col">
-          <span class="proj-number">04</span>
+          <span class="proj-number">06</span>
         </div>
         <div class="proj-content">
           <div class="proj-top">
@@ -824,40 +962,167 @@
     </div>
 
     <div class="tab-panel" id="panel-motion" role="tabpanel" aria-labelledby="tab-motion">
-      <div class="proj-card coming-soon reveal">
-        <div class="proj-num-col">
-          <span class="proj-number">01</span>
-        </div>
-        <div class="proj-content">
-          <div class="proj-top">
-            <p class="proj-category">Motion Reel</p>
-            <span class="proj-badge soon">Coming Soon</span>
+      <div class="vid-grid">
+      <figure class="vid-card feature reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/luxury-fragrance.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Fragrance Film"></video>
+          <button class="vid-ov" type="button" aria-label="Play Fragrance Film">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Product Motion &middot; 0:05</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:05</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
           </div>
-          <div class="proj-title-block">
-            <h2 class="proj-title">Motion Reel</h2>
-          <p class="proj-subtitle">A short cut of selected motion work</p>
-          </div>
-          <div class="proj-divider"></div>
-          <p class="proj-desc">A compiled reel of motion pieces: brand animations, UI motion studies, and typographic sequences edited into a single short cut.</p>
         </div>
-      </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Product Motion</p>
+          <h2 class="vid-name">Fragrance Film</h2>
+          <p class="vid-desc">Studio-lit bottle reveal with a slow push and a specular sweep across the glass.</p>
+        </figcaption>
+      </figure>
 
-      <div class="proj-card coming-soon reveal d1">
-        <div class="proj-num-col">
-          <span class="proj-number">02</span>
-        </div>
-        <div class="proj-content">
-          <div class="proj-top">
-            <p class="proj-category">Social &amp; Ad Motion</p>
-            <span class="proj-badge soon">Coming Soon</span>
+      <figure class="vid-card reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/glass-type.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Chrome Sale Type"></video>
+          <button class="vid-ov" type="button" aria-label="Play Chrome Sale Type">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Promotional Type &middot; 0:05</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:05</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
           </div>
-          <div class="proj-title-block">
-            <h2 class="proj-title">Social &amp; Ad Motion</h2>
-          <p class="proj-subtitle">Short-form motion built for feed</p>
-          </div>
-          <div class="proj-divider"></div>
-          <p class="proj-desc">Short-form animated assets designed for feed and story placements, where the first second has to earn the next five.</p>
         </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Promotional Type</p>
+          <h2 class="vid-name">Chrome Sale Type</h2>
+          <p class="vid-desc">Dimensional chrome lettering built for a seasonal offer, with a liquid metal finish.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="vid-card reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/pink-vapor.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Love Potion"></video>
+          <button class="vid-ov" type="button" aria-label="Play Love Potion">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Product Motion &middot; 0:05</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:05</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Product Motion</p>
+          <h2 class="vid-name">Love Potion</h2>
+          <p class="vid-desc">Still life carried by drifting vapour and a satin ribbon, shot warm and close.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="vid-card reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/stylized-3d.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Metro Portrait"></video>
+          <button class="vid-ov" type="button" aria-label="Play Metro Portrait">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">3D Environment &middot; 0:05</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:05</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">3D Environment</p>
+          <h2 class="vid-name">Metro Portrait</h2>
+          <p class="vid-desc">Character and environment study, cinematic camera move through a lit tunnel.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="vid-card reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/outline-motion.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Line-Art Loop"></video>
+          <button class="vid-ov" type="button" aria-label="Play Line-Art Loop">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Line Art &middot; 0:05</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:05</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Line Art</p>
+          <h2 class="vid-name">Line-Art Loop</h2>
+          <p class="vid-desc">Single-weight outline figure drawn over terminal typography on black.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="vid-card reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/wave-break-01.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Cyber Monday"></video>
+          <button class="vid-ov" type="button" aria-label="Play Cyber Monday">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Retail Promo &middot; 0:12</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:12</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Retail Promo</p>
+          <h2 class="vid-name">Cyber Monday</h2>
+          <p class="vid-desc">Retail offer staged over a live fulfilment line, type locked to the conveyor.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="vid-card reveal">
+        <div class="vid-frame">
+          <video src="videos/motion/wave-break-02.mp4#t=0.1" preload="metadata" playsinline
+                 aria-label="Splash Portrait"></video>
+          <button class="vid-ov" type="button" aria-label="Play Splash Portrait">
+            <span class="vid-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vid-dur">Abstract Promo &middot; 0:12</span>
+          </button>
+          <div class="vid-ctl">
+            <button class="vid-btn" data-a="pp" type="button" aria-label="Play"></button>
+            <input class="vid-seek" type="range" min="0" max="100" value="0" step="0.01" aria-label="Seek">
+            <span class="vid-time">0:00 / 0:12</span>
+            <button class="vid-btn" data-a="mute" type="button" aria-label="Mute"></button>
+            <button class="vid-btn" data-a="fs" type="button" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+          </div>
+        </div>
+        <figcaption class="vid-meta">
+          <p class="vid-cat">Abstract Promo</p>
+          <h2 class="vid-name">Splash Portrait</h2>
+          <p class="vid-desc">Paint-burst portrait resolving inside a scanning interface frame.</p>
+        </figcaption>
+      </figure>
       </div>
     </div>
 
@@ -937,6 +1202,78 @@
         if (e.key === 'ArrowLeft')  next = tabs[(i - 1 + tabs.length) % tabs.length];
         if (next) { e.preventDefault(); next.focus(); select(next); }
       });
+    });
+  })();
+</script>
+
+<script>
+  // ── Motion players: click to play, one at a time ──
+  (function () {
+    var I = {
+      play:  '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+      pause: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
+      on:    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+      off:   '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>'
+    };
+    function fmt(s) {
+      if (!isFinite(s)) return '0:00';
+      s = Math.max(0, Math.floor(s));
+      return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    }
+
+    document.querySelectorAll('.vid-card').forEach(function (card) {
+      var v  = card.querySelector('video'),
+          ov = card.querySelector('.vid-ov'),
+          pp = card.querySelector('[data-a="pp"]'),
+          mu = card.querySelector('[data-a="mute"]'),
+          fs = card.querySelector('[data-a="fs"]'),
+          sk = card.querySelector('.vid-seek'),
+          tm = card.querySelector('.vid-time'),
+          scrubbing = false;
+
+      function sync() {
+        pp.innerHTML = v.paused ? I.play : I.pause;
+        pp.setAttribute('aria-label', v.paused ? 'Play' : 'Pause');
+        mu.innerHTML = v.muted ? I.off : I.on;
+        mu.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute');
+        card.classList.toggle('is-paused', v.paused);
+      }
+      function start() {
+        document.querySelectorAll('.vid-card.started video').forEach(function (o) {
+          if (o !== v) o.pause();
+        });
+        card.classList.add('started');
+        var r = v.play();
+        if (r && r.catch) r.catch(function () { v.muted = true; v.play(); sync(); });
+      }
+
+      ov.addEventListener('click', start);
+      pp.addEventListener('click', function () { v.paused ? start() : v.pause(); });
+      mu.addEventListener('click', function () { v.muted = !v.muted; sync(); });
+      fs.addEventListener('click', function () {
+        if (v.requestFullscreen) v.requestFullscreen();
+        else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+      });
+
+      v.addEventListener('play', sync);
+      v.addEventListener('pause', sync);
+      v.addEventListener('loadedmetadata', function () {
+        sk.max = v.duration || 0;
+        tm.textContent = '0:00 / ' + fmt(v.duration);
+      });
+      v.addEventListener('timeupdate', function () {
+        if (!scrubbing) sk.value = v.currentTime;
+        tm.textContent = fmt(v.currentTime) + ' / ' + fmt(v.duration);
+      });
+      v.addEventListener('ended', function () {
+        card.classList.remove('started');
+        v.currentTime = 0; sync();
+      });
+      sk.addEventListener('pointerdown', function () { scrubbing = true; });
+      sk.addEventListener('pointerup',   function () { scrubbing = false; });
+      sk.addEventListener('input', function () { v.currentTime = +sk.value; });
+
+      sync();
     });
   })();
 </script>
