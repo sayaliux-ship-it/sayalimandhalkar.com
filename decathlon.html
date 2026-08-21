@@ -582,8 +582,6 @@ h2{margin:0;font-size:clamp(30px,3.6vw,54px);font-weight:700;font-style:italic;l
   <a href="#idea"><span>The idea</span><i></i></a>
   <a href="#system"><span>The system</span><i></i></a>
   <a href="#work"><span>The work</span><i></i></a>
-  <a href="#craft"><span>Craft</span><i></i></a>
-  <a href="#reflection"><span>Reflection</span><i></i></a>
 </nav>
 
 <div class="pagetop">
@@ -948,75 +946,7 @@ h2{margin:0;font-size:clamp(30px,3.6vw,54px);font-weight:700;font-style:italic;l
   </div>
 </div>
 
-<!-- ── 05 craft ─────────────────────────────────────────────────── -->
-<section class="intro" id="craft">
-  <p class="eyebrow"><i></i>05, Craft</p>
-  <h2>The decisions nobody notices</h2>
-  <div class="details-grid" style="margin-top:34px">
-    <div>
-      <h5>Price architecture</h5>
-      <p>Reduced price first and largest, was-price struck through beside it, −25% flash third. The budget block states the rule in words, "prices below are what you pay", so there is no arithmetic anywhere in the campaign. Ambiguity at the price is where promotional trust is lost.</p>
-    </div>
-    <div>
-      <h5>Counter-skewed lockups</h5>
-      <p>Every skewed chip, CTA and price slab carries an inner span rotated back the opposite way: container leans, words stay upright. Skewed type at 11px is unreadable, and this element repeats more than any other in the system.</p>
-    </div>
-    <div>
-      <h5>Cutouts and their ground</h5>
-      <p>Products carry a drop shadow plus a radial ground ellipse: the only shadow in the system. Without the ellipse a cutout floats above the panel; with it, it stands on it. At 300&times;300 source, I also capped render size at 312px to stay ahead of visible softening.</p>
-    </div>
-    <div>
-      <h5>Legibility over spec</h5>
-      <p>The handoff set navigation type at 10–12px. Read at arm's length on a laptop it failed, so I took it to 12–14px against the spec. Yellow never carries body copy on white, and every white-on-blue and yellow-on-ink pairing clears WCAG AA at the size used.</p>
-    </div>
-    <div>
-      <h5>One clock, three surfaces</h5>
-      <p>The countdown in the sale bar, the hero and the urgency band all derive from a single campaign-end timestamp rather than three typed strings, so the promotion cannot contradict itself, and the whole promotional layer removes itself when the flight ends.</p>
-    </div>
-    <div>
-      <h5>Re-composition, not reflow</h5>
-      <p>Mobile is a different composition of the same elements: photography beneath the type instead of behind it, the category strip as a snap scroller, the product row as feature-then-grid. Reflowing a 1440 hero into 390 produces a squeezed page, not a mobile one.</p>
-    </div>
-  </div>
-</section>
 
-<!-- ── 06 reflection ────────────────────────────────────────────── -->
-<section class="details" id="reflection">
-  <p class="eyebrow"><i></i>06, Reflection</p>
-  <h2 style="margin-bottom:34px">What I'd change, and what I'd measure</h2>
-  <div class="details-grid">
-    <div>
-      <h5>Where the work is thin</h5>
-      <ul>
-        <li>Cutouts are 300&times;300 originals rendered up to 312px. Production needs 2× exports and a responsive srcset before this ships.</li>
-        <li>Photography is library-cropped. Each slot's crop values encode the shot I would brief, not the shot I had.</li>
-        <li>Counts, prices and copy are hardcoded. In production they come from the campaign feed with the discount computed, never typed.</li>
-      </ul>
-    </div>
-    <div>
-      <h5>What I'd test next</h5>
-      <ul>
-        <li>Six category tiles against four: six is a composition decision I have not yet proven commercially.</li>
-        <li>The mechanic post as a standalone paid asset: is "no code needed" a strong enough hook with no product in frame?</li>
-        <li>A hero variant with the offer above the campaign line, to put my own hierarchy assumption under test.</li>
-      </ul>
-    </div>
-    <div>
-      <h5>What I'd measure</h5>
-      <ul>
-        <li>Category-strip click-through by tile position, to validate the six-tile ceiling.</li>
-        <li>Revenue per send across the flight: does the merchandising email out-earn the urgency one?</li>
-        <li>Countdown exposure against bounce; urgency devices repel as readily as they pull.</li>
-        <li>Share of orders under ₹ 999, to see whether the budget block opens a door or only decorates one.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-note">
-    <span class="chip"><span>Your next move</span></span>
-    <span>Concept project · Decathlon is not a client</span>
-    <a href="branding.html" style="color:var(--blue)">← Back to Branding &amp; Marketing</a>
-  </div>
-</section>
 
 
 </main>
