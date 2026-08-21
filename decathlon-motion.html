@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Decathlon · Your Next Move: Campaign Film</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet" />
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   YOUR NEXT MOVE — 8-second campaign film
+   One master clock (--T). Every layer animates across the full 8s
+   on percentage keyframes, so the whole film is frame-locked and
+   loops seamlessly. 20 beats @ 0.4s = 5% per beat.
+   ═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --T: 8.016s;  /* locked to the audio track length, frame-exact */
+  --blue:#0082C3; --blue-700:#00679b; --blue-900:#00567f;
+  --ink:#1A2A34;  --ink-deep:#0F2029;
+  --yellow:#FFEA28; --red:#E3262F;
+  --cond:'Roboto Condensed',Arial Narrow,Arial,sans-serif;
+  --skew:-14deg;
+}
+
+/* Full-bleed by design: the same file is the shareable page AND the <iframe>
+   source inside the case study, so it must letterbox to whatever box it is given. */
+html,body{height:100%}
+body{background:#000;font-family:var(--cond);margin:0;overflow:hidden;
+     display:grid;place-items:center}
+
+/* ══════ SHELL ══════ */
+.film-wrap{position:relative;width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh}
+.film{position:absolute;inset:0;overflow:hidden;background:#000}
+.film *{will-change:transform,opacity,clip-path}
+
+/* the shake rig — everything that should feel the impact lives inside */
+.rig{position:absolute;inset:-3%;animation:rigShake var(--T) linear infinite}
+
+/* ── layer defaults ── */
+.L{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0}
+
+/* ═══════════ TYPE PRIMITIVES ═══════════ */
+.big{font-weight:900;font-style:italic;text-transform:uppercase;line-height:.82;
+     letter-spacing:-.035em;color:#fff;white-space:nowrap}
+.chip{display:inline-block;background:var(--yellow);color:var(--ink);font-weight:900;
+      text-transform:uppercase;transform:skewX(var(--skew));padding:.28em .7em;letter-spacing:.02em}
+.chip>span{display:inline-block;transform:skewX(calc(-1 * var(--skew)))}
+.chip--red{background:var(--red);color:#fff}
+.chip--ink{background:var(--ink);color:#fff}
+.kicker{font-weight:700;text-transform:uppercase;letter-spacing:.34em;color:#fff}
+
+/* ═══════════ ACT 1 · IGNITION (0 – 10%) ═══════════ */
+/* the film opens on one held frame of real movement, then the bar rips it away */
+.hero-open{position:absolute;inset:0;z-index:1;opacity:0;overflow:hidden;
+           animation:heroOpen var(--T) linear infinite}
+.hero-open img{width:100%;height:100%;object-fit:cover;object-position:34% 58%;
+               transform:scale(1.16);animation:heroPush var(--T) linear infinite}
+.hero-open::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,86,127,.5),rgba(15,32,41,.75))}
+@keyframes heroOpen{0%{opacity:0} 0.5%{opacity:1} 3.3%{opacity:1} 3.4%,100%{opacity:0}}
+@keyframes heroPush{0%{transform:scale(1.22)} 4%{transform:scale(1.06)} 100%{transform:scale(1.06)}}
+
+/* yellow bar rips across black */
+.rip{position:absolute;top:-30%;bottom:-30%;left:0;width:34%;background:var(--yellow);z-index:2;
+     transform:skewX(var(--skew)) translateX(-160%);animation:rip var(--T) linear infinite}
+@keyframes rip{
+  0%   {transform:skewX(var(--skew)) translateX(-190%)}
+  4.4% {transform:skewX(var(--skew)) translateX(330%)}
+  4.5%,100%{transform:skewX(var(--skew)) translateX(330%)}
+}
+/* blue field wipes in on the same angle, then owns the frame */
+.field{position:absolute;inset:0;background:var(--blue);
+       clip-path:polygon(-30% 0,-30% 0,-16% 100%,-16% 100%);
+       animation:field var(--T) linear infinite}
+@keyframes field{
+  0%,3.4%  {clip-path:polygon(-30% 0,-30% 0,-16% 100%,-16% 100%)}
+  6.6%     {clip-path:polygon(-30% 0,130% 0,130% 100%,-16% 100%)}
+  100%     {clip-path:polygon(-30% 0,130% 0,130% 100%,-16% 100%)}
+}
+/* colour floods for the later acts, hard-cut on top of the blue */
+.flood{position:absolute;inset:0;opacity:0;z-index:4}
+.flood--yellow{background:var(--yellow);animation:floodYellow var(--T) linear infinite}
+@keyframes floodYellow{
+  0%,24.4%{opacity:0} 24.5%,37.4%{opacity:1} 37.5%,100%{opacity:0}
+}
+.flood--red{background:var(--red);animation:floodRed var(--T) linear infinite}
+@keyframes floodRed{
+  0%,62.4%{opacity:0} 62.5%,74.4%{opacity:1} 74.5%,100%{opacity:0}
+}
+.flood--ink{background:var(--ink-deep);animation:floodInk var(--T) linear infinite}
+@keyframes floodInk{
+  0%,39.4%{opacity:0} 39.5%,62.4%{opacity:1} 62.5%,100%{opacity:0}
+}
+
+/* diagonal speed lines — the brand device, always drifting */
+.lines{position:absolute;inset:-20%;opacity:0;z-index:5;mix-blend-mode:overlay;
+       animation:linesOn var(--T) linear infinite}
+@keyframes linesOn{0%,4.9%{opacity:0} 5%,100%{opacity:.42}}
+.lines i{position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,.5);
+         transform:skewX(var(--skew));animation:lineDrift 2.4s linear infinite}
+@keyframes lineDrift{to{transform:skewX(var(--skew)) translateX(90px)}}
+
+/* ═══════════ ACT 2 · YOUR NEXT MOVE (5 – 25%) ═══════════ */
+.stack{position:absolute;left:6%;top:50%;transform:translateY(-50%);opacity:1;
+       display:flex;flex-direction:column;align-items:flex-start;gap:.02em;z-index:3}
+.stack .w{display:block;font-size:clamp(38px,10.4vw,150px);opacity:0;transform-origin:left center}
+.w1{animation:wordIn var(--T) linear infinite}
+.w2{animation:wordIn var(--T) linear infinite; animation-delay:calc(var(--T) * -0.95)}
+.w3{color:var(--yellow);animation:wordIn3 var(--T) linear infinite}
+/* w1: in at 5%, out at 24% */
+@keyframes wordIn{
+  0%,4.9%{opacity:0;transform:translateX(-14%) skewX(6deg) scale(1.3)}
+  5%     {opacity:1;transform:translateX(0) skewX(0deg) scale(1.14);animation-timing-function:cubic-bezier(.12,.9,.2,1)}
+  8%     {opacity:1;transform:translateX(0) skewX(0) scale(1)}
+  23.9%  {opacity:1;transform:translateX(0) skewX(0) scale(1)}
+  24%,100%{opacity:0;transform:translateX(0) skewX(0) scale(1)}
+}
+@keyframes wordIn3{
+  0%,14.9%{opacity:0;transform:translateX(-14%) skewX(8deg) scale(1.42)}
+  15%     {opacity:1;transform:translateX(0) skewX(0) scale(1.2);animation-timing-function:cubic-bezier(.12,.9,.2,1)}
+  18.4%   {opacity:1;transform:translateX(0) skewX(0) scale(1)}
+  23.9%   {opacity:1;transform:translateX(0) skewX(0) scale(1)}
+  24%,100%{opacity:0}
+}
+/* w2 needs its own timing (10%) — delay trick above is unreliable, use explicit */
+.w2{animation:word2 var(--T) linear infinite;animation-delay:0s}
+@keyframes word2{
+  0%,9.9%{opacity:0;transform:translateX(-14%) skewX(7deg) scale(1.34)}
+  10%    {opacity:1;transform:translateX(0) skewX(0) scale(1.16);animation-timing-function:cubic-bezier(.12,.9,.2,1)}
+  13.2%  {opacity:1;transform:translateX(0) skewX(0) scale(1)}
+  23.9%  {opacity:1;transform:translateX(0) skewX(0) scale(1)}
+  24%,100%{opacity:0}
+}
+/* athlete photo flashes behind the type, on a skewed slab */
+.ath{position:absolute;right:0;top:-10%;bottom:-10%;width:52%;overflow:hidden;
+     transform:skewX(var(--skew)) translateX(120%);z-index:2}
+.ath img{width:100%;height:100%;object-fit:cover;transform:skewX(calc(-1 * var(--skew))) scale(1.35)}
+.ath::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,130,195,.85),rgba(0,130,195,.1))}
+.ath1{animation:athA var(--T) linear infinite}
+.ath2{animation:athB var(--T) linear infinite}
+@keyframes athA{
+  0%,7.4%{transform:skewX(var(--skew)) translateX(120%)}
+  7.5%   {transform:skewX(var(--skew)) translateX(14%);animation-timing-function:cubic-bezier(.1,.85,.2,1)}
+  12%    {transform:skewX(var(--skew)) translateX(6%);animation-timing-function:linear}
+  15.4%  {transform:skewX(var(--skew)) translateX(3%)}
+  15.5%,100%{transform:skewX(var(--skew)) translateX(120%)}
+}
+/* second athlete — hard cut on the beat, no dissolve */
+@keyframes athB{
+  0%,15.4%{transform:skewX(var(--skew)) translateX(120%)}
+  15.5%   {transform:skewX(var(--skew)) translateX(14%);animation-timing-function:cubic-bezier(.1,.85,.2,1)}
+  19%     {transform:skewX(var(--skew)) translateX(4%);animation-timing-function:linear}
+  23.9%   {transform:skewX(var(--skew)) translateX(-1%)}
+  24%,100%{transform:skewX(var(--skew)) translateX(120%)}
+}
+/* underline that grows under the lockup */
+.stack-rule{height:.1em;width:0;background:#fff;transform:skewX(var(--skew));margin-top:.14em;
+            animation:stackRule var(--T) linear infinite}
+@keyframes stackRule{
+  0%,17.9%{width:0}
+  18%     {width:0;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+  22%     {width:62%}
+  23.9%   {width:62%}
+  24%,100%{width:0}
+}
+
+/* ═══════════ ACT 3 · THE DROP (25 – 40%) ═══════════ */
+.drop{z-index:6;flex-direction:column;gap:0;animation:actOn var(--T) linear infinite}
+@keyframes actOn{0%,24.4%{opacity:0} 24.5%,37.4%{opacity:1} 37.5%,100%{opacity:0}}
+.drop-row{display:flex;align-items:center;gap:2.2vw}
+.pct{font-size:clamp(76px,19vw,270px);font-weight:900;font-style:italic;line-height:.78;
+     letter-spacing:-.05em;color:var(--ink);animation:pctIn var(--T) linear infinite}
+@keyframes pctIn{
+  0%,24.4%{transform:scale(1.7) skewX(10deg);opacity:0}
+  24.5%   {transform:scale(1.34) skewX(6deg);opacity:1;animation-timing-function:cubic-bezier(.1,.95,.15,1)}
+  27.5%   {transform:scale(1) skewX(0);opacity:1}
+  100%    {transform:scale(1) skewX(0);opacity:1}
+}
+.off{font-size:clamp(24px,5.6vw,80px);animation:offIn var(--T) linear infinite}
+@keyframes offIn{
+  0%,26.9%{transform:translateX(340%) skewX(var(--skew));opacity:0}
+  27%     {transform:translateX(38%) skewX(var(--skew));opacity:1;animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  29.6%   {transform:translateX(0) skewX(var(--skew));opacity:1}
+  100%    {transform:translateX(0) skewX(var(--skew));opacity:1}
+}
+.drop-kick{font-size:clamp(9px,1.7vw,23px);font-weight:900;text-transform:uppercase;
+           letter-spacing:.5em;color:var(--ink);margin-bottom:1.2vw;opacity:.55;
+           animation:dropKick var(--T) linear infinite}
+@keyframes dropKick{
+  0%,25.9%{opacity:0;transform:translateY(-14px)}
+  26%{opacity:0;transform:translateY(-14px);animation-timing-function:cubic-bezier(.16,1,.3,1)}
+  28.5%{opacity:.55;transform:translateY(0)} 100%{opacity:.55;transform:translateY(0)}}
+.drop-sub{margin-top:1.4vw;font-size:clamp(10px,1.9vw,26px);color:var(--ink);
+          font-weight:700;text-transform:uppercase;letter-spacing:.4em;
+          animation:dropSub var(--T) linear infinite}
+@keyframes dropSub{
+  0%,30.9%{opacity:0;transform:translateY(18px)}
+  31%     {opacity:0;transform:translateY(18px);animation-timing-function:cubic-bezier(.16,1,.3,1)}
+  33.5%   {opacity:1;transform:translateY(0)}
+  100%    {opacity:1;transform:translateY(0)}
+}
+
+/* ═══════════ ACT 4 · THE GRID (40 – 62.5%) ═══════════ */
+/* Four skewed colour panels slam in from alternating edges, each carrying one
+   product cut-out. The colour rotation is what stops it reading as four tiles. */
+.grid{z-index:6;align-items:stretch;justify-content:center;gap:0;animation:gridOn var(--T) linear infinite}
+@keyframes gridOn{0%,39.4%{opacity:0} 39.5%,62.4%{opacity:1} 62.5%,100%{opacity:0}}
+.panel{position:relative;flex:1;transform:skewX(var(--skew));overflow:hidden;margin:0 -.4%;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.panel-in{transform:skewX(calc(-1 * var(--skew)));display:flex;flex-direction:column;
+          align-items:center;gap:.55vw;padding-top:4vw}
+.prod{width:min(80%,196px);height:auto;filter:drop-shadow(0 20px 34px rgba(0,0,0,.5));
+      transform:scale(.2);opacity:0}
+.panel b{font-size:clamp(8px,1.5vw,21px);font-weight:900;font-style:italic;text-transform:uppercase;
+         letter-spacing:.1em;color:#fff}
+.panel i{font-style:normal;font-size:clamp(7px,1.02vw,14px);font-weight:900;
+         letter-spacing:.1em;text-transform:uppercase;background:var(--yellow);color:var(--ink);padding:.24em .62em}
+
+/* colour rotation */
+.p1{background:var(--blue)}
+.p2{background:var(--yellow)}
+.p3{background:var(--ink-deep)}
+.p4{background:var(--blue-900)}
+.panel.p2 b{color:var(--ink)}
+.panel.p2 i{background:var(--ink);color:var(--yellow)}
+
+/* panels enter from alternating edges, one per beat */
+.p1{animation:panelUp  var(--T) linear infinite}
+.p2{animation:panelDn  var(--T) linear infinite}
+.p3{animation:panelUp2 var(--T) linear infinite}
+.p4{animation:panelDn2 var(--T) linear infinite}
+@keyframes panelUp{
+  0%,39.4%{transform:skewX(var(--skew)) translateY(104%)}
+  39.5%{transform:skewX(var(--skew)) translateY(104%);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  42.6%{transform:skewX(var(--skew)) translateY(0)} 100%{transform:skewX(var(--skew)) translateY(0)}}
+@keyframes panelDn{
+  0%,44.4%{transform:skewX(var(--skew)) translateY(-104%)}
+  44.5%{transform:skewX(var(--skew)) translateY(-104%);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  47.6%{transform:skewX(var(--skew)) translateY(0)} 100%{transform:skewX(var(--skew)) translateY(0)}}
+@keyframes panelUp2{
+  0%,49.4%{transform:skewX(var(--skew)) translateY(104%)}
+  49.5%{transform:skewX(var(--skew)) translateY(104%);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  52.6%{transform:skewX(var(--skew)) translateY(0)} 100%{transform:skewX(var(--skew)) translateY(0)}}
+@keyframes panelDn2{
+  0%,54.4%{transform:skewX(var(--skew)) translateY(-104%)}
+  54.5%{transform:skewX(var(--skew)) translateY(-104%);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  57.6%{transform:skewX(var(--skew)) translateY(0)} 100%{transform:skewX(var(--skew)) translateY(0)}}
+
+/* the product lands a beat behind its panel, with a little overshoot and counter-rotation */
+.p1 .prod{animation:prodPop  var(--T) linear infinite}
+.p2 .prod{animation:prodPop2 var(--T) linear infinite}
+.p3 .prod{animation:prodPop3 var(--T) linear infinite}
+.p4 .prod{animation:prodPop4 var(--T) linear infinite}
+@keyframes prodPop{
+  0%,41.4%{opacity:0;transform:scale(.3) rotate(-16deg)}
+  41.5%{opacity:1;transform:scale(1.18) rotate(5deg);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  43.9%{opacity:1;transform:scale(1) rotate(-2deg)} 100%{opacity:1;transform:scale(1) rotate(-2deg)}}
+@keyframes prodPop2{
+  0%,46.4%{opacity:0;transform:scale(.3) rotate(15deg)}
+  46.5%{opacity:1;transform:scale(1.18) rotate(-5deg);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  48.9%{opacity:1;transform:scale(1) rotate(3deg)} 100%{opacity:1;transform:scale(1) rotate(3deg)}}
+@keyframes prodPop3{
+  0%,51.4%{opacity:0;transform:scale(.3) rotate(-14deg)}
+  51.5%{opacity:1;transform:scale(1.18) rotate(4deg);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  53.9%{opacity:1;transform:scale(1) rotate(-3deg)} 100%{opacity:1;transform:scale(1) rotate(-3deg)}}
+@keyframes prodPop4{
+  0%,56.4%{opacity:0;transform:scale(.3) rotate(17deg)}
+  56.5%{opacity:1;transform:scale(1.18) rotate(-6deg);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  58.9%{opacity:1;transform:scale(1) rotate(2deg)} 100%{opacity:1;transform:scale(1) rotate(2deg)}}
+
+/* headline riding over the grid */
+.grid-head{position:absolute;left:6%;top:9%;z-index:8;font-size:clamp(16px,3.4vw,48px);
+           text-shadow:0 4px 26px rgba(0,0,0,.45);animation:gridHead var(--T) linear infinite}
+@keyframes gridHead{
+  0%,40.9%{opacity:0;transform:translateY(-40px) skewX(6deg)}
+  41%     {opacity:0;transform:translateY(-40px) skewX(6deg);animation-timing-function:cubic-bezier(.12,.9,.2,1)}
+  43.5%   {opacity:1;transform:translateY(0) skewX(0)}
+  100%    {opacity:1;transform:translateY(0) skewX(0)}
+}
+
+/* ═══════════ ACT 5 · URGENCY (62.5 – 75%) ═══════════ */
+.urg{z-index:7;flex-direction:column;gap:1.4vw;animation:urgOn var(--T) linear infinite}
+@keyframes urgOn{0%,62.4%{opacity:0} 62.5%,74.4%{opacity:1} 74.5%,100%{opacity:0}}
+.urg-big{font-size:clamp(40px,11.5vw,168px);color:#fff;animation:urgBig var(--T) linear infinite}
+@keyframes urgBig{
+  0%,62.4%{transform:scale(1.55) rotate(-4deg);opacity:0}
+  62.5%   {transform:scale(1.2) rotate(-2deg);opacity:1;animation-timing-function:cubic-bezier(.1,.95,.15,1)}
+  65%     {transform:scale(1) rotate(0);opacity:1}
+  100%    {transform:scale(1) rotate(0);opacity:1}
+}
+.urg-chip{font-size:clamp(12px,2.5vw,34px);animation:urgChip var(--T) linear infinite}
+@keyframes urgChip{
+  0%,66.4%{opacity:0;transform:skewX(var(--skew)) translateY(30px) scale(.8)}
+  66.5%   {opacity:0;transform:skewX(var(--skew)) translateY(30px) scale(.8);animation-timing-function:cubic-bezier(.1,.9,.2,1)}
+  69%     {opacity:1;transform:skewX(var(--skew)) translateY(0) scale(1)}
+  100%    {opacity:1;transform:skewX(var(--skew)) translateY(0) scale(1)}
+}
+
+/* ═══════════ ACT 6 · RESOLVE (75 – 100%) ═══════════ */
+/* the closing wipe: one yellow slab crosses the whole frame */
+.sweep{position:absolute;top:-30%;bottom:-30%;left:0;width:150%;background:var(--yellow);z-index:9;
+       transform:skewX(var(--skew)) translateX(-190%);animation:sweep var(--T) linear infinite}
+@keyframes sweep{
+  0%,74.4%{transform:skewX(var(--skew)) translateX(-190%)}
+  74.5%   {transform:skewX(var(--skew)) translateX(-190%);animation-timing-function:cubic-bezier(.5,0,.2,1)}
+  78.5%   {transform:skewX(var(--skew)) translateX(190%)}
+  100%    {transform:skewX(var(--skew)) translateX(190%)}
+}
+.end{z-index:8;flex-direction:column;gap:2.2vw;animation:endOn var(--T) linear infinite}
+@keyframes endOn{0%,76.4%{opacity:0} 76.5%,100%{opacity:1}}
+.end-logo{width:clamp(120px,22vw,300px);height:auto;animation:endLogo var(--T) linear infinite}
+@keyframes endLogo{
+  0%,76.4%{transform:scale(1.45);opacity:0}
+  76.5%   {transform:scale(1.18);opacity:1;animation-timing-function:cubic-bezier(.1,.95,.15,1)}
+  79.5%   {transform:scale(1);opacity:1}
+  100%    {transform:scale(1);opacity:1}
+}
+.end-rule{height:4px;width:0;background:var(--yellow);transform:skewX(var(--skew));
+          margin:-1vw 0 .2vw;animation:endRule var(--T) linear infinite}
+@keyframes endRule{
+  0%,78.9%{width:0}
+  79%{width:0;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+  82%{width:clamp(120px,22vw,300px)} 100%{width:clamp(120px,22vw,300px)}}
+.end-kick{font-size:clamp(8px,1.5vw,20px);animation:endKick var(--T) linear infinite}
+@keyframes endKick{
+  0%,79.9%{opacity:0;letter-spacing:.9em}
+  80%     {opacity:0;letter-spacing:.9em;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+  83%     {opacity:1;letter-spacing:.34em}
+  100%    {opacity:1;letter-spacing:.34em}
+}
+.end-cta{font-size:clamp(13px,2.7vw,38px);animation:endCta var(--T) linear infinite}
+@keyframes endCta{
+  0%,84.4%{opacity:0;transform:skewX(var(--skew)) scale(1.5)}
+  84.5%   {opacity:1;transform:skewX(var(--skew)) scale(1.22);animation-timing-function:cubic-bezier(.1,.95,.15,1)}
+  87%     {opacity:1;transform:skewX(var(--skew)) scale(1)}
+  100%    {opacity:1;transform:skewX(var(--skew)) scale(1)}
+}
+
+/* ═══════════ IMPACT FRAMES & SHAKE ═══════════ */
+.flash{position:absolute;inset:0;background:#fff;z-index:12;opacity:0;
+       animation:flash var(--T) linear infinite;mix-blend-mode:screen}
+@keyframes flash{
+  0%,3.3%{opacity:0} 3.4%{opacity:.9} 4.2%{opacity:0}
+  24.4%{opacity:0} 24.5%{opacity:1} 25.4%{opacity:0}
+  39.4%{opacity:0} 39.5%{opacity:.85} 40.3%{opacity:0}
+  62.4%{opacity:0} 62.5%{opacity:1} 63.4%{opacity:0}
+  76.4%{opacity:0} 76.5%{opacity:.8} 77.3%{opacity:0}
+  100%{opacity:0}
+}
+@keyframes rigShake{
+  0%,24.4%{transform:translate(0,0) rotate(0)}
+  24.7%{transform:translate(1.1%,-.9%) rotate(.35deg)}
+  25.2%{transform:translate(-.9%,.7%) rotate(-.3deg)}
+  25.7%{transform:translate(.5%,.4%) rotate(.15deg)}
+  26.3%{transform:translate(-.2%,-.2%) rotate(-.06deg)}
+  27%,62.4%{transform:translate(0,0) rotate(0)}
+  62.7%{transform:translate(-1%,.8%) rotate(-.32deg)}
+  63.2%{transform:translate(.8%,-.6%) rotate(.26deg)}
+  63.8%{transform:translate(-.3%,.2%) rotate(-.1deg)}
+  64.4%,100%{transform:translate(0,0) rotate(0)}
+}
+
+/* film texture */
+.vig{position:absolute;inset:0;z-index:14;pointer-events:none;
+     background:radial-gradient(130% 105% at 50% 50%,transparent 52%,rgba(0,0,0,.42) 100%)}
+.scan{position:absolute;inset:0;z-index:15;pointer-events:none;opacity:.055;
+      background:repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 3px)}
+
+/* ═══════════ CONTROLS ═══════════ */
+.bar{position:absolute;left:0;right:0;bottom:0;height:clamp(2px,.28vw,4px);background:rgba(255,255,255,.14);z-index:20}
+.bar i{display:block;height:100%;width:100%;background:var(--yellow);transform-origin:left;
+       transform:scaleX(0);animation:barFill var(--T) linear infinite}
+@keyframes barFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* Sized in vw so the chrome scales with the frame — the same file is a full
+   page and an <iframe>, and an iframe carries its own viewport. */
+.ctl{position:absolute;left:2.2%;bottom:4.5%;z-index:30;display:flex;align-items:center;
+     gap:clamp(4px,.62vw,9px);opacity:.3;transition:opacity .28s}
+.film-wrap:hover .ctl,.ctl:focus-within{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:clamp(4px,.55vw,8px);cursor:pointer;
+     background:rgba(0,0,0,.5);backdrop-filter:blur(10px);
+     border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.9);
+     font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+     font-size:clamp(6.5px,.78vw,11px);padding:clamp(5px,.62vw,9px) clamp(7px,1.05vw,15px);
+     border-radius:2px;transition:border-color .2s,color .2s,background .2s;white-space:nowrap}
+.btn:hover{border-color:var(--yellow);color:var(--yellow)}
+.btn.on{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.btn svg{width:clamp(8px,.85vw,12px);height:clamp(8px,.85vw,12px);flex:0 0 auto}
+.note{font-size:clamp(6px,.7vw,10px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+      color:rgba(255,255,255,.5);padding-left:.4vw;white-space:nowrap}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+
+/* paused state */
+.film.paused .rig,.film.paused *{animation-play-state:paused!important}
+
+@media (prefers-reduced-motion:reduce){
+  .film *{animation-play-state:paused!important}
+}
+</style>
+</head>
+<body>
+
+<div class="film-wrap">
+  <div class="film" id="film">
+    <div class="rig">
+
+      <!-- ACT 1 · ignition -->
+      <div class="hero-open"><img src="decathlon-sale/assets/hero.png" alt="" /></div>
+      <div class="rip"></div>
+      <div class="field"></div>
+      <div class="lines" id="lines"></div>
+      <div class="flood flood--ink"></div>
+      <div class="flood flood--yellow"></div>
+      <div class="flood flood--red"></div>
+
+      <!-- ACT 2 · your next move -->
+      <div class="ath ath1"><img src="decathlon-sale/assets/cat-running.png" alt="" /></div>
+      <div class="ath ath2"><img src="decathlon-sale/assets/cat-fitness.png" alt="" /></div>
+      <div class="stack">
+        <span class="big w w1">Your</span>
+        <span class="big w w2">Next</span>
+        <span class="big w w3">Move</span>
+        <span class="stack-rule"></span>
+      </div>
+
+      <!-- ACT 3 · the drop -->
+      <div class="L drop">
+        <span class="drop-kick">Sitewide Sale</span>
+        <div class="drop-row">
+          <span class="pct">25%</span>
+          <span class="chip chip--red off"><span>Off</span></span>
+        </div>
+        <span class="drop-sub">Everything · Every Sport</span>
+      </div>
+
+      <!-- ACT 4 · the grid -->
+      <div class="L grid">
+        <div class="panel p1"><div class="panel-in"><img class="prod" src="decathlon-sale/assets/p-kiprun-cut.png" alt="" /><b>Running</b><i>From ₹1,299</i></div></div>
+        <div class="panel p2"><div class="panel-in"><img class="prod" src="decathlon-sale/assets/p-domyos-cut.png" alt="" /><b>Fitness</b><i>From ₹899</i></div></div>
+        <div class="panel p3"><div class="panel-in"><img class="prod" src="decathlon-sale/assets/p-rockrider-cut.png" alt="" /><b>Cycling</b><i>From ₹2,499</i></div></div>
+        <div class="panel p4"><div class="panel-in"><img class="prod" src="decathlon-sale/assets/p-forclaz-cut.png" alt="" /><b>Hiking</b><i>From ₹1,799</i></div></div>
+        <span class="big grid-head">Every Sport.<br />Every Aisle.</span>
+      </div>
+
+      <!-- ACT 5 · urgency -->
+      <div class="L urg">
+        <span class="big urg-big">3 Days Only</span>
+        <span class="chip chip--ink urg-chip"><span>Ends Sunday Midnight</span></span>
+      </div>
+
+      <!-- ACT 6 · resolve -->
+      <div class="sweep"></div>
+      <div class="L end">
+        <img class="end-logo" src="decathlon-sale/assets/decathlon-logo.png" alt="Decathlon" />
+        <span class="end-rule"></span>
+        <span class="kicker end-kick">Your Next Move</span>
+        <span class="chip end-cta"><span>Shop Now →</span></span>
+      </div>
+
+    </div>
+
+    <div class="flash"></div>
+    <div class="vig"></div>
+    <div class="scan"></div>
+    <div class="bar"><i></i></div>
+  </div>
+
+  <div class="ctl">
+  <button class="btn" id="sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" id="sIcon">
+      <path d="M11 5 6 9H2v6h4l5 4z"/><path d="M23 9l-6 6"/><path d="M17 9l6 6"/>
+    </svg>
+    <span id="sLabel">Sound Off</span>
+  </button>
+  <button class="btn" id="replay">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+    Replay
+  </button>
+  <button class="btn" id="pause">
+    <svg viewBox="0 0 24 24" fill="currentColor" id="pIcon"><rect x="7" y="5" width="3.4" height="14" rx="1"/><rect x="13.6" y="5" width="3.4" height="14" rx="1"/></svg>
+    <span id="pLabel">Pause</span>
+  </button>
+    <span class="note">8s · loop</span>
+  </div>
+</div>
+
+<audio id="track" loop preload="auto" src="decathlon-sale/assets/your-next-move.mp3"></audio>
+
+<script>
+(function(){
+  var film = document.getElementById('film');
+  var lines= document.getElementById('lines');
+  var audio= document.getElementById('track');
+
+  // speed-line field
+  for(var i=0;i<26;i++){
+    var s=document.createElement('i');
+    s.style.left=(i*4.4)+'%';
+    s.style.opacity=(i%3===0?0.34:0.13);
+    s.style.width=(i%4===0?'4px':'2px');
+    s.style.animationDelay=(-(i%6)*0.4)+'s';
+    lines.appendChild(s);
+  }
+
+  function restart(){
+    var a=film.getElementsByTagName('*');
+    film.style.display='none';
+    void film.offsetWidth;
+    film.style.display='';
+    if(!audio.paused){ audio.currentTime=0; audio.play().catch(function(){}); }
+  }
+
+  var paused=false;
+  document.getElementById('pause').addEventListener('click',function(){
+    paused=!paused;
+    film.classList.toggle('paused',paused);
+    document.getElementById('pLabel').textContent=paused?'Play':'Pause';
+    document.getElementById('pIcon').innerHTML = paused
+      ? '<path d="M8 5.5v13l11-6.5z"/>'
+      : '<rect x="7" y="5" width="3.4" height="14" rx="1"/><rect x="13.6" y="5" width="3.4" height="14" rx="1"/>';
+    if(paused) audio.pause(); else if(sndOn) audio.play().catch(function(){});
+  });
+
+  document.getElementById('replay').addEventListener('click',restart);
+
+  var sndOn=false, btn=document.getElementById('sound');
+  btn.addEventListener('click',function(){
+    sndOn=!sndOn;
+    btn.classList.toggle('on',sndOn);
+    btn.setAttribute('aria-pressed',String(sndOn));
+    document.getElementById('sLabel').textContent=sndOn?'Sound On':'Sound Off';
+    document.getElementById('sIcon').innerHTML = sndOn
+      ? '<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/>'
+      : '<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M23 9l-6 6"/><path d="M17 9l6 6"/>';
+    if(sndOn){ restart(); audio.currentTime=0; audio.play().catch(function(){}); }
+    else audio.pause();
+  });
+
+  // pause the film when it scrolls away
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!paused) film.classList.toggle('paused', !e.isIntersecting);
+        if(!e.isIntersecting) audio.pause();
+        else if(sndOn && !paused) audio.play().catch(function(){});
+      });
+    },{threshold:.3}).observe(film);
+  }
+})();
+</script>
+</body>
+</html>

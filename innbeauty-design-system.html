@@ -1,0 +1,843 @@
+<title>INNBEAUTY Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap">
+
+<style>
+:root{
+  --ground:#FFFFFF;
+  --ground-alt:#FAF8F7;
+  --ink:#27292B;
+  --ink-soft:#494A4A;
+  --ink-mute:#7C7A79;
+  --rule:#E2DDDB;
+  --rule-soft:#EFEAE8;
+  --accent:#FF6ED7;
+  --code-bg:#F6F3F2;
+  --code-ink:#2E2B2A;
+  --band-sand:#F5E4D6;
+  --band-blush:#EBE1E1;
+  --band-ink:#27292B;
+  --on-band:#27292B;
+  --swatch-ring:rgba(39,41,43,.14);
+  --glyph:rgba(39,41,43,.16);
+  --glass:rgba(255,255,255,.5);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#171819;
+    --ground-alt:#1E1F21;
+    --ink:#F2EEEC;
+    --ink-soft:#C4BEBB;
+    --ink-mute:#8E8785;
+    --rule:#33302F;
+    --rule-soft:#262525;
+    --accent:#FF8FE0;
+    --code-bg:#212022;
+    --code-ink:#E4DEDB;
+    --band-sand:#2C2521;
+    --band-blush:#2A2323;
+    --band-ink:#0F1011;
+    --on-band:#F2EEEC;
+    --swatch-ring:rgba(255,255,255,.16);
+    --glyph:rgba(242,238,236,.14);
+    --glass:rgba(30,31,33,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#171819;
+  --ground-alt:#1E1F21;
+  --ink:#F2EEEC;
+  --ink-soft:#C4BEBB;
+  --ink-mute:#8E8785;
+  --rule:#33302F;
+  --rule-soft:#262525;
+  --accent:#FF8FE0;
+  --code-bg:#212022;
+  --code-ink:#E4DEDB;
+  --band-sand:#2C2521;
+  --band-blush:#2A2323;
+  --band-ink:#0F1011;
+  --on-band:#F2EEEC;
+  --swatch-ring:rgba(255,255,255,.16);
+  --glyph:rgba(242,238,236,.14);
+  --glass:rgba(30,31,33,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:'Bodoni Moda',Didot,'Times New Roman',serif;font-weight:400}
+
+/* ---- structure ---- */
+.band{width:100%;padding:0}
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+.sec{padding-block:78px}
+.sec--tight{padding-block:52px}
+.band--sand{background:var(--band-sand)}
+.band--blush{background:var(--band-blush)}
+.band--ink{background:var(--band-ink);color:var(--on-band)}
+.band--alt{background:var(--ground-alt)}
+
+hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
+
+/* ---- type roles ---- */
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--ink-mute);margin:0 0 14px;
+}
+.band--ink .eyebrow{color:#A1A1A1}
+h1.display{
+  font-family:'Bodoni Moda',Didot,serif;font-weight:400;
+  font-size:clamp(42px,7vw,74px);line-height:1.06;letter-spacing:-.01em;
+  margin:0 0 20px;text-wrap:balance;
+}
+h2.sechead{
+  font-family:'Bodoni Moda',Didot,serif;font-weight:400;
+  font-size:clamp(30px,4.2vw,42px);line-height:1.2;margin:0 0 10px;text-wrap:balance;
+}
+h3{
+  font-size:13px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+  margin:44px 0 14px;color:var(--ink);
+}
+h4{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-mute);margin:30px 0 12px}
+p{margin:0 0 16px;max-width:66ch;color:var(--ink-soft)}
+p.lead{font-size:17px;line-height:1.7;color:var(--ink)}
+a{color:var(--ink);text-underline-offset:3px}
+strong{color:var(--ink);font-weight:700}
+code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.88em;background:var(--code-bg);color:var(--code-ink);
+  padding:2px 5px;border-radius:3px;
+}
+pre{
+  background:var(--code-bg);color:var(--code-ink);
+  padding:20px 22px;border-radius:4px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12.5px;line-height:1.7;margin:0 0 20px;
+  border:1px solid var(--rule-soft);
+}
+pre code{background:none;padding:0;font-size:inherit}
+
+/* ---- masthead ---- */
+.masthead{padding-block:74px 0}
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:0 40px;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:16px 0;margin-top:38px;
+  font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--ink-mute);
+}
+.meta-row span strong{color:var(--ink);font-weight:700}
+
+.thesis{
+  display:grid;grid-template-columns:1fr;gap:0;
+  border-left:3px solid var(--accent);padding:4px 0 4px 24px;margin:34px 0 0;
+}
+.thesis .t{font-family:'Bodoni Moda',Didot,serif;font-size:clamp(24px,3.4vw,34px);line-height:1.28;margin:0;color:var(--ink)}
+
+/* ---- swatches ---- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin:0 0 8px}
+.sw{border:1px solid var(--swatch-ring);border-radius:0}
+.sw__chip{height:96px;display:flex;align-items:flex-end;padding:10px 12px}
+.sw__body{padding:11px 12px 13px;background:var(--ground);border-top:1px solid var(--swatch-ring)}
+.sw__hex{font-size:12px;font-weight:700;letter-spacing:.6px;font-variant-numeric:tabular-nums;margin:0 0 3px;color:var(--ink)}
+.sw__name{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-mute);margin:0 0 6px}
+.sw__use{font-size:12px;line-height:1.5;color:var(--ink-soft);margin:0}
+.sw__chip span{font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;opacity:.7}
+
+/* ---- tables ---- */
+.tablewrap{overflow-x:auto;margin:0 0 24px;border:1px solid var(--rule);}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+th{
+  text-align:left;font-size:10.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+  color:var(--ink-mute);padding:12px 14px;border-bottom:1px solid var(--rule);white-space:nowrap;
+  background:var(--ground-alt);
+}
+td{padding:11px 14px;border-bottom:1px solid var(--rule-soft);color:var(--ink-soft);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td.k{color:var(--ink);font-weight:700}
+.band--ink th{background:#1A1B1C;color:#A1A1A1;border-color:#33302F}
+.band--ink td{color:#C4BEBB;border-color:#242526}
+.band--ink .tablewrap{border-color:#33302F}
+.band--ink td.k{color:#F2EEEC}
+
+/* ---- type specimens ---- */
+.spec{border-top:1px solid var(--rule);padding:26px 0}
+.spec:last-child{border-bottom:1px solid var(--rule)}
+.spec__label{
+  font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-mute);
+  margin:0 0 14px;display:flex;flex-wrap:wrap;gap:0 14px;
+}
+.spec__label b{color:var(--ink);font-weight:700}
+.spec__sample{color:var(--ink);margin:0}
+
+.s-hero{font-family:'Bodoni Moda',Didot,serif;font-weight:400;font-size:42px;line-height:54.6px}
+.s-sectitle{font-family:'Bodoni Moda',Didot,serif;font-weight:400;font-size:32px;line-height:39.36px}
+.s-subhead{font-size:16px;font-weight:400;line-height:28.8px}
+.s-body{font-size:14px;font-weight:400;line-height:25.2px}
+.s-prod{font-size:15px;font-weight:700;line-height:20px;text-transform:uppercase}
+.s-desc{font-size:12px;font-weight:400;line-height:14px;letter-spacing:.7px}
+.s-nav{font-size:14px;font-weight:400;line-height:17px;text-transform:uppercase}
+.s-btn{font-size:15px;font-weight:400;line-height:17px;letter-spacing:.3px;text-transform:uppercase}
+.s-badge{font-size:12px;font-weight:400;line-height:12px;letter-spacing:-.3px;text-transform:uppercase}
+.s-foot{font-size:14px;font-weight:500;line-height:30px;letter-spacing:.28px;text-transform:uppercase}
+
+/* ---- components (rebuilt live) ---- */
+.demo{
+  border:1px solid var(--rule);padding:30px;margin:0 0 22px;background:var(--ground-alt);
+  display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius:4px;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  border:0;transition:opacity .2s ease;
+}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.btn:hover{opacity:.86}
+.btn--primary{background:#27292B;color:#fff;height:46px;padding:0 26px;font-size:15px;line-height:17px;letter-spacing:.3px;font-weight:400}
+.btn--small{background:#27292B;color:#fff;height:39px;padding:0 15px;font-size:12px;letter-spacing:.24px;font-weight:400}
+.btn--quick{background:#27292B;color:#fff;height:24px;max-width:100px;width:100px;font-size:12px;font-weight:700;line-height:15px}
+.btn--secondary{background:transparent;color:#707070;border:1px solid #707070;height:47px;padding:0 45px;font-size:16px;font-weight:400}
+.btn--tertiary{background:transparent;color:var(--ink);font-size:16px;text-decoration:underline;height:auto;padding:0;text-transform:none}
+
+.badge{
+  display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:4px;
+  background:#fff;color:#27292B;font-size:12px;line-height:12px;letter-spacing:-.3px;
+  text-transform:uppercase;border:1px solid var(--swatch-ring);font-weight:400;
+}
+.badge--sale{background:#FFFB8F;border-color:rgba(39,41,43,.12)}
+.badge--teal{background:#28D1C8;border-color:rgba(39,41,43,.12)}
+
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin:0 0 8px;max-width:760px}
+.pcard{background:var(--ground);border:1px solid var(--rule)}
+.pcard__media{
+  position:relative;aspect-ratio:1/1;background:var(--band-blush);
+  display:flex;align-items:flex-end;padding:12px;
+}
+.pcard__glyph{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bodoni Moda',Didot,serif;font-size:64px;color:var(--glyph);
+}
+.pcard__info{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px}
+.pcard__rating{font-size:12px;letter-spacing:.7px;line-height:14px;color:var(--ink-soft);margin:0}
+.pcard__name{font-size:15px;font-weight:700;line-height:20px;text-transform:uppercase;margin:0;color:var(--ink)}
+.pcard__desc{font-size:12px;font-weight:400;line-height:14px;letter-spacing:.7px;color:var(--ink-soft);margin:0}
+.pcard__chips{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 0}
+.chip{
+  font-size:11px;letter-spacing:.4px;padding:4px 9px;border:1px solid var(--rule);
+  border-radius:4px;color:var(--ink-soft);
+}
+.chip[aria-pressed="true"]{border-color:#A1A1A1;color:var(--ink);font-weight:700}
+.pcard__foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.pcard__price{font-size:14px;font-weight:700;line-height:20px;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+.headerdemo{border:1px solid var(--rule);margin:0 0 22px;overflow:hidden}
+.headerdemo__strip{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:0 24px;height:64px;font-size:12px;letter-spacing:1px;text-transform:uppercase;
+}
+.headerdemo__a{background:#3B2F2C;color:#fff}
+.headerdemo__b{background:var(--glass);backdrop-filter:blur(20px);color:var(--ink);border-top:1px solid var(--rule)}
+.headerdemo__mark{font-family:'Bodoni Moda',Didot,serif;font-size:15px;letter-spacing:3px}
+.headerdemo__note{font-size:11px;letter-spacing:1px;line-height:1.6;text-transform:uppercase;color:var(--ink-mute);padding:9px 24px;border-top:1px solid var(--rule);background:var(--ground-alt);max-width:none;margin:0}
+
+.ticker{
+  background:#27292B;color:#fff;padding:5px 10px 7px;font-size:14px;line-height:25.2px;
+  display:flex;gap:44px;justify-content:center;flex-wrap:wrap;margin:0 0 22px;overflow:hidden;
+}
+
+.announce{
+  background:#F5E4D6;color:#27292B;height:35px;display:flex;align-items:center;justify-content:center;
+  font-size:14px;text-transform:uppercase;border-bottom:1px solid rgba(39,41,43,.08);margin:0 0 22px;
+  letter-spacing:.2px;
+}
+
+/* ---- lists ---- */
+ul.clean{margin:0 0 18px;padding:0 0 0 20px;max-width:66ch}
+ul.clean li{margin:0 0 9px;color:var(--ink-soft)}
+ul.clean li::marker{color:var(--accent)}
+ol.rules{counter-reset:r;list-style:none;margin:0;padding:0;max-width:70ch}
+ol.rules li{
+  counter-increment:r;position:relative;padding:0 0 16px 44px;margin:0 0 16px;
+  border-bottom:1px solid var(--rule-soft);color:var(--ink-soft);
+}
+ol.rules li:last-child{border-bottom:0;margin-bottom:0}
+ol.rules li::before{
+  content:counter(r);position:absolute;left:0;top:0;
+  font-family:'Bodoni Moda',Didot,serif;font-size:22px;color:var(--accent);line-height:1.3;
+}
+ol.rules li b{color:var(--ink)}
+
+.flags{display:grid;gap:0;border-top:1px solid #33302F}
+.band--ink .flags{border-top-color:#33302F}
+.flag{padding:16px 0;border-bottom:1px solid #33302F;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.flag__mark{font-size:11px;letter-spacing:1px;font-weight:700;color:#FF8FE0;padding-top:3px;white-space:nowrap}
+.flag p{margin:0;color:#C4BEBB;max-width:70ch}
+.flag p b{color:#F2EEEC}
+
+.footnote{font-size:12px;color:var(--ink-mute);max-width:70ch;margin:20px 0 0}
+.pagefoot{padding-block:44px 60px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.6px;color:var(--ink-mute)}
+
+@media (max-width:620px){
+  .wrap{padding:0 20px}
+  .sec{padding-block:52px}
+  .s-hero{font-size:32px;line-height:37px}
+  .meta-row{gap:0 22px;font-size:10px}
+  .demo{padding:20px;gap:14px}
+  .flag{grid-template-columns:1fr;gap:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+
+<header class="wrap masthead">
+  <p class="eyebrow">Design System &#183; Extracted Reference</p>
+  <h1 class="display">INNBEAUTY<br>Project</h1>
+  <p class="lead">Clinical skincare, direct to consumer. A complete visual system reconstructed from the live storefront &#8212; every token below is a measured value, not an approximation.</p>
+
+  <div class="thesis">
+    <p class="t">Serif for feeling.<br>Uppercase sans for fact.</p>
+  </div>
+
+  <div class="meta-row">
+    <span><strong>Source</strong> innbeautyproject.com</span>
+    <span><strong>Platform</strong> Shopify &#183; Dawn-derived theme t/522</span>
+    <span><strong>Captured</strong> 19 Aug 2026</span>
+    <span><strong>Method</strong> Theme CSS + live computed styles</span>
+  </div>
+</header>
+
+<section class="wrap sec">
+  <p class="eyebrow">01 &#8212; Positioning</p>
+  <h2 class="sechead">Two signals held in tension</h2>
+  <p>The brand has to read as <strong>clinically credible</strong> and <strong>physically soft</strong> at the same time. Charcoal, all-caps Helvetica, ratings to two decimal places and ingredient counts do the first job. A light didone display face, blush photography and warm neutral bands do the second. The whole visual language is that tension &#8212; a rebuild should not resolve it in either direction.</p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Attribute</th><th>Value on the live site</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Category</td><td>Clinical skincare, DTC</td></tr>
+        <tr><td class="k">Core promise</td><td>&#8220;Pro-level results. Without the markups.&#8221;</td></tr>
+        <tr><td class="k">Proof marquee</td><td>Pro-level results &#183; Dermatologist tested &#183; Clinically proven formulas</td></tr>
+        <tr><td class="k">Differentiators</td><td>8&#8211;10 clinical ingredients per formula (industry average 1&#8211;3); final formulas clinically tested, not ingredient data; no middleman</td></tr>
+        <tr><td class="k">Sustainability</td><td>Refillable system &#8212; &#8220;Refillable&#8221; badge, refill SKUs, Recycle With Us</td></tr>
+        <tr><td class="k">Price ladder</td><td class="num">$28&#8211;$64 single SKUs &#183; $42&#8211;$166 sets, always against a struck-through value</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="band band--alt">
+  <div class="wrap sec">
+    <p class="eyebrow">02 &#8212; Color</p>
+    <h2 class="sechead">Four declared tokens, one full palette</h2>
+    <p>The brand layer declares only four custom properties. Everything else below was reconstructed from how colors are actually used across the theme.</p>
+
+<pre><code>:root {
+  --primary-color:   #27292B;   /* charcoal &#8212; text, buttons, footer */
+  --highlight-color: #FF6ED7;   /* hot pink &#8212; active / selected */
+  --border-color:    #707070;   /* mid grey &#8212; secondary button, rules */
+  --font-ivy-light:  'Ivy Presto Light', serif;
+}</code></pre>
+
+    <h3>Core</h3>
+    <div class="swatches">
+      <div class="sw"><div class="sw__chip" style="background:#27292B;color:#fff"><span>Primary</span></div><div class="sw__body"><p class="sw__hex">#27292B</p><p class="sw__name">Charcoal</p><p class="sw__use">Body text, primary button fill, footer, ticker bar, logo.</p></div></div>
+      <div class="sw"><div class="sw__chip" style="background:#FFFFFF;color:#27292B;border-bottom:1px solid var(--swatch-ring)"><span>Surface</span></div><div class="sw__body"><p class="sw__hex">#FFFFFF</p><p class="sw__name">White</p><p class="sw__use">Page ground, text on charcoal, badge fill.</p></div></div>
+      <div class="sw"><div class="sw__chip" style="background:#494A4A;color:#fff"><span>Grey 700</span></div><div class="sw__body"><p class="sw__hex">#494A4A</p><p class="sw__name">Ink soft</p><p class="sw__use">Nav links at rest, secondary body copy.</p></div></div>
+      <div class="sw"><div class="sw__chip" style="background:#707070;color:#fff"><span>Grey 500</span></div><div class="sw__body"><p class="sw__hex">#707070</p><p class="sw__name">Border</p><p class="sw__use">Secondary button border and label, hairlines.</p></div></div>
+      <div class="sw"><div class="sw__chip" style="background:#A1A1A1;color:#27292B"><span>Grey 400</span></div><div class="sw__body"><p class="sw__hex">#A1A1A1</p><p class="sw__name">Muted</p><p class="sw__use">Footer utility links, dividers, disabled borders.</p></div></div>
+      <div class="sw"><div class="sw__chip" style="background:#F5F5F7;color:#27292B"><span>Grey 50</span></div><div class="sw__body"><p class="sw__hex">#F5F5F7</p><p class="sw__name">Panel</p><p class="sw__use">Panel background &#8212; how-it-works, blog surfaces.</p></div></div>
+    </div>
+    <p class="footnote">Charcoal is never pure black. <code>#000</code> does leak into a few hero blocks on the live site &#8212; treat that as a defect, not a token.</p>
+  </div>
+</section>
+
+<section class="band band--sand">
+  <div class="wrap sec--tight">
+    <p class="eyebrow">Warm neutral &#183; Sand</p>
+    <h2 class="sechead" style="margin-bottom:6px">#F5E4D6</h2>
+    <p style="color:var(--on-band);opacity:.75;margin:0">Announcement bar background. Active state on the tabbed navigation. This band is shown at full bleed because that is the only way it is ever used.</p>
+  </div>
+</section>
+
+<section class="band band--blush">
+  <div class="wrap sec--tight">
+    <p class="eyebrow">Warm neutral &#183; Blush</p>
+    <h2 class="sechead" style="margin-bottom:6px">#EBE1E1</h2>
+    <p style="color:var(--on-band);opacity:.75;margin:0">Full-bleed section ground for Real Results &#8212; 50px top, 100px bottom padding. Never used as a component tint.</p>
+  </div>
+</section>
+
+<section class="wrap sec">
+  <h3 style="margin-top:0">Remaining warm neutrals</h3>
+  <div class="swatches">
+    <div class="sw"><div class="sw__chip" style="background:#FCF1EB;color:#27292B"><span>Cream</span></div><div class="sw__body"><p class="sw__hex">#FCF1EB</p><p class="sw__name">Cream</p><p class="sw__use">Footer social icon circles (32px), holiday slider surface.</p></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#F5D9DF;color:#27292B"><span>Rose</span></div><div class="sw__body"><p class="sw__hex">#F5D9DF</p><p class="sw__name">Rose</p><p class="sw__use">Editorial label underline &#8212; blog and featured article.</p></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#C28F8C;color:#fff"><span>Clay</span></div><div class="sw__body"><p class="sw__hex">#C28F8C</p><p class="sw__name">Clay</p><p class="sw__use">Editorial accents, secondary label text.</p></div></div>
+  </div>
+  <p class="footnote">Photography is nude, blush and translucent-water. These neutrals were matched to it &#8212; the imagery does the color work, the interface stays neutral.</p>
+
+  <h3>Status accents &#8212; use one per screen</h3>
+  <div class="swatches">
+    <div class="sw"><div class="sw__chip" style="background:#FF6ED7;color:#27292B"><span>Highlight</span></div><div class="sw__body"><p class="sw__hex">#FF6ED7</p><p class="sw__name">Hot pink</p><p class="sw__use">The declared highlight. One real use: 8px bottom border on the active tab. High energy, low frequency.</p></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#FFA8E7;color:#27292B"><span>Sale</span></div><div class="sw__body"><p class="sw__hex">#FFA8E7</p><p class="sw__name">Sale pink</p><p class="sw__use">On-sale price text inside quick-add. Decorative only &#8212; fails contrast.</p></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#FFFB8F;color:#27292B"><span>Badge</span></div><div class="sw__body"><p class="sw__hex">#FFFB8F</p><p class="sw__name">Sale yellow</p><p class="sw__use">PDP sale badge fill, 5px 7px 4px padding.</p></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#AC0909;color:#fff"><span>Savings</span></div><div class="sw__body"><p class="sw__hex">#AC0909</p><p class="sw__name">Savings red</p><p class="sw__use">Cart savings copy only. Not an error color.</p></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#28D1C8;color:#27292B"><span>Bundle</span></div><div class="sw__body"><p class="sw__hex">#28D1C8</p><p class="sw__name">Teal</p><p class="sw__use">Custom-bundle and promo badge.</p></div></div>
+  </div>
+
+  <h4>Contrast</h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Pair</th><th>Ratio</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td class="k">#27292B on #FFFFFF</td><td class="num">13.6:1</td><td>Passes AAA</td></tr>
+        <tr><td class="k">#494A4A on #FFFFFF</td><td class="num">8.3:1</td><td>Passes AAA</td></tr>
+        <tr><td class="k">#A1A1A1 on #27292B</td><td class="num">5.9:1</td><td>Passes AA</td></tr>
+        <tr><td class="k">#FFA8E7 on #FFFFFF</td><td class="num">1.7:1</td><td>Fails &#8212; decorative use only</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="wrap sec">
+  <p class="eyebrow">03 &#8212; Typography</p>
+  <h2 class="sechead">Serif is feeling. Sans is fact.</h2>
+  <p>Serif appears <strong>only</strong> on emotive display lines and section titles. Every functional string &#8212; navigation, buttons, product names, prices, badges, footer &#8212; is Helvetica Neue, most of it uppercase. This split is the single rule that defines the brand.</p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Role</th><th>Family</th><th>Stack</th><th>Weights</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Display</td><td>Ivy Presto Headline Light</td><td><code>'Ivy Presto Light', serif</code></td><td class="num">200, 200 italic</td></tr>
+        <tr><td class="k">Display alt</td><td>ivypresto-display (Typekit)</td><td><code>"ivypresto-display", serif</code></td><td class="num">400</td></tr>
+        <tr><td class="k">UI &amp; body</td><td>Helvetica Neue</td><td><code>'Helvetica Neue', Arial, sans-serif</code></td><td class="num">400, 500, 600, 700</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footnote">The root sets <code>html { font-size: 10px }</code>, so <code>1rem = 10px</code> throughout. Inherited theme rules are in <code>rem</code>; the brand layer is in <code>px</code>. Specimens below are set in Bodoni Moda, a high-contrast didone standing in for Ivy Presto Headline, which is not web-licensable.</p>
+
+  <h3>Live specimens</h3>
+
+  <div class="spec">
+    <p class="spec__label"><b>Hero display</b> <span>42px</span> <span>weight 200</span> <span>54.6px line</span> <span>sentence case</span></p>
+    <p class="spec__sample s-hero serif">Everything off.<br>Nothing stripped.</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Section title</b> <span>32px</span> <span>weight 200</span> <span>39.36px line</span></p>
+    <p class="spec__sample s-sectitle serif">Clinically Proven Results</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Hero subhead</b> <span>16px</span> <span>weight 400</span> <span>28.8px line</span></p>
+    <p class="spec__sample s-subhead">A Smarter Cleanse is Coming 08.21</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Body</b> <span>14px</span> <span>weight 400</span> <span>25.2px line</span></p>
+    <p class="spec__sample s-body">We built INNBEAUTY on a different model &#8212; investing in high-efficacy ingredients, advanced formulations, and rigorous clinical testing, while eliminating middlemen so we can charge less.</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Product name</b> <span>15px</span> <span>weight 700</span> <span>20px line</span> <span>uppercase</span></p>
+    <p class="spec__sample s-prod">Extreme Cream Eye</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Product descriptor</b> <span>12px</span> <span>weight 400</span> <span>14px line</span> <span>0.7px tracking</span></p>
+    <p class="spec__sample s-desc">Copper Peptide &amp; Growth Factor Firming Serum</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Navigation</b> <span>14px</span> <span>weight 400</span> <span>17px line</span> <span>uppercase</span></p>
+    <p class="spec__sample s-nav">Shop All &nbsp; New + Featured &nbsp; SPF &nbsp; Bundle + Save &nbsp; About &nbsp; Rewards</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Button label</b> <span>15px</span> <span>weight 400</span> <span>0.3px tracking</span> <span>uppercase</span></p>
+    <p class="spec__sample s-btn">Join the waitlist</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Badge</b> <span>12px</span> <span>weight 400</span> <span>&#8722;0.3px tracking</span> <span>uppercase</span></p>
+    <p class="spec__sample s-badge">Refillable</p>
+  </div>
+
+  <div class="spec">
+    <p class="spec__label"><b>Footer heading</b> <span>14px</span> <span>weight 500</span> <span>0.28px tracking</span> <span>uppercase</span></p>
+    <p class="spec__sample s-foot">Company</p>
+  </div>
+
+  <h3>Scale in use</h3>
+  <p>Twenty-one distinct sizes ship. Four of them carry roughly 70% of the page: <strong>14 &#183; 16 &#183; 12 &#183; 15</strong>.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Observed</th><th>Recommended rebuild</th></tr></thead>
+      <tbody>
+        <tr><td class="num">9 &#183; 12 &#183; 13 &#183; 14 &#183; 15 &#183; 16 &#183; 17 &#183; 18 &#183; 20 &#183; 22 &#183; 24 &#183; 25 &#183; 26 &#183; 28 &#183; 30 &#183; 32 &#183; 33 &#183; 37 &#183; 42 &#183; 60 &#183; 80</td><td class="num k">12 &#183; 14 &#183; 16 &#183; 20 &#183; 24 &#183; 32 &#183; 42 &#183; 60</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Rules</h4>
+  <ul class="clean">
+    <li>Uppercase is the default for anything interactive or labelling. Sentence case is reserved for prose and serif display.</li>
+    <li>Tracking sits near zero everywhere. The one negative value is the badge at <code>&#8722;0.3px</code>, tightening a 12px all-caps chip.</li>
+    <li>Serif never goes bold &#8212; weight 200 only. Its authority comes from size, not weight.</li>
+    <li>Body line-height is generous at 1.8; component text is tight at 1.15&#8211;1.35.</li>
+  </ul>
+</section>
+
+<hr class="rule">
+
+<section class="band band--alt">
+  <div class="wrap sec">
+    <p class="eyebrow">04 &#8212; Layout &amp; Spacing</p>
+    <h2 class="sechead">Every section owns its padding</h2>
+    <p>The inherited section-spacing tokens are both set to <code>0px</code>, so vertical rhythm is decided per section rather than by the system. That is the largest structural weakness in the original.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td class="k">--page-width</td><td class="num">144rem / 1440px</td><td>Max content width</td></tr>
+          <tr><td class="k">Side padding</td><td class="num">75px</td><td>Desktop <code>.page-width</code></td></tr>
+          <tr><td class="k">--header-height</td><td class="num">98px</td><td>Fixed header</td></tr>
+          <tr><td class="k">Grid gap &#8212; desktop</td><td class="num">40px / 22px</td><td>Vertical / horizontal</td></tr>
+          <tr><td class="k">Grid gap &#8212; mobile</td><td class="num">40px / 12px</td><td>Vertical / horizontal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Breakpoints</h4>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Name</th><th>Query</th><th>Behaviour</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Mobile</td><td class="num">max-width: 749px</td><td>Single column, accordion footer, drawer nav</td></tr>
+          <tr><td class="k">Tablet</td><td class="num">min-width: 750px</td><td>Primary breakpoint &#8212; 36 rules</td></tr>
+          <tr><td class="k">Desktop</td><td class="num">min-width: 990px</td><td>Second breakpoint &#8212; 23 rules; mega-menu appears</td></tr>
+          <tr><td class="k">Wide</td><td class="num">1200 / 1300 / 1400px</td><td>Sparse typographic tuning only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Measured section rhythm</h4>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Section</th><th>Padding</th><th>Ground</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Real Results</td><td class="num">50px / 100px</td><td>#EBE1E1</td></tr>
+          <tr><td class="k">Shop By</td><td class="num">70px / 70px</td><td>transparent</td></tr>
+          <tr><td class="k">Ticker bar</td><td class="num">5px 10px 7px</td><td>#27292B</td></tr>
+          <tr><td class="k">Footer</td><td class="num">36px / 36px</td><td>#27292B</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="footnote">Eighteen distinct spacing values appear with no common factor: 4 &#183; 8 &#183; 10 &#183; 12 &#183; 15 &#183; 20 &#183; 22 &#183; 25 &#183; 28 &#183; 30 &#183; 35 &#183; 40 &#183; 45 &#183; 50 &#183; 70 &#183; 100 &#183; 110 &#183; 175. A rebuild should use <strong>4 &#183; 8 &#183; 12 &#183; 16 &#183; 24 &#183; 32 &#183; 48 &#183; 64 &#183; 96 &#183; 128</strong>.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="wrap sec">
+  <p class="eyebrow">05 &#8212; Shape, Elevation &amp; Motion</p>
+  <h2 class="sechead">Square cards. No shadows. One radius.</h2>
+  <p>Separation comes entirely from whitespace and background bands. Every shadow opacity token is <code>0.0</code>; the one exception sits on a <code>0px</code> blur and therefore renders nothing.</p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Token</th><th>Value</th><th>Applies to</th></tr></thead>
+      <tbody>
+        <tr><td class="k">--buttons-radius</td><td class="num">4px</td><td>Buttons, inputs</td></tr>
+        <tr><td class="k">--badge-corner-radius</td><td class="num">4px</td><td>Badges</td></tr>
+        <tr><td class="k">--card-corner-radius</td><td class="num">0px</td><td>Cards are square</td></tr>
+        <tr><td class="k">--media-radius</td><td class="num">0px</td><td>Imagery is square</td></tr>
+        <tr><td class="k">--popup-corner-radius</td><td class="num">0px</td><td>Modals</td></tr>
+        <tr><td class="k">--buttons-border-width</td><td class="num">1px</td><td>Secondary button</td></tr>
+        <tr><td class="k">--duration-short</td><td class="num">0.1s</td><td>Micro feedback</td></tr>
+        <tr><td class="k">--duration-default</td><td class="num">0.2s</td><td>Interaction default</td></tr>
+        <tr><td class="k">--duration-long</td><td class="num">0.5s</td><td>Header colour inversion on scroll</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>4px is the only radius</strong>, and only on interactive chrome. Social icons are the single exception at <code>border-radius: 100%</code>. Card image hover is <code>transform: scale(1.03)</code>, desktop only. <code>prefers-reduced-motion</code> is respected.</p>
+</section>
+
+<hr class="rule">
+
+<section class="wrap sec">
+  <p class="eyebrow">06 &#8212; Components</p>
+  <h2 class="sechead">Rebuilt from measured values</h2>
+  <p>Every element below is reconstructed at its real dimensions &#8212; heights, radii, type sizes and tracking are the live values, not visual approximations.</p>
+
+  <h3>Buttons</h3>
+  <div class="demo">
+    <button class="btn btn--primary" type="button">Join the waitlist</button>
+    <button class="btn btn--small" type="button">Notify me</button>
+    <button class="btn btn--secondary" type="button">Read more</button>
+    <button class="btn btn--quick" type="button">Add</button>
+    <a class="btn btn--tertiary" href="#0">Shop all</a>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Variant</th><th>Fill</th><th>Label</th><th>Border</th><th>Height</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Primary</td><td>#27292B</td><td>#FFFFFF</td><td>none</td><td class="num">46px</td><td class="num">15 / 400 / 0.3px</td></tr>
+        <tr><td class="k">Primary small</td><td>#27292B</td><td>#FFFFFF</td><td>none</td><td class="num">39px</td><td class="num">12 / 400 / 0.24px</td></tr>
+        <tr><td class="k">Quick-add</td><td>#27292B</td><td>#FFFFFF</td><td>none</td><td class="num">24px, max 100px wide</td><td class="num">12 / 700</td></tr>
+        <tr><td class="k">Secondary</td><td>transparent</td><td>#707070</td><td>1px #707070</td><td class="num">47px (38px mobile)</td><td class="num">16 / 400</td></tr>
+        <tr><td class="k">Tertiary</td><td>transparent</td><td>#27292B</td><td>none</td><td class="num">auto</td><td class="num">16, underlined</td></tr>
+        <tr><td class="k">Form / footer</td><td>transparent</td><td>#FFFFFF</td><td>1px #FFFFFF</td><td class="num">48px, full width</td><td class="num">14 / 400, left-aligned</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>One primary per view.</strong> Never two filled buttons side by side. Labels run two to four words. Button text is always uppercase and never bold at full size &#8212; weight 700 appears only on the 12px quick-add.</p>
+
+  <h3>Badges</h3>
+  <div class="demo">
+    <span class="badge">Refillable</span>
+    <span class="badge">New</span>
+    <span class="badge">Back in Stock</span>
+    <span class="badge">$154 Value</span>
+    <span class="badge badge--sale">Sale</span>
+    <span class="badge badge--teal">Bundle</span>
+  </div>
+  <p>Two species, never mixed in the same corner. <strong>Text badges</strong> are white pills at 24px, positioned bottom-left over the card image. <strong>SVG badges</strong> &#8212; Best Seller, Viral on TikTok, Award Winner &#8212; are transparent illustrated marks 73px wide, positioned top-left.</p>
+
+  <h3>Product card</h3>
+  <div class="cardgrid">
+    <article class="pcard">
+      <div class="pcard__media">
+        <span class="pcard__glyph" aria-hidden="true">iNN</span>
+        <span class="badge">Refillable</span>
+      </div>
+      <div class="pcard__info">
+        <p class="pcard__rating">&#9733; (4.88)</p>
+        <p class="pcard__name">Extreme Cream</p>
+        <p class="pcard__desc">Firming &amp; Lifting Moisturizer</p>
+        <div class="pcard__chips">
+          <span class="chip" aria-pressed="true">Full Size</span>
+          <span class="chip" aria-pressed="false">Refill</span>
+        </div>
+        <div class="pcard__foot">
+          <span class="pcard__price">$50</span>
+          <button class="btn btn--quick" type="button">Add</button>
+        </div>
+      </div>
+    </article>
+    <article class="pcard">
+      <div class="pcard__media">
+        <span class="pcard__glyph" aria-hidden="true">iNN</span>
+        <span class="badge">New</span>
+      </div>
+      <div class="pcard__info">
+        <p class="pcard__rating">&#9733; (4.89)</p>
+        <p class="pcard__name">Pro C Serum</p>
+        <p class="pcard__desc">Brightening Solution</p>
+        <div class="pcard__chips">
+          <span class="chip" aria-pressed="true">Full Size</span>
+          <span class="chip" aria-pressed="false">Refill</span>
+          <span class="chip" aria-pressed="false">Travel</span>
+        </div>
+        <div class="pcard__foot">
+          <span class="pcard__price">$64</span>
+          <button class="btn btn--quick" type="button">Add</button>
+        </div>
+      </div>
+    </article>
+  </div>
+  <ul class="clean">
+    <li>Internal rhythm is <strong>6px</strong> &#8212; <code>.card-information > * + * { margin-top: 6px }</code>.</li>
+    <li>Ratings show two decimals (4.88, 4.9, 5.0). Precision is a credibility device &#8212; keep it.</li>
+    <li>Selected variant chip takes a <code>#A1A1A1</code> border on <code>input:checked + label</code>.</li>
+    <li>Was-price gets <code>line-through</code> at 75% foreground; sale price uses <code>#FFA8E7</code> in quick-add contexts.</li>
+    <li>Hover at &#8805;990px: image scales to 1.03 over 0.5s, or crossfades to a second image.</li>
+  </ul>
+
+  <h3>Header &#8212; two states</h3>
+  <div class="headerdemo">
+    <div class="headerdemo__strip headerdemo__a">
+      <span>Shop All</span><span class="headerdemo__mark">iNNBEAUTY</span><span>Cart</span>
+    </div>
+    <p class="headerdemo__note">Over the hero &#8212; transparent ground, white links and icon strokes, logo forced white with <code>filter: invert(1)</code></p>
+    <div class="headerdemo__strip headerdemo__b">
+      <span>Shop All</span><span class="headerdemo__mark">iNNBEAUTY</span><span>Cart</span>
+    </div>
+    <p class="headerdemo__note">Scrolled, or any non-home page &#8212; <code>rgba(255,255,255,.5)</code> with <code>backdrop-filter: blur(20px)</code>, ink reverts to charcoal. Transition 0.5s.</p>
+  </div>
+  <p>Layout is <code>grid-template-areas: "left-nav heading right-nav"</code> at <code>3fr 1fr 3fr</code> &#8212; centred wordmark, nav left, account and cart right. Height 98px, side padding 75px. Nav is 14px uppercase 400, except <strong>Shop All</strong> at 700.</p>
+
+  <h3>Announcement bar</h3>
+  <div class="announce">15% off first order with code <strong style="margin-left:.4em">WELCOME15</strong></div>
+  <p>Sand ground, 35px tall, 1px bottom border at <code>rgba(39,41,43,.08)</code>, centred, Swiper-rotated. Code words are emphasised inline.</p>
+
+  <h3>Proof ticker</h3>
+  <div class="ticker">
+    <span>Pro-level results</span><span>Dermatologist tested</span><span>Clinically proven formulas</span>
+  </div>
+  <p>Full-bleed charcoal, white 14px, infinite horizontal marquee. It exists to interrupt the product rails with credibility.</p>
+
+  <h3>Footer</h3>
+<pre><code>footer { background:#27292B; color:#fff; padding:36px 0 }
+
+.footer-block__heading   { 14px/500, .28px, uppercase, #fff, margin-bottom:30px }
+.footer-block__details-content a { 14px/400 }
+.footer__column--links a { 12px; color:#A1A1A1 }
+.footer__list-social a   { 32px circle; background:#FCF1EB }
+
+#footer-signup_form .field__input {
+  height:48px; width:100%; padding:0 16px;
+  border:1px solid #fff; border-radius:4px;
+  font:400 14px 'Helvetica Neue'; color:#fff;
+  text-transform:uppercase; justify-content:flex-start;
+}</code></pre>
+  <p>Desktop uses a <code>175px</code> grid gap between the newsletter block (max 320px) and the link columns. Below 749px every block collapses to an accordion with a &#177; built from two 12&#215;1px pseudo-element bars, divided by <code>1px #A1A1A1</code> rules.</p>
+</section>
+
+<hr class="rule">
+
+<section class="band band--alt">
+  <div class="wrap sec">
+    <p class="eyebrow">07 &#8212; Voice</p>
+    <h2 class="sechead">Claim, then disclaim</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Pattern</th><th>Live example</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Two-beat hero built on a reversal</td><td>&#8220;Everything off. / Nothing stripped.&#8221;</td></tr>
+          <tr><td class="k">Claim, then the disclaimer</td><td>&#8220;Pro-level results. / Without the markups.&#8221;</td></tr>
+          <tr><td class="k">Dated drops</td><td>&#8220;A Smarter Cleanse is Coming 08.21&#8221;</td></tr>
+          <tr><td class="k">Name plus clinical descriptor</td><td>&#8220;Elastic Skin &#8212; Copper Peptide &amp; Growth Factor Firming Serum&#8221;</td></tr>
+          <tr><td class="k">Numbers as proof</td><td>&#8220;8&#8211;10 clinical ingredients per formula (vs. the industry average of 1&#8211;3)&#8221;</td></tr>
+          <tr><td class="k">Value framing, never &#8220;discount&#8221;</td><td>&#8220;$154 Value&#8221; struck through to &#8220;$136&#8221;</td></tr>
+          <tr><td class="k">Concern-first navigation</td><td>Firming &amp; Wrinkles &#183; Dark Spots &amp; Uneven Tone &#183; Texture &amp; Pores &#183; Acne</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Sentence case in serif, uppercase in sans. Periods inside display lines &#8212; they create the two-beat rhythm. Ampersands over &#8220;and&#8221; in labels. Never exclamation marks.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="wrap sec">
+  <p class="eyebrow">08 &#8212; Rebuild Kit</p>
+  <h2 class="sechead">Normalised tokens</h2>
+  <p>The site&#8217;s real values, cleaned into a scale you would actually ship.</p>
+
+<pre><code>:root {
+  /* Color &#8212; core */
+  --ink:         #27292B;
+  --ink-soft:    #494A4A;
+  --grey-500:    #707070;
+  --grey-400:    #A1A1A1;
+  --grey-50:     #F5F5F7;
+  --surface:     #FFFFFF;
+
+  /* Color &#8212; warm neutrals (section bands only) */
+  --sand:        #F5E4D6;
+  --blush:       #EBE1E1;
+  --cream:       #FCF1EB;
+  --rose:        #F5D9DF;
+  --clay:        #C28F8C;
+
+  /* Color &#8212; status (one per screen) */
+  --pink:        #FF6ED7;
+  --pink-soft:   #FFA8E7;
+  --sale-yellow: #FFFB8F;
+  --savings-red: #AC0909;
+  --teal:        #28D1C8;
+
+  /* Type */
+  --font-display: 'Ivy Presto Light', Georgia, serif;
+  --font-ui:      'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --text-xs:   12px;   /* badges, descriptors, utility links */
+  --text-sm:   14px;   /* body, nav, prices, footer */
+  --text-base: 16px;   /* subheads, section copy */
+  --text-lg:   20px;
+  --text-xl:   24px;
+  --text-2xl:  32px;   /* section titles, mobile hero */
+  --text-3xl:  42px;   /* hero */
+  --text-4xl:  60px;
+
+  --leading-body:  1.8;
+  --leading-tight: 1.15;
+  --leading-serif: 1.3;
+  --track-caps:    0.3px;
+  --track-badge:  -0.3px;
+
+  /* Space */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-6: 24px;  --sp-8: 32px;  --sp-12: 48px; --sp-16: 64px;
+  --sp-24: 96px; --sp-32: 128px;
+
+  /* Shape */
+  --radius:      4px;
+  --radius-full: 999px;
+  --border:      1px;
+
+  /* Layout */
+  --page-max:    1440px;
+  --page-pad:    75px;
+  --page-pad-sm: 20px;
+  --header-h:    98px;
+
+  /* Motion */
+  --dur-fast: 0.1s;
+  --dur:      0.2s;
+  --dur-slow: 0.5s;
+}
+
+@media (max-width: 749px) {
+  :root { --text-3xl: 32px; --page-pad: var(--page-pad-sm); }
+}</code></pre>
+
+  <h3>Five rules that carry the system</h3>
+  <ol class="rules">
+    <li><b>Serif for feeling, uppercase sans for fact.</b> Never swap them. This is the brand.</li>
+    <li><b>Charcoal <code>#27292B</code>, never black.</b> White page, dark bands as punctuation.</li>
+    <li><b>Square cards and imagery.</b> 4px radius on interactive chrome only.</li>
+    <li><b>No shadows.</b> Separation is whitespace and background colour.</li>
+    <li><b>One accent, one primary button, per screen.</b></li>
+  </ol>
+</section>
+
+<section class="band band--ink">
+  <div class="wrap sec">
+    <p class="eyebrow">09 &#8212; Known defects</p>
+    <h2 class="sechead" style="color:var(--on-band)">Do not faithfully reproduce these</h2>
+    <p style="color:#C4BEBB">Flagged so a rebuild inherits the system without inheriting its bugs.</p>
+
+    <div class="flags">
+      <div class="flag"><span class="flag__mark">Color</span><p><b>Pure black leaks in.</b> Hero copy and several <code>h2</code> / <code>p</code> blocks compute to <code>rgb(0,0,0)</code> instead of <code>#27292B</code>.</p></div>
+      <div class="flag"><span class="flag__mark">Type</span><p><b><code>h1</code> has <code>line-height: 0</code></b> and renders in Helvetica at 32px/700. The real display heading is <code>h2</code> in Ivy Presto &#8212; heading levels do not map to the type scale at all.</p></div>
+      <div class="flag"><span class="flag__mark">Token</span><p><b><code>#334FB4</code> is orphaned.</b> An inherited theme accent that is never rendered anywhere. Not part of the brand palette.</p></div>
+      <div class="flag"><span class="flag__mark">Cascade</span><p><b><code>!important</code> is load-bearing</b> in the footer newsletter and waitlist buttons &#8212; specificity has been lost to app-injected markup.</p></div>
+      <div class="flag"><span class="flag__mark">Spacing</span><p><b>No scale exists.</b> Eighteen distinct section and margin values with no common factor.</p></div>
+      <div class="flag"><span class="flag__mark">Fonts</span><p><b>Two serif faces ship</b> for near-identical roles &#8212; self-hosted Ivy Presto Light plus Typekit ivypresto-display. One is redundant.</p></div>
+      <div class="flag"><span class="flag__mark">Dead</span><p><b><code>--card-shadow-opacity: 0.1</code> sits on a 0px blur</b> &#8212; a token that does nothing.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap pagefoot">
+  Reconstructed from innbeautyproject.com &#183; theme t/522 &#183; 19 August 2026. Display type set in Bodoni Moda as a stand-in for Ivy Presto Headline Light. All values measured from theme stylesheets and live computed styles.
+</footer>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Decathlon — Your Next Move, 25% Off Sitewide</title>
+<meta name="description" content="Flat 25% off sitewide at Decathlon. 70 sports, 10,000+ items. No code needed — the discount is already on the price." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+<link rel="icon" href="assets/decathlon-logo.png" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ══ 1. Sale bar ══════════════════════════════════════════════ -->
+<div class="salebar" data-sale-bar>
+  <span class="chip chip--yellow salebar__chip">Sale live</span>
+  <span class="salebar__offer">Flat 25% off sitewide</span>
+  <span class="salebar__note">No code needed. No minimum order.</span>
+  <span class="salebar__divider">|</span>
+  <div class="salebar__countdown">
+    <span class="salebar__ends">Ends in</span>
+    <span class="salebar__num" data-cd="hrs">47</span><span class="salebar__unit">hrs</span>
+    <span class="salebar__num" data-cd="min">23</span><span class="salebar__unit">min</span>
+    <span class="salebar__num" data-cd="sec">59</span><span class="salebar__unit">sec</span>
+  </div>
+</div>
+
+<!-- ══ 2. Header ════════════════════════════════════════════════ -->
+<header class="header">
+  <button class="header__burger" type="button" aria-label="All sports menu">
+    <span class="burger"><i></i><i></i><i></i></span>
+    <span class="header__burger-label">All<br />Sports</span>
+  </button>
+
+  <a class="header__logo" href="#top" aria-label="Decathlon home">
+    <img src="assets/decathlon-logo.png" alt="Decathlon" width="161" height="40" />
+  </a>
+
+  <form class="search" role="search" action="#products">
+    <svg class="search__icon" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="6.7" cy="6.7" r="5" fill="none" stroke="#1A2A34" stroke-width="1.6"></circle>
+      <path d="M10.4 10.4 L14.5 14.5" stroke="#1A2A34" stroke-width="1.6"></path>
+    </svg>
+    <input class="search__input" type="search" name="q" placeholder="Search 70 sports and 5000 products" aria-label="Search 70 sports and 5000 products" />
+  </form>
+
+  <nav class="header__nav">
+    <div class="delivery">
+      <svg width="14" height="19" viewBox="0 0 14 20" fill="#FFEA28" aria-hidden="true"><path d="M 7 0 C 3.13 0 0 3.13 0 7 C 0 12.25 7 20 7 20 C 7 20 14 12.25 14 7 C 14 3.13 10.87 0 7 0 Z M 7 9.5 C 5.62 9.5 4.5 8.38 4.5 7 C 4.5 5.62 5.62 4.5 7 4.5 C 8.38 4.5 9.5 5.62 9.5 7 C 9.5 8.38 8.38 9.5 7 9.5 Z"></path></svg>
+      <span class="delivery__text">
+        <span class="delivery__label">Delivery to</span>
+        <span class="delivery__pin">500081 <a class="delivery__change" href="#top">Change</a></span>
+      </span>
+    </div>
+    <a class="header__link" href="#top">My store</a>
+    <a class="header__link" href="#top">Support</a>
+    <a class="header__cart" href="#top">
+      <span class="header__link">Cart</span>
+      <span class="header__badge" data-cart-count>3</span>
+    </a>
+  </nav>
+</header>
+
+<!-- ══ 3. Hero ══════════════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero__photo"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__field"></div>
+  <div class="hero__lines" aria-hidden="true">
+    <i class="hero__line hero__line--1"></i>
+    <i class="hero__line hero__line--2"></i>
+    <i class="hero__line hero__line--3"></i>
+  </div>
+
+  <div class="hero__copy">
+    <div class="hero__eyebrow">
+      <span class="chip chip--yellow">Mega sale — now live</span>
+      <span class="hero__meta">70 sports · 10,000+ items</span>
+    </div>
+    <h1 class="hero__title">Your<br />Next<br />Move</h1>
+    <div class="slab"><span class="slab__inner">25% off sitewide</span></div>
+    <p class="hero__lede">Every sport. Every product. No code needed — the discount is already on the price.</p>
+    <div class="hero__actions">
+      <a class="btn btn--yellow" href="#products">Shop the sale →</a>
+      <a class="link-underline link-underline--light" href="#categories">Browse all sports →</a>
+    </div>
+  </div>
+
+  <img class="hero__product" src="assets/p-rockrider-cut.png" alt="Down jacket 100" width="312" height="312" />
+
+  <div class="hero__timer"><span class="chip chip--red">Ends in <span data-cd="hrs">47</span> hrs</span></div>
+
+  <div class="hero__deal">
+    <span class="hero__deal-label">Featured deal · Down jacket 100</span>
+    <span class="hero__deal-price">₹ 1,124</span>
+    <span class="hero__deal-was">₹ 1,499</span>
+  </div>
+</section>
+
+<!-- ══ 4. Value strip ═══════════════════════════════════════════ -->
+<div class="values">
+  <span class="values__lead">Discount already applied</span>
+  <span class="values__item">2 years warranty*</span>
+  <span class="values__item">90 days returns*</span>
+  <span class="values__item">Free delivery over ₹ 999</span>
+  <span class="values__item">50+ sports in store</span>
+</div>
+
+<!-- ══ 5. Categories ════════════════════════════════════════════ -->
+<section class="cats" id="categories">
+  <div class="cats__head">
+    <div>
+      <div class="eyebrow eyebrow--light"><i class="rule rule--yellow"></i><span>Pick your sport</span></div>
+      <h2 class="h2 h2--light">Six sports. One sale.</h2>
+    </div>
+    <div class="cats__aside">
+      <p>Every category discounted. Every price already marked down.</p>
+      <a class="link-plain link-plain--yellow" href="#products">All 70 sports →</a>
+    </div>
+  </div>
+
+  <div class="cats__strip">
+    <a class="cat" href="#products">
+      <div class="cat__img" style="background-image:url(assets/cat-running.png); background-position:46% 30%;"></div>
+      <div class="cat__scrim"></div>
+      <div class="cat__body">
+        <i class="rule rule--yellow rule--sm"></i>
+        <div class="cat__name">Running</div>
+        <div class="cat__meta">1,240 items · 25% off</div>
+      </div>
+    </a>
+    <a class="cat" href="#products">
+      <div class="cat__img" style="background-image:url(assets/cat-fitness.png); background-position:50% 40%;"></div>
+      <div class="cat__scrim"></div>
+      <div class="cat__body">
+        <i class="rule rule--yellow rule--sm"></i>
+        <div class="cat__name">Fitness</div>
+        <div class="cat__meta">920 items · 25% off</div>
+      </div>
+    </a>
+    <a class="cat" href="#products">
+      <div class="cat__img" style="background-image:url(assets/cat-cycling.png); background-position:50% 26%;"></div>
+      <div class="cat__scrim"></div>
+      <div class="cat__body">
+        <i class="rule rule--yellow rule--sm"></i>
+        <div class="cat__name">Cycling</div>
+        <div class="cat__meta">860 items · 25% off</div>
+      </div>
+    </a>
+    <a class="cat cat--cutout" href="#products">
+      <img class="cat__cutout" src="assets/cat-hiking-cut.png" alt="" />
+      <div class="cat__scrim cat__scrim--soft"></div>
+      <div class="cat__body">
+        <i class="rule rule--yellow rule--sm"></i>
+        <div class="cat__name">Hiking</div>
+        <div class="cat__meta">780 items · 25% off</div>
+      </div>
+    </a>
+    <a class="cat" href="#products">
+      <div class="cat__img" style="background-image:url(assets/cat-football.png); background-position:42% 40%;"></div>
+      <div class="cat__scrim"></div>
+      <div class="cat__body">
+        <i class="rule rule--yellow rule--sm"></i>
+        <div class="cat__name">Football</div>
+        <div class="cat__meta">540 items · 25% off</div>
+      </div>
+    </a>
+    <a class="cat" href="#products">
+      <div class="cat__img" style="background-image:url(assets/hero.png); background-position:52% 34%;"></div>
+      <div class="cat__scrim cat__scrim--deep"></div>
+      <div class="cat__body">
+        <i class="rule rule--yellow rule--sm"></i>
+        <div class="cat__name">Outdoor</div>
+        <div class="cat__meta">1,100 items · 25% off</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══ 6. Products ══════════════════════════════════════════════ -->
+<section class="products" id="products">
+  <div class="products__head">
+    <div>
+      <div class="eyebrow"><i class="rule rule--red"></i><span class="eyebrow__blue">On sale now</span></div>
+      <h2 class="h2">Best of the sale</h2>
+    </div>
+    <a class="link-underline" href="#products">View all 10,000+ deals →</a>
+  </div>
+
+  <div class="products__grid">
+    <a class="feature" href="#products">
+      <i class="feature__wedge" aria-hidden="true"></i>
+      <span class="badge badge--lg"><span>−25%</span></span>
+      <span class="shadow shadow--lg" aria-hidden="true"></span>
+      <img class="feature__img" src="assets/p-kiprun-cut.png" alt="Men's trail running hoodie TR500" />
+      <div class="feature__body">
+        <div class="feature__brand">Kiprun · Deal of the day</div>
+        <div class="feature__name">Men's trail running hoodie TR500</div>
+        <div class="feature__prices">
+          <span class="price-slab"><span>₹ 2,249</span></span>
+          <span class="feature__was">₹ 2,999</span>
+          <span class="link-underline link-underline--light feature__cta">Shop now →</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="tiles">
+      <a class="tile" href="#products">
+        <span class="badge"><span>−25%</span></span>
+        <span class="shadow" aria-hidden="true"></span>
+        <img class="tile__img" src="assets/p-quechua-cut.png" alt="Men's Warm Fleece Jacket MH500" />
+        <div class="tile__body">
+          <div class="tile__brand">Quechua</div>
+          <div class="tile__name">Men's Warm Fleece Jacket MH500</div>
+          <div class="tile__prices"><span class="tile__price">₹ 1,499</span><span class="tile__was">₹ 1,999</span></div>
+        </div>
+      </a>
+      <a class="tile" href="#products">
+        <span class="badge"><span>−25%</span></span>
+        <span class="shadow" aria-hidden="true"></span>
+        <img class="tile__img" src="assets/p-kipsta-cut.png" alt="Adult Football Jersey F100" />
+        <div class="tile__body">
+          <div class="tile__brand">Kipsta</div>
+          <div class="tile__name">Adult Football Jersey F100</div>
+          <div class="tile__prices"><span class="tile__price">₹ 561</span><span class="tile__was">₹ 749</span></div>
+        </div>
+      </a>
+      <a class="tile" href="#products">
+        <span class="badge"><span>−25%</span></span>
+        <span class="shadow" aria-hidden="true"></span>
+        <img class="tile__img" src="assets/p-domyos-cut.png" alt="Resistance Band Training Set" />
+        <div class="tile__body">
+          <div class="tile__brand">Domyos</div>
+          <div class="tile__name">Resistance Band Training Set</div>
+          <div class="tile__prices"><span class="tile__price">₹ 449</span><span class="tile__was">₹ 599</span></div>
+        </div>
+      </a>
+      <a class="tile" href="#products">
+        <span class="badge"><span>−25%</span></span>
+        <span class="shadow" aria-hidden="true"></span>
+        <img class="tile__img" src="assets/p-forclaz-cut.png" alt="Trekking Backpack 40L MT100" />
+        <div class="tile__body">
+          <div class="tile__brand">Forclaz</div>
+          <div class="tile__name">Trekking Backpack 40L MT100</div>
+          <div class="tile__prices"><span class="tile__price">₹ 2,249</span><span class="tile__was">₹ 2,999</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7. Budget ════════════════════════════════════════════════ -->
+<section class="budget">
+  <div class="budget__head">
+    <div>
+      <div class="eyebrow eyebrow--light"><i class="rule rule--yellow"></i><span>Shop by budget</span></div>
+      <h2 class="h2 h2--sm h2--light">Every price already down 25%</h2>
+    </div>
+    <p class="budget__note">Prices below are what you pay. Nothing to apply at checkout.</p>
+  </div>
+  <div class="budget__row">
+    <a class="budget__col" href="#products">
+      <div class="budget__price">Under ₹ 499</div>
+      <div class="budget__meta">1,860 items · Tees, socks, bottles</div>
+    </a>
+    <a class="budget__col" href="#products">
+      <div class="budget__price">Under ₹ 999</div>
+      <div class="budget__meta">2,940 items · Tights, jerseys, bags</div>
+    </a>
+    <a class="budget__col" href="#products">
+      <div class="budget__price">Under ₹ 1,999</div>
+      <div class="budget__meta">2,110 items · Shoes, fleece, helmets</div>
+    </a>
+    <a class="budget__col" href="#products">
+      <div class="budget__price">₹ 2,000 +</div>
+      <div class="budget__meta">1,240 items · Tents, bikes, jackets</div>
+    </a>
+  </div>
+</section>
+
+<!-- ══ 8. Editorial — running ═══════════════════════════════════ -->
+<section class="edit">
+  <div class="edit__photo"></div>
+  <div class="edit__scrim"></div>
+  <div class="edit__lines" aria-hidden="true"><i class="edit__line edit__line--1"></i><i class="edit__line edit__line--2"></i></div>
+
+  <div class="edit__title">
+    <span class="chip chip--yellow">Running</span>
+    <h2 class="edit__h2">Run further.<br />Spend less.</h2>
+  </div>
+
+  <div class="edit__panel">
+    <div class="edit__kicker">Campaign edit</div>
+    <div class="edit__figure">25%<br />off</div>
+    <p class="edit__body">Shoes, tights, jackets and hydration — 1,240 running products, all reduced until Sunday.</p>
+    <a class="btn btn--yellow btn--sm" href="#products">Shop running →</a>
+  </div>
+</section>
+
+<!-- ══ 9. Still-life pair ═══════════════════════════════════════ -->
+<section class="pair">
+  <div class="pair__half pair__half--a">
+    <div class="pair__img" style="background-image:url(assets/ed-hiking.png); background-position:62% 34%; background-size:66% auto;"></div>
+    <div class="pair__body">
+      <i class="rule rule--yellow rule--md"></i>
+      <div class="pair__kicker">Hiking &amp; outdoor</div>
+      <h3 class="pair__h3">Conquer more.</h3>
+      <p class="pair__text">Boots, shells and packs built for altitude — 780 products reduced.</p>
+      <a class="link-underline" href="#products">Shop hiking →</a>
+    </div>
+  </div>
+  <div class="pair__rule"></div>
+  <div class="pair__half pair__half--b">
+    <div class="pair__img" style="background-image:url(assets/ed-fitness.png); background-position:40% 38%; background-size:62% auto;"></div>
+    <div class="pair__body pair__body--right">
+      <i class="rule rule--red rule--md"></i>
+      <div class="pair__kicker">Trail &amp; trek</div>
+      <h3 class="pair__h3">Go further.</h3>
+      <p class="pair__text">Trekking kit tested from Manali to the Sahyadris. All 25% off.</p>
+      <a class="link-underline" href="#products">Shop trekking →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10. Urgency band ═════════════════════════════════════════ -->
+<section class="urgency" data-urgency>
+  <div class="urgency__texture" aria-hidden="true"></div>
+  <div class="urgency__copy">
+    <div class="urgency__kicker">Don't miss out</div>
+    <div class="urgency__row">
+      <span class="urgency__label">Sale ends in</span>
+      <span class="urgency__clock"><span data-cd="hrs">47</span> : <span data-cd="min2">23</span> : <span data-cd="sec2">59</span></span>
+    </div>
+  </div>
+  <a class="btn btn--yellow btn--skew" href="#products"><span>Shop before it ends →</span></a>
+</section>
+
+<!-- ══ 11. Sale index ═══════════════════════════════════════════ -->
+<section class="index">
+  <div class="index__head">
+    <div>
+      <div class="eyebrow"><i class="rule rule--blue"></i><span>Sale index</span></div>
+      <h2 class="h2 h2--sm">Where the sale starts</h2>
+    </div>
+    <a class="link-underline" href="#categories">All 70 sports →</a>
+  </div>
+  <div class="index__grid">
+    <div class="index__col">
+      <a class="index__row" href="#products"><span class="index__name">Running</span><span class="index__meta">1,240 items · from ₹ 224</span></a>
+      <a class="index__row" href="#products"><span class="index__name">Fitness</span><span class="index__meta">920 items · from ₹ 149</span></a>
+      <a class="index__row" href="#products"><span class="index__name">Cycling</span><span class="index__meta">860 items · from ₹ 299</span></a>
+      <a class="index__row index__row--last" href="#products"><span class="index__name">Swimming</span><span class="index__meta">420 items · from ₹ 179</span></a>
+    </div>
+    <div class="index__col">
+      <a class="index__row" href="#products"><span class="index__name">Hiking</span><span class="index__meta">780 items · from ₹ 374</span></a>
+      <a class="index__row" href="#products"><span class="index__name">Football</span><span class="index__meta">540 items · from ₹ 189</span></a>
+      <a class="index__row" href="#products"><span class="index__name">Camping</span><span class="index__meta">610 items · from ₹ 449</span></a>
+      <a class="index__row index__row--last" href="#products"><span class="index__name">Badminton</span><span class="index__meta">380 items · from ₹ 119</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 12. App band ═════════════════════════════════════════════ -->
+<section class="app">
+  <div>
+    <div class="app__kicker">Exclusive app-only prices</div>
+    <div class="app__title">Get extra savings on the app</div>
+  </div>
+  <a class="btn btn--yellow btn--sm" href="#top">Download the app →</a>
+</section>
+
+<!-- ══ 13. Footer ═══════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <img src="assets/decathlon-logo.png" alt="Decathlon" width="148" height="37" />
+      <p>Making sport accessible to all.</p>
+    </div>
+    <div class="footer__col">
+      <div class="footer__head">Services</div>
+      <a href="#top">My Account</a><a href="#top">Orders &amp; Tracking</a><a href="#top">Store Finder</a><a href="#top">Gift Cards</a><a href="#top">Loyalty Club</a>
+    </div>
+    <div class="footer__col">
+      <div class="footer__head">Help</div>
+      <a href="#top">FAQs</a><a href="#top">Returns Policy</a><a href="#top">Contact Us</a><a href="#top">Size Guide</a><a href="#top">Product Advice</a>
+    </div>
+    <div class="footer__col">
+      <div class="footer__head">About</div>
+      <a href="#top">About Decathlon</a><a href="#top">Careers</a><a href="#top">Sustainability</a><a href="#top">Press</a><a href="#top">Investors</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__legal">
+      <span class="chip chip--yellow chip--sm">Your next move</span>
+      <span>25% off sale. Limited time. T&amp;Cs apply.</span>
+    </div>
+    <span>© 2026 Decathlon Sports India Pvt Ltd</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

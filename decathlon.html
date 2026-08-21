@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decathlon, Your Next Move: 25% Off Sale Campaign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap">
+<style>
+/* ── Decathlon case study — art direction borrowed from the campaign itself ── */
+:root{
+  --blue:#0082C3; --blue-600:#006ba2; --blue-900:#00567f;
+  --ink:#1A2A34; --ink-deep:#0F2029; --yellow:#FFEA28; --red:#E3262F;
+  --grey-100:#EFF1F3; --grey-50:#F4F6F8; --soft:#55666F;
+  --cond:'Roboto Condensed',Arial,sans-serif;
+  --pad:clamp(20px,3.4vw,48px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;display:flex;background:#FFFFFF;color:var(--ink);font-family:var(--cond);
+     -webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* thin top line — a way back, not a site nav */
+.pagetop{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+         padding:22px var(--pad) 0;font-size:11px;font-weight:700;letter-spacing:.18em;
+         text-transform:uppercase;color:var(--soft)}
+.pagetop a{color:var(--ink);border-bottom:2px solid var(--yellow);padding-bottom:3px;transition:color .12s ease-out}
+.pagetop a:hover{color:var(--blue)}
+
+/* section marker — no panel, no border; colour adapts to the ground behind it */
+.toc{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:35;
+     display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.toc a{display:flex;align-items:center;gap:10px;padding:6px 0;
+       font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+       color:rgba(26,42,52,.4);transition:color .15s ease-out}
+.toc a i{display:block;width:12px;height:2px;background:currentColor;opacity:.55;
+         transform:skewX(-14deg);transition:width .2s ease-out,background .2s ease-out,opacity .2s ease-out}
+.toc a:hover{color:var(--ink)}
+.toc a.is-active{color:var(--ink)}
+.toc a.is-active i{width:30px;background:var(--yellow);opacity:1}
+.toc.on-dark a{color:rgba(255,255,255,.45)}
+.toc.on-dark a:hover,.toc.on-dark a.is-active{color:#fff}
+
+/* intro blocks */
+.intro{width:100%;max-width:1180px;margin:0 auto;padding:clamp(56px,6vw,96px) var(--pad) clamp(30px,3.4vw,52px)}
+.eyebrow{display:flex;align-items:center;gap:12px;margin:0 0 18px;font-size:12px;font-weight:700;
+         letter-spacing:.24em;text-transform:uppercase;color:var(--blue)}
+.eyebrow i{display:block;width:34px;height:8px;background:var(--yellow);transform:skewX(-14deg)}
+h1{margin:0;font-size:clamp(42px,5.6vw,86px);font-weight:700;font-style:italic;line-height:.9;
+   letter-spacing:-.02em;text-transform:uppercase;text-wrap:balance}
+h2{margin:0;font-size:clamp(30px,3.6vw,54px);font-weight:700;font-style:italic;line-height:.94;
+   letter-spacing:-.02em;text-transform:uppercase;text-wrap:balance}
+.lede{max-width:70ch;margin:24px 0 0;font-size:18px;line-height:1.7;color:var(--soft);text-wrap:pretty}
+.scope{max-width:74ch;margin:20px 0 0;font-size:15px;line-height:1.85;color:var(--soft)}
+.scope b{color:var(--blue);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+.meta{display:flex;flex-wrap:wrap;gap:0 clamp(22px,3vw,52px);margin-top:34px}
+.meta div{display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:2px solid var(--ink);min-width:132px}
+.meta b{font-size:34px;font-weight:700;font-style:italic;line-height:1}
+.meta span{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.jump{display:inline-flex;align-items:center;gap:8px;margin-top:26px;padding-bottom:5px;
+      border-bottom:3px solid var(--yellow);font-size:12px;font-weight:700;letter-spacing:.18em;
+      text-transform:uppercase;transition:color .12s ease-out}
+.jump:hover{color:var(--blue)}
+
+/* bands */
+.band{position:relative;width:100%;overflow:hidden;padding:clamp(52px,6vw,92px) var(--pad) clamp(48px,5vw,84px)}
+.band--grey{background:var(--grey-50)}
+.band--ink{background:var(--ink);color:#fff}
+.band--deep{background:var(--ink-deep);color:#fff}
+.band--blue{background:linear-gradient(150deg,var(--blue),var(--blue-900));color:#fff}
+.band--red{background:var(--red);color:#fff}
+.band--ink h2,.band--deep h2,.band--blue h2,.band--red h2{color:#fff}
+.band--ink .lede,.band--deep .lede,.band--blue .lede,.band--red .lede{color:rgba(255,255,255,.78)}
+.band--deep .eyebrow,.band--ink .eyebrow{color:var(--yellow)}
+.band-lines{position:absolute;inset:0;pointer-events:none;opacity:.5}
+.band-lines i{position:absolute;top:-40px;height:140%;transform:skewX(-14deg)}
+
+.band-head{position:relative;z-index:3;max-width:1500px;margin:0 auto clamp(26px,3vw,44px);
+           display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.band-head h3{margin:0;font-size:clamp(22px,2.3vw,32px);font-weight:700;font-style:italic;
+              text-transform:uppercase;letter-spacing:-.01em}
+.band-head span{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+.band--ink .band-head span,.band--deep .band-head span,.band--blue .band-head span{color:rgba(255,255,255,.6)}
+
+/* the reasoning columns */
+.why{position:relative;z-index:3;max-width:1500px;margin:clamp(30px,3.2vw,50px) auto 0;
+     display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(18px,2.2vw,38px)}
+.why div{padding-top:14px;border-top:2px solid rgba(26,42,52,.16)}
+.why h5{margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.why p{margin:0;font-size:14px;line-height:1.8;color:var(--soft)}
+.band--ink .why div,.band--deep .why div,.band--blue .why div{border-top-color:rgba(255,255,255,.24)}
+.band--ink .why h5,.band--deep .why h5,.band--blue .why h5{color:var(--yellow)}
+.band--ink .why p,.band--deep .why p,.band--blue .why p{color:rgba(255,255,255,.72)}
+
+/* artboard stages */
+.stage{position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:center;
+       align-items:flex-start;gap:clamp(14px,2vw,32px);max-width:1500px;margin:0 auto}
+.piece{display:flex;flex-direction:column;align-items:flex-start;max-width:100%;min-width:0}
+.frame{position:relative;overflow:hidden;background:#fff;outline:1px solid rgba(26,42,52,.14);outline-offset:-1px}
+.band--ink .frame,.band--deep .frame,.band--blue .frame{outline-color:rgba(255,255,255,.18)}
+.frame iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0}
+.still{display:block;max-width:100%;height:auto;outline:1px solid rgba(26,42,52,.14);outline-offset:-1px}
+.band--ink .still,.band--deep .still,.band--blue .still{outline-color:rgba(255,255,255,.18)}
+.cap{width:100%;margin-top:10px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+     font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.cap i{font-style:normal;opacity:.7}
+.band--ink .cap,.band--deep .cap,.band--blue .cap{color:rgba(255,255,255,.6)}
+.cap a:hover{color:var(--blue)}
+.band--ink .cap a:hover,.band--deep .cap a:hover,.band--blue .cap a:hover{color:var(--yellow)}
+
+/* system blocks */
+.sys{position:relative;z-index:3;max-width:1500px;margin:0 auto;display:grid;
+     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(18px,2.4vw,40px)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:8px}
+.sw{padding:14px 12px 12px;min-height:96px;display:flex;flex-direction:column;justify-content:flex-end;
+    font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.sw b{font-size:11px;display:block}
+.sw span{opacity:.7;font-weight:400;letter-spacing:.06em}
+.typerow{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;
+         border-bottom:1px solid rgba(255,255,255,.16)}
+.typerow em{font-style:italic;font-weight:700;text-transform:uppercase;line-height:1}
+.typerow span{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap}
+
+/* closing details */
+.details{width:100%;max-width:1500px;margin:0 auto;padding:clamp(52px,6vw,92px) var(--pad)}
+.details-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(20px,2.6vw,44px)}
+.details-grid h5{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.details-grid p{margin:0 0 12px;font-size:14px;line-height:1.85;color:var(--soft)}
+.details-grid ul{margin:0;padding-left:18px}
+.details-grid li{font-size:14px;line-height:1.85;color:var(--soft)}
+.footer-note{margin-top:clamp(40px,5vw,72px);padding-top:22px;border-top:2px solid var(--ink);
+             display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;
+             font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.chip{display:inline-block;background:var(--yellow);color:var(--ink);font-size:11px;font-weight:700;
+      letter-spacing:.16em;text-transform:uppercase;padding:6px 11px;transform:skewX(-10deg)}
+.chip span{display:inline-block;transform:skewX(10deg)}
+
+@media (min-width:1201px){
+  .intro,.band,.details,.pagetop{padding-right:calc(var(--pad) + 96px)}
+}
+@media (max-width:1200px){
+  /* becomes a swipeable strip at the top */
+  .toc{position:sticky;top:0;right:auto;transform:none;flex-direction:row;align-items:center;
+       gap:0;width:100%;overflow-x:auto;padding:10px var(--pad);
+       background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+       border-bottom:1px solid rgba(26,42,52,.12);scrollbar-width:none}
+  .toc::-webkit-scrollbar{display:none}
+  .toc.on-dark a{color:rgba(26,42,52,.4)}
+  .toc.on-dark a:hover,.toc.on-dark a.is-active{color:var(--ink)}
+  .toc a{white-space:nowrap;padding:8px 12px 8px 0;gap:8px}
+  .toc a i{width:10px}
+  .toc a.is-active i{width:20px}
+}
+@media (max-width:900px){
+  .stage{gap:20px}
+}
+
+/* ── case-study furniture ─────────────────────────────────────── */
+
+/* role / scope metadata, the block graphic-design case studies open with */
+.role{max-width:1180px;margin:38px auto 0;display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px 34px}
+.role div{padding-top:12px;border-top:2px solid var(--ink)}
+.role h6{margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
+.role p{margin:0;font-size:14px;line-height:1.7;color:var(--soft)}
+
+/* the written brief */
+.brief{max-width:1180px;margin:0 auto;border:2px solid var(--ink);background:#fff}
+.brief-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+           padding:18px 24px;background:var(--ink);color:#fff}
+.brief-top b{font-size:16px;font-weight:700;font-style:italic;text-transform:uppercase;letter-spacing:.02em}
+.brief-top span{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow)}
+.brief dl{margin:0;display:grid;grid-template-columns:180px 1fr}
+.brief dt{padding:16px 24px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+          color:var(--blue);border-top:1px solid var(--grey-100)}
+.brief dd{margin:0;padding:16px 24px 16px 0;font-size:15px;line-height:1.75;color:var(--soft);
+          border-top:1px solid var(--grey-100)}
+.brief dt:first-of-type,.brief dd:first-of-type{border-top:0}
+@media (max-width:700px){
+  .brief dl{grid-template-columns:1fr}
+  .brief dd{padding:0 24px 16px}
+  .brief dt{padding-bottom:6px;border-top:1px solid var(--grey-100)}
+  .brief dd{border-top:0}
+}
+
+/* artifact crops — a window onto part of a screen, never the whole thing */
+.crop{position:relative;overflow:hidden;background:#fff;max-width:100%;
+      outline:1px solid rgba(26,42,52,.14);outline-offset:-1px}
+.crop iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0}
+.band--ink .crop,.band--deep .crop,.band--blue .crop{outline-color:rgba(255,255,255,.18)}
+
+/* the decision annotation that sits under an artifact */
+.note{margin:12px 0 0;max-width:44ch;font-size:13.5px;line-height:1.75;color:var(--soft);
+      border-left:3px solid var(--yellow);padding-left:12px}
+.note b{color:var(--ink);font-weight:700}
+.band--ink .note,.band--deep .note,.band--blue .note{color:rgba(255,255,255,.74)}
+.band--ink .note b,.band--deep .note b,.band--blue .note b{color:#fff}
+
+/* type specimen + angle diagram */
+.spec{border-top:2px solid rgba(255,255,255,.2)}
+.spec-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px;padding:14px 0;
+          border-bottom:1px solid rgba(255,255,255,.14)}
+.spec-row em{font-style:italic;font-weight:700;text-transform:uppercase;line-height:1;color:#fff}
+.spec-row span{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+               color:rgba(255,255,255,.55);white-space:nowrap}
+.angles{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+.angle{flex:1 1 150px;padding:16px;background:rgba(255,255,255,.06);min-width:150px}
+.angle i{display:block;height:14px;background:var(--yellow);margin-bottom:14px}
+.angle b{display:block;font-size:22px;font-weight:700;font-style:italic;color:#fff;line-height:1}
+.angle span{display:block;margin-top:8px;font-size:12px;line-height:1.7;color:rgba(255,255,255,.7)}
+
+.stage--tight{gap:clamp(12px,1.6vw,22px)}
+
+
+
+/* ── campaign film embed ─────────────────────────────────────── */
+.film-embed{position:relative;z-index:3;max-width:1500px;margin:0 auto;width:100%;
+            aspect-ratio:16/9;background:#000;overflow:hidden;
+            box-shadow:0 30px 70px -28px rgba(0,0,0,.55)}
+.film-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.film-note{position:relative;z-index:3;max-width:1500px;margin:10px auto 0;
+           display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+           font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.film-note i{font-style:normal;opacity:.7}
+@media (max-width:640px){.film-note{flex-direction:column;gap:4px}}
+</style>
+<style>
+
+    /* portfolio chrome — vars scoped to .sidebar so they never reach the
+       case study's own Prata/cream type system */
+    :root { --sw: 280px; }
+    .sidebar {
+      --bg:#111111; --sidebar:#000000; --border:rgba(255,255,255,0.07);
+      --gold:#c9a96e; --gold-dim:rgba(201,169,110,0.1); --gold-lt:#dfc08a;
+      --text:#e8e4dc; --muted:rgba(232,228,220,0.72); --faint:rgba(232,228,220,0.55);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      text-align: left;
+    }
+    .sidebar a { text-decoration: none; }
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s ease;
+    }
+    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0;
+      transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
+    }
+
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    @media (max-width: 960px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; width: 100%; }
+    }
+  </style>
+
+<style>
+  /* ── floating return to Branding & Marketing ── */
+  .fab-back {
+    position: fixed; right: 26px; bottom: 26px; z-index: 500;
+    display: inline-flex; align-items: center; gap: 9px;
+    height: 44px; padding: 0 20px 0 15px;
+    background: #c9a96e; color: #151515;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    font-size: 0.66rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 999px; border: 0;
+    box-shadow: 0 6px 26px rgba(0,0,0,0.42);
+    opacity: 0; transform: translateY(14px); pointer-events: none;
+    transition: opacity .35s ease, transform .35s ease, background .25s ease;
+  }
+  .fab-back.show { opacity: 1; transform: none; pointer-events: auto; }
+  .fab-back:hover { background: #dfc08a; }
+  .fab-back svg { flex: none; }
+  @media (max-width: 560px) {
+    .fab-back { right: 14px; bottom: 14px; height: 40px; padding: 0 15px 0 12px; font-size: 0.58rem; letter-spacing: .12em; }
+  }
+  @media (prefers-reduced-motion: reduce) { .fab-back { transition: none; } }
+</style>
+</head>
+<body>
+
+<aside class="sidebar" aria-label="Site navigation">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer &middot; New York</span>
+    </div>
+  </a>
+
+  <nav class="sb-nav" aria-label="Primary">
+
+    <!-- UX PROJECTS -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">UX Projects</span>
+
+      <a href="tenetic.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+
+      <a href="pur.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="mentormap.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="presence.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Presence</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="philly-truce.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- BRANDING & MARKETING -->
+    <a href="branding.html" class="sb-row active">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
+      </span>
+      <span class="sb-label">Branding &amp; Marketing</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- CERTIFICATIONS -->
+    <a href="certifications.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+          <circle cx="12" cy="8" r="6"/>
+        </svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- ABOUT ME -->
+    <a href="about.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+  </nav>
+
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+
+<!-- section marker — minimal, unboxed, adapts to the ground behind it -->
+<nav class="toc" aria-label="Case study sections">
+  <a href="#top"><span>Overview</span><i></i></a>
+  <a href="#brief"><span>The brief</span><i></i></a>
+  <a href="#idea"><span>The idea</span><i></i></a>
+  <a href="#system"><span>The system</span><i></i></a>
+  <a href="#work"><span>The work</span><i></i></a>
+  <a href="#craft"><span>Craft</span><i></i></a>
+  <a href="#reflection"><span>Reflection</span><i></i></a>
+</nav>
+
+<div class="pagetop">
+  <a href="branding.html">&larr;&nbsp;&nbsp;Branding &amp; Marketing</a>
+  <span>Decathlon &nbsp;·&nbsp; Sale campaign &nbsp;·&nbsp; 2026</span>
+</div>
+
+<!-- ── overview ─────────────────────────────────────────────────── -->
+<section class="intro" id="top" style="padding-bottom:clamp(20px,2vw,30px)">
+  <p class="eyebrow"><i></i>Retail campaign · Art direction &amp; design system</p>
+  <h1>Your Next Move</h1>
+  <p class="lede" style="max-width:62ch">Decathlon's end-of-season promotion runs flat 25% off sitewide: no code, no threshold, the reduction already on the shelf price. I art-directed the campaign end to end and built the master artwork: the campaign lockup, the sale homepage, a three-send email flight, a social toolkit, the standard display kit and six animated units across three motion concepts. One graphic system underneath all of it, so the sale reads as Decathlon at 1440px and at 160px.</p>
+  <div class="role">
+    <div><h6>Role</h6><p>Art direction, design system, master artwork and adaptations, front-end build</p></div>
+    <div><h6>Deliverables</h6><p>Sale homepage · 3-send email flight · 9 social formats · 4 IAB display units · 6 animated units</p></div>
+    <div><h6>Disciplines</h6><p>Campaign design, editorial typography, e-commerce merchandising, motion, HTML/CSS</p></div>
+    <div><h6>Context</h6><p>2026 · Concept project · Decathlon is not a client</p></div>
+  </div>
+</section>
+
+<!-- ── 01 the brief ─────────────────────────────────────────────── -->
+<section class="intro intro--tight" id="brief" style="padding-top:clamp(34px,3.6vw,56px);padding-bottom:clamp(18px,2vw,28px)">
+  <p class="eyebrow"><i></i>01, The brief</p>
+</section>
+
+<div class="band" style="padding-top:0">
+  <div class="brief">
+    <div class="brief-top"><b>Campaign brief: "25% off sitewide"</b><span>End of season · India</span></div>
+    <dl>
+      <dt>Client</dt><dd>Decathlon India: 70 sports, 10,000+ SKUs, a brand positioned on accessibility rather than aspiration.</dd>
+      <dt>Objective</dt><dd>Drive traffic and conversion across a 48-hour sitewide promotion, and land it as a Decathlon campaign rather than generic seasonal sale furniture.</dd>
+      <dt>Audience</dt><dd>Everyday sportspeople and families. Price-aware, mobile-first, shopping across categories rather than committing to one.</dd>
+      <dt>The mechanic</dt><dd>Flat 25% off every product. No code, no minimum, no tiering: the discount is applied to the price shown.</dd>
+      <dt>Deliverables</dt><dd>Sale homepage at desktop and mobile, a three-send email flight, a social toolkit for feed, carousel and stories, the four standard IAB display units, and animated versions of the display and email hero.</dd>
+      <dt>Mandatories</dt><dd>Decathlon blue and the master logo lockup. Reduced-first price architecture with the was-price struck through. Warranty, returns and delivery reassurance present on every surface.</dd>
+      <dt>Constraints</dt><dd>Product cutouts supplied at 300&times;300. No new photography: library crops only. Type restricted to Roboto Condensed, the licensed brand family.</dd>
+      <dt>Success criteria</dt><dd>A campaign that survives every resize down to 160&times;600, and a mechanic a shopper can read in under three seconds.</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- ── 02 the idea ──────────────────────────────────────────────── -->
+<section class="intro" id="idea">
+  <p class="eyebrow"><i></i>02, The idea</p>
+  <h2>A discount is not an idea</h2>
+  <p class="lede">Every retailer discounts in the same week, at the same depth, in the same red. Lead with the number and you are competing on a field where Decathlon has no advantage. So I moved the number off centre and put the shopper's intent in its place, <b>Your Next Move</b>: the sale as the moment you finally buy the running shoes. The offer still carries, it just carries in the brand's voice.</p>
+  <p class="lede">Everything else in the campaign is an adaptation of the master lockup below. I resolved it once, at 1080&times;1080, and every other format is a resize of the same four elements in a fixed hierarchy.</p>
+</section>
+
+<div class="band band--blue">
+  <div class="band-lines"><i style="left:38%;width:26px;background:rgba(255,234,40,.2)"></i><i style="left:42%;width:10px;background:rgba(255,255,255,.12)"></i></div>
+  <div class="band-head"><h3>Master lockup</h3><span>1080 × 1080 · every other format resizes from this</span></div>
+  <div class="stage">
+    <div class="piece">
+      <div class="frame" style="width:520px;aspect-ratio:1/1">
+        <iframe src="decathlon-sale/campaign/ig-01-keyvisual.html" title="Campaign master lockup" loading="lazy" style="width:1080px;height:1080px"></iframe>
+      </div>
+      <p class="cap"><span>Master lockup</span><a href="decathlon-sale/campaign/ig-01-keyvisual.html">Open ↗</a></p>
+    </div>
+    <div class="piece" style="flex:1 1 300px;max-width:430px">
+      <p class="note"><b>Three words, three lines.</b> Setting "Your / Next / Move" at 0.84 leading turns a sentence into a mass. It holds its silhouette at 150px on the lockup and at 38px in a skyscraper, which is what makes the resizes recognisable rather than merely consistent.</p>
+      <p class="note"><b>Campaign line above, offer below.</b> I set the hierarchy in that order deliberately. Inverted, the composition reads as a coupon: the price becomes the brand, and the equity built by the line is spent for nothing.</p>
+      <p class="note"><b>The image is cut, not framed.</b> A 16% diagonal clip lets the photography collide with the type field instead of sitting in a panel beside it, and the product cutout crosses that seam so the two halves interlock.</p>
+      <p class="note"><b>Red is rationed to urgency.</b> The only red on the master is the countdown chip. Holding the line on that is what lets the final email go full red and actually mean something.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── 03 the system ────────────────────────────────────────────── -->
+<section class="intro" id="system">
+  <p class="eyebrow"><i></i>03, The system</p>
+  <h2>Guardrails, not guesswork</h2>
+  <p class="lede">Six colours with a job each, two typographic voices, three angles and one rule about corners. I keep campaign systems this tight on purpose: a toolkit an in-house team can extend without a design review on every asset.</p>
+</section>
+
+<div class="band band--ink">
+  <div class="sys">
+    <div>
+      <h5 style="margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)">Colour, with permissions attached</h5>
+      <div class="swatches">
+        <div class="sw" style="background:#0082C3;color:#fff"><b>Brand blue</b><span>#0082C3</span></div>
+        <div class="sw" style="background:#FFEA28;color:#1A2A34"><b>Promo yellow</b><span>#FFEA28</span></div>
+        <div class="sw" style="background:#E3262F;color:#fff"><b>Promo red</b><span>#E3262F</span></div>
+        <div class="sw" style="background:#1A2A34;color:#fff;outline:1px solid rgba(255,255,255,.2)"><b>Ink</b><span>#1A2A34</span></div>
+        <div class="sw" style="background:#0F2029;color:#fff;outline:1px solid rgba(255,255,255,.2)"><b>Ink deep</b><span>#0F2029</span></div>
+        <div class="sw" style="background:#EFF1F3;color:#1A2A34"><b>Grey 100</b><span>#EFF1F3</span></div>
+      </div>
+      <p class="note" style="max-width:none"><b>Blue is the ground, yellow is the offer, red is the clock.</b> Ink carries the reassurance layer (warranty, returns, delivery) so trust messaging never competes with promotion for the same attention.</p>
+    </div>
+    <div>
+      <h5 style="margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)">Type: Roboto Condensed, two voices</h5>
+      <div class="spec">
+        <div class="spec-row"><em style="font-size:32px">Campaign</em><span>700 italic · 0.84–0.94 · −2px</span></div>
+        <div class="spec-row"><em style="font-size:22px">Section</em><span>58 / 52 italic</span></div>
+        <div class="spec-row"><em style="font-size:17px">Offer slab</em><span>50 / 1 italic</span></div>
+        <div class="spec-row"><em style="font-size:14px;font-style:normal">Product name</em><span>16 / 1.15 · 700 upright</span></div>
+        <div class="spec-row"><em style="font-size:11px;font-style:normal;letter-spacing:.2em">Utility label</em><span>10–14 · tracking 1.2–2.8px</span></div>
+        <div class="spec-row" style="border-bottom:0"><em style="font-size:14px;font-style:normal;font-weight:400;text-transform:none">Body, the only weight set in 400</em><span>15–19 / 1.45</span></div>
+      </div>
+      <p class="note" style="max-width:none"><b>Italic uppercase speaks campaign; upright uppercase states fact.</b> Headlines lean, prices and specifications stand straight. Tracking opens as the size drops (negative at display sizes, up to 2.8px on utility labels) so the condensed cut stays readable at 10px.</p>
+    </div>
+    <div>
+      <h5 style="margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)">The angle system</h5>
+      <div class="angles">
+        <div class="angle"><i style="transform:skewX(-10deg)"></i><b>−10°</b><span>Chips, CTAs, price slabs. Inner text counter-skewed +10° so the words sit upright.</span></div>
+        <div class="angle"><i style="transform:skewX(-14deg)"></i><b>−14°</b><span>Rules and motion lines. One speed mark per composition, never two.</span></div>
+        <div class="angle"><i style="transform:skewX(-19deg)"></i><b>−19°</b><span>Editorial band only. Steeper, so the single full-bleed moment outruns the rest.</span></div>
+      </div>
+      <p class="note" style="max-width:none"><b>Zero radius, no exceptions.</b> Square corners against consistent skews are what keep a promotional page reading as sports equipment rather than as a coupon site.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── 04 the work ──────────────────────────────────────────────── -->
+<section class="intro" id="work">
+  <p class="eyebrow"><i></i>04, The work</p>
+  <h2>Homepage</h2>
+  <p class="lede">The landing surface, and the only one where the whole campaign has to hold together at once: hero, category entry points, merchandised product row, budget doors, editorial moment, urgency band. I resolved it at 1440 and then re-composed it for mobile rather than reflowing it: headline steps 122&rarr;56px, gutters 72&rarr;20px, and the six-sport strip becomes a snap scroller that keeps its parallelogram crop.</p>
+  <a class="jump" href="decathlon-sale/index.html">Open the live build &nbsp;↗</a>
+</section>
+
+<div class="band band--deep">
+  <div class="band-head"><h3>Sale homepage</h3><span>Live build · the full page, and the top 2,400px to scroll</span></div>
+  <div class="stage stage--tight" style="align-items:flex-start">
+    <div class="piece">
+      <div class="frame" style="width:640px;aspect-ratio:1440/2400">
+        <iframe src="decathlon-sale/index.html" title="Sale homepage, desktop" loading="lazy" style="width:1440px;height:2400px"></iframe>
+      </div>
+      <p class="cap"><span>Desktop · 1440</span><a href="decathlon-sale/index.html">Open ↗</a></p>
+    </div>
+    <div class="piece">
+      <div class="frame" style="width:300px;aspect-ratio:1440/5160">
+        <iframe src="decathlon-sale/index.html" title="Sale homepage, full length" loading="lazy" style="width:1440px;height:5160px"></iframe>
+      </div>
+      <p class="cap"><span>Full page</span><i>Top to footer</i></p>
+    </div>
+  </div>
+  <div class="stage stage--tight" style="margin-top:clamp(16px,2vw,28px);align-items:flex-start">
+    <div class="piece">
+      <div class="frame" style="width:228px;aspect-ratio:390/844">
+        <iframe src="decathlon-sale/index.html" title="Sale homepage, mobile" loading="lazy" style="width:390px;height:844px"></iframe>
+      </div>
+      <p class="cap"><span>Mobile · 390</span><i>Scroll</i></p>
+    </div>
+    <div class="piece" style="flex:1 1 320px;max-width:640px">
+      <p class="note" style="max-width:none"><b>Mobile is a re-composition, not a squeeze.</b> The hero photograph moves beneath the type instead of behind it, the six-sport strip becomes a snap scroller that keeps its parallelogram crop, the product row goes feature-then-grid, and the headline steps 122px down to 56px. Gutters collapse 72 → 20px.</p>
+      <p class="note" style="max-width:none"><b>The page is a merchandising sequence.</b> Campaign moment, reassurance strip, category entry, hero deal, budget doors, editorial, urgency, sale index. Each band answers the question the one above it raises, which is why the full-length view reads as one argument rather than a stack of modules.</p>
+    </div>
+  </div>
+
+  <div class="band-head" style="margin-top:clamp(32px,3.6vw,54px);margin-bottom:18px">
+    <h3 style="font-size:clamp(18px,1.8vw,22px)">Four decisions on the page</h3>
+    <span>Detail crops at 1440</span>
+  </div>
+  <div class="stage stage--tight">
+    <div class="piece">
+      <div class="crop" style="width:466px;aspect-ratio:1440/720">
+        <iframe src="decathlon-sale/index.html" title="Homepage hero" loading="lazy" data-crop-y="132" style="width:1440px;height:5400px"></iframe>
+      </div>
+      <p class="cap"><span>Hero · the campaign moment</span></p>
+      <p class="note"><b>The type field owns the left 48%.</b> Photography clips in behind it and the cutout crosses the seam, so the composition locks rather than splits. The offer slab sits on the baseline of the headline block, not floated below it.</p>
+    </div>
+    <div class="piece">
+      <div class="crop" style="width:466px;aspect-ratio:1440/660">
+        <iframe src="decathlon-sale/index.html" title="Homepage category strip" loading="lazy" data-crop-y="958" style="width:1440px;height:5400px"></iframe>
+      </div>
+      <p class="cap"><span>Six sports · category entry</span></p>
+      <p class="note"><b>Every tile is a parallelogram.</b> Cut at 13/87%, the six read as one moving band. Six is the ceiling at this width: a seventh drops the sport name below legible size, which is a merchandising loss, not a layout one.</p>
+    </div>
+  </div>
+  <div class="stage stage--tight" style="margin-top:clamp(14px,1.8vw,26px)">
+    <div class="piece">
+      <div class="crop" style="width:466px;aspect-ratio:1440/770">
+        <iframe src="decathlon-sale/index.html" title="Homepage product row" loading="lazy" data-crop-y="1655" style="width:1440px;height:5400px"></iframe>
+      </div>
+      <p class="cap"><span>Best of the sale · merchandising</span></p>
+      <p class="note"><b>One hero deal, four supporting.</b> The 604px feature panel takes the brand blue and the yellow price slab; the satellite tiles sit on grey. The eye lands on the deal, then browses: the standard retail ladder, built into the layout rather than left to the feed.</p>
+    </div>
+    <div class="piece">
+      <div class="crop" style="width:466px;aspect-ratio:1440/200">
+        <iframe src="decathlon-sale/index.html" title="Homepage urgency band" loading="lazy" data-crop-y="3972" style="width:1440px;height:5400px"></iframe>
+      </div>
+      <p class="cap"><span>Urgency band</span></p>
+      <p class="note"><b>The only full-red moment on the page.</b> Placed after the product and editorial sections, so urgency arrives once the shopper already has something in mind. Leading with it converts worse and cheapens the brand field above.</p>
+    </div>
+  </div>
+</div>
+
+<!-- email -->
+<section class="intro">
+  <h2 class="h2--sm" style="font-size:clamp(28px,3vw,40px)">Email flight</h2>
+  <p class="lede">A flat promotion generates no new news on day two, so I sequenced the flight on urgency rather than on offer: land the line, answer "what should I buy", then start the clock. Hand-built at 600px on nested tables with inline styles, live text headlines with an Arial fallback, hidden preheaders carrying the mechanic, and a single-column stack below 600px.</p>
+</section>
+
+<div class="band band--grey" style="padding-top:clamp(28px,3vw,44px)">
+  <div class="band-head"><h3>Three sends across 48 hours</h3><span>600px · scroll inside the frames</span></div>
+  <div class="stage stage--tight">
+    <div class="piece">
+      <div class="frame" style="width:300px;aspect-ratio:600/1240"><iframe src="decathlon-sale/campaign/email-01-launch.html" title="Launch email" loading="lazy" style="width:600px;height:1240px"></iframe></div>
+      <p class="cap"><span>01 · Launch</span><a href="decathlon-sale/campaign/email-01-launch.html">Open ↗</a></p>
+    </div>
+    <div class="piece">
+      <div class="frame" style="width:300px;aspect-ratio:600/1240"><iframe src="decathlon-sale/campaign/email-02-picks.html" title="Picks email" loading="lazy" style="width:600px;height:1240px"></iframe></div>
+      <p class="cap"><span>02 · The picks</span><a href="decathlon-sale/campaign/email-02-picks.html">Open ↗</a></p>
+    </div>
+    <div class="piece">
+      <div class="frame" style="width:300px;aspect-ratio:600/1240"><iframe src="decathlon-sale/campaign/email-03-lastchance.html" title="Last chance email" loading="lazy" style="width:600px;height:1240px"></iframe></div>
+      <p class="cap"><span>03 · Last chance</span><a href="decathlon-sale/campaign/email-03-lastchance.html">Open ↗</a></p>
+    </div>
+  </div>
+  <div class="why">
+    <div><h5>Sequenced, not repeated</h5><p>Send one carries the campaign line and a single hero deal. Send two is a merchandising email: eight picks and three budget doors for the shopper who needs to be told what to buy. Send three drops the brand field entirely and runs on the clock.</p></div>
+    <div><h5>Built for inboxes</h5><p>Tables, bgcolor attributes, inline styles, one hidden preheader per send. The headline is live HTML type, so the offer still lands with images blocked: the state a meaningful share of a promotional list will actually see.</p></div>
+    <div><h5>One primary action</h5><p>Each send holds a single primary CTA above the fold and repeats it once at the foot. Category and budget rows are secondary paths, styled as links rather than buttons so the hierarchy stays unambiguous.</p></div>
+  </div>
+</div>
+
+<!-- social -->
+<section class="intro">
+  <h2 class="h2--sm" style="font-size:clamp(28px,3vw,40px)">Social toolkit</h2>
+  <p class="lede">Feed does the announcing, carousel does the browsing, stories do the clicking. Nine artboards off one master: same skew, same slab, same two-line hierarchy, so three exposures in a week read as one campaign rather than three ads.</p>
+</section>
+
+<div class="band band--blue" style="padding-top:clamp(28px,3vw,44px)">
+  <div class="band-head"><h3>Feed</h3><span>4 posts · 1080 × 1080</span></div>
+  <div class="stage stage--tight">
+    <div class="piece"><div class="frame" style="width:220px;aspect-ratio:1/1"><iframe src="decathlon-sale/campaign/ig-01-keyvisual.html" title="Master lockup post" loading="lazy" style="width:1080px;height:1080px"></iframe></div><p class="cap"><span>Master lockup</span></p></div>
+    <div class="piece"><div class="frame" style="width:220px;aspect-ratio:1/1"><iframe src="decathlon-sale/campaign/ig-02-deal.html" title="Deal post" loading="lazy" style="width:1080px;height:1080px"></iframe></div><p class="cap"><span>Deal of the day</span></p></div>
+    <div class="piece"><div class="frame" style="width:220px;aspect-ratio:1/1"><iframe src="decathlon-sale/campaign/ig-03-running.html" title="Category post" loading="lazy" style="width:1080px;height:1080px"></iframe></div><p class="cap"><span>Category</span></p></div>
+    <div class="piece"><div class="frame" style="width:220px;aspect-ratio:1/1"><iframe src="decathlon-sale/campaign/ig-04-type.html" title="Mechanic post" loading="lazy" style="width:1080px;height:1080px"></iframe></div><p class="cap"><span>The mechanic</span></p></div>
+  </div>
+
+  <div class="band-head" style="margin-top:clamp(28px,3.2vw,46px);margin-bottom:18px">
+    <h3 style="font-size:clamp(18px,1.8vw,22px)">Carousel &amp; stories</h3><span>3 frames · 2 verticals, 1080 × 1920</span>
+  </div>
+  <div class="stage stage--tight">
+    <div class="piece"><div class="frame" style="width:220px;aspect-ratio:1/1"><iframe src="decathlon-sale/campaign/carousel-1.html" title="Carousel frame 1" loading="lazy" style="width:1080px;height:1080px"></iframe></div><p class="cap"><span>1 / 3</span></p></div>
+    <div class="piece"><div class="frame" style="width:220px;aspect-ratio:1/1"><iframe src="decathlon-sale/campaign/carousel-2.html" title="Carousel frame 2" loading="lazy" style="width:1080px;height:1080px"></iframe></div><p class="cap"><span>2 / 3</span></p></div>
+    <div class="piece"><div class="frame" style="width:180px;aspect-ratio:1080/1920"><iframe src="decathlon-sale/campaign/story-01-keyvisual.html" title="Story, launch" loading="lazy" style="width:1080px;height:1920px"></iframe></div><p class="cap"><span>Story · Launch</span></p></div>
+    <div class="piece"><div class="frame" style="width:180px;aspect-ratio:1080/1920"><iframe src="decathlon-sale/campaign/story-02-countdown.html" title="Story, countdown" loading="lazy" style="width:1080px;height:1920px"></iframe></div><p class="cap"><span>Story · Countdown</span></p></div>
+  </div>
+  <div class="stage stage--tight" style="margin-top:clamp(12px,1.6vw,22px)">
+    <div class="piece"><div class="frame" style="width:220px;aspect-ratio:1/1"><iframe src="decathlon-sale/campaign/carousel-3.html" title="Carousel frame 3" loading="lazy" style="width:1080px;height:1080px"></iframe></div><p class="cap"><span>3 / 3</span></p></div>
+    <div class="piece" style="flex:1 1 320px;max-width:640px">
+      <p class="note" style="max-width:none"><b>The mechanic earns its own post.</b> "No code. No minimum. Just 25% off." is the only artboard with no photography and no product. The yellow ground makes the sale's one genuine point of difference the whole image: the asset I would put paid budget behind.</p>
+      <p class="note" style="max-width:none"><b>The carousel is a funnel.</b> Frame one states the promise, frame two offers three sports to choose from, frame three converts on price bands, and each frame still stands alone, because most people never swipe.</p>
+      <p class="note" style="max-width:none"><b>Stories are composed around the sticker.</b> Type sits inside the middle band, clear of the profile row and the CTA zone. The swipe-up block is drawn into the artboard so the composition is judged with it in place.</p>
+    </div>
+  </div>
+</div>
+
+<!-- display -->
+<section class="intro">
+  <h2 class="h2--sm" style="font-size:clamp(28px,3vw,40px)">Display kit</h2>
+  <p class="lede">Display is where a campaign system either survives or falls apart. At 160&times;600 there is room for the lockup, three words, the offer and a button, so I fixed the drop order in advance (lede, then item count, then countdown) and every unit resolves from the same master rather than being redrawn.</p>
+</section>
+
+<div class="band" style="padding-top:clamp(28px,3vw,44px)">
+  <div class="band-head"><h3>Standard IAB units</h3><span>Rendered 1:1: no scaling</span></div>
+  <div class="stage stage--tight" style="align-items:flex-start">
+    <div class="piece"><div class="frame" style="width:300px;aspect-ratio:300/250"><iframe src="decathlon-sale/campaign/banner-300x250.html" title="300x250" loading="lazy" style="width:300px;height:250px"></iframe></div><p class="cap"><span>300 × 250</span><i>MPU</i></p></div>
+    <div class="piece"><div class="frame" style="width:160px;aspect-ratio:160/600"><iframe src="decathlon-sale/campaign/banner-160x600.html" title="160x600" loading="lazy" style="width:160px;height:600px"></iframe></div><p class="cap"><span>160 × 600</span><i>Skyscraper</i></p></div>
+    <div class="piece" style="flex:1 1 380px;max-width:440px">
+      <div class="frame" style="width:100%;aspect-ratio:728/90"><iframe src="decathlon-sale/campaign/banner-728x90.html" title="728x90" loading="lazy" style="width:728px;height:90px"></iframe></div>
+      <p class="cap"><span>728 × 90</span><i>Leaderboard</i></p>
+      <div class="frame" style="width:100%;aspect-ratio:970/250;margin-top:20px"><iframe src="decathlon-sale/campaign/banner-970x250.html" title="970x250" loading="lazy" style="width:970px;height:250px"></iframe></div>
+      <p class="cap"><span>970 × 250</span><i>Billboard</i></p>
+      <p class="note"><b>Deciding the drop order is the whole job.</b> Fixed in advance, the small units are deliberate compositions; decided ad hoc, they become compressed versions of the big ones. The lockup, three words, the offer and the button survive to every size.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- motion -->
+<section class="intro">
+  <h2 class="h2--sm" style="font-size:clamp(28px,3vw,40px)">Motion</h2>
+  <p class="lede">Six animated units built on three concepts rather than one loop applied six times. Each concept exists for a placement: a wipe that earns the campaign's own graphic device, kinetic type that stays sharp and light where weight matters, and a slow reveal for the surfaces where the reader has already stopped. Every unit is rendered from the same assets by script, 2× supersampled and quantised against one 256-colour palette with dithering off, and delivered at 2× for retina: the three things that decide whether a hand-rolled GIF looks sharp or soft.</p>
+</section>
+
+<div class="band" style="padding-top:clamp(28px,3vw,44px)">
+  <div class="band-head">
+    <h3>00 · The film</h3>
+    <span>8 seconds · 20 beats · the cut every other unit is trimmed from</span>
+  </div>
+
+  <div class="film-embed">
+    <iframe src="decathlon-motion.html" title="Your Next Move: 8-second campaign film"
+            loading="lazy" allow="autoplay"></iframe>
+  </div>
+  <p class="film-note"><span>16 : 9 · loops seamlessly</span><i>Sound is off by default: turn it on inside the frame</i></p>
+
+  <div class="why">
+    <div>
+      <h5>One rule, twenty beats</h5>
+      <p>The −14° skew is the only transition in the film. Nothing dissolves: a skewed slab either rips the frame away or slams a panel in, so every cut is the campaign's own graphic device rather than an effect borrowed from a template. Beats land every 0.4s, which is what makes it read as advertising instead of as a slideshow.</p>
+    </div>
+    <div>
+      <h5>Locked to the track, not to a timer</h5>
+      <p>The whole film is one 8.016-second clock: every layer animates across the full duration on percentage keyframes rather than chaining delays. That length is the audio bed's exact length, so picture and sound stay frame-locked across every loop, and any beat can be retimed by moving one percentage.</p>
+    </div>
+    <div>
+      <h5>Built in the browser, not exported</h5>
+      <p>Type, colour and product cut-outs are live DOM, so it is resolution-independent, re-cuts to 9:16 or 1:1 by changing one aspect ratio, and copy changes are a text edit rather than a re-render. The GIF units below are the same three concepts cut down to placement weights.</p>
+    </div>
+  </div>
+</div>
+
+<div class="band band--grey" style="padding-top:clamp(28px,3vw,44px)">
+  <div class="band-head"><h3>01 · Sweep</h3><span>The −14° line is the transition: three states, two wipes</span></div>
+  <div class="stage stage--tight" style="align-items:flex-start">
+    <div class="piece">
+      <img class="still" src="decathlon-sale/campaign/gif/banner-300x250@2x.gif" alt="Sweep concept, 300x250" width="300" height="250" loading="lazy">
+      <p class="cap"><span>300 × 250</span><i>4.8s · ×3 loops</i></p>
+    </div>
+    <div class="piece">
+      <img class="still" src="decathlon-sale/campaign/gif/social-square-sweep@2x.gif" alt="Sweep concept, square" width="300" height="300" loading="lazy">
+      <p class="cap"><span>Square · 600</span><i>Loops</i></p>
+    </div>
+    <div class="piece" style="flex:1 1 280px;max-width:320px">
+      <p class="note"><b>The wipe is the campaign line, doing work.</b> A skewed yellow bar crosses the frame and the composition behind it has changed: headline, then offer, then product and CTA. It replaces a dissolve with the brand's own device, and gives three full states inside five seconds.</p>
+    </div>
+  </div>
+
+  <div class="band-head" style="margin-top:clamp(30px,3.4vw,50px);margin-bottom:18px">
+    <h3 style="font-size:clamp(18px,1.8vw,22px)">02 · Count</h3><span>Kinetic type on flat colour: 0 to 25 as the slab grows</span>
+  </div>
+  <div class="stage stage--tight" style="align-items:flex-start">
+    <div class="piece" style="width:100%">
+      <img class="still" src="decathlon-sale/campaign/gif/banner-728x90@2x.gif" alt="Count concept, 728x90" width="728" height="90" loading="lazy">
+      <p class="cap"><span>728 × 90</span><i>45 KB at 1× · ×3 loops</i></p>
+    </div>
+  </div>
+  <div class="stage stage--tight" style="margin-top:14px;align-items:flex-start">
+    <div class="piece">
+      <img class="still" src="decathlon-sale/campaign/gif/social-square-count@2x.gif" alt="Count concept, square" width="300" height="300" loading="lazy">
+      <p class="cap"><span>Square · 600</span><i>Loops</i></p>
+    </div>
+    <div class="piece" style="flex:1 1 300px;max-width:560px">
+      <p class="note" style="max-width:none"><b>No photography, on purpose.</b> The discount counts 0 → 25 while the slab grows to meet it, and the headline words snap in on a slight overshoot. Flat colour quantises to 32 shades with no dithering, which is why the leaderboard lands at 45 KB against half a megabyte for the photographic cuts. It is the version I would put into a weight-capped placement.</p>
+    </div>
+  </div>
+
+  <div class="band-head" style="margin-top:clamp(30px,3.4vw,50px);margin-bottom:18px">
+    <h3 style="font-size:clamp(18px,1.8vw,22px)">03 · Reveal</h3><span>Slow push-in, product rising, type settling</span>
+  </div>
+  <div class="stage stage--tight" style="align-items:flex-start">
+    <div class="piece">
+      <img class="still" src="decathlon-sale/campaign/gif/banner-160x600@2x.gif" alt="Reveal concept, 160x600" width="160" height="600" loading="lazy">
+      <p class="cap"><span>160 × 600</span><i>4.9s · ×3 loops</i></p>
+    </div>
+    <div class="piece" style="flex:1 1 420px;max-width:600px">
+      <img class="still" src="decathlon-sale/campaign/gif/email-hero-600x300@2x.gif" alt="Reveal concept, email hero" width="600" height="300" loading="lazy">
+      <p class="cap"><span>Email hero · 600 × 300</span><i>Loops</i></p>
+      <p class="note" style="max-width:none"><b>Email motion has to be GIF.</b> No client runs CSS animation reliably, so the hero animates as an image with the CTA left as live HTML underneath: clickable, trackable, still readable with images blocked. The plate is held static and only the elements move: identical background pixels are what keep the file inside a defensible send weight.</p>
+    </div>
+  </div>
+
+  <div class="why">
+    <div><h5>Drawn at 2×, shown at half</h5><p>Every unit is rendered at twice its nominal size and placed at half, so it lands pixel-for-pixel on a retina screen instead of being upscaled into softness. Frames are quantised against one 256-colour global palette with dithering off, which keeps flat brand colour clean and type edges hard.</p></div>
+    <div><h5>Delta frames, not full ones</h5><p>Each frame writes only the region that changed. That is the difference between a 7 MB file and 45 KB on the leaderboard, and it is what makes a photographic 300×250 viable at 86 KB.</p></div>
+    <div><h5>Timed to the standard</h5><p>Display units run under five seconds and loop three times, inside the IAB 15-second ceiling, holding the end card 1.4s on lockup, offer and button. Social cuts loop continuously; production display would ship as HTML5 with these as fallback, and feed platforms take MP4.</p></div>
+  </div>
+</div>
+
+<!-- ── 05 craft ─────────────────────────────────────────────────── -->
+<section class="intro" id="craft">
+  <p class="eyebrow"><i></i>05, Craft</p>
+  <h2>The decisions nobody notices</h2>
+  <div class="details-grid" style="margin-top:34px">
+    <div>
+      <h5>Price architecture</h5>
+      <p>Reduced price first and largest, was-price struck through beside it, −25% flash third. The budget block states the rule in words, "prices below are what you pay", so there is no arithmetic anywhere in the campaign. Ambiguity at the price is where promotional trust is lost.</p>
+    </div>
+    <div>
+      <h5>Counter-skewed lockups</h5>
+      <p>Every skewed chip, CTA and price slab carries an inner span rotated back the opposite way: container leans, words stay upright. Skewed type at 11px is unreadable, and this element repeats more than any other in the system.</p>
+    </div>
+    <div>
+      <h5>Cutouts and their ground</h5>
+      <p>Products carry a drop shadow plus a radial ground ellipse: the only shadow in the system. Without the ellipse a cutout floats above the panel; with it, it stands on it. At 300&times;300 source, I also capped render size at 312px to stay ahead of visible softening.</p>
+    </div>
+    <div>
+      <h5>Legibility over spec</h5>
+      <p>The handoff set navigation type at 10–12px. Read at arm's length on a laptop it failed, so I took it to 12–14px against the spec. Yellow never carries body copy on white, and every white-on-blue and yellow-on-ink pairing clears WCAG AA at the size used.</p>
+    </div>
+    <div>
+      <h5>One clock, three surfaces</h5>
+      <p>The countdown in the sale bar, the hero and the urgency band all derive from a single campaign-end timestamp rather than three typed strings, so the promotion cannot contradict itself, and the whole promotional layer removes itself when the flight ends.</p>
+    </div>
+    <div>
+      <h5>Re-composition, not reflow</h5>
+      <p>Mobile is a different composition of the same elements: photography beneath the type instead of behind it, the category strip as a snap scroller, the product row as feature-then-grid. Reflowing a 1440 hero into 390 produces a squeezed page, not a mobile one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 06 reflection ────────────────────────────────────────────── -->
+<section class="details" id="reflection">
+  <p class="eyebrow"><i></i>06, Reflection</p>
+  <h2 style="margin-bottom:34px">What I'd change, and what I'd measure</h2>
+  <div class="details-grid">
+    <div>
+      <h5>Where the work is thin</h5>
+      <ul>
+        <li>Cutouts are 300&times;300 originals rendered up to 312px. Production needs 2× exports and a responsive srcset before this ships.</li>
+        <li>Photography is library-cropped. Each slot's crop values encode the shot I would brief, not the shot I had.</li>
+        <li>Counts, prices and copy are hardcoded. In production they come from the campaign feed with the discount computed, never typed.</li>
+      </ul>
+    </div>
+    <div>
+      <h5>What I'd test next</h5>
+      <ul>
+        <li>Six category tiles against four: six is a composition decision I have not yet proven commercially.</li>
+        <li>The mechanic post as a standalone paid asset: is "no code needed" a strong enough hook with no product in frame?</li>
+        <li>A hero variant with the offer above the campaign line, to put my own hierarchy assumption under test.</li>
+      </ul>
+    </div>
+    <div>
+      <h5>What I'd measure</h5>
+      <ul>
+        <li>Category-strip click-through by tile position, to validate the six-tile ceiling.</li>
+        <li>Revenue per send across the flight: does the merchandising email out-earn the urgency one?</li>
+        <li>Countdown exposure against bounce; urgency devices repel as readily as they pull.</li>
+        <li>Share of orders under ₹ 999, to see whether the budget block opens a door or only decorates one.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-note">
+    <span class="chip"><span>Your next move</span></span>
+    <span>Concept project · Decathlon is not a client · 2026</span>
+    <a href="branding.html" style="color:var(--blue)">← Back to Branding &amp; Marketing</a>
+  </div>
+</section>
+
+
+</main>
+
+<script>
+/* Artefacts are live builds rendered at true pixel size. Each .frame or .crop is a window
+   onto one: scale the iframe to the window width, and for a crop, offset it to the band
+   of the page the caption is describing. */
+(function () {
+  var windows = document.querySelectorAll('.frame, .crop');
+  function fit() {
+    windows.forEach(function (win) {
+      var el = win.querySelector('iframe');
+      if (!el) return;
+      var natural = parseFloat(el.style.width);
+      if (!natural) return;
+      var offset = parseFloat(el.getAttribute('data-crop-y')) || 0;
+      el.style.transformOrigin = '0 0';
+      el.style.transform = 'scale(' + (win.clientWidth / natural) + ') translateY(' + (-offset) + 'px)';
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(fit);
+    windows.forEach(function (w) { ro.observe(w); });
+  }
+})();
+
+/* Section marker: highlight where the reader is, and flip the marker to light type
+   whenever it sits over one of the dark bands. */
+(function () {
+  var rail = document.querySelector('.toc');
+  var links = [].slice.call(document.querySelectorAll('.toc a'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var dark = [].slice.call(document.querySelectorAll('.band--ink, .band--deep, .band--blue, .band--red'));
+
+  function update() {
+    var line = window.scrollY + window.innerHeight * 0.35, found = 0;
+    sections.forEach(function (el, i) {
+      if (el && el.getBoundingClientRect().top + window.scrollY <= line) found = i;
+    });
+    links.forEach(function (a, n) { a.classList.toggle('is-active', n === found); });
+
+    var mid = window.innerHeight / 2;
+    var overDark = dark.some(function (b) {
+      var r = b.getBoundingClientRect();
+      return r.top <= mid && r.bottom >= mid;
+    });
+    rail.classList.toggle('on-dark', overDark);
+  }
+
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+})();
+</script>
+
+<a href="branding.html" class="fab-back" aria-label="Back to Branding and Marketing">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+  <span>Branding &amp; Marketing</span>
+</a>
+<script>
+  (function () {
+    var f = document.querySelector('.fab-back');
+    if (!f) return;
+    function upd() { f.classList.toggle('show', (window.scrollY || 0) > 380); }
+    window.addEventListener('scroll', upd, { passive: true });
+    upd();
+  })();
+</script>
+</body>
+</html>

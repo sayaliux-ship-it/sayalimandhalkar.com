@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mossora &mdash; Amazon Listing Design</title>
+<meta name="description" content="Amazon full product page listing design and infographics for Mossora, a botanical body cream.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap">
+<style>
+:root{
+  --page:#FFFFFF;
+  --d1:#2B370C; --d2:#212C05; --d3:#161F03;
+  --gold:#C9A24A; --gold-lt:#E4C878;
+  --w:rgba(255,255,255,.72); --w2:rgba(255,255,255,.42); --hair:rgba(255,255,255,.16);
+  --g:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --s:'Cormorant Garamond',Georgia,serif;
+  --pad:clamp(12px,2vw,30px);
+  --r:clamp(14px,1.5vw,22px);
+  --gut:clamp(26px,4vw,72px);
+}
+*{box-sizing:border-box}
+body{margin:0;display:flex;background:var(--page);color:#12100E;font-family:var(--g);
+     -webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+.stack{width:100%;max-width:1460px;margin:0 auto;padding:0 var(--pad)}
+
+/* ── shared panel ────────────────────────────────────── */
+.panel{position:relative;overflow:hidden;border-radius:var(--r);color:#fff;
+       background:linear-gradient(152deg,var(--d1) 0%,var(--d2) 52%,var(--d3) 100%);
+       margin-bottom:clamp(10px,1.1vw,16px)}
+/* a fine grain + a soft light source, so the ground has depth instead of flat colour */
+.panel::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(120% 90% at 18% 0%,rgba(255,255,255,.09),transparent 58%);}
+.panel::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.16;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>");}
+.panel > *{position:relative;z-index:2}
+
+/* meta rows — the thing that stops everything floating */
+.meta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+      font-size:10px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--w2)}
+.meta b{font-weight:500;color:rgba(255,255,255,.72)}
+.hair{height:1px;background:linear-gradient(90deg,var(--hair),rgba(255,255,255,.03));border:0;margin:0}
+.dates{display:flex;gap:6px}
+.dates span{min-width:38px;text-align:center;padding:5px 8px;border:1px solid var(--hair);border-radius:4px;
+            font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.8);font-variant-numeric:tabular-nums}
+
+/* ── cover ───────────────────────────────────────────── */
+.cover{position:relative;display:grid;grid-template-rows:auto 1fr auto;
+       min-height:clamp(430px,46vw,620px);padding:clamp(22px,2.6vw,38px) 0}
+.cover .band{width:min(100%,60%);padding:0 var(--gut)}
+.cover .band.top{padding-bottom:clamp(18px,2.2vw,30px)}
+.cover .band.bot{padding-top:clamp(18px,2.2vw,30px)}
+.cover .type{width:min(100%,60%);align-self:center;padding:clamp(20px,3vw,44px) var(--gut)}
+.cover .shot{position:absolute;right:0;top:0;bottom:0;width:46%;overflow:hidden}
+.cover .shot img{width:100%;height:100%;object-fit:cover;object-position:52% 46%}
+.cover .shot::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--d2) 0%,rgba(33,44,5,.55) 22%,rgba(33,44,5,0) 62%)}
+.cover h1{margin:0;font-size:clamp(40px,6.6vw,102px);font-weight:800;line-height:.86;
+          letter-spacing:-.045em;text-transform:uppercase}
+.cover .rule{display:flex;align-items:center;gap:16px;margin:clamp(16px,1.8vw,26px) 0 clamp(14px,1.6vw,22px)}
+.cover .rule i{flex:1;height:1px;background:var(--hair)}
+.cover .rule span{font-size:10px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
+.cover .say{margin:0;max-width:26ch;font-family:var(--s);font-size:clamp(19px,2.1vw,30px);
+            font-style:italic;font-weight:300;line-height:1.34;color:rgba(255,255,255,.9)}
+@media (max-width:900px){
+  .cover .band,.cover .type{width:100%}
+  .cover .shot{position:static;width:auto;height:clamp(240px,54vw,340px);
+               margin:clamp(18px,3vw,26px) var(--gut) 0;border-radius:10px}
+  .cover .shot::after{background:linear-gradient(180deg,rgba(33,44,5,.3),rgba(33,44,5,0) 45%)}
+}
+
+/* ── intro panel ─────────────────────────────────────── */
+.intro{padding:clamp(30px,3.6vw,54px) var(--gut) clamp(34px,4vw,60px)}
+.intro h2{margin:clamp(20px,2.4vw,34px) 0 0;font-size:clamp(23px,3vw,44px);font-weight:700;
+          letter-spacing:-.035em;text-transform:uppercase;line-height:1.02}
+.intro h2 em{font-family:var(--s);font-style:italic;font-weight:300;text-transform:none;
+             letter-spacing:-.01em;color:var(--gold-lt)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px clamp(20px,2.6vw,44px);
+       margin-top:clamp(26px,3vw,42px)}
+@media (min-width:820px){ .facts{grid-template-columns:repeat(4,1fr)} }
+.facts div{padding-top:12px;border-top:1px solid var(--hair)}
+.facts h6{margin:0 0 6px;font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.facts p{margin:0;font-size:13px;line-height:1.6;color:var(--w)}
+
+/* ── listing rows ────────────────────────────────────── */
+.listing{padding:clamp(30px,3.6vw,54px) var(--gut) clamp(38px,4.6vw,74px)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+     gap:clamp(20px,3.4vw,64px);align-items:center;padding:clamp(28px,3.6vw,60px) 0;
+     border-top:1px solid rgba(255,255,255,.09)}
+.row:first-of-type{border-top:0;padding-top:clamp(20px,2.4vw,34px)}
+.art{position:relative;border-radius:clamp(8px,.9vw,14px);overflow:hidden;
+     box-shadow:0 26px 58px rgba(0,0,0,.46),0 2px 0 rgba(255,255,255,.06) inset;
+     outline:1px solid rgba(255,255,255,.1);outline-offset:-1px}
+.art img,.art video{width:100%;display:block}
+.art video{background:#000}
+.row.flip .art{order:2}.row.flip .say{order:1}
+.say .no{display:block;font-size:clamp(46px,5.6vw,86px);font-weight:800;line-height:.8;
+         letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22);
+         margin:0 0 clamp(12px,1.4vw,20px)}
+.say h3{margin:0;font-size:clamp(19px,2.2vw,32px);font-weight:700;letter-spacing:-.032em;line-height:1.1}
+.say h3 em{font-family:var(--s);font-style:italic;font-weight:300;letter-spacing:0;color:var(--gold-lt)}
+.say p{margin:12px 0 0;font-size:clamp(13px,1.1vw,15.5px);line-height:1.68;color:var(--w);max-width:38ch}
+.say .spec{margin:clamp(14px,1.6vw,22px) 0 0;padding-top:10px;border-top:1px solid var(--hair);
+           font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--w2);max-width:38ch}
+@media (max-width:900px){
+  .row{grid-template-columns:1fr;gap:20px}
+  .row .art,.row .say,.row.flip .art,.row.flip .say{order:initial}
+  .say .no{font-size:40px}
+}
+
+/* ── close ───────────────────────────────────────────── */
+.close{padding:clamp(34px,4.2vw,66px) var(--gut)}
+.close .lockup{display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.close .lockup h4{margin:0;font-size:clamp(20px,2.4vw,34px);font-weight:700;letter-spacing:-.03em;text-transform:uppercase}
+.close .lockup h4 em{font-family:var(--s);font-style:italic;font-weight:300;text-transform:none;color:var(--gold-lt)}
+.close .lockup a{font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--w);
+                 padding-bottom:4px;border-bottom:1px solid var(--gold)}
+.close .lockup a:hover{color:#fff}
+.smallprint{max-width:80ch;margin:0 auto;padding:16px 4px clamp(40px,5vw,72px);
+            font-size:11px;line-height:1.8;color:#7A7468;letter-spacing:.01em}
+
+/* a little drama: sections settle in as you reach them */
+.rise{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){ .rise{opacity:1!important;transform:none!important;transition:none} }
+</style>
+<style>
+
+    /* portfolio chrome — vars scoped to .sidebar so they never reach the
+       case study's own Prata/cream type system */
+    :root { --sw: 280px; }
+    .sidebar {
+      --bg:#111111; --sidebar:#000000; --border:rgba(255,255,255,0.07);
+      --gold:#c9a96e; --gold-dim:rgba(201,169,110,0.1); --gold-lt:#dfc08a;
+      --text:#e8e4dc; --muted:rgba(232,228,220,0.72); --faint:rgba(232,228,220,0.55);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      text-align: left;
+    }
+    .sidebar a { text-decoration: none; }
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; scrollbar-width: none;
+      animation: sidebarIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    @keyframes sidebarIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    html.sb-instant .sidebar { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.sb-instant .sb-row:nth-child(n) { animation-delay: 0s !important; }
+
+    .sb-profile {
+      display: flex; align-items: center; gap: 13px;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease; cursor: pointer;
+    }
+    .sb-profile:hover { background: rgba(201,169,110,0.05); }
+    .sb-profile:hover .sb-avatar { border-color: rgba(201,169,110,0.65); }
+    .sb-profile:hover .sb-name { color: var(--gold-lt); }
+
+    .sb-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a2218, #4a3828);
+      border: 1.5px solid rgba(201,169,110,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: border-color 0.25s ease;
+    }
+    .sb-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .sb-avatar-initials {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em; line-height: 1;
+    }
+    .sb-name { font-size: 0.88rem; font-weight: 500; color: var(--text); letter-spacing: 0.01em; line-height: 1.3; display: block; }
+    .sb-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); margin-top: 1px; display: block; }
+
+    .sb-nav { flex: 1; padding: 8px 0; }
+    .sb-section { padding: 18px 0 6px; }
+    .sb-section-label {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55; padding: 0 22px 0 20px; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sb-section-label::before {
+      content: ''; width: 14px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
+    }
+
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .sb-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 14px; height: 44px; cursor: pointer; position: relative;
+      opacity: 0; animation: rowIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .sb-row:nth-child(1)  { animation-delay: 0.12s; }
+    .sb-row:nth-child(2)  { animation-delay: 0.17s; }
+    .sb-row:nth-child(3)  { animation-delay: 0.22s; }
+    .sb-row:nth-child(4)  { animation-delay: 0.27s; }
+    .sb-row:nth-child(5)  { animation-delay: 0.32s; }
+    .sb-row:nth-child(6)  { animation-delay: 0.37s; }
+    .sb-row:nth-child(7)  { animation-delay: 0.42s; }
+    .sb-row:nth-child(8)  { animation-delay: 0.47s; }
+    .sb-row:nth-child(9)  { animation-delay: 0.52s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .sb-row::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 2px; height: 0; background: var(--gold); border-radius: 0 2px 2px 0;
+      transition: height 0.25s ease;
+    }
+    .sb-row:hover::before, .sb-row.active::before { height: 56%; }
+    .sb-row:hover { background: rgba(255,255,255,0.03); }
+    .sb-row.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.04) 100%);
+      box-shadow: inset 0 0 20px rgba(201,169,110,0.04);
+    }
+
+    .sb-icon-left {
+      width: 30px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: var(--muted); transition: color 0.2s;
+    }
+    .sb-row:hover .sb-icon-left, .sb-row.active .sb-icon-left { color: var(--gold); }
+
+    .sb-label {
+      flex: 1; font-size: 0.84rem; font-weight: 400; color: var(--muted);
+      transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sb-row:hover .sb-label, .sb-row.active .sb-label { color: var(--text); }
+    .sb-row.active .sb-label { color: var(--gold-lt); }
+
+    .sb-icon-right {
+      width: 24px; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; color: rgba(232,228,220,0.22); transition: color 0.25s, transform 0.25s;
+    }
+    .sb-row:hover .sb-icon-right { color: var(--faint); }
+    .sb-row:hover .sb-icon-right.arrow { transform: translate(2px, -2px); }
+    .sb-row.active .sb-icon-right { color: var(--gold); }
+
+    .sb-footer { padding: 16px 18px 22px; border-top: 1px solid var(--border); }
+    .sb-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 14px; padding: 0 4px;
+    }
+    .avail-dot {
+      position: relative; width: 7px; height: 7px;
+      border-radius: 50%; background: #4ade80; flex-shrink: 0;
+    }
+    .avail-dot::before, .avail-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #4ade80; animation: dotRipple 2.4s ease-out infinite;
+    }
+    .avail-dot::after { animation-delay: 1.2s; }
+    @keyframes dotRipple {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .sb-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.69rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: transparent;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+    .sb-link:hover { border-color: rgba(201,169,110,0.4); color: var(--gold-lt); background: var(--gold-dim); }
+    .sb-link.full { grid-column: span 2; }
+
+    /* ════════════════════════════════
+       MAIN
+    ════════════════════════════════ */
+    .main {
+      margin-left: var(--sw);
+      width: calc(100% - var(--sw));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    @media (max-width: 960px) {
+      :root { --sw: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; width: 100%; }
+    }
+  </style></head>
+<body>
+
+<aside class="sidebar" aria-label="Site navigation">
+  <a href="index.html" class="sb-profile" style="text-decoration:none;">
+    <div class="sb-avatar" aria-hidden="true">
+      <span class="sb-avatar-initials">SM</span>
+    </div>
+    <div class="sb-profile-text">
+      <span class="sb-name">Sayali Mandhalkar</span>
+      <span class="sb-role">Product Designer &middot; New York</span>
+    </div>
+  </a>
+
+  <nav class="sb-nav" aria-label="Primary">
+
+    <!-- UX PROJECTS -->
+    <div class="sb-section">
+      <span class="sb-section-label" aria-hidden="true">UX Projects</span>
+
+      <a href="tenetic.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Tenetic</span>
+        <span class="sb-icon-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </a>
+
+      <a href="pur.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">PUR Waters</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="mentormap.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">MentorMap</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="presence.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Presence</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+
+      <a href="philly-truce.html" class="sb-row">
+        <span class="sb-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            <path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+          </svg>
+        </span>
+        <span class="sb-label">Philly Truce</span>
+        <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <!-- BRANDING & MARKETING -->
+    <a href="branding.html" class="sb-row active">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
+      </span>
+      <span class="sb-label">Branding &amp; Marketing</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- CERTIFICATIONS -->
+    <a href="certifications.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+          <circle cx="12" cy="8" r="6"/>
+        </svg>
+      </span>
+      <span class="sb-label">Certifications</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <!-- ABOUT ME -->
+    <a href="about.html" class="sb-row">
+      <span class="sb-icon-left" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="sb-label">About me</span>
+      <span class="sb-icon-right arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </a>
+
+  </nav>
+
+  <div class="sb-footer">
+    <div class="sb-avail">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+    <div class="sb-links">
+      <a href="mailto:sayali.ux@gmail.com" class="sb-link full" aria-label="Send email">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 5l7 4.5L15 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        sayali.ux@gmail.com
+      </a>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+<div class="stack">
+
+  <!-- ═══ COVER ═══ -->
+  <section class="panel cover">
+    <div class="band top">
+      <div class="meta">
+        <span>Mossora &mdash; <b>Sandal &amp; Moss Body Cream</b></span>
+        <span class="dates"><span>21</span><span>08</span><span>2026</span></span>
+      </div>
+      <hr class="hair" style="margin-top:14px">
+    </div>
+
+    <div class="type">
+      <h1>Amazon<br>Listing<br>Design</h1>
+      <div class="rule"><span>Full product page</span><i></i></div>
+      <p class="say">Photorealistic product imagery and a complete listing, built in one consistent style.</p>
+    </div>
+
+    <div class="shot">
+      <img src="mossora/img/02-in-hand.jpg" alt="Mossora body cream held in an open palm on moss" width="1400" height="1400">
+    </div>
+
+    <div class="band bot">
+      <hr class="hair" style="margin-bottom:14px">
+      <div class="meta">
+        <span>@sayali.ux</span>
+        <span>8 assets &nbsp;&middot;&nbsp; 1:1 &nbsp;&middot;&nbsp; 1600&nbsp;px</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INTRO ═══ -->
+  <section class="panel intro rise">
+    <div class="meta"><span>The project</span><span>01</span></div>
+    <h2>A body cream sold with<br>no shelf and <em>no tester</em></h2>
+    <div class="facts">
+      <div><h6>Role</h6><p>Art direction &middot; Structure &amp; copywriting &middot; Infographics &middot; Retouch</p></div>
+      <div><h6>Deliverable</h6><p>Seven gallery images and one video</p></div>
+      <div><h6>Format</h6><p>1:1 square &middot; 1600&nbsp;px &middot; sRGB</p></div>
+      <div><h6>Tools</h6><p>Generative imaging, Photoshop, hand-set type</p></div>
+    </div>
+  </section>
+
+  <!-- ═══ THE LISTING ═══ -->
+  <section class="panel listing rise">
+    <div class="meta"><span>The listing</span><span>02</span></div>
+
+    <div class="row">
+      <div class="art"><img src="mossora/img/01-hero.jpg" alt="Hero image" width="1400" height="1400"></div>
+      <div class="say">
+        <span class="no">01</span>
+        <h3>Hero <em>image</em></h3>
+        <p>The frame that earns the click. Product dead centre on warm paper, one descriptive line above it, three claim marks along the base.</p>
+        <p class="spec">Main gallery image</p>
+      </div>
+    </div>
+
+    <div class="row flip">
+      <div class="art"><img src="mossora/img/03-whats-inside.jpg" alt="Ingredient infographic" width="1400" height="1385" loading="lazy"></div>
+      <div class="say">
+        <span class="no">02</span>
+        <h3>What&rsquo;s <em>inside</em></h3>
+        <p>Three ingredients, not nine. Each one photographed rather than iconed, so the panel still reads as the same world as the hero.</p>
+        <p class="spec">Ingredients</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="art"><img src="mossora/img/05-texture.jpg" alt="Texture and swatch" width="1400" height="1403" loading="lazy"></div>
+      <div class="say">
+        <span class="no">03</span>
+        <h3>The <em>texture</em></h3>
+        <p>Whipped, not greasy. The swatch is left sheer at the edge to show it sinks in &mdash; texture is what brings a body cream buyer back.</p>
+        <p class="spec">Texture &amp; finish</p>
+      </div>
+    </div>
+
+    <div class="row flip">
+      <div class="art"><img src="mossora/img/04-how-to-use.jpg" alt="Three-step usage infographic" width="1400" height="1366" loading="lazy"></div>
+      <div class="say">
+        <span class="no">04</span>
+        <h3>How to <em>use it</em></h3>
+        <p>Three numbered steps, one line each. Enough to set the daily habit, short enough to read at thumbnail size.</p>
+        <p class="spec">Usage</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="art"><img src="mossora/img/06-lifestyle.jpg" alt="The jar on a stone vanity" width="1400" height="1400" loading="lazy"></div>
+      <div class="say">
+        <span class="no">05</span>
+        <h3>Where it <em>lives</em></h3>
+        <p>The one frame that leaves the studio. Stone, brass and low light &mdash; it sells the shelf the jar ends up on.</p>
+        <p class="spec">Lifestyle</p>
+      </div>
+    </div>
+
+    <div class="row flip">
+      <div class="art"><img src="mossora/img/02-in-hand.jpg" alt="The jar in an open palm" width="1400" height="1400" loading="lazy"></div>
+      <div class="say">
+        <span class="no">06</span>
+        <h3>True <em>scale</em></h3>
+        <p>An open palm answers the size question that &ldquo;200&nbsp;ml&rdquo; never does &mdash; and size confusion is the cheapest return there is to prevent.</p>
+        <p class="spec">Dimensions</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="art"><img src="mossora/img/07-cover.jpg" alt="The jar on flowering moss" width="1400" height="1400" loading="lazy"></div>
+      <div class="say">
+        <span class="no">07</span>
+        <h3>The <em>close</em></h3>
+        <p>Composed with the top third empty so the same frame carries a storefront banner without being redesigned.</p>
+        <p class="spec">Brand frame</p>
+      </div>
+    </div>
+
+    <div class="row flip">
+      <div class="art"><video src="mossora/img/08-motion.mp4" muted loop playsinline autoplay preload="auto" aria-label="Mossora product video"></video></div>
+      <div class="say">
+        <span class="no">08</span>
+        <h3>In <em>motion</em></h3>
+        <p>Silent and looping, because sound is off by default wherever it plays. The first frame has to hold on its own in case it never starts.</p>
+        <p class="spec">Video &middot; 1:1</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CLOSE ═══ -->
+  <section class="panel close rise">
+    <div class="meta" style="margin-bottom:clamp(20px,2.4vw,32px)"><span>End</span><span>03</span></div>
+    <div class="lockup">
+      <h4>Mossora &mdash; <em>Amazon listing design</em></h4>
+      <a href="branding.html">Back to Branding &amp; Marketing</a>
+    </div>
+  </section>
+
+  <p class="smallprint">Self-initiated concept project. Product imagery was generated and composited; art direction, layout, typography, copy and retouching by me.</p>
+
+</div>
+</main>
+
+<script>
+/* sections settle in as they come into view */
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.rise'));
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -12% 0px',threshold:.06});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+<script>sessionStorage.setItem('sb_v','1');</script>
+</body>
+</html>
