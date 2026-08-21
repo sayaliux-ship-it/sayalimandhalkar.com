@@ -204,7 +204,7 @@
        PAGE HEADER
     ════════════════════════════════ */
     .pg-header {
-      padding: 80px 100px 64px;
+      padding: 30px 100px 20px;
       border-bottom: 1px solid var(--border);
       position: relative;
       overflow: hidden;
@@ -227,20 +227,29 @@
       right: 60px; bottom: -20px;
       line-height: 1;
       pointer-events: none; user-select: none;
+      transform-origin: 50% 50%;
+      animation: starDrift 18s ease-in-out infinite;
+    }
+    @keyframes starDrift {
+      0%, 100% { transform: rotate(0deg)   scale(1);    opacity: 1;    }
+      50%      { transform: rotate(180deg) scale(1.07); opacity: 0.55; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pg-header::after { animation: none; }
     }
     .pg-header-inner { position: relative; z-index: 1; }
     .pg-eyebrow {
       display: flex; align-items: center; gap: 14px;
       font-size: 0.62rem; font-weight: 500; letter-spacing: 0.3em;
       text-transform: uppercase; color: var(--gold);
-      margin-bottom: 24px;
+      margin-bottom: 11px;
     }
     .pg-eyebrow-line { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
     .pg-title {
       font-family: var(--serif);
-      font-size: clamp(40px, 5.5vw, 72px);
+      font-size: clamp(30px, 3.4vw, 48px);
       font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
-      color: var(--text); margin-bottom: 20px;
+      color: var(--text); margin-bottom: 0;
     }
     .pg-title em { font-style: italic; color: var(--gold); }
     .pg-sub {
@@ -253,7 +262,7 @@
     ════════════════════════════════ */
     .projects-area {
       flex: 1;
-      padding: 72px 100px 100px;
+      padding: 44px 100px 90px;
       display: flex;
       flex-direction: column;
       gap: 32px;
@@ -610,18 +619,21 @@
     }
 
     /* ── skills + tools ── */
-    .pg-tools { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; max-width: 660px; }
+    .pg-tools { margin-top: 18px; display: flex; flex-direction: column; gap: 11px; max-width: 920px; }
     .pg-tools-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .pg-tools-label {
-      width: 100%; margin-bottom: -3px; flex: none;
-      font-size: 0.55rem; font-weight: 500; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.7;
+      width: 100%; margin-bottom: 0; flex: none;
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.8;
     }
     .pg-chip {
-      font-size: 0.68rem; letter-spacing: 0.03em; color: var(--muted);
-      border: 1px solid var(--border); border-radius: 999px;
-      padding: 5px 13px; background: rgba(255,255,255,0.02); white-space: nowrap;
+      font-size: 0.82rem; font-weight: 400; letter-spacing: 0.01em;
+      color: var(--text);
+      border: 1px solid rgba(201,169,110,0.22); border-radius: 999px;
+      padding: 8px 18px; background: rgba(201,169,110,0.05);
+      white-space: nowrap; transition: border-color .25s ease, background .25s ease;
     }
+    .pg-chip:hover { border-color: rgba(201,169,110,0.45); background: rgba(201,169,110,0.1); }
 
     /* ════════════════════════════════
        MOTION GRID
@@ -877,7 +889,6 @@
         <span class="pg-eyebrow-line"></span>
       </p>
       <h1 class="pg-title">Brand, Campaign<br>&amp; <em>Motion</em></h1>
-      <p class="pg-sub">Identity systems, campaign assets and motion, built for the moments before a product interface ever loads.</p>
       <div class="pg-tools">
         <div class="pg-tools-row">
           <span class="pg-tools-label">Skills</span>
@@ -906,7 +917,7 @@
   <div class="tab-bar" role="tablist" aria-label="Branding sections">
     <button class="tab-btn" id="tab-work" role="tab" aria-selected="true"
             aria-controls="panel-work" data-panel="panel-work" type="button">
-      Work<span class="tab-count">06</span>
+      Work<span class="tab-count">03</span>
     </button>
     <button class="tab-btn" id="tab-motion" role="tab" aria-selected="false"
             aria-controls="panel-motion" data-panel="panel-motion" type="button" tabindex="-1">
@@ -933,7 +944,7 @@
             <p class="proj-subtitle">Storefront redesign extended into a two-campaign system</p>
           </div>
           <div class="proj-divider"></div>
-          <p class="proj-desc">A self-directed concept redesign of a clinical skincare storefront, measured from the live site and rebuilt on a documented design system, then scaled into Black Friday and Christmas campaigns across email, retail, display and social. Not affiliated with the brand.</p>
+          <p class="proj-desc">A clinical skincare storefront rebuilt on a measured, documented design system, then extended into Black Friday and Christmas campaigns across email, retail, display and social. Four responsive pages, twenty-nine artboards, one system holding it together. Concept work, unaffiliated with the brand.</p>
           <span class="proj-cta">
             View Case Study
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -954,11 +965,11 @@
             <span class="proj-badge available">Available &rarr;</span>
           </div>
           <div class="proj-title-block">
-            <h2 class="proj-title">Decathlon &mdash; Your Next Move</h2>
+            <h2 class="proj-title">Decathlon, Your Next Move</h2>
             <p class="proj-subtitle">A 25% off sale campaign, homepage to skyscraper</p>
           </div>
           <div class="proj-divider"></div>
-          <p class="proj-desc">A sitewide sale built end to end: a responsive homepage coded from a high-fidelity handoff, a three-send email flight, nine social artboards and four display sizes &mdash; all driven by one campaign idea and a single countdown timestamp. Self-directed concept work, not affiliated with the brand.</p>
+          <p class="proj-desc">A sitewide sale carried end to end: a responsive homepage coded from a high-fidelity handoff, a three-send email flight, nine social artboards and four display sizes, every unit driven by one campaign idea and a single countdown timestamp. Concept work, unaffiliated with the brand.</p>
           <span class="proj-cta">
             View Case Study
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -975,15 +986,15 @@
         </div>
         <div class="proj-content">
           <div class="proj-top">
-            <p class="proj-category">Amazon &middot; Product Listing &amp; A+ Premium</p>
+            <p class="proj-category">Amazon &middot; Listing &amp; Infographic Design</p>
             <span class="proj-badge available">Available &rarr;</span>
           </div>
           <div class="proj-title-block">
-            <h2 class="proj-title">Mossora &mdash; Amazon Product Listing</h2>
-            <p class="proj-subtitle">Seven gallery images and a video that sell a body cream</p>
+            <h2 class="proj-title">Mossora Amazon Listing</h2>
+            <p class="proj-subtitle">Full product page listing and infographics</p>
           </div>
           <div class="proj-divider"></div>
-          <p class="proj-desc">On Amazon there is no shelf, no tester and nobody to ask &mdash; seven square images and a short video have to do all of it. Benefit, texture, ingredients, how to use, scale, and where it lives. Self-initiated concept; Mossora is a fictional brand.</p>
+          <p class="proj-desc">On Amazon there is no shelf, no tester and nobody to ask. Seven square images and a short video carry the entire purchase decision: benefit, texture, ingredients, use, scale and the place it lives. Mossora is a fictional brand created for this project.</p>
           <span class="proj-cta">
             View Case Study
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -992,60 +1003,6 @@
           </span>
         </div>
       </a>
-
-      <div class="proj-card coming-soon reveal d1">
-        <div class="proj-num-col">
-          <span class="proj-number">04</span>
-        </div>
-        <div class="proj-content">
-          <div class="proj-top">
-            <p class="proj-category">Brand Identity</p>
-            <span class="proj-badge soon">Coming Soon</span>
-          </div>
-          <div class="proj-title-block">
-            <h2 class="proj-title">Brand Identity</h2>
-            <p class="proj-subtitle">Logo systems, type, and visual language</p>
-          </div>
-          <div class="proj-divider"></div>
-          <p class="proj-desc">Identity work spanning logo systems, typographic hierarchy, and the visual language that holds a brand together across every touchpoint.</p>
-        </div>
-      </div>
-
-      <div class="proj-card coming-soon reveal d1">
-        <div class="proj-num-col">
-          <span class="proj-number">05</span>
-        </div>
-        <div class="proj-content">
-          <div class="proj-top">
-            <p class="proj-category">Campaign &amp; Marketing</p>
-            <span class="proj-badge soon">Coming Soon</span>
-          </div>
-          <div class="proj-title-block">
-            <h2 class="proj-title">Campaign &amp; Marketing</h2>
-          <p class="proj-subtitle">Launch campaigns and channel assets</p>
-          </div>
-          <div class="proj-divider"></div>
-          <p class="proj-desc">Launch campaigns built as systems: a master key visual adapted into channel-specific executions for social, retail media, and brand-site placements.</p>
-        </div>
-      </div>
-
-      <div class="proj-card coming-soon reveal d1">
-        <div class="proj-num-col">
-          <span class="proj-number">06</span>
-        </div>
-        <div class="proj-content">
-          <div class="proj-top">
-            <p class="proj-category">Packaging &amp; Print</p>
-            <span class="proj-badge soon">Coming Soon</span>
-          </div>
-          <div class="proj-title-block">
-            <h2 class="proj-title">Packaging &amp; Print</h2>
-          <p class="proj-subtitle">Physical-first design work</p>
-          </div>
-          <div class="proj-divider"></div>
-          <p class="proj-desc">Packaging, collateral, and print work where material, scale, and production constraints shape the design as much as the brief does.</p>
-        </div>
-      </div>
     </div>
 
     <div class="tab-panel" id="panel-motion" role="tabpanel" aria-labelledby="tab-motion">
