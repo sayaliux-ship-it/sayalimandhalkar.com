@@ -4,7 +4,7 @@
 <script>if(sessionStorage.getItem('sb_v'))document.documentElement.classList.add('sb-instant');</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mossora &mdash; Amazon Listing Design</title>
+<title>Mossora, Amazon Listing Design</title>
 <meta name="description" content="Amazon full product page listing design and infographics for Mossora, a botanical body cream.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@ body{margin:0;display:flex;background:var(--page);color:#12100E;font-family:var(
      -webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
-.stack{width:100%;max-width:1460px;margin:0 auto;padding:0 var(--pad)}
+.stack{width:100%;max-width:1460px;margin:0 auto;padding:clamp(26px,4vw,64px) var(--pad) clamp(34px,4.4vw,72px)}
 
 /* ── shared panel ────────────────────────────────────── */
 .panel{position:relative;overflow:hidden;border-radius:var(--r);color:#fff;
@@ -39,7 +39,7 @@ a{color:inherit;text-decoration:none}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>");}
 .panel > *{position:relative;z-index:2}
 
-/* meta rows — the thing that stops everything floating */
+/* meta rows: the thing that stops everything floating */
 .meta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
       font-size:10px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--w2)}
 .meta b{font-weight:500;color:rgba(255,255,255,.72)}
@@ -51,12 +51,12 @@ a{color:inherit;text-decoration:none}
 /* ── cover ───────────────────────────────────────────── */
 .cover{position:relative;display:grid;grid-template-rows:auto 1fr auto;
        min-height:clamp(430px,46vw,620px);padding:clamp(22px,2.6vw,38px) 0}
-.cover .band{width:min(100%,60%);padding:0 var(--gut)}
+.cover .band{width:min(100%,53%);padding:0 var(--gut)}
 .cover .band.top{padding-bottom:clamp(18px,2.2vw,30px)}
 .cover .band.bot{padding-top:clamp(18px,2.2vw,30px)}
-.cover .type{width:min(100%,60%);align-self:center;padding:clamp(20px,3vw,44px) var(--gut)}
-.cover .shot{position:absolute;right:0;top:0;bottom:0;width:46%;overflow:hidden}
-.cover .shot img{width:100%;height:100%;object-fit:cover;object-position:52% 46%}
+.cover .type{width:min(100%,53%);align-self:center;padding:clamp(20px,3vw,44px) var(--gut)}
+.cover .shot{position:absolute;right:0;top:0;bottom:0;width:47%;overflow:hidden}
+.cover .shot img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
 .cover .shot::after{content:'';position:absolute;inset:0;
   background:linear-gradient(90deg,var(--d2) 0%,rgba(33,44,5,.55) 22%,rgba(33,44,5,0) 62%)}
 .cover h1{margin:0;font-size:clamp(40px,6.6vw,102px);font-weight:800;line-height:.86;
@@ -120,8 +120,23 @@ a{color:inherit;text-decoration:none}
 .close .lockup a{font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--w);
                  padding-bottom:4px;border-bottom:1px solid var(--gold)}
 .close .lockup a:hover{color:#fff}
-.smallprint{max-width:80ch;margin:0 auto;padding:16px 4px clamp(40px,5vw,72px);
-            font-size:11px;line-height:1.8;color:#7A7468;letter-spacing:.01em}
+
+/* floating return to Branding & Marketing */
+.fab-back{position:fixed;right:26px;bottom:26px;z-index:500;
+  display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 20px 0 15px;
+  background:var(--gold);color:#16200A;
+  font-family:var(--g);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;border-radius:999px;border:0;
+  box-shadow:0 8px 30px rgba(0,0,0,.34);
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .35s ease,transform .35s ease,background .25s ease}
+.fab-back.show{opacity:1;transform:none;pointer-events:auto}
+.fab-back:hover{background:var(--gold-lt)}
+.fab-back svg{flex:none}
+@media (max-width:560px){
+  .fab-back{right:14px;bottom:14px;height:40px;padding:0 15px 0 12px;font-size:9px;letter-spacing:.12em}
+}
+@media (prefers-reduced-motion:reduce){ .fab-back{transition:none} }
 
 /* a little drama: sections settle in as you reach them */
 .rise{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -455,8 +470,8 @@ a{color:inherit;text-decoration:none}
   <section class="panel cover">
     <div class="band top">
       <div class="meta">
-        <span>Mossora &mdash; <b>Sandal &amp; Moss Body Cream</b></span>
-        <span class="dates"><span>21</span><span>08</span><span>2026</span></span>
+        <span>Mossora, <b>Sandal &amp; Moss Body Cream</b></span>
+        <span>Case study</span>
       </div>
       <hr class="hair" style="margin-top:14px">
     </div>
@@ -468,7 +483,7 @@ a{color:inherit;text-decoration:none}
     </div>
 
     <div class="shot">
-      <img src="mossora/img/02-in-hand.jpg" alt="Mossora body cream held in an open palm on moss" width="1400" height="1400">
+      <img src="mossora/img/00-cover.jpg" alt="Mossora Sandal and Moss body cream styled on stone with moss and jojoba" width="1536" height="1536">
     </div>
 
     <div class="band bot">
@@ -485,7 +500,7 @@ a{color:inherit;text-decoration:none}
     <div class="meta"><span>The project</span><span>01</span></div>
     <h2>A body cream sold with<br>no shelf and <em>no tester</em></h2>
     <div class="facts">
-      <div><h6>Role</h6><p>Art direction &middot; Structure &amp; copywriting &middot; Infographics &middot; Retouch</p></div>
+      <div><h6>Role</h6><p>Art direction, structure and copywriting, infographics, retouch</p></div>
       <div><h6>Deliverable</h6><p>Seven gallery images and one video</p></div>
       <div><h6>Format</h6><p>1:1 square &middot; 1600&nbsp;px &middot; sRGB</p></div>
       <div><h6>Tools</h6><p>Generative imaging, Photoshop, hand-set type</p></div>
@@ -521,7 +536,7 @@ a{color:inherit;text-decoration:none}
       <div class="say">
         <span class="no">03</span>
         <h3>The <em>texture</em></h3>
-        <p>Whipped, not greasy. The swatch is left sheer at the edge to show it sinks in &mdash; texture is what brings a body cream buyer back.</p>
+        <p>Whipped, not greasy. The swatch is left sheer at the edge to show it sinks in. Texture is what brings a body cream buyer back.</p>
         <p class="spec">Texture &amp; finish</p>
       </div>
     </div>
@@ -541,7 +556,7 @@ a{color:inherit;text-decoration:none}
       <div class="say">
         <span class="no">05</span>
         <h3>Where it <em>lives</em></h3>
-        <p>The one frame that leaves the studio. Stone, brass and low light &mdash; it sells the shelf the jar ends up on.</p>
+        <p>The one frame that leaves the studio. Stone, brass and low light. It sells the shelf the jar ends up on.</p>
         <p class="spec">Lifestyle</p>
       </div>
     </div>
@@ -551,7 +566,7 @@ a{color:inherit;text-decoration:none}
       <div class="say">
         <span class="no">06</span>
         <h3>True <em>scale</em></h3>
-        <p>An open palm answers the size question that &ldquo;200&nbsp;ml&rdquo; never does &mdash; and size confusion is the cheapest return there is to prevent.</p>
+        <p>An open palm answers the size question that &ldquo;200&nbsp;ml&rdquo; never does, and size confusion is the cheapest return there is to prevent.</p>
         <p class="spec">Dimensions</p>
       </div>
     </div>
@@ -581,12 +596,11 @@ a{color:inherit;text-decoration:none}
   <section class="panel close rise">
     <div class="meta" style="margin-bottom:clamp(20px,2.4vw,32px)"><span>End</span><span>03</span></div>
     <div class="lockup">
-      <h4>Mossora &mdash; <em>Amazon listing design</em></h4>
+      <h4>Mossora <em>Amazon listing design</em></h4>
       <a href="branding.html">Back to Branding &amp; Marketing</a>
     </div>
   </section>
 
-  <p class="smallprint">Self-initiated concept project. Product imagery was generated and composited; art direction, layout, typography, copy and retouching by me.</p>
 
 </div>
 </main>
@@ -603,5 +617,19 @@ a{color:inherit;text-decoration:none}
 })();
 </script>
 <script>sessionStorage.setItem('sb_v','1');</script>
+
+<a href="branding.html" class="fab-back" aria-label="Back to Branding and Marketing">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+  <span>Branding &amp; Marketing</span>
+</a>
+<script>
+  (function () {
+    var f = document.querySelector('.fab-back');
+    if (!f) return;
+    function upd(){ f.classList.toggle('show', (window.scrollY || 0) > 380); }
+    window.addEventListener('scroll', upd, { passive: true });
+    upd();
+  })();
+</script>
 </body>
 </html>
