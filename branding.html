@@ -222,20 +222,11 @@
       content: '✦';
       font-family: var(--serif);
       font-size: clamp(150px, 17vw, 250px);
-      color: rgba(201,169,110,0.10);
+      color: rgba(201,169,110,0.055);
       position: absolute;
       right: 76px; bottom: -46px;
       line-height: 1;
       pointer-events: none; user-select: none;
-      transform-origin: 50% 50%;
-      animation: starDrift 18s ease-in-out infinite;
-    }
-    @keyframes starDrift {
-      0%, 100% { transform: rotate(0deg)   scale(1);    opacity: 1;    }
-      50%      { transform: rotate(180deg) scale(1.07); opacity: 0.55; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .pg-header::after { animation: none; }
     }
     .pg-header-inner { position: relative; z-index: 1; }
     .pg-eyebrow {
@@ -247,8 +238,8 @@
     .pg-eyebrow-line { width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
     .pg-title {
       font-family: var(--serif);
-      font-size: clamp(26px, 3.1vw, 46px);
-      white-space: nowrap;
+      font-size: clamp(30px, 3.9vw, 58px);
+      text-wrap: balance;
       font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
       color: var(--text); margin-bottom: 0;
     }
@@ -620,21 +611,22 @@
     }
 
     /* ── skills + tools ── */
-    .pg-tools { margin-top: 18px; display: flex; flex-direction: column; gap: 11px; max-width: 920px; }
+    .pg-tools { margin-top: 26px; display: flex; flex-direction: column; gap: 15px; max-width: 920px; }
     .pg-tools-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .pg-tools-label {
       width: 100%; margin-bottom: 0; flex: none;
       font-size: 0.62rem; font-weight: 500; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.8;
+      text-transform: uppercase; color: var(--gold); opacity: 0.55;
     }
     .pg-chip {
-      font-size: 0.82rem; font-weight: 400; letter-spacing: 0.01em;
-      color: var(--text);
-      border: 1px solid rgba(201,169,110,0.22); border-radius: 999px;
-      padding: 8px 18px; background: rgba(201,169,110,0.05);
-      white-space: nowrap; transition: border-color .25s ease, background .25s ease;
+      font-size: 0.76rem; font-weight: 400; letter-spacing: 0.02em;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 999px;
+      padding: 7px 15px; background: transparent;
+      white-space: nowrap;
+      transition: color .25s ease, border-color .25s ease;
     }
-    .pg-chip:hover { border-color: rgba(201,169,110,0.45); background: rgba(201,169,110,0.1); }
+    .pg-chip:hover { color: var(--text); border-color: rgba(201,169,110,0.35); }
 
     /* ════════════════════════════════
        MOTION GRID
@@ -924,7 +916,7 @@
   <div class="tab-bar" role="tablist" aria-label="Branding sections">
     <button class="tab-btn" id="tab-work" role="tab" aria-selected="true"
             aria-controls="panel-work" data-panel="panel-work" type="button">
-      Work<span class="tab-count">03</span>
+      Work<span class="tab-count">04</span>
     </button>
     <button class="tab-btn" id="tab-motion" role="tab" aria-selected="false"
             aria-controls="panel-motion" data-panel="panel-motion" type="button" tabindex="-1">
@@ -1002,6 +994,31 @@
           </div>
           <div class="proj-divider"></div>
           <p class="proj-desc">On Amazon there is no shelf, no tester and nobody to ask. Seven square images and a short video carry the entire purchase decision: benefit, texture, ingredients, use, scale and the place it lives. Self-initiated concept project.</p>
+          <span class="proj-cta">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="sera.html" class="proj-card active reveal d1 has-cover" style="text-decoration:none;">
+        <div class="proj-cover">
+          <img src="images/covers/sera.jpg" alt="Sera One portable lamp lighting a dinner table at dusk" loading="lazy" decoding="async">
+          <span class="proj-number">04</span>
+        </div>
+        <div class="proj-content">
+          <div class="proj-top">
+            <p class="proj-category">Product Launch &middot; Campaign &amp; Art Direction</p>
+            <span class="proj-badge available">Available &rarr;</span>
+          </div>
+          <div class="proj-title-block">
+            <h2 class="proj-title">SERA, The Blue Hour</h2>
+            <p class="proj-subtitle">A portable lamp launched at the hour it was made for</p>
+          </div>
+          <div class="proj-divider"></div>
+          <p class="proj-desc">Lamps are photographed in daylight. This campaign is set entirely in the blue hour, every frame holding one warm source against a cooling room. Art direction, product photography direction, DTC hero, OOH and social, built on one rule that survives any crop. Concept work, unaffiliated with any brand.</p>
           <span class="proj-cta">
             View Case Study
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
