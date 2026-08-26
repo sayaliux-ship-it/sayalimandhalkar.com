@@ -1,0 +1,29 @@
+<!-- @dsCard group="Shape" viewport="760x180" name="Elevation" subtitle="Only two shadows exist. Do not add a third." -->
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" /><title>Elevation</title>
+<link rel="stylesheet" href="../styles.css" />
+<style>
+ body{margin:0;padding:18px;background:var(--nouri-offwhite);color:var(--nouri-deep-green);font-family:var(--nouri-font-sans)}
+ .cap{font-size:11px;font-weight:700;opacity:.6;margin-top:12px;line-height:1.5;max-width:78ch}
+ .row{display:flex;gap:8px}
+ .sw{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;height:92px;padding:10px;border-radius:16px;border:1px solid rgba(23,38,19,.14)}
+ .sw b{font-size:12px;font-weight:700;letter-spacing:-.01em}
+ .sw span{font-size:10.5px;opacity:.8;font-variant-numeric:tabular-nums;font-family:var(--nouri-font-mono)}
+ table{border-collapse:collapse;width:100%;font-size:12px}
+ td,th{text-align:left;padding:5px 10px 5px 0;vertical-align:baseline}
+ th{font-size:10px;font-weight:700;opacity:.55}
+ td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--nouri-font-mono);font-size:11px}
+ code{font-family:var(--nouri-font-mono);font-size:11px;opacity:.85}
+</style></head><body>
+<div class="row" style="gap:16px">
+ <div style="flex:1;background:#fff;border-radius:24px;padding:18px;box-shadow:0 4px 24px rgba(23,38,19,.05)">
+  <b style="font-size:13px">Card</b>
+  <div style="font-family:var(--nouri-font-mono);font-size:11px;margin-top:6px;opacity:.8">0 4px 24px rgba(23,38,19,.05)</div>
+ </div>
+ <div style="flex:1;background:#fff;border-radius:24px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.12)">
+  <b style="font-size:13px">Hairline</b>
+  <div style="font-family:var(--nouri-font-mono);font-size:11px;margin-top:6px;opacity:.8">0 1px 3px rgba(0,0,0,.12)</div>
+ </div>
+</div>
+<div class="cap">The card shadow is tinted with deep green at 5%, not neutral black — a neutral shadow greys out the mint and sun grounds. Only <b>white</b> cards get a shadow; tinted cards sit flat. In dark mode the card shadow becomes rgba(0,0,0,.35).</div>
+</body></html>

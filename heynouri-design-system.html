@@ -1,0 +1,789 @@
+<title>Hey Nouri Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   Tokens. Light palette lives on bare :root; dark redefines
+   only tokens, in both the un-stamped and stamped states.
+   ============================================================ */
+:root{
+  --ground:#f5f5f5;
+  --surface:#ffffff;
+  --surface-2:#ffffff;
+  --ink:#172613;
+  --ink-soft:#5d675a;
+  --hair:rgba(23,38,19,.12);
+  --hair-strong:rgba(23,38,19,.22);
+  --band-dark:#172613;
+  --band-dark-ink:#ceebc2;
+  --band-dark-soft:rgba(206,235,194,.72);
+  --band-dark-hair:rgba(206,235,194,.18);
+  --band-mint:#ceebc2;
+  --band-mint-ink:#172613;
+  --band-mint-soft:rgba(23,38,19,.76);
+  --shadow-card:0 4px 24px rgba(23,38,19,.05);
+  --shadow-hair:0 1px 3px rgba(0,0,0,.12);
+  --arc:#ffffff;
+
+  /* brand constants — identical in both themes, they are the subject */
+  --deep:#172613; --olive:#3a4c34; --mint:#ceebc2; --sun:#fae899;
+  --sky:#bae8ef; --blue:#aec8e1; --carrot:#f0710c; --off:#f5f5f5; --white:#ffffff;
+
+  --font:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --col:1120px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#172613;
+    --surface:#1f3019;
+    --surface-2:#26391f;
+    --ink:#ceebc2;
+    --ink-soft:rgba(206,235,194,.70);
+    --hair:rgba(206,235,194,.16);
+    --hair-strong:rgba(206,235,194,.30);
+    --band-dark:#0d1709;
+    --band-dark-ink:#ceebc2;
+    --band-dark-soft:rgba(206,235,194,.72);
+    --band-dark-hair:rgba(206,235,194,.18);
+    --band-mint:#243a1c;
+    --band-mint-ink:#ceebc2;
+    --band-mint-soft:rgba(206,235,194,.72);
+    --shadow-card:0 4px 24px rgba(0,0,0,.35);
+    --shadow-hair:0 1px 3px rgba(0,0,0,.4);
+    --arc:#1f3019;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#172613; --surface:#1f3019; --surface-2:#26391f;
+  --ink:#ceebc2; --ink-soft:rgba(206,235,194,.70);
+  --hair:rgba(206,235,194,.16); --hair-strong:rgba(206,235,194,.30);
+  --band-dark:#0d1709; --band-dark-ink:#ceebc2;
+  --band-dark-soft:rgba(206,235,194,.72); --band-dark-hair:rgba(206,235,194,.18);
+  --band-mint:#243a1c; --band-mint-ink:#ceebc2; --band-mint-soft:rgba(206,235,194,.72);
+  --shadow-card:0 4px 24px rgba(0,0,0,.35);
+  --shadow-hair:0 1px 3px rgba(0,0,0,.4);
+  --arc:#1f3019;
+}
+
+/* ============================================================ */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--font); font-size:16px; line-height:1.5;
+  font-weight:400; -webkit-font-smoothing:antialiased;
+}
+:focus-visible{outline:2px solid var(--carrot); outline-offset:3px; border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* --- Band system: the site's own composition -------------- */
+.band{padding:72px 24px}
+.band--dark{background:var(--band-dark); color:var(--band-dark-ink)}
+.band--dark .lede,.band--dark .note{color:var(--band-dark-soft)}
+.band--mint{background:var(--band-mint); color:var(--band-mint-ink)}
+.band--surface{background:var(--surface)}
+.col{max-width:var(--col); margin:0 auto}
+
+/* --- Curve dividers: the brand's literal motif ------------- */
+.arc{display:block; width:100%; height:56px; color:var(--arc)}
+.arc--onto-dark{color:var(--band-dark)}
+.arc--onto-mint{color:var(--band-mint)}
+.arc--onto-ground{color:var(--ground)}
+.arc--onto-surface{color:var(--surface)}
+
+/* --- Type roles ------------------------------------------- */
+h1,h2,h3,h4{margin:0; text-wrap:balance}
+.display{font-size:clamp(38px,6.2vw,64px); line-height:1.1; font-weight:700; letter-spacing:-.04em}
+h2.sec{font-size:clamp(28px,3.6vw,44px); line-height:1.2; font-weight:600; letter-spacing:-.03em}
+h3.sub{font-size:20px; line-height:1.4; font-weight:600; letter-spacing:-.03em; margin-top:40px}
+h4.min{font-size:18px; line-height:1.4; font-weight:600; letter-spacing:-.03em}
+p{margin:0}
+.lede{font-size:18px; line-height:1.55; color:var(--ink-soft); max-width:62ch}
+.note{font-size:14px; line-height:1.5; color:var(--ink-soft); max-width:70ch}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:12px; font-weight:700; letter-spacing:-.01em; line-height:1;
+  padding:8px 14px; border-radius:9999px;
+  background:var(--mint); color:var(--deep);
+}
+.band--dark .eyebrow{background:rgba(206,235,194,.16); color:var(--mint)}
+.stack{display:flex; flex-direction:column; gap:20px}
+.stack-sm{display:flex; flex-direction:column; gap:12px}
+.mono{font-family:var(--mono); font-size:13px; letter-spacing:0; font-variant-numeric:tabular-nums}
+
+/* --- Section head ----------------------------------------- */
+.head{display:flex; flex-direction:column; gap:16px; margin-bottom:40px}
+.head .num{
+  font-family:var(--mono); font-size:13px; font-weight:500;
+  color:var(--ink-soft); letter-spacing:.04em;
+}
+.band--dark .head .num{color:var(--band-dark-soft)}
+
+/* --- Swatches: true brand color, always deep-green text ---- */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:16px}
+.sw{
+  border-radius:24px; padding:18px 18px 16px; min-height:150px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  color:#172613; border:1px solid rgba(23,38,19,.14);
+}
+.sw--ondark{color:#ceebc2; border-color:rgba(206,235,194,.22)}
+.sw .nm{font-size:15px; font-weight:700; letter-spacing:-.01em}
+.sw .hx{font-family:var(--mono); font-size:12px; font-weight:500; opacity:.8}
+.sw .rl{font-size:12px; line-height:1.35; font-weight:400; opacity:.78; margin-top:8px}
+
+/* --- Data tables ------------------------------------------ */
+.tw{overflow-x:auto; border:1px solid var(--hair); border-radius:16px; background:var(--surface)}
+.band--dark .tw{background:rgba(206,235,194,.05); border-color:var(--band-dark-hair)}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:14px}
+th,td{text-align:left; padding:11px 16px; border-bottom:1px solid var(--hair); vertical-align:middle}
+.band--dark th,.band--dark td{border-color:var(--band-dark-hair)}
+th{font-size:12px; font-weight:700; letter-spacing:-.01em; color:var(--ink-soft)}
+.band--dark th{color:var(--band-dark-soft)}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right; font-family:var(--mono); font-size:13px; font-variant-numeric:tabular-nums}
+td code,.inline{font-family:var(--mono); font-size:12.5px; background:var(--ground); padding:2px 6px; border-radius:5px}
+.band--dark td code,.band--dark .inline{background:rgba(206,235,194,.10)}
+.band--surface td code,.band--surface .inline{background:var(--ground)}
+
+/* --- Area bars -------------------------------------------- */
+.bars{display:flex; flex-direction:column; gap:10px}
+.bar{display:grid; grid-template-columns:120px 1fr 76px; align-items:center; gap:14px; font-size:13px}
+.bar .track{height:20px; border-radius:9999px; background:var(--hair); overflow:hidden}
+.bar .fill{height:100%; border-radius:9999px; border:1px solid rgba(23,38,19,.16)}
+.bar .val{font-family:var(--mono); font-size:12.5px; text-align:right; font-variant-numeric:tabular-nums; color:var(--ink-soft)}
+
+/* --- Type specimens --------------------------------------- */
+.spec{border-top:1px solid var(--hair); padding:22px 0; display:grid; grid-template-columns:1fr; gap:10px}
+@media(min-width:860px){.spec{grid-template-columns:1fr 232px; align-items:baseline; gap:32px}}
+.spec:last-child{border-bottom:1px solid var(--hair)}
+.spec .meta{font-family:var(--mono); font-size:12px; color:var(--ink-soft); line-height:1.7}
+.smp{color:var(--ink)}
+
+/* --- Contrast grid ---------------------------------------- */
+.cgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px}
+.cc{border-radius:16px; padding:16px; border:1px solid rgba(23,38,19,.12)}
+.cc .t{font-size:15px; font-weight:600; letter-spacing:-.02em}
+.cc .r{font-family:var(--mono); font-size:12px; margin-top:10px; opacity:.85; display:flex; justify-content:space-between; gap:8px}
+.cc.fail{border:2px solid #b3261e}
+
+/* --- Component demos -------------------------------------- */
+.demos{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px}
+.demo{
+  background:var(--surface); border:1px solid var(--hair); border-radius:24px;
+  padding:24px; display:flex; flex-direction:column; gap:16px;
+}
+.band--dark .demo{background:rgba(206,235,194,.05); border-color:var(--band-dark-hair)}
+.demo .cap{font-size:12px; font-weight:700; color:var(--ink-soft); letter-spacing:-.01em}
+.band--dark .demo .cap{color:var(--band-dark-soft)}
+.demo .stage{display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:8px 0}
+
+.btn{
+  font-family:inherit; font-size:14px; font-weight:700; line-height:1;
+  padding:13px 20px; border-radius:8px; border:0; cursor:pointer;
+  background:var(--carrot); color:#172613;
+  transition:transform .2s cubic-bezier(0,0,.2,1), filter .2s cubic-bezier(0,0,.2,1);
+}
+.btn:hover{filter:brightness(.94)}
+.btn:active{transform:scale(.97)}
+.btn--link{background:none; color:var(--ink); padding:13px 4px}
+.band--dark .btn--link{color:var(--band-dark-ink)}
+
+.formcard{border-radius:16px; overflow:hidden; box-shadow:var(--shadow-card); max-width:320px; width:100%}
+.row{background:#fff; padding:10px 16px; display:flex; flex-direction:column; gap:3px; height:56px; justify-content:center}
+.row:nth-child(even){background:#f5f5f5}
+.row .lb{font-size:12px; font-weight:700; color:#172613; line-height:1}
+.row .ph{font-size:14px; color:rgba(23,38,19,.7); line-height:1.4}
+.formcta{
+  background:var(--carrot); color:#172613; border:0; width:100%; height:64px;
+  font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+
+.chip{
+  display:inline-flex; align-items:center; gap:6px; padding:8px 14px;
+  border-radius:9999px; font-size:12px; font-weight:700; line-height:1;
+  background:#ceebc2; color:#172613;
+}
+.chip--white{background:#fff}
+.chip--sun{background:#fae899}
+
+.statrow{display:flex; gap:28px; flex-wrap:wrap}
+.stat .v{font-size:44px; font-weight:700; letter-spacing:-.03em; line-height:1}
+.stat .u{font-size:12px; font-weight:700; margin-left:4px}
+.stat .c{font-size:13px; color:var(--ink-soft); margin-top:6px; max-width:16ch; line-height:1.35}
+.band--dark .stat .c{color:var(--band-dark-soft)}
+
+.ghost{position:relative; padding:20px 0 0 0}
+.ghost .g{
+  position:absolute; top:-14px; left:-4px; font-size:88px; font-weight:700;
+  letter-spacing:-.04em; line-height:1; color:rgba(206,235,194,.30); pointer-events:none;
+}
+.ghost .fg{position:relative}
+
+.radii{display:flex; gap:14px; flex-wrap:wrap; align-items:flex-end}
+.rd{width:76px; text-align:center}
+.rd .bx{height:64px; background:var(--mint); border:1px solid rgba(23,38,19,.16)}
+.rd .lb{font-family:var(--mono); font-size:11.5px; margin-top:8px; color:var(--ink-soft)}
+.band--dark .rd .lb{color:var(--band-dark-soft)}
+
+.spaces{display:flex; flex-direction:column; gap:8px}
+.sp{display:grid; grid-template-columns:52px 1fr; gap:14px; align-items:center; font-family:var(--mono); font-size:12.5px}
+.sp .b{height:14px; background:var(--sun); border-radius:9999px; border:1px solid rgba(23,38,19,.16)}
+
+/* --- Do / Don't ------------------------------------------- */
+.dd{display:grid; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); gap:16px}
+.card{
+  background:var(--surface); border:1px solid var(--hair); border-radius:24px; padding:22px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.band--dark .card{background:rgba(206,235,194,.05); border-color:var(--band-dark-hair)}
+.band--mint .card{background:rgba(255,255,255,.55); border-color:rgba(23,38,19,.14)}
+:root[data-theme="dark"] .band--mint .card{background:rgba(206,235,194,.06); border-color:rgba(206,235,194,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .band--mint .card{background:rgba(206,235,194,.06); border-color:rgba(206,235,194,.18)}}
+.card .h{font-size:16px; font-weight:700; letter-spacing:-.02em; display:flex; align-items:center; gap:8px}
+.card .b{font-size:14px; line-height:1.5; color:var(--ink-soft)}
+.band--dark .card .b{color:var(--band-dark-soft)}
+.band--mint .card .b{color:var(--band-mint-soft)}
+.band--mint .lede,.band--mint .note,.band--mint ul.list{color:var(--band-mint-soft)}
+.band--mint .head .num{color:var(--band-mint-soft)}
+.tick{width:18px;height:18px;border-radius:9999px;display:inline-grid;place-items:center;font-size:11px;flex:none}
+.tick--y{background:#ceebc2;color:#172613}
+.tick--n{background:#172613;color:#ceebc2}
+
+ul.list{margin:0; padding-left:20px; font-size:14px; line-height:1.6; color:var(--ink-soft)}
+.band--dark ul.list{color:var(--band-dark-soft)}
+ul.list li{margin-bottom:7px}
+ul.list li strong{color:var(--ink); font-weight:700}
+.band--dark ul.list li strong{color:var(--band-dark-ink)}
+.band--mint ul.list li strong{color:var(--band-mint-ink)}
+.band--mint .card .h{color:var(--band-mint-ink)}
+.warn,.warn strong{color:#172613}
+
+.warn{
+  border-radius:16px; padding:16px 18px; font-size:14px; line-height:1.55;
+  background:var(--sun); color:#172613; border:1px solid rgba(23,38,19,.14);
+  max-width:74ch;
+}
+.warn strong{font-weight:700}
+
+.foot{padding:56px 24px 72px; border-top:1px solid var(--hair)}
+.filelist{display:grid; grid-template-columns:repeat(auto-fit,minmax(236px,1fr)); gap:14px; margin-top:20px}
+.file{border:1px solid var(--hair); border-radius:16px; padding:16px; background:var(--surface)}
+.file .fn{font-family:var(--mono); font-size:13px; font-weight:500}
+.file .fd{font-size:13px; color:var(--ink-soft); margin-top:6px; line-height:1.45}
+
+.hero{
+  padding:88px 24px 0; background:var(--band-mint); color:var(--band-mint-ink);
+}
+.hero .col{display:flex; flex-direction:column; gap:26px}
+.metaline{
+  display:flex; flex-wrap:wrap; gap:8px 22px; font-family:var(--mono);
+  font-size:12.5px; color:var(--band-mint-soft); padding-top:6px;
+}
+</style>
+
+<div class="hero band--mint">
+  <div class="col">
+    <span class="eyebrow">Extracted from the live site · 25 Aug 2026</span>
+    <h1 class="display">Hey Nouri</h1>
+    <p class="lede" >Nine colors, one typeface, two shadows, and a shape language built entirely out of curves. This is the system as it actually ships on heynouri.com — measured, not estimated — plus the layer an app will have to add.</p>
+    <div class="metaline">
+      <span>heynouri.com</span><span>Next.js + Tailwind v4</span><span>Manrope 200–800</span><span>159 CSS rules</span><span>72 images</span>
+    </div>
+  </div>
+  <svg class="arc arc--onto-surface" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="margin-top:56px">
+    <path d="M0,56 L0,30 Q600,-30 1200,30 L1200,56 Z" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- 01 · COLOR -->
+<section class="band band--surface">
+  <div class="col">
+    <div class="head">
+      <span class="num">01</span>
+      <h2 class="sec">Color</h2>
+      <p class="lede">The theme layer declares exactly nine brand colors and five semantic aliases. There is nothing else. Hierarchy is carried by opacity steps, not by a grey ramp.</p>
+    </div>
+
+    <div class="swatches">
+      <div class="sw sw--ondark" style="background:#172613">
+        <div><div class="nm">Deep green</div><div class="hx">#172613</div></div>
+        <div class="rl">Foreground. All body text, dark section grounds, icon fills, text on carrot. The brand's black — never use #000.</div>
+      </div>
+      <div class="sw sw--ondark" style="background:#3a4c34">
+        <div><div class="nm">Olive green</div><div class="hx">#3a4c34</div></div>
+        <div class="rl">Secondary dark. Input :focus border. Appears twice on the whole homepage.</div>
+      </div>
+      <div class="sw" style="background:#ceebc2">
+        <div><div class="nm">Fresh mint</div><div class="hx">#ceebc2</div></div>
+        <div class="rl">The signature. Text on dark grounds, sticky header, large section panels.</div>
+      </div>
+      <div class="sw" style="background:#fae899">
+        <div><div class="nm">Warm sun</div><div class="hx">#fae899</div></div>
+        <div class="rl">Card grounds, range-input focus ring, gradient start. Largest tinted panel area on the page.</div>
+      </div>
+      <div class="sw" style="background:#bae8ef">
+        <div><div class="nm">Soft sky</div><div class="hx">#bae8ef</div></div>
+        <div class="rl">Card grounds, gradient end.</div>
+      </div>
+      <div class="sw" style="background:#aec8e1">
+        <div><div class="nm">Pastel blue</div><div class="hx">#aec8e1</div></div>
+        <div class="rl">Card grounds. Least used of the four tints.</div>
+      </div>
+      <div class="sw" style="background:#f0710c">
+        <div><div class="nm">Carrot</div><div class="hx">#f0710c</div></div>
+        <div class="rl">Accent. Primary action only — 1.5% of the page. One per screen.</div>
+      </div>
+      <div class="sw" style="background:#f5f5f5">
+        <div><div class="nm">Offwhite</div><div class="hx">#f5f5f5</div></div>
+        <div class="rl">Page background — and the text color on deep-green grounds.</div>
+      </div>
+      <div class="sw" style="background:#ffffff">
+        <div><div class="nm">White</div><div class="hx">#ffffff</div></div>
+        <div class="rl">Surface. Cards, panels, form rows.</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Measured area distribution</h3>
+    <p class="note" style="margin-bottom:18px">Painted area across the rendered homepage. This is what makes the carrot rule non-negotiable.</p>
+    <div class="bars">
+      <div class="bar"><span>White</span><span class="track"><span class="fill" style="width:100%;background:#ffffff"></span></span><span class="val">1,628k</span></div>
+      <div class="bar"><span>Deep green</span><span class="track"><span class="fill" style="width:96.3%;background:#172613"></span></span><span class="val">1,568k</span></div>
+      <div class="bar"><span>Fresh mint</span><span class="track"><span class="fill" style="width:72.2%;background:#ceebc2"></span></span><span class="val">1,176k</span></div>
+      <div class="bar"><span>Warm sun</span><span class="track"><span class="fill" style="width:54.5%;background:#fae899"></span></span><span class="val">887k</span></div>
+      <div class="bar"><span>Offwhite</span><span class="track"><span class="fill" style="width:45.6%;background:#f5f5f5"></span></span><span class="val">743k</span></div>
+      <div class="bar"><span>Pastel blue</span><span class="track"><span class="fill" style="width:17.7%;background:#aec8e1"></span></span><span class="val">288k</span></div>
+      <div class="bar"><span>Soft sky</span><span class="track"><span class="fill" style="width:9%;background:#bae8ef"></span></span><span class="val">147k</span></div>
+      <div class="bar"><span>Carrot</span><span class="track"><span class="fill" style="width:2.8%;background:#f0710c"></span></span><span class="val">46k</span></div>
+    </div>
+
+    <div class="warn" style="margin-top:28px">
+      <strong>The carrot rule.</strong> Four elements, ~1.5% of the colored area. Carrot is a scarcity signal, not a brand color you decorate with. One carrot element per screen. Text on carrot is deep green at 5.35:1 — white on carrot is 2.97:1 and fails AA at every size. The site never does it.
+    </div>
+
+    <h3 class="sub">Opacity steps — the whole hierarchy system</h3>
+    <div class="tw" style="margin-top:16px">
+      <table>
+        <thead><tr><th>Token</th><th>Resolves to</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code>foreground/70</code></td><td class="mono">#5d675a on white</td><td>Placeholders, secondary copy. 5.91:1 — passes AA.</td></tr>
+          <tr><td><code>foreground/10</code></td><td class="mono">—</td><td>Hairlines on light grounds.</td></tr>
+          <tr><td><code>fresh-mint/30</code></td><td class="mono">#4e6148 on deep</td><td>Ghost numerals. 2.36:1 — decorative only, never text.</td></tr>
+          <tr><td><code>fresh-mint/16</code></td><td class="mono">—</td><td>Hairlines on dark grounds.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">The one gradient</h3>
+    <div style="height:76px;border-radius:24px;background:linear-gradient(90deg,#fae899,#bae8ef);margin-top:14px;border:1px solid rgba(23,38,19,.14)"></div>
+    <p class="note" style="margin-top:12px"><span class="inline">linear-gradient(90deg, #fae899, #bae8ef)</span> — warm sun to soft sky. Warm to cool, morning to day. The only gradient the brand declares. Plus a functional bottom scrim for text over photography: transparent to 40% black.</p>
+  </div>
+</section>
+
+<svg class="arc arc--onto-dark" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="background:var(--surface)">
+  <path d="M0,56 L0,26 Q600,86 1200,26 L1200,56 Z" fill="currentColor"/>
+</svg>
+
+<!-- 02 · CONTRAST -->
+<section class="band band--dark">
+  <div class="col">
+    <div class="head">
+      <span class="num">02</span>
+      <h2 class="sec">Contrast</h2>
+      <p class="lede">Every pairing the site actually uses, computed. The palette is essentially two-tone — very dark green against very light tints — so it is unusually safe. The only real trap is carrot.</p>
+    </div>
+    <div class="cgrid">
+      <div class="cc" style="background:#172613;color:#ffffff;border-color:rgba(206,235,194,.22)"><div class="t">White on deep</div><div class="r"><span>15.87:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#172613;color:#f5f5f5;border-color:rgba(206,235,194,.22)"><div class="t">Offwhite on deep</div><div class="r"><span>14.56:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#ffffff;color:#172613"><div class="t">Deep on white</div><div class="r"><span>15.87:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#fae899;color:#172613"><div class="t">Deep on sun</div><div class="r"><span>12.90:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#172613;color:#ceebc2;border-color:rgba(206,235,194,.22)"><div class="t">Mint on deep</div><div class="r"><span>12.31:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#bae8ef;color:#172613"><div class="t">Deep on sky</div><div class="r"><span>12.00:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#aec8e1;color:#172613"><div class="t">Deep on blue</div><div class="r"><span>9.18:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#3a4c34;color:#ffffff;border-color:rgba(206,235,194,.22)"><div class="t">White on olive</div><div class="r"><span>9.28:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#3a4c34;color:#ceebc2;border-color:rgba(206,235,194,.22)"><div class="t">Mint on olive</div><div class="r"><span>7.20:1</span><span>AAA</span></div></div>
+      <div class="cc" style="background:#ffffff;color:#5d675a"><div class="t">fg/70 on white</div><div class="r"><span>5.91:1</span><span>AA</span></div></div>
+      <div class="cc" style="background:#f0710c;color:#172613"><div class="t">Deep on carrot</div><div class="r"><span>5.35:1</span><span>AA</span></div></div>
+      <div class="cc fail" style="background:#f0710c;color:#ffffff"><div class="t">White on carrot</div><div class="r"><span>2.97:1</span><span>NEVER</span></div></div>
+    </div>
+  </div>
+</section>
+
+<svg class="arc arc--onto-ground" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="background:var(--band-dark)">
+  <path d="M0,56 L0,30 Q600,-30 1200,30 L1200,56 Z" fill="currentColor"/>
+</svg>
+
+<!-- 03 · TYPE -->
+<section class="band">
+  <div class="col">
+    <div class="head">
+      <span class="num">03</span>
+      <h2 class="sec">Type</h2>
+      <p class="lede">One family carries the entire brand. Manrope, variable, axis 200–800, self-hosted as six woff2 subsets. No display face, no serif, no rendered mono. It is a good fit for a specific reason: near-circular bowls read friendly and child-legible, while the tall x-height and tight apertures read dense and credible. That is the medical/warm split, in a typeface.</p>
+    </div>
+
+    <div class="spec">
+      <div class="smp" style="font-size:clamp(40px,6vw,64px);font-weight:700;line-height:1.1;letter-spacing:-.04em">Pediatrician-led weight management</div>
+      <div class="meta">Display / H1<br>64 / 70.4 · 1.10<br>700 · −0.04em<br>mobile 36 / 39.6</div>
+    </div>
+    <div class="spec">
+      <div class="smp" style="font-size:clamp(28px,4vw,44px);font-weight:600;line-height:1.2;letter-spacing:-.03em">With or without GLP-1s, our model makes results stick.</div>
+      <div class="meta">H2 · section headline<br>44 / 52.8 · 1.20<br>600 · −0.03em<br>mobile 28 / 33.6</div>
+    </div>
+    <div class="spec">
+      <div class="smp" style="font-size:20px;font-weight:600;line-height:1.4;letter-spacing:-.03em">Mindset &amp; confidence</div>
+      <div class="meta">H3 · card title<br>20 / 28 · 1.40<br>600 · −0.03em</div>
+    </div>
+    <div class="spec">
+      <div class="smp" style="font-size:18px;font-weight:600;line-height:1.4;letter-spacing:-.03em">Skill toolbox for life</div>
+      <div class="meta">H4 · sub-card, FAQ<br>18 / 25.2 · 1.40<br>600 · −0.03em<br>same at every width</div>
+    </div>
+    <div class="spec">
+      <div class="smp" style="font-size:16px;font-weight:400;line-height:1.5;max-width:62ch">Your child learns how food, movement, sleep, and feelings all connect. Building everyday skills for confidence, smarter choices, and a body that feels good to live in.</div>
+      <div class="meta">Body<br>16 / 24 · 1.50<br>400 · 0</div>
+    </div>
+    <div class="spec">
+      <div class="smp" style="font-size:14px;font-weight:400;line-height:1.4;letter-spacing:-.01em;max-width:62ch">It's free for most families*</div>
+      <div class="meta">Body small<br>14 / 19.6 · 1.40<br>400 · −0.01em</div>
+    </div>
+    <div class="spec">
+      <div class="smp" style="font-size:13px;font-weight:400;line-height:1.4;max-width:62ch">Weekly goals, daily streaks and check-ins turn small choices into a gamified journey that builds lasting behaviors.</div>
+      <div class="meta">Caption<br>13 / 18.2 · 1.40<br>400 · 0</div>
+    </div>
+    <div class="spec">
+      <div class="smp"><span class="chip">Pediatrician managed</span></div>
+      <div class="meta">Label / badge<br>12 / 10.8 · <strong style="color:var(--ink)">0.90</strong><br>700 · −0.01em<br>single line only</div>
+    </div>
+
+    <h3 class="sub">Four rules the scale encodes</h3>
+    <ul class="list" style="margin-top:14px;max-width:74ch">
+      <li><strong>Four line-heights, total.</strong> 1.10 display · 1.20 section headline · 1.40 titles and small text · 1.50 body. Memorize them.</li>
+      <li><strong>Tracking tightens as size grows, and is never positive.</strong> −0.04em at 64px, −0.03em from 18–44px, −0.01em below 14px, 0 at body.</li>
+      <li><strong>Sentence case everywhere.</strong> Zero <span class="inline">text-transform: uppercase</span> on the homepage — even the badges. There is no letterspaced-caps eyebrow in this system. Don't add one.</li>
+      <li><strong>H1 is heavier than H2.</strong> 700 vs 600. The hero shouts; every section headline speaks.</li>
+      <li><strong>Label line-height 0.90 is single-line only.</strong> It's tuned for pill badges that never wrap. If a label can wrap in the app, set 1.30 or the lines collide.</li>
+    </ul>
+  </div>
+</section>
+
+<svg class="arc arc--onto-surface" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="background:var(--ground)">
+  <path d="M0,56 L0,26 Q600,86 1200,26 L1200,56 Z" fill="currentColor"/>
+</svg>
+
+<!-- 04 · SPACE & SHAPE -->
+<section class="band band--surface">
+  <div class="col">
+    <div class="head">
+      <span class="num">04</span>
+      <h2 class="sec">Space &amp; shape</h2>
+      <p class="lede">Two spacing scales that must not be interpolated, and a radius census that is more lopsided than you would guess.</p>
+    </div>
+
+    <div class="demos">
+      <div class="demo">
+        <div class="cap">Component scale — 4px step, inside cards and controls</div>
+        <div class="spaces">
+          <div class="sp"><span>4</span><span class="b" style="width:4px"></span></div>
+          <div class="sp"><span>8</span><span class="b" style="width:8px"></span></div>
+          <div class="sp"><span>12</span><span class="b" style="width:12px"></span></div>
+          <div class="sp"><span>16</span><span class="b" style="width:16px"></span></div>
+          <div class="sp"><span>20</span><span class="b" style="width:20px"></span></div>
+          <div class="sp"><span>24</span><span class="b" style="width:24px"></span></div>
+          <div class="sp"><span>32</span><span class="b" style="width:32px"></span></div>
+          <div class="sp"><span>40</span><span class="b" style="width:40px"></span></div>
+          <div class="sp"><span>48</span><span class="b" style="width:48px"></span></div>
+        </div>
+      </div>
+      <div class="demo">
+        <div class="cap">Section rhythm — named, non-linear, gaps between sections</div>
+        <div class="spaces">
+          <div class="sp"><span>xs 64</span><span class="b" style="width:32px;background:#ceebc2"></span></div>
+          <div class="sp"><span>s 80</span><span class="b" style="width:40px;background:#ceebc2"></span></div>
+          <div class="sp"><span>m 120</span><span class="b" style="width:60px;background:#ceebc2"></span></div>
+          <div class="sp"><span>l 160</span><span class="b" style="width:80px;background:#ceebc2"></span></div>
+          <div class="sp"><span>xl 200</span><span class="b" style="width:100px;background:#ceebc2"></span></div>
+        </div>
+        <p class="note" style="font-size:13px">Shown at 50%. Ratios are hand-tuned, not geometric. The homepage default gap is <strong style="color:var(--ink)">200px</strong> — a large part of why the site feels calm rather than salesy.</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Radius census — counted on the rendered homepage</h3>
+    <div class="radii" style="margin-top:18px">
+      <div class="rd"><div class="bx" style="border-radius:9999px"></div><div class="lb">pill · 149×</div></div>
+      <div class="rd"><div class="bx" style="border-radius:24px"></div><div class="lb">24px · 33×</div></div>
+      <div class="rd"><div class="bx" style="border-radius:16px"></div><div class="lb">16px · 28×</div></div>
+      <div class="rd"><div class="bx" style="border-radius:12px"></div><div class="lb">12px · 17×</div></div>
+      <div class="rd"><div class="bx" style="border-radius:8px"></div><div class="lb">8px · 3×</div></div>
+    </div>
+    <p class="note" style="margin-top:16px;max-width:74ch">Pill is the dominant shape by a factor of four — badges, chips, tag rows, 240px circular team portraits. Note the inversion: <strong style="color:var(--ink)">buttons are the sharpest thing on the page at 8px</strong> while everything decorative is fully round. That keeps the CTA reading as a control rather than a sticker.</p>
+
+    <h3 class="sub">The curve motif</h3>
+    <p class="note" style="margin-top:12px;max-width:74ch">The mission line is <em>"bend the obesity curve down"</em> — and the curve is a literal shape motif running through the asset set: paired <span class="inline">ellipse-up-xl</span> / <span class="inline">ellipse-down-xl</span> arcs as section transitions, a curve framing the doctor portrait, photos arranged on an oval path, 90px circle bubbles, pill radius on 149 elements. No sharp diagonals, no triangles, no hard geometry anywhere. The dividers on this page are the same device.</p>
+
+    <h3 class="sub">Elevation — only two shadows exist</h3>
+    <div class="demos" style="margin-top:16px">
+      <div class="demo" style="box-shadow:var(--shadow-card)">
+        <div class="cap">Card</div>
+        <div class="mono">0 4px 24px rgba(23,38,19,.05)</div>
+        <p class="note" style="font-size:13px">Tinted with deep green at 5%, not neutral black. Neutral shadows would grey out the mint and sun grounds. Keep the tint.</p>
+      </div>
+      <div class="demo" style="box-shadow:var(--shadow-hair)">
+        <div class="cap">Hairline</div>
+        <div class="mono">0 1px 3px rgba(0,0,0,.12)</div>
+        <p class="note" style="font-size:13px">Sticky header only. Do not add a third shadow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="arc arc--onto-dark" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="background:var(--surface)">
+  <path d="M0,56 L0,26 Q600,86 1200,26 L1200,56 Z" fill="currentColor"/>
+</svg>
+
+<!-- 05 · COMPONENTS -->
+<section class="band band--dark">
+  <div class="col">
+    <div class="head">
+      <span class="num">05</span>
+      <h2 class="sec">Components as built</h2>
+      <p class="lede">Everything the site actually ships. It is a short list — and the gaps are as informative as the parts.</p>
+    </div>
+
+    <div class="demos">
+      <div class="demo">
+        <div class="cap">Buttons — primary is the only variant</div>
+        <div class="stage">
+          <button class="btn" type="button">Get started &nbsp;→</button>
+          <button class="btn btn--link" type="button">How it works</button>
+        </div>
+        <p class="note" style="font-size:13px">Carrot fill, deep-green text, 8px radius, 13/20 padding, 40px tall, 14/700. The site has <strong style="color:var(--band-dark-ink)">no declared secondary button</strong> — every secondary action is a plain text link at 14/700.</p>
+      </div>
+
+      <div class="demo">
+        <div class="cap">Form stack — welded CTA</div>
+        <div class="formcard">
+          <div class="row"><span class="lb">Child's first name</span><span class="ph">Ava</span></div>
+          <div class="row"><span class="lb">Child's last name</span><span class="ph">Ramirez</span></div>
+          <div class="row"><span class="lb">State</span><span class="ph">Select</span></div>
+          <button class="formcta" type="button">Check coverage &nbsp;→</button>
+        </div>
+        <p class="note" style="font-size:13px">56px rows, 12px radius, alternating white/offwhite, no gaps, no rest border. Only the outer corners round, and the 64px CTA closes the bottom — so the form reads as one object.</p>
+      </div>
+
+      <div class="demo">
+        <div class="cap">Badges &amp; chips</div>
+        <div class="stage">
+          <span class="chip">✓ &nbsp;Pediatrician managed</span>
+          <span class="chip chip--white">In network with 500+ plans</span>
+          <span class="chip chip--sun">Verified Review</span>
+        </div>
+        <p class="note" style="font-size:13px">12/700, deep green, pill, optional 14px leading icon. Sentence case — never caps.</p>
+      </div>
+
+      <div class="demo">
+        <div class="cap">Stat block</div>
+        <div class="statrow">
+          <div class="stat"><div class="v">3–6<span class="u">lbs</span></div><div class="c">Average weight loss per month</div></div>
+          <div class="stat"><div class="v">1<span class="u">MO</span></div><div class="c">Average time for confidence boost</div></div>
+          <div class="stat"><div class="v">96<span class="u">%</span></div><div class="c">Of families have a $0 co-pay</div></div>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="cap">Numbered step — the two-scale signature</div>
+        <div class="ghost">
+          <span class="g">01</span>
+          <div class="fg">
+            <span class="chip" style="background:rgba(206,235,194,.16);color:#ceebc2">01</span>
+            <h4 class="min" style="margin-top:14px">Check coverage &amp; book free intro call</h4>
+          </div>
+        </div>
+        <p class="note" style="font-size:13px;margin-top:18px">The same number set twice: once as a 12/700 eyebrow, once at display size in <span class="inline">fresh-mint/30</span> as a ghost behind the content.</p>
+      </div>
+
+      <div class="demo">
+        <div class="cap">Header</div>
+        <div style="background:#ceebc2;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:var(--shadow-hair)">
+          <span style="font-size:17px;font-weight:700;letter-spacing:-.03em;color:#172613">HeyNouri</span>
+          <span style="display:flex;gap:14px;font-size:12px;font-weight:700;color:#172613;opacity:.85">How it works · About us</span>
+          <button class="btn" style="padding:10px 14px;font-size:12px" type="button">Get started</button>
+        </div>
+        <p class="note" style="font-size:13px">Sticky, mint ground, hairline shadow, wordmark left, nav at 14/700, one carrot CTA right.</p>
+      </div>
+    </div>
+
+    <div class="warn" style="margin-top:28px">
+      <strong>The 40px button height fails both iOS (44pt) and Android (48dp) minimums.</strong> Fine on web with a mouse. It must go to 48px in the app.
+    </div>
+  </div>
+</section>
+
+<svg class="arc arc--onto-ground" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="background:var(--band-dark)">
+  <path d="M0,56 L0,30 Q600,-30 1200,30 L1200,56 Z" fill="currentColor"/>
+</svg>
+
+<!-- 06 · PHOTOGRAPHY & VOICE -->
+<section class="band">
+  <div class="col">
+    <div class="head">
+      <span class="num">06</span>
+      <h2 class="sec">Photography &amp; voice</h2>
+      <p class="lede">72 images on the homepage, and what is absent from them is the strongest statement in the whole system.</p>
+    </div>
+
+    <div class="dd">
+      <div class="card">
+        <div class="h"><span class="tick tick--y">✓</span> Photograph</div>
+        <div class="b">Real kids and teens, 9–18. Candid, active, outdoors, natural light. Tennis, running, forest, holding an apple. Never an adult alone; never a parent without a child.</div>
+      </div>
+      <div class="card">
+        <div class="h"><span class="tick tick--n">✕</span> Never photograph</div>
+        <div class="b">No before/after. No scales. No measuring tape. No food framed as the enemy. No sad-kid stock. No stethoscope-on-white clinical stock.</div>
+      </div>
+      <div class="card">
+        <div class="h"><span class="tick tick--y">✓</span> Treatment</div>
+        <div class="b">Hero: full-bleed <span class="inline">cover</span>, square corners, bottom scrim. Cards: <span class="inline">cover</span> at 24px radius. Cutouts: transparent PNG subjects on flat color grounds, <span class="inline">contain</span>. Avatars: 88px at 16px radius; care team at 240px fully circular.</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Voice</h3>
+    <p class="lede" style="margin-top:14px;font-size:22px;line-height:1.45;font-weight:600;letter-spacing:-.02em;color:var(--ink);max-width:26ch">"Your child gets someone who knows them, checks in, and has their back: on good days and tough ones."</p>
+    <ul class="list" style="margin-top:22px;max-width:74ch">
+      <li><strong>"Your child"</strong> — not "your patient," not "the user." Consistently, everywhere.</li>
+      <li><strong>Name the fear, then remove it.</strong> "Many of the families we work with feel like they've already tried everything."</li>
+      <li><strong>Never diet language.</strong> No calories, no restriction, no "cheat," no "guilt-free," no "burn." The FAQ says so outright.</li>
+      <li><strong>Numbers are specific and honestly hedged.</strong> "3–6 lb per month," "96% of families," "most families pay $0" — with an asterisk.</li>
+      <li><strong>Gamification is described as fun, not compliance.</strong> "a game they actually want to play." Never "adherence," never "tracking your progress."</li>
+      <li><strong>There is a script for the parent.</strong> The FAQ literally hands them words to say to their kid. That is the tone benchmark: practical, warm, non-clinical.</li>
+    </ul>
+    <div class="warn" style="margin-top:24px">
+      <strong>Every word on the site is written to the parent.</strong> The app is used by the child. The child-facing voice does not exist yet — it is the biggest single open question in this system.
+    </div>
+  </div>
+</section>
+
+<svg class="arc arc--onto-mint" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="background:var(--ground)">
+  <path d="M0,56 L0,26 Q600,86 1200,26 L1200,56 Z" fill="currentColor"/>
+</svg>
+
+<!-- 07 · APP LAYER -->
+<section class="band band--mint">
+  <div class="col">
+    <div class="head">
+      <span class="num">07</span>
+      <h2 class="sec">The app layer</h2>
+      <p class="lede" >Nothing in this section is on the website. These are the gaps an app has to fill, proposed to sit inside the brand — a starting position, not extracted fact.</p>
+    </div>
+
+    <h4 class="min">Proposed status colors</h4>
+    <p class="note" style="margin-top:8px;margin-bottom:16px">The site inherits raw, unbranded Tailwind reds and greens for form validation. These are tuned to the palette instead. Note that <strong style="color:var(--band-mint-ink)">danger is not carrot</strong> — carrot is the "go" color here, and doubling it as the error color would be a real usability failure in a medication app.</p>
+    <div class="swatches">
+      <div class="sw sw--ondark" style="background:#2f7d32"><div><div class="nm">Success</div><div class="hx">#2f7d32</div></div><div class="rl">5.1:1 on white. Paired tint #e8f5e2.</div></div>
+      <div class="sw sw--ondark" style="background:#9a6100"><div><div class="nm">Warning</div><div class="hx">#9a6100</div></div><div class="rl">Darkened carrot — readable, not alarming. Tint #fdf3d6.</div></div>
+      <div class="sw sw--ondark" style="background:#b3261e"><div><div class="nm">Danger</div><div class="hx">#b3261e</div></div><div class="rl">Deliberately not carrot. Tint #fce9e7.</div></div>
+      <div class="sw sw--ondark" style="background:#2c5c7d"><div><div class="nm">Info</div><div class="hx">#2c5c7d</div></div><div class="rl">Darkened pastel blue. Tint #e6eff7.</div></div>
+    </div>
+
+    <h4 class="min" style="margin-top:40px">Dark mode already exists inside the brand</h4>
+    <p class="note" style="margin-top:8px;margin-bottom:16px">The deep-green sections <em>are</em> the dark theme. Invert to them rather than inventing one. Mint on deep green is 12.31:1 — a genuinely comfortable dark theme, not a compromise. (This page uses exactly that mapping; switch your OS theme to check it.)</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Role</th><th>Light</th><th>Dark</th></tr></thead>
+        <tbody>
+          <tr><td>Background</td><td><code>#f5f5f5</code></td><td><code>#172613</code></td></tr>
+          <tr><td>Surface</td><td><code>#ffffff</code></td><td><code>#1f3019</code> <span style="opacity:.7">deep green lifted one step</span></td></tr>
+          <tr><td>Foreground</td><td><code>#172613</code></td><td><code>#ceebc2</code></td></tr>
+          <tr><td>Secondary text</td><td><code>foreground/70</code></td><td><code>mint/70</code></td></tr>
+          <tr><td>Hairline</td><td><code>foreground/10</code></td><td><code>mint/16</code></td></tr>
+          <tr><td>Card shadow</td><td><code>rgba(23,38,19,.05)</code></td><td><code>rgba(0,0,0,.35)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="min" style="margin-top:40px">Giving the four tints jobs</h4>
+    <p class="note" style="margin-top:8px;margin-bottom:16px">On the site these are interchangeable decoration. In a daily-use app they need consistent meaning — and this split lets medical content sit in a calmer register than gamified content without adding a color.</p>
+    <div class="swatches">
+      <div class="sw" style="background:#fae899"><div><div class="nm">Warm sun</div><div class="hx">#fae899</div></div><div class="rl">Streaks, rewards, today's win, celebration.</div></div>
+      <div class="sw" style="background:#ceebc2"><div><div class="nm">Fresh mint</div><div class="hx">#ceebc2</div></div><div class="rl">Progress, goal completion, checkmarks, rings.</div></div>
+      <div class="sw" style="background:#bae8ef"><div><div class="nm">Soft sky</div><div class="hx">#bae8ef</div></div><div class="rl">Sleep, mood, reflection, calm surfaces.</div></div>
+      <div class="sw" style="background:#aec8e1"><div><div class="nm">Pastel blue</div><div class="hx">#aec8e1</div></div><div class="rl">Clinical and medical — labs, medication, visit notes.</div></div>
+    </div>
+
+    <div class="dd" style="margin-top:40px">
+      <div class="card">
+        <div class="h"><span class="tick tick--y">✓</span> Carry forward</div>
+        <ul class="list" >
+          <li>Pill-first shape language — progress <strong>rings</strong>, not bars; arc charts, not columns. On-brand and on-mission.</li>
+          <li>Alternating band composition → a card-stack feed with alternating grounds.</li>
+          <li>Two shadows only.</li>
+          <li>Sentence case, no tracked caps.</li>
+          <li>Opacity for hierarchy, not extra greys.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="h"><span class="tick tick--n">✕</span> Leave behind</div>
+        <ul class="list" >
+          <li>The 200px section rhythm — correct on marketing, absurd on a phone. Use 24–48px.</li>
+          <li>Scroll-triggered reveal choreography — reads premium on a landing page, reads laggy in a daily app.</li>
+          <li><span class="inline">scale(1.2)</span> on hover. There is no hover on touch; use <span class="inline">scale(0.97)</span> as a press state.</li>
+          <li>The 40px button.</li>
+          <li><span class="inline">outline: none</span> — the CSS strips focus rings in two places. Build on the one good example instead: <span class="inline">2px solid warm-sun, offset 3px</span>.</li>
+          <li>Parent-only voice in child-facing surfaces.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="arc arc--onto-ground" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true" style="background:var(--band-mint)">
+  <path d="M0,56 L0,30 Q600,-30 1200,30 L1200,56 Z" fill="currentColor"/>
+</svg>
+
+<!-- 08 · OPEN QUESTIONS -->
+<section class="band">
+  <div class="col">
+    <div class="head">
+      <span class="num">08</span>
+      <h2 class="sec">Open before app design starts</h2>
+      <p class="lede">Five things the website cannot tell us, in the order they will block work.</p>
+    </div>
+    <div class="dd">
+      <div class="card">
+        <div class="h">Two apps, or one app with two modes?</div>
+        <div class="b">The site sells to the parent and describes a daily app for the child. Parent check-ins, meal photos, coach chat and prescription management are different jobs with different privacy boundaries — a 16-year-old's coach chat probably should not sit in the parent's view. This decision reshapes the whole IA.</div>
+      </div>
+      <div class="card">
+        <div class="h">Is there already an app?</div>
+        <div class="b">No App Store or Play links anywhere on the site, and the product UI is shown as flat PNG mockups (<span class="inline">todays-win.png</span>, <span class="inline">weekly-plan.png</span>, <span class="inline">handphone.png</span>). Confirm before treating this as greenfield — and pull those files either way; they are the closest thing to an existing product spec.</div>
+      </div>
+      <div class="card">
+        <div class="h">What is the child-facing voice?</div>
+        <div class="b">Everything written so far is addressed to the parent. The daily user is nine to eighteen.</div>
+      </div>
+      <div class="card">
+        <div class="h">Where is the mark?</div>
+        <div class="b">The wordmark is an inline SVG at a 285×75 viewBox. There is no icon or square lockup in the system — and an app needs one before anything else can be laid out.</div>
+      </div>
+      <div class="card">
+        <div class="h">9 to 18 is an enormous range.</div>
+        <div class="b">A nine-year-old and a seventeen-year-old need different type sizes, different reward language, and different amounts of parent visibility. The web system has one register. The app will need at least two.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="col">
+    <h4 class="min">Files</h4>
+    <div class="filelist">
+      <div class="file"><div class="fn">heynouri-design-system.md</div><div class="fd">The written guide — every measurement, with sources and caveats.</div></div>
+      <div class="file"><div class="fn">heynouri-tokens.css</div><div class="fd">Custom properties, <span class="inline">--nouri-*</span> namespaced. The app-extension layer is fenced and commented.</div></div>
+      <div class="file"><div class="fn">heynouri-tokens.json</div><div class="fd">DTCG format — Figma, Tokens Studio, Style Dictionary.</div></div>
+      <div class="file"><div class="fn">heynouri-design-system.html</div><div class="fd">This page.</div></div>
+    </div>
+    <p class="note" style="margin-top:28px">Extracted 25 August 2026 from heynouri.com — homepage DOM, the compiled stylesheet (159 rules) and live computed styles at 1280px and 375px. Manrope is SIL OFL and available on Google Fonts; no licensing blocker for the app.</p>
+  </div>
+</footer>

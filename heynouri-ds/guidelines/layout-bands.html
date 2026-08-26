@@ -1,0 +1,33 @@
+<!-- @dsCard group="Layout" viewport="760x260" name="The band system" subtitle="Three surface tiers, strictly ordered" -->
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" /><title>The band system</title>
+<link rel="stylesheet" href="../styles.css" />
+<style>
+ body{margin:0;padding:18px;background:var(--nouri-offwhite);color:var(--nouri-deep-green);font-family:var(--nouri-font-sans)}
+ .cap{font-size:11px;font-weight:700;opacity:.6;margin-top:12px;line-height:1.5;max-width:78ch}
+ .row{display:flex;gap:8px}
+ .sw{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;height:92px;padding:10px;border-radius:16px;border:1px solid rgba(23,38,19,.14)}
+ .sw b{font-size:12px;font-weight:700;letter-spacing:-.01em}
+ .sw span{font-size:10.5px;opacity:.8;font-variant-numeric:tabular-nums;font-family:var(--nouri-font-mono)}
+ table{border-collapse:collapse;width:100%;font-size:12px}
+ td,th{text-align:left;padding:5px 10px 5px 0;vertical-align:baseline}
+ th{font-size:10px;font-weight:700;opacity:.55}
+ td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--nouri-font-mono);font-size:11px}
+ code{font-family:var(--nouri-font-mono);font-size:11px;opacity:.85}
+</style></head><body>
+<div style="border-radius:16px;overflow:hidden">
+ <div style="background:#fff;padding:14px 16px;font-size:12px;font-weight:700">Band — full-bleed, square corners, one of five tones</div>
+ <div style="background:#172613;padding:14px 16px;color:#ceebc2;font-size:12px;font-weight:700">Band — deep green (this is also the dark theme)</div>
+ <div style="background:#ceebc2;padding:14px 16px">
+  <div style="background:#fae899;border-radius:24px;padding:12px 14px;font-size:12px;font-weight:700">Panel — inset, 24px radius, a tint</div>
+ </div>
+ <div style="background:#fff;padding:14px 16px">
+  <div style="background:#fff;border-radius:24px;padding:12px 14px;box-shadow:0 4px 24px rgba(23,38,19,.05);font-size:12px;font-weight:700;max-width:343px">Card — 343px, 16–24px radius, tinted shadow</div>
+ </div>
+</div>
+<table style="margin-top:12px">
+ <tr><td>Container max</td><td class="n">1200px</td><td>Card width</td><td class="n">343px</td><td>Prose max</td><td class="n">448px</td></tr>
+ <tr><td>Breakpoints</td><td class="n" colspan="5">640 / 768 / 1024 / 1280 / 1536 — Tailwind defaults, plus one custom max-width:767px</td></tr>
+</table>
+<div class="cap">Compose pages by <b>alternating</b> bands — the source order runs roughly white → deep → mint → white → sun. Two adjacent bands of the same tone is a composition error. Bands have square corners; the 24px radius belongs to panels inside them. Collapsing these tiers is the fastest way to stop looking like Hey Nouri.</div>
+</body></html>

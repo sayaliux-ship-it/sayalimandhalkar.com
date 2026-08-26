@@ -1,0 +1,30 @@
+<!-- @dsCard group="Colors" viewport="760x230" name="The carrot rule" subtitle="One per screen, deep-green label, never white" -->
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" /><title>The carrot rule</title>
+<link rel="stylesheet" href="../styles.css" />
+<style>
+ body{margin:0;padding:18px;background:var(--nouri-white);color:var(--nouri-deep-green);font-family:var(--nouri-font-sans)}
+ .cap{font-size:11px;font-weight:700;opacity:.6;margin-top:12px;line-height:1.5;max-width:78ch}
+ .row{display:flex;gap:8px}
+ .sw{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;height:92px;padding:10px;border-radius:16px;border:1px solid rgba(23,38,19,.14)}
+ .sw b{font-size:12px;font-weight:700;letter-spacing:-.01em}
+ .sw span{font-size:10.5px;opacity:.8;font-variant-numeric:tabular-nums;font-family:var(--nouri-font-mono)}
+ table{border-collapse:collapse;width:100%;font-size:12px}
+ td,th{text-align:left;padding:5px 10px 5px 0;vertical-align:baseline}
+ th{font-size:10px;font-weight:700;opacity:.55}
+ td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--nouri-font-mono);font-size:11px}
+ code{font-family:var(--nouri-font-mono);font-size:11px;opacity:.85}
+</style></head><body>
+<div class="row" style="gap:14px">
+ <div class="sw" style="background:#f0710c;flex:2"><b>Deep green on carrot</b><span>5.35:1 · passes AA</span></div>
+ <div class="sw" style="background:#f0710c;color:#fff;flex:2;border:2px solid #b3261e"><b>White on carrot</b><span>2.97:1 · FAILS — never</span></div>
+</div>
+<table style="margin-top:14px">
+ <tr><th>Color</th><th>Elements</th><th class="n">Painted area</th></tr>
+ <tr><td>White</td><td>69</td><td class="n">1,628k px²</td></tr>
+ <tr><td>Deep green</td><td>24</td><td class="n">1,568k px²</td></tr>
+ <tr><td>Fresh mint</td><td>25</td><td class="n">1,176k px²</td></tr>
+ <tr><td><b>Carrot</b></td><td><b>4</b></td><td class="n"><b>46k px²</b></td></tr>
+</table>
+<div class="cap">Carrot is a scarcity signal, not a brand color you decorate with. Two orange things on a screen means one of them is wrong. It is never a band, never a card ground, never an icon tint.</div>
+</body></html>

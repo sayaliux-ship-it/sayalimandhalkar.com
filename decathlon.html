@@ -431,10 +431,101 @@ h2{margin:0;font-size:clamp(30px,3.6vw,54px);font-weight:700;font-style:italic;l
   }
   @media (prefers-reduced-motion: reduce) { .fab-back { transition: none; } }
 </style>
+
+<style>
+  /* ══════════════════════════════
+     MOBILE NAV (drawer + hamburger)
+  ══════════════════════════════ */
+  .nav-toggle, .nav-scrim { display: none; }
+
+  @media (max-width: 960px) {
+    :root { --sw: 0px; }
+
+    /* the button */
+    .nav-toggle {
+      position: fixed; top: 12px; left: 12px; z-index: 320;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; padding: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.38);
+      background: rgba(12,12,12,0.86);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.34);
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span {
+      position: absolute; left: 13px; top: 50%;
+      width: 18px; height: 1.5px; margin-top: -0.75px;
+      background: #c9a96e; border-radius: 2px;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), opacity .18s ease;
+    }
+    .nav-toggle span:nth-child(1) { transform: translateY(-5.5px); }
+    .nav-toggle span:nth-child(3) { transform: translateY(5.5px); }
+    /* when open, the button steps outside the drawer so it never
+       covers the profile block */
+    body.nav-open .nav-toggle {
+      left: calc(min(80vw, 300px) + 8px);
+      background: rgba(12,12,12,0.7);
+      border-color: rgba(201,169,110,0.28);
+    }
+    body.nav-open .nav-toggle span:nth-child(1) { transform: rotate(45deg); }
+    body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    body.nav-open .nav-toggle span:nth-child(3) { transform: rotate(-45deg); }
+
+    /* the drawer */
+    html .sidebar, html.sb-instant .sidebar {
+      display: flex !important;
+      width: min(80vw, 300px) !important;
+      max-width: 300px !important;
+      transform: translateX(-102%) !important;
+      transition: transform .34s cubic-bezier(.16,1,.3,1);
+      z-index: 310 !important;
+      opacity: 1 !important;
+      animation: none !important;
+      box-shadow: 0 0 44px rgba(0,0,0,0.5);
+    }
+    html body.nav-open .sidebar { transform: none !important; }
+    .sidebar .sb-row { opacity: 1 !important; animation: none !important; }
+
+    /* scrim */
+    .nav-scrim {
+      display: block; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.55);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    body.nav-open .nav-scrim { opacity: 1; pointer-events: auto; }
+    body.nav-open { overflow: hidden; }
+
+    /* content takes the full width once the sidebar is a drawer.
+       min-width:0 stops a wide child stretching the flex item, which
+       is what pushed several pages into horizontal scroll. */
+    .main {
+      margin-left: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100vw !important;
+    }
+
+    /* flex children default to min-width:auto, so a wide grid inside
+       one refuses to shrink and pushes the page sideways */
+    .main > * { min-width: 0; max-width: 100%; }
+
+    /* keep page mastheads and section markers clear of the button */
+    .top, .masthead, .toc { padding-left: 68px !important; }
+
+    /* rigid multi-column grids collapse on a phone */
+    .testimonials-grid { grid-template-columns: 1fr !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sidebar, .nav-scrim, .nav-toggle span { transition: none !important; }
+  }
+</style>
 </head>
 <body>
 
-<aside class="sidebar" aria-label="Site navigation">
+<aside class="sidebar" id="site-nav" aria-label="Site navigation">
   <a href="index.html" class="sb-profile" style="text-decoration:none;">
     <div class="sb-avatar" aria-hidden="true">
       <span class="sb-avatar-initials">SM</span>
@@ -1016,6 +1107,70 @@ h2{margin:0;font-size:clamp(30px,3.6vw,54px);font-weight:700;font-style:italic;l
     function upd() { f.classList.toggle('show', (window.scrollY || 0) > 380); }
     window.addEventListener('scroll', upd, { passive: true });
     upd();
+  })();
+</script>
+
+<button class="nav-toggle" type="button" aria-label="Open menu"
+        aria-expanded="false" aria-controls="site-nav">
+  <span></span><span></span><span></span>
+</button>
+<div class="nav-scrim" hidden></div>
+
+<script>
+  /* mobile drawer: hamburger, scrim, escape, focus handling */
+  (function () {
+    var btn   = document.querySelector('.nav-toggle');
+    var scrim = document.querySelector('.nav-scrim');
+    var nav   = document.getElementById('site-nav');
+    if (!btn || !scrim || !nav) return;
+
+    var desktop = window.matchMedia('(min-width: 961px)');
+    var lastFocus = null;
+
+    function shut() {
+      if (desktop.matches) { nav.removeAttribute('aria-hidden'); nav.removeAttribute('inert'); }
+      else if (!document.body.classList.contains('nav-open')) {
+        nav.setAttribute('aria-hidden', 'true');
+        if ('inert' in HTMLElement.prototype) nav.inert = true;
+      }
+    }
+
+    function setOpen(open) {
+      document.body.classList.toggle('nav-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      scrim.hidden = !open;
+      if (open) {
+        nav.removeAttribute('aria-hidden');
+        if ('inert' in HTMLElement.prototype) nav.inert = false;
+        lastFocus = document.activeElement;
+        var first = nav.querySelector('a, button');
+        if (first) first.focus({ preventScroll: true });
+      } else {
+        shut();
+        // return focus to the control that opened the drawer
+        var back = (lastFocus && lastFocus.focus && document.contains(lastFocus) && !nav.contains(lastFocus))
+                   ? lastFocus : btn;
+        back.focus({ preventScroll: true });
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      setOpen(!document.body.classList.contains('nav-open'));
+    });
+    scrim.addEventListener('click', function () { setOpen(false); });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) setOpen(false);
+    });
+
+    function onBreak() { if (desktop.matches) setOpen(false); else shut(); }
+    if (desktop.addEventListener) desktop.addEventListener('change', onBreak);
+    else desktop.addListener(onBreak);
+
+    shut();
   })();
 </script>
 </body>

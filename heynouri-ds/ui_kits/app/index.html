@@ -1,0 +1,61 @@
+<!-- @dsCard group="UI kits" viewport="1000x620" name="App" subtitle="EXTENSION — Today, Coach and Care screens, light and dark" -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>App kit</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <style>body{margin:0;padding:24px;background:var(--nouri-offwhite);font-family:var(--nouri-font-sans)}</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const NS = window.HeyNouriDesignSystem_a8244f;
+    const { AppScreen, TabBar, ProgressRing, GoalCard, MedCard, CoachMessage, StatusNote, Badge, Button } = NS;
+
+    const Today = () => (
+      <AppScreen title="Today" tabBar={<TabBar active={0} />}>
+        <div style={{ display:'flex', gap:14, justifyContent:'center' }}>
+          <ProgressRing value={72} size={92} tone="progress" sublabel="This week" />
+          <ProgressRing value={100} size={92} tone="streak" label="7" sublabel="Day streak" />
+        </div>
+        <GoalCard tone="progress" value={80} label="4/5" chip="Habit" title="Move for 20 minutes" note="Four days done. One to go." />
+        <GoalCard tone="calm" value={60} label="3/5" chip="Sleep" title="Lights out by 10" note="You've been going to bed earlier." />
+        <GoalCard tone="streak" value={100} label="✓" chip="Today's win" title="Tried a new vegetable" note="Nice one." />
+      </AppScreen>
+    );
+
+    const Coach = () => (
+      <AppScreen title="Coach" tabBar={<TabBar active={2} />}>
+        <CoachMessage name="Coach Amy" time="9:04">Morning! How did the walk after dinner go?</CoachMessage>
+        <CoachMessage from="child" time="9:11">good!! i went twice</CoachMessage>
+        <CoachMessage name="Coach Amy" time="9:12">Twice is brilliant. Want to make that this week's goal?</CoachMessage>
+        <CoachMessage from="child" time="9:15">yeah ok</CoachMessage>
+      </AppScreen>
+    );
+
+    const Care = () => (
+      <AppScreen title="Care" theme="dark" tabBar={<TabBar active={3} theme="dark" />}>
+        <MedCard name="Wegovy" dose="0.25 mg" schedule="Weekly · Sundays" status="On track"
+          note="Your care team reviews this at every visit." />
+        <StatusNote kind="success" title="Coverage confirmed">Your plan covers the program. Your co-pay is $0.</StatusNote>
+        <StatusNote kind="warning" title="Dose not logged">Tap the card above when you take it. Nothing is overdue.</StatusNote>
+        <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+          <Badge tone="clinical">Next visit · 12 Sept</Badge>
+          <Badge tone="onDark">Labs up to date</Badge>
+        </div>
+      </AppScreen>
+    );
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <div style={{ display:'flex', gap:28, alignItems:'flex-start', transform:'scale(.62)', transformOrigin:'top left' }}>
+        <Today /><Coach /><Care />
+      </div>
+    );
+  </script>
+</body>
+</html>

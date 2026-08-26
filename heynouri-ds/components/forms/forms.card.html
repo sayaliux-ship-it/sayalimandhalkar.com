@@ -1,0 +1,42 @@
+<!-- @dsCard group="Components" viewport="760x420" name="Forms" subtitle="Borderless field stack with a welded carrot CTA" -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Forms</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <style>
+    body{margin:0;padding:18px;background:var(--nouri-white);font-family:var(--nouri-font-sans);color:var(--nouri-deep-green)}
+    .lbl{font-size:11px;font-weight:700;letter-spacing:-.01em;opacity:.55;margin-bottom:9px}
+    .grp{display:flex;flex-direction:column;gap:9px}
+    .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { FormStack, Field } = window.HeyNouriDesignSystem_a8244f;
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <div style={{ display:'flex', gap:36, alignItems:'flex-start' }}>
+        <FormStack cta="Check coverage" footnote="It's free for most families*">
+          <Field label="Child's first name" placeholder="Ava" />
+          <Field label="Child's last name" placeholder="Ramirez" />
+          <Field label="Child's date of birth" placeholder="MM / DD / YYYY" type="date" />
+          <Field label="State" placeholder="Select" select />
+          <Field label="Your insurance carrier" placeholder="Select" select />
+        </FormStack>
+        <div style={{ maxWidth:300, fontSize:13, lineHeight:1.55, opacity:.75 }}>
+          <div className="lbl">Why it is built this way</div>
+          56px rows, 12px radius, no borders. The white/offwhite alternation is the only
+          separator — no gaps, no rules. Only the outer corners round, and the 64px CTA is
+          welded to the bottom edge, so five questions about a child read as one small ask.
+        </div>
+      </div>
+    );
+  </script>
+</body>
+</html>

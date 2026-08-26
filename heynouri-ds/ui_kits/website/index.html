@@ -1,0 +1,91 @@
+<!-- @dsCard group="UI kits" viewport="1000x620" name="Website" subtitle="Homepage recreation — bands, arcs, steps, proof, testimonials" -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Website kit</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <style>body{margin:0;background:var(--nouri-offwhite);font-family:var(--nouri-font-sans)}</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const NS = window.HeyNouriDesignSystem_a8244f;
+    const { SiteHeader, SiteFooter, SectionBand, ArcDivider, NumberedStep,
+            FeatureCard, TestimonialCard, Stat, Badge, FormStack, Field, Button } = NS;
+
+    const Hero = () => (
+      <div style={{ position:'relative', background:'var(--nouri-deep-green)', color:'var(--nouri-fresh-mint)', padding:'72px 24px 88px' }}>
+        <div style={{ maxWidth:1200, margin:'0 auto', display:'flex', gap:48, alignItems:'flex-start', flexWrap:'wrap' }}>
+          <div style={{ flex:'1 1 420px', display:'flex', flexDirection:'column', gap:22 }}>
+            <Badge tone="onDark" icon="✓">Pediatrician managed</Badge>
+            <h1 style={{ margin:0, fontSize:'clamp(38px,5vw,64px)', lineHeight:1.1, letterSpacing:'-.04em', fontWeight:700, textWrap:'balance' }}>
+              Pediatrician-led weight management for your child. Covered by insurance.
+            </h1>
+            <div style={{ fontSize:12, fontWeight:700, opacity:.75 }}>In network with 500+ plans</div>
+          </div>
+          <FormStack cta="Check coverage" footnote={<span style={{ color:'rgba(206,235,194,.72)' }}>It's free for most families*</span>}>
+            <Field label="Child's first name" placeholder="Ava" />
+            <Field label="Child's last name" placeholder="Ramirez" />
+            <Field label="State" placeholder="Select" select />
+            <Field label="Your insurance carrier" placeholder="Select" select />
+          </FormStack>
+        </div>
+      </div>
+    );
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <div>
+        <SiteHeader />
+        <Hero />
+        <ArcDivider from="deep" to="white" direction="up" />
+        <SectionBand tone="white" rhythm="s">
+          <Badge>The first steps down</Badge>
+          <h2 style={{ margin:'16px 0 32px', fontSize:44, lineHeight:1.2, letterSpacing:'-.03em', fontWeight:600 }}>Get started in less than 3 minutes</h2>
+          <div style={{ display:'flex', gap:40, flexWrap:'wrap' }}>
+            <NumberedStep onDark={false} n={1} title="Check coverage & book free intro call" body="Two minutes. No card, no commitment." />
+            <NumberedStep onDark={false} n={2} title="Meet your care team and get a plan" body="A pediatrician and a coach, matched to your child." />
+            <NumberedStep onDark={false} n={3} title="Watch your child thrive" body="Weekly goals, weekly sessions, steady progress." />
+          </div>
+        </SectionBand>
+        <ArcDivider from="white" to="deep" direction="down" />
+        <SectionBand tone="deep" rhythm="s">
+          <h2 style={{ margin:'0 0 32px', fontSize:44, lineHeight:1.2, letterSpacing:'-.03em', fontWeight:600 }}>Results that stick.</h2>
+          <div style={{ display:'flex', gap:56, flexWrap:'wrap' }}>
+            <Stat value="3–6" unit="lbs" caption="Average weight loss per month" />
+            <Stat value="1" unit="MO" caption="Average time for confidence boost" />
+            <Stat value="96" unit="%" caption="Of families have a $0 co-pay" />
+          </div>
+        </SectionBand>
+        <ArcDivider from="deep" to="white" direction="up" />
+        <SectionBand tone="white" rhythm="s">
+          <h2 style={{ margin:'0 0 32px', fontSize:44, lineHeight:1.2, letterSpacing:'-.03em', fontWeight:600 }}>Care built for your child</h2>
+          <div style={{ display:'flex', gap:16, flexWrap:'wrap' }}>
+            <FeatureCard tone="sun" title="Skill toolbox for life" body="Your child learns how food, movement, sleep and feelings all connect." />
+            <FeatureCard tone="sky" title="An app that makes being healthy fun" body="Missions, streaks and rewards turn healthy choices into a game they actually want to play." />
+            <FeatureCard tone="blue" title="A coach in their corner" body="Someone who knows them, checks in, and has their back — on good days and tough ones." />
+          </div>
+          <div style={{ display:'flex', gap:16, marginTop:32, flexWrap:'wrap' }}>
+            <TestimonialCard name="Sylvia P." role="Mom" rating="5.0"
+              quote="The weekly coaching sessions are so helpful for both my son and myself. They keep us accountable." />
+            <TestimonialCard name="Keren M." role="Mom" rating="4.8"
+              quote="Beyond the weight, her mindset has transformed — she's choosing quality foods on her own." />
+          </div>
+        </SectionBand>
+        <ArcDivider from="white" to="sun" direction="down" />
+        <SectionBand tone="sun" rhythm="s">
+          <h2 style={{ margin:'0 0 20px', fontSize:44, lineHeight:1.2, letterSpacing:'-.03em', fontWeight:600, maxWidth:'18ch' }}>
+            On a mission to bend the obesity curve down
+          </h2>
+          <Button arrow size="app">Check coverage</Button>
+        </SectionBand>
+        <SiteFooter />
+      </div>
+    );
+  </script>
+</body>
+</html>

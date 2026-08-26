@@ -1,0 +1,55 @@
+<!-- @dsCard group="App kit" viewport="900x560" name="App kit" subtitle="EXTENSION — screen frame, tab bar, rings, goal, coach, medication" -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>App kit</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <style>
+    body{margin:0;padding:18px;background:var(--nouri-offwhite);font-family:var(--nouri-font-sans);color:var(--nouri-deep-green)}
+    .lbl{font-size:11px;font-weight:700;letter-spacing:-.01em;opacity:.55;margin-bottom:9px}
+    .grp{display:flex;flex-direction:column;gap:9px}
+    .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const NS = window.HeyNouriDesignSystem_a8244f;
+    const { AppScreen, TabBar, ProgressRing, GoalCard, CoachMessage, MedCard, StatusNote, Badge } = NS;
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <div style={{ display:'flex', gap:24, alignItems:'flex-start' }}>
+        <div style={{ transform:'scale(.6)', transformOrigin:'top left', width:393, height:852 }}>
+          <AppScreen title="Today" tabBar={<TabBar active={0} />}>
+            <div style={{ display:'flex', gap:12, alignItems:'center' }}>
+              <ProgressRing value={72} size={84} tone="progress" sublabel="This week" />
+              <ProgressRing value={100} size={84} tone="streak" label="7" sublabel="Day streak" />
+            </div>
+            <GoalCard tone="progress" value={80} label="4/5" chip="Habit"
+              title="Move for 20 minutes" note="Four days done. One to go." />
+            <GoalCard tone="calm" value={60} label="3/5" chip="Sleep"
+              title="Lights out by 10" note="You've been going to bed earlier." />
+            <MedCard name="Wegovy" dose="0.25 mg" schedule="Weekly · Sundays" status="On track"
+              note="Your care team reviews this at every visit." />
+          </AppScreen>
+        </div>
+        <div style={{ display:'flex', flexDirection:'column', gap:14, maxWidth:330, paddingTop:6 }}>
+          <div className="lbl">Extension layer — not on heynouri.com</div>
+          <CoachMessage name="Coach Amy" time="9:04">Morning! How did the walk after dinner go?</CoachMessage>
+          <CoachMessage from="child" time="9:11">good!! i went twice</CoachMessage>
+          <StatusNote kind="success" title="Coverage confirmed">Your plan covers the program. Your co-pay is $0.</StatusNote>
+          <StatusNote kind="warning" title="Dose not logged">Tap the card above when you take it. Nothing is overdue.</StatusNote>
+          <div style={{ fontSize:12, lineHeight:1.5, opacity:.7 }}>
+            Rings, never bars. Medication sits in the clinical tint and is never gamified.
+            <b> danger</b> is #b3261e, deliberately not carrot — carrot means <i>go</i>.
+          </div>
+        </div>
+      </div>
+    );
+  </script>
+</body>
+</html>

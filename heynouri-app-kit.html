@@ -1,0 +1,214 @@
+<title>Hey Nouri App Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap">
+
+<style>
+:root{
+  --ground:#f5f5f5; --panel:#ffffff; --ink:#172613; --ink-70:rgb(23 38 19 / .70);
+  --hair:rgb(23 38 19 / .10);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#141f10; --panel:#1f3019; --ink:#ceebc2; --ink-70:rgb(206 235 194 / .70);
+    --hair:rgb(206 235 194 / .16);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141f10; --panel:#1f3019; --ink:#ceebc2; --ink-70:rgb(206 235 194 / .70);
+  --hair:rgb(206 235 194 / .16);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.wrap{padding:48px 32px 64px;max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:34px}
+.head{display:flex;flex-direction:column;gap:14px;max-width:70ch}
+.eyebrow{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:-.01em;padding:6px 12px;border-radius:9999px;background:#fae899;color:#172613}
+h1{margin:0;font-size:clamp(30px,4vw,44px);line-height:1.2;letter-spacing:-.03em;font-weight:600;text-wrap:balance}
+.lede{margin:0;font-size:17px;line-height:1.55;color:var(--ink-70)}
+.row{display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.slot{display:flex;flex-direction:column;gap:14px;width:393px}
+.cap{display:flex;flex-direction:column;gap:5px}
+.cap b{font-size:16px;font-weight:700;letter-spacing:-.02em}
+.cap span{font-size:13px;line-height:1.5;color:var(--ink-70)}
+.parts{display:flex;flex-wrap:wrap;gap:5px;margin-top:3px}
+.parts i{font-style:normal;font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:9999px;background:var(--panel);border:1px solid var(--hair);color:var(--ink-70)}
+.foot{font-size:13px;line-height:1.6;color:var(--ink-70);max-width:74ch;border-top:1px solid var(--hair);padding-top:22px}
+.foot b{color:var(--ink)}
+
+/* phone — literal in both themes */
+.chassis{flex:none;width:413px;height:872px;padding:10px;border-radius:54px;background:#172613;box-shadow:0 4px 24px rgb(23 38 19 / .05)}
+.screen{position:relative;width:393px;height:852px;border-radius:44px;overflow:hidden;display:flex;flex-direction:column}
+.sb{position:relative;flex:none;height:54px;padding:0 26px;display:flex;align-items:center;justify-content:space-between}
+.body{flex:1;overflow:hidden;padding:4px 20px 20px;display:flex;flex-direction:column;gap:16px}
+.title{padding:0 20px 12px;flex:none}
+.title h2{margin:0;font-size:28px;line-height:1.2;letter-spacing:-.03em;font-weight:700}
+.home{flex:none;height:22px;display:flex;align-items:center;justify-content:center}
+.tabbar{flex:none;display:flex;gap:6px;padding:10px 12px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;height:48px;border-radius:9999px;font-size:13px;font-weight:700;line-height:1}
+.goal{display:flex;align-items:center;gap:16px;padding:18px;border-radius:24px;color:#172613}
+.goal h3{margin:0;font-size:18px;line-height:1.4;letter-spacing:-.03em;font-weight:600}
+.goal p{margin:0;font-size:13px;line-height:1.4;opacity:.78}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;padding:6px 12px;border-radius:9999px;font-size:11px;font-weight:700;line-height:1.3;background:#fff;color:#172613}
+.bubble{padding:12px 16px;font-size:15px;line-height:1.45}
+.note{display:flex;gap:12px;padding:14px 16px;border-radius:16px;color:#172613}
+.note .g{flex:none;width:22px;height:22px;border-radius:9999px;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+</style>
+
+<div class="wrap">
+  <div class="head">
+    <span class="eyebrow">Extension layer — not measured from heynouri.com</span>
+    <h1>Hey Nouri app kit</h1>
+    <p class="lede">The site shows its product UI only as flat PNG mockups, so there was no app design to extract. These three screens are reasoned from the brand: the marketing rhythm drops from 200px to 24px, the deep-green bands become the dark theme, and the four tints stop being decoration and take fixed jobs.</p>
+  </div>
+
+  <div class="row" id="row"></div>
+
+  <p class="foot">
+    <b>Three rules these screens encode.</b> Progress is always a <b>ring, never a bar</b> — there is no straight rule used for emphasis anywhere in this system, and the company's mission is literally "bend the curve down". <b>There is no carrot on any of these screens</b>: a screen earns one carrot action when it has one, and none of these do. And medication sits in the pastel-blue clinical register with <b>no streaks, no carrot, and a warning rather than an error</b> for a missed dose — the programme states medication is never required, so the UI must never imply a child is behind for not taking one.
+  </p>
+</div>
+
+<script>
+(() => {
+'use strict';
+const T = { deep:'#172613', mint:'#ceebc2', sun:'#fae899', sky:'#bae8ef', blue:'#aec8e1',
+            off:'#f5f5f5', white:'#ffffff', dbg:'#172613', dsurf:'#1f3019', dfg:'#ceebc2' };
+
+const statusBar = dark => {
+  const fg = dark ? T.dfg : T.deep, dim = dark ? 'rgb(206 235 194 / .35)' : 'rgb(23 38 19 / .30)';
+  return `<div class="sb">
+    <span style="font-size:14px;font-weight:700;letter-spacing:-.01em;color:${fg}">9:41</span>
+    <div style="display:flex;align-items:flex-end;gap:7px">
+      <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:108px;height:32px;border-radius:9999px;background:#172613"></div>
+      <div style="display:flex;align-items:flex-end;gap:2px">
+        ${[5,7,9].map(h=>`<div style="width:3px;height:${h}px;border-radius:9999px;background:${fg}"></div>`).join('')}
+        <div style="width:3px;height:11px;border-radius:9999px;background:${dim}"></div>
+      </div>
+      <div style="width:15px;height:9px;overflow:hidden;display:flex;justify-content:center"><div style="flex:none;width:15px;height:15px;border-radius:9999px;border:2.5px solid ${fg}"></div></div>
+      <div style="display:flex;align-items:center;gap:1.5px">
+        <div style="width:23px;height:12px;border-radius:4px;border:1.5px solid ${dim};padding:1.5px;display:flex"><div style="width:68%;border-radius:9999px;background:${fg}"></div></div>
+        <div style="width:2.5px;height:5px;border-radius:9999px;background:${dim}"></div>
+      </div>
+    </div></div>`;
+};
+
+const ring = (value, size, tone, label, sublabel, dark) => {
+  const C = { progress:T.mint, streak:T.sun, calm:T.sky, clinical:T.blue }[tone] || T.mint;
+  const th = Math.round(size/9), r = (size-th)/2, circ = 2*Math.PI*r;
+  const track = dark ? 'rgb(206 235 194 / .16)' : 'rgb(23 38 19 / .10)';
+  return `<div style="display:inline-flex;flex-direction:column;align-items:center;gap:8px">
+    <div style="position:relative;width:${size}px;height:${size}px">
+      <svg width="${size}" height="${size}" style="transform:rotate(-90deg)" aria-hidden="true">
+        <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke-width="${th}" stroke="${track}"></circle>
+        <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke-width="${th}" stroke="${C}" stroke-linecap="round"
+                stroke-dasharray="${circ}" stroke-dashoffset="${circ*(1-value/100)}"></circle>
+      </svg>
+      <div style="position:absolute;inset:0;display:grid;place-items:center;font-size:${Math.round(size/4)}px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums">${label != null ? label : value+'%'}</div>
+    </div>
+    ${sublabel ? `<span style="font-size:12px;font-weight:700;opacity:.72">${sublabel}</span>` : ''}
+  </div>`;
+};
+
+const goal = (tone, value, label, chip, title, note) => {
+  const G = { progress:T.mint, streak:T.sun, calm:T.sky, clinical:T.blue }[tone];
+  return `<article class="goal" style="background:${G}">
+    ${ring(value, 72, tone, label, null, false)}
+    <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+      <span class="chip">${chip}</span>
+      <h3>${title}</h3><p>${note}</p>
+    </div></article>`;
+};
+
+const tabbar = (active, dark) => {
+  const items = ['Today','Goals','Coach','Care'];
+  return `<nav class="tabbar" style="background:${dark?T.dsurf:T.white};border-top:1px solid ${dark?'rgb(206 235 194 / .16)':'rgb(23 38 19 / .10)'}">
+    ${items.map((t,i)=>{
+      const on = i===active;
+      const bg = on ? (dark?'rgb(206 235 194 / .16)':T.mint) : 'transparent';
+      const fg = on ? (dark?T.dfg:T.deep) : (dark?'rgb(206 235 194 / .55)':'rgb(23 38 19 / .55)');
+      return `<span class="tab" style="background:${bg};color:${fg}">${t}</span>`;
+    }).join('')}</nav>`;
+};
+
+const phone = (title, bodyHTML, active, dark) => `
+  <div class="chassis"><div class="screen" style="background:${dark?T.dbg:T.off};color:${dark?T.dfg:T.deep}">
+    ${statusBar(dark)}
+    <div class="title"><h2>${title}</h2></div>
+    <div class="body">${bodyHTML}</div>
+    ${tabbar(active, dark)}
+    <div class="home"><div style="width:134px;height:5px;border-radius:9999px;background:${dark?'rgb(206 235 194 / .35)':'rgb(23 38 19 / .35)'}"></div></div>
+  </div></div>`;
+
+/* ── Today ─────────────────────────────────────────────── */
+const today = phone('Today', `
+  <div style="display:flex;gap:14px;justify-content:center;padding:4px 0 2px">
+    ${ring(72, 92, 'progress', null, 'This week', false)}
+    ${ring(100, 92, 'streak', '7', 'Day streak', false)}
+  </div>
+  ${goal('progress', 80, '4/5', 'Habit', 'Move for 20 minutes', 'Four days done. One to go.')}
+  ${goal('calm', 60, '3/5', 'Sleep', 'Lights out by 10', "You've been going to bed earlier.")}
+  ${goal('streak', 100, '✓', "Today's win", 'Tried a new vegetable', 'Nice one.')}
+`, 0, false);
+
+/* ── Coach ─────────────────────────────────────────────── */
+const msg = (from, name, time, text) => {
+  const mine = from === 'child';
+  return `<div style="display:flex;gap:10px;flex-direction:${mine?'row-reverse':'row'};align-items:flex-end">
+    ${mine ? '' : `<div style="flex:none;width:32px;height:32px;border-radius:9999px;background:${T.mint};display:grid;place-items:center;font-size:13px;font-weight:700;color:${T.deep}">A</div>`}
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:${mine?'flex-end':'flex-start'};max-width:78%">
+      ${mine ? '' : `<span style="font-size:12px;font-weight:700;opacity:.7">${name}</span>`}
+      <div class="bubble" style="border-radius:${mine?'20px 20px 6px 20px':'20px 20px 20px 6px'};background:${mine?T.mint:T.white};color:${T.deep};${mine?'':'box-shadow:0 4px 24px rgb(23 38 19 / .05)'}">${text}</div>
+      <span style="font-size:11px;opacity:.55">${time}</span>
+    </div></div>`;
+};
+const coach = phone('Coach', `
+  ${msg('coach','Coach Amy','9:04','Morning! How did the walk after dinner go?')}
+  ${msg('child',null,'9:11','good!! i went twice')}
+  ${msg('coach','Coach Amy','9:12','Twice is brilliant. Want to make that this week&rsquo;s goal?')}
+  ${msg('child',null,'9:15','yeah ok')}
+`, 2, false);
+
+/* ── Care (dark) ───────────────────────────────────────── */
+const note = (kind, title, body) => {
+  const K = { success:['#2f7d32','#e8f5e2','✓'], warning:['#9a6100','#fdf3d6','!'],
+              danger:['#b3261e','#fce9e7','!'], info:['#2c5c7d','#e6eff7','i'] }[kind];
+  return `<div class="note" style="background:${K[1]}">
+    <span class="g" style="background:${K[0]}">${K[2]}</span>
+    <div style="display:flex;flex-direction:column;gap:3px">
+      <span style="font-size:14px;font-weight:700;line-height:1.3">${title}</span>
+      <span style="font-size:13px;line-height:1.45;opacity:.82">${body}</span>
+    </div></div>`;
+};
+const care = phone('Care', `
+  <article style="display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:24px;background:${T.blue};color:${T.deep}">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <span class="chip">Prescribed by your care team</span>
+      <span style="font-size:12px;font-weight:700;opacity:.75">On track</span>
+    </div>
+    <h3 style="margin:0;font-size:20px;line-height:1.4;letter-spacing:-.03em;font-weight:600">Wegovy</h3>
+    <div style="display:flex;gap:18px;font-size:13px;opacity:.8"><span>0.25 mg</span><span>Weekly &middot; Sundays</span></div>
+    <p style="margin:0;font-size:13px;line-height:1.45;opacity:.8">Your care team reviews this at every visit.</p>
+  </article>
+  ${note('success','Coverage confirmed','Your plan covers the programme. Your co-pay is $0.')}
+  ${note('warning','Dose not logged','Tap the card above when you take it. Nothing is overdue.')}
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span style="padding:7px 13px;border-radius:9999px;font-size:11.5px;font-weight:700;background:${T.blue};color:${T.deep}">Next visit &middot; 12 Sept</span>
+    <span style="padding:7px 13px;border-radius:9999px;font-size:11.5px;font-weight:700;background:rgb(206 235 194 / .16);color:${T.dfg}">Labs up to date</span>
+  </div>
+`, 3, true);
+
+const SLOTS = [
+  [today, 'Today', 'The four tints doing fixed jobs — mint is progress, sun is streak and reward, sky is sleep. Rings, never bars.', ['AppScreen','ProgressRing','GoalCard','TabBar']],
+  [coach, 'Coach', 'A named coach with the care team&rsquo;s circular portrait. This is the surface where the parent/child privacy question becomes unavoidable.', ['AppScreen','CoachMessage','TabBar']],
+  [care,  'Care &middot; dark theme', 'Medication in the clinical register: pastel blue, no streaks, no carrot, and a warning rather than an error for a missed dose.', ['AppScreen','MedCard','StatusNote','TabBar']],
+];
+document.getElementById('row').innerHTML = SLOTS.map(([html,name,desc,parts]) => `
+  <div class="slot">
+    <div class="cap"><b>${name}</b><span>${desc}</span>
+      <div class="parts">${parts.map(p=>`<i>${p}</i>`).join('')}</div>
+    </div>${html}
+  </div>`).join('');
+})();
+</script>
