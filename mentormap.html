@@ -406,6 +406,95 @@
     .sidebar, .nav-scrim, .nav-toggle span { transition: none !important; }
   }
 </style>
+
+<style>
+  /* ══════════════════════════════
+     MOBILE LAYOUT PASS
+  ══════════════════════════════ */
+  @media (max-width: 720px) {
+
+    /* ── side padding: 100px gutters leave ~190px of content ── */
+    .about-hero,
+    .page-section,
+    .gallery-section,
+    .creds-strip,
+    .pg-header,
+    .projects-area,
+    .contact-section,
+    .cs-section,
+    .cs-hero-content { padding-left: 22px !important; padding-right: 22px !important; }
+
+    .about-hero { padding-top: 84px !important; padding-bottom: 52px !important; }
+    .page-section { padding-top: 56px !important; padding-bottom: 56px !important; }
+    .gallery-section { padding-top: 52px !important; padding-bottom: 52px !important; }
+    .creds-strip { padding-top: 32px !important; padding-bottom: 32px !important; }
+
+    /* ── two and three column layouts stack ── */
+    .about-hero-inner,
+    .story-grid,
+    .coffee-grid,
+    .coffee-art-grid,
+    .creds-strip,
+    .project-list,
+    .goal-cards,
+    .moscow-grid,
+    .client-split,
+    .footer-body,
+    .testimonials-grid,
+    .vid-grid { grid-template-columns: 1fr !important; }
+
+    .about-hero-inner,
+    .story-grid,
+    .coffee-grid { gap: 34px !important; }
+
+    /* the hero portrait is a sliver when the hero is still two up */
+    .about-hero-photo-wrap { max-width: 320px; margin: 0 auto; }
+
+    /* project cards read as rows, not squeezed columns */
+    .proj-card-hero { grid-column: auto !important; }
+    .proj-row { min-width: 0; }
+
+    /* ── tap targets ── */
+    a.footer-back,
+    a.footer-back-link,
+    a.about-link,
+    a.more-link,
+    a.cta-back,
+    a.cert-link,
+    a.gate-return,
+    .top a.back,
+    a.jump,
+    a.cs-back,
+    .toc a {
+      display: inline-flex !important;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    /* ── type floor: nothing under 11px on a phone ── */
+    .proj-tag, .proj-category, .cert-issuer, .cert-skill,
+    .part-label, .xyz-label, .hero-pill, .insight-label,
+    .chapter-label, .gold-link, .pull-quote-source, .privacy-pill,
+    .part-subtitle, .cs-img-caption, .footer-copy, .testi-role,
+    .vid-cat, .vid-dur, .proj-subtitle, .caption, .colophon,
+    figcaption, .shotcap { font-size: 11.5px !important; line-height: 1.55 !important; }
+
+    /* page-specific stragglers found in the audit */
+    .didnt-ship-row { grid-template-columns: 1fr !important; gap: 6px !important; }
+    .role-card p, .subsec-label,
+    .meta, .meta span, .lockup, .lockup a,
+    .pagetop a, .cap, .cap a { font-size: 11.5px !important; }
+
+    /* block-level back/open links were 17-18px tall */
+    .lockup a, .pagetop a, .cap a {
+      display: inline-flex !important; align-items: center; min-height: 44px;
+    }
+
+    /* keep uppercase micro-labels legible rather than merely bigger */
+    .proj-tag, .proj-category, .part-label, .xyz-label,
+    .hero-pill, .chapter-label, .vid-cat { letter-spacing: 0.14em !important; }
+  }
+</style>
 </head>
 <body>
 
